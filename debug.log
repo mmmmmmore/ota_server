@@ -1,0 +1,6 @@
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 296-762-680
+127.0.0.1 - - [28/Nov/2025 17:13:33] "POST /api/upload HTTP/1.1" 200 -
+127.0.0.1 - - [28/Nov/2025 17:14:30] "GET /api/software HTTP/1.1" 200 -
+127.0.0.1 - - [28/Nov/2025 17:14:30] "GET /favicon.ico HTTP/1.1" 404 -

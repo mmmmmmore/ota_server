@@ -40,7 +40,7 @@ function uploadFirmware() {
   formData.append("file", file);
   formData.append("version", version);
 
-  fetch("/api/upload", {
+  fetch("http:localhost:8080/api/upload", {
     method: "POST",
     body: formData
   })
