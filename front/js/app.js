@@ -44,18 +44,16 @@ function uploadFirmware() {
     method: "POST",
     body: formData
   })
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error("HTTP error " + res.status);
+      return res.json();
+    })
     .then(resp => {
-      if (resp.status === "ok") {
-        alert("固件上传成功，版本：" + resp.version);
-        querySoftware(); // 上传成功后刷新软件版本表格
-      } else {
-        alert("固件上传失败");
-      }
+      console.log("上传返回:", resp);
+      alert("固件上传成功，版本：" + resp.version);
     })
     .catch(err => alert("上传出错: " + err));
 }
-
 
 
 function renderPartition(deviceName) {
@@ -229,4 +227,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
