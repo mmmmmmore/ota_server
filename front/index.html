@@ -70,6 +70,12 @@
         </tbody>
       </table>
       <button onclick="querySoftware()">查询软件版本</button>
+
+      <!-- 新增：固件上传入口 -->
+      <h4>上传新固件</h4>
+      <input type="file" id="firmwareFile" />
+      <input type="text" id="firmwareVersion" placeholder="版本号 (如 v1.3.0)" />
+      <button onclick="uploadFirmware()">上传固件</button>
     </div>
 
     <!-- OTA任务 -->
@@ -155,3 +161,4 @@
   <script src="js/app.js"></script>
 </body>
 </html>
+
