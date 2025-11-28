@@ -43,21 +43,20 @@ function uploadFirmware() {
 
 
     fetch("http://localhost:8080/api/upload", { method: "POST", body: formData })
-  .then(res => {
-    console.log("状态码:", res.status);
-    return res.text(); // 打印原始响应
-  })
-  .then(text => {
-    console.log("原始响应:", text);
-    try {
-      const data = JSON.parse(text);
-      console.log("解析成功:", data);
-    } catch (e) {
-      console.error("JSON解析失败:", e);
-    }
-  })
-  .catch(err => console.error("请求失败:", err));
-
+      .then(res => {
+        console.log("状态码:", res.status);
+        return res.text(); // 打印原始响应
+      })
+      .then(text => {
+        console.log("原始响应:", text);
+        try {
+          const data = JSON.parse(text);
+          console.log("解析成功:", data);
+        } catch (e) {
+          console.error("JSON解析失败:", e);
+        }
+      })
+      .catch(err => console.error("请求失败:", err));
   
 }
 
@@ -101,7 +100,7 @@ function updateStats(deviceName, success) {
 
 // 查询设备信息
 function queryDevices() {
-  fetch("/api/devices")
+  fetch("http://localhost:8080/api/devices")
     .then(res => res.json())
     .then(devices => {
       devices.forEach(d => {
@@ -117,7 +116,7 @@ function queryDevices() {
 
 // 查询软件版本
 function querySoftware() {
-  fetch("/api/software")
+  fetch("http://localhost:8080/api/software")
     .then(res => res.json())
     .then(versions => {
       const tbody = document.getElementById("software-tbody");
@@ -139,7 +138,7 @@ function updateDevice(deviceName) {
   const version = document.getElementById(`ver-${deviceName}`).value;
   setStatus(deviceName, "更新中...", "black");
 
-  fetch("/api/dispatch", {
+  fetch("http://localhost:8080/api/dispatch", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -164,7 +163,7 @@ function updateAll() {
   statusAll.textContent = "更新中...";
   statusAll.style.color = "black";
 
-  fetch("/api/dispatch", {
+  fetch("http://localhost:8080/api/dispatch", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -188,7 +187,7 @@ function updateAll() {
 // 轮询任务状态
 function pollTaskStatus(taskId, deviceName) {
   setTimeout(() => {
-    fetch(`/api/status?task_id=${taskId}`)
+    fetch(`http://localhost:8080/api/status?task_id=${taskId}`)
       .then(res => res.json())
       .then(results => {
         results.forEach(r => {

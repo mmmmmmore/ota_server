@@ -48,8 +48,10 @@ def upload_firmware():
             "hardware": "HW_Ax",
             "changes": "新上传版本"
         })
+        print(jsonify({"status":"ok", "version":version}))
         return jsonify({"status": "ok", "version": version})
     return jsonify({"status": "fail"}), 400
+
 
 @app.route("/firmware/<filename>", methods=["GET"])
 def get_firmware(filename):
