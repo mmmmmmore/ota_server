@@ -25,6 +25,39 @@ function partitionHTML(isAActive) {
     : '<div class="partition-box inactive">A</div><div class="partition-box active">B</div>';
 }
 
+function uploadFirmware() {
+  const fileInput = document.getElementById("firmwareFile");
+  const versionInput = document.getElementById("firmwareVersion");
+
+  if (!fileInput.files.length) {
+    alert("请先选择固件文件");
+    return;
+  }
+  const file = fileInput.files[0];
+  const version = versionInput.value || "unknown";
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("version", version);
+
+  fetch("/api/upload", {
+    method: "POST",
+    body: formData
+  })
+    .then(res => res.json())
+    .then(resp => {
+      if (resp.status === "ok") {
+        alert("固件上传成功，版本：" + resp.version);
+        querySoftware(); // 上传成功后刷新软件版本表格
+      } else {
+        alert("固件上传失败");
+      }
+    })
+    .catch(err => alert("上传出错: " + err));
+}
+
+
+
 function renderPartition(deviceName) {
   const html = partitionHTML(partitions[deviceName]);
   const cells = document.querySelectorAll(`#partition-${deviceName}`);
@@ -196,3 +229,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
