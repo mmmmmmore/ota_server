@@ -30,6 +30,8 @@ ota_server_project/
 └── README.md                # 项目说明文档
 
 
+　the code structure  tested pass, detail function need connect with the GW for further test. 
+
 
 各层职责
 frontend/
