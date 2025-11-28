@@ -27,4 +27,172 @@ function partitionHTML(isAActive) {
 
 function renderPartition(deviceName) {
   const html = partitionHTML(partitions[deviceName]);
-  const cells = document.query
+  const cells = document.querySelectorAll(`#partition-${deviceName}`);
+  cells.forEach(cell => { cell.innerHTML = html; });
+}
+
+function setStatus(deviceName, text, color) {
+  const cell = document.getElementById(`status-${deviceName}`);
+  if (!cell) return;
+  cell.textContent = text;
+  cell.style.color = color;
+}
+
+// 图表对象
+let updateChart = null;
+
+// 更新统计并刷新图表
+function updateStats(deviceName, success) {
+  stats[deviceName].total++;
+  if (success) stats[deviceName].success++;
+
+  if (!updateChart) return;
+
+  const successData = Object.values(stats).map(s => s.success);
+  const failData = Object.values(stats).map(s => s.total - s.success);
+  const ratioData = Object.values(stats).map(s =>
+    s.total > 0 ? Math.round((s.success / s.total) * 100) : 0
+  );
+
+  updateChart.data.datasets[0].data = successData;
+  updateChart.data.datasets[1].data = failData;
+  updateChart.data.datasets[2].data = ratioData;
+  updateChart.update();
+}
+
+// ---------------- API 对接 ---------------- //
+
+// 查询设备信息
+function queryDevices() {
+  fetch("/api/devices")
+    .then(res => res.json())
+    .then(devices => {
+      devices.forEach(d => {
+        // 更新分区显示
+        partitions[d.name] = d.partition === "A";
+        renderPartition(d.name);
+        // 更新状态
+        setStatus(d.name, d.status, d.status === "online" ? "green" : "red");
+      });
+    })
+    .catch(err => alert("设备查询失败: " + err));
+}
+
+// 查询软件版本
+function querySoftware() {
+  fetch("/api/software")
+    .then(res => res.json())
+    .then(versions => {
+      const tbody = document.getElementById("software-tbody");
+      tbody.innerHTML = "";
+      versions.forEach(v => {
+        tbody.innerHTML += `<tr>
+          <td>${v.version}</td>
+          <td>${v.date}</td>
+          <td>${v.hardware}</td>
+          <td>${v.changes}</td>
+        </tr>`;
+      });
+    })
+    .catch(err => alert("软件查询失败: " + err));
+}
+
+// 单设备更新
+function updateDevice(deviceName) {
+  const version = document.getElementById(`ver-${deviceName}`).value;
+  setStatus(deviceName, "更新中...", "black");
+
+  fetch("/api/dispatch", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      target: [deviceName],
+      version: version,
+      url: "/firmware/firmware.bin"
+    })
+  })
+    .then(res => res.json())
+    .then(resp => {
+      setStatus(deviceName, "任务已下发", "blue");
+      // 查询任务结果
+      pollTaskStatus(resp.task_id, deviceName);
+    })
+    .catch(err => setStatus(deviceName, "下发失败", "red"));
+}
+
+// 更新全部设备
+function updateAll() {
+  const version = document.getElementById("ver-All").value;
+  const statusAll = document.getElementById("status-All");
+  statusAll.textContent = "更新中...";
+  statusAll.style.color = "black";
+
+  fetch("/api/dispatch", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      target: ["Vehicle_1", "Vehicle_2", "Vehicle_3"],
+      version: version,
+      url: "/firmware/firmware.bin"
+    })
+  })
+    .then(res => res.json())
+    .then(resp => {
+      statusAll.textContent = "任务已下发";
+      statusAll.style.color = "blue";
+      pollTaskStatus(resp.task_id, "All");
+    })
+    .catch(err => {
+      statusAll.textContent = "下发失败";
+      statusAll.style.color = "red";
+    });
+}
+
+// 轮询任务状态
+function pollTaskStatus(taskId, deviceName) {
+  setTimeout(() => {
+    fetch(`/api/status?task_id=${taskId}`)
+      .then(res => res.json())
+      .then(results => {
+        results.forEach(r => {
+          const success = r.result === "success";
+          setStatus(r.name, success ? "成功" : "失败", success ? "green" : "red");
+          partitions[r.name] = success ? !partitions[r.name] : partitions[r.name];
+          renderPartition(r.name);
+          updateStats(r.name, success);
+        });
+
+        if (deviceName === "All") {
+          const allSuccess = results.every(r => r.result === "success");
+          const statusAll = document.getElementById("status-All");
+          statusAll.textContent = allSuccess ? "全部成功" : "部分失败";
+          statusAll.style.color = allSuccess ? "green" : "orange";
+        }
+      })
+      .catch(err => console.error("状态查询失败:", err));
+  }, 2000);
+}
+
+// ---------------- 初始化 ---------------- //
+document.addEventListener("DOMContentLoaded", () => {
+  ["Vehicle_1", "Vehicle_2", "Vehicle_3"].forEach(renderPartition);
+
+  const ctx = document.getElementById('updateChart').getContext('2d');
+  updateChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ["Vehicle_1", "Vehicle_2", "Vehicle_3"],
+      datasets: [
+        { label: "成功次数", data: [0, 0, 0], backgroundColor: 'green' },
+        { label: "失败次数", data: [0, 0, 0], backgroundColor: 'orange' },
+        { label: "成功比例 (%)", data: [0, 0, 0], backgroundColor: 'blue' }
+      ]
+    },
+    options: {
+      responsive: false,
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+});
