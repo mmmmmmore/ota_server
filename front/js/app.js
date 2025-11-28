@@ -40,19 +40,25 @@ function uploadFirmware() {
   formData.append("file", file);
   formData.append("version", version);
 
-  fetch("http:localhost:8080/api/upload", {
-    method: "POST",
-    body: formData
+
+
+    fetch("http://localhost:8080/api/upload", { method: "POST", body: formData })
+  .then(res => {
+    console.log("状态码:", res.status);
+    return res.text(); // 打印原始响应
   })
-    .then(res => {
-      if (!res.ok) throw new Error("HTTP error " + res.status);
-      return res.json();
-    })
-    .then(resp => {
-      console.log("上传返回:", resp);
-      alert("固件上传成功，版本：" + resp.version);
-    })
-    .catch(err => alert("上传出错: " + err));
+  .then(text => {
+    console.log("原始响应:", text);
+    try {
+      const data = JSON.parse(text);
+      console.log("解析成功:", data);
+    } catch (e) {
+      console.error("JSON解析失败:", e);
+    }
+  })
+  .catch(err => console.error("请求失败:", err));
+
+  
 }
 
 
@@ -227,5 +233,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
