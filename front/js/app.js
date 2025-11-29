@@ -5,6 +5,10 @@ const stats = {
   "Vehicle_3": { success: 0, total: 0 }
 };
 
+let statsChart = null; // 在全局定义一个变量保存图表实例
+
+
+
 // 分区状态：true=A运行；false=B运行
 const partitions = {
   "Vehicle_1": true,
@@ -451,6 +455,7 @@ function pollTaskStatus(taskId, deviceName) {
 
 //---------------ota result summary ------------------//
 
+
 function showStats() {
   fetch("http://localhost:8080/api/dispatch/stats")
     .then(res => res.json())
@@ -462,7 +467,13 @@ function showStats() {
       const successData = labels.map(cid => stats[cid].success);
       const percentData = labels.map(cid => stats[cid].percent);
 
-      new Chart(ctx, {
+      // 如果已有图表实例，先销毁
+      if (statsChart) {
+        statsChart.destroy();
+      }
+
+      // 创建新的图表
+      statsChart = new Chart(ctx, {
         type: "bar",
         data: {
           labels: labels,
@@ -522,6 +533,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
