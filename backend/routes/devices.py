@@ -64,7 +64,7 @@ def register_device():
         "client_id": data.get("client_id"),
         "ip": None,
         "version": data.get("version", "unknown"),
-        "partition": None,
+        "partition": "A",
         "status": None
     }
     devices.append(new_device)

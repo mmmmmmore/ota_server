@@ -182,7 +182,7 @@ function newDevices() {
     device_name: deviceName,
     mac_address: macAddress,
     client_id: clientId,
-    firmware_version: firmwareVersion
+    firmware_version: firmwareVersion,
   };
 
   // 调用后端接口
