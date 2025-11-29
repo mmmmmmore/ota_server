@@ -460,48 +460,37 @@ function showStats() {
   fetch("http://localhost:8080/api/dispatch/stats")
     .then(res => res.json())
     .then(stats => {
-      const ctx = document.getElementById("updateChart").getContext("2d");
-
+      
       const labels = Object.keys(stats);
       const totalData = labels.map(cid => stats[cid].total);
       const successData = labels.map(cid => stats[cid].success);
       const percentData = labels.map(cid => stats[cid].percent);
 
-      // 如果已有图表实例，先销毁
-      if (statsChart) {
-        statsChart.destroy();
-      }
-
-      // 创建新的图表
-      statsChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: labels,
-          datasets: [
-            {
-              label: "总推送次数",
-              data: totalData,
-              backgroundColor: "lightblue"
-            },
-            {
-              label: "成功次数",
-              data: successData,
-              backgroundColor: "green"
-            },
-            {
-              label: "成功率 (%)",
-              data: percentData,
-              backgroundColor: "orange"
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          scales: {
-            y: { beginAtZero: true }
+      // create blank chart
+      if(!statsChart){
+        const ctx = document.getElementById("updateChart").getContext("2d");
+        statsChart = new Chart(ctx, {
+          type: "bar",
+          date: {
+            labels:labels ,
+            datasets:[
+              { label: "Total",       data : totalData,   backgroundColor : "lightblue"},
+              { label: "Success",     data : successData, backgroundColor : "green"},
+              { label: "SuccessRate", data : percentData, backgroundColor : "black"}
+            ]
+          },
+          options:{
+            responsive : true,
+            scales: {y: {beginAtZero: true} }
           }
-        }
-      });
+        });
+      } else {
+        statsChart.data.labels  = labels ;
+        statsChart.data.datasets[0].data = totalData;
+        statsChart.data.datasets[1].data = successData;
+        statsChart.data.datasets[2].data = percentData;
+        statsChart.update();
+      }
     })
     .catch(err => console.error("统计失败:", err));
 }
@@ -515,14 +504,14 @@ document.addEventListener("DOMContentLoaded", () => {
   ["Vehicle_1", "Vehicle_2", "Vehicle_3"].forEach(renderPartition);
 
   const ctx = document.getElementById('updateChart').getContext('2d');
-  updateChart = new Chart(ctx, {
+  statsChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ["Vehicle_1", "Vehicle_2", "Vehicle_3"],
+      labels: [],
       datasets: [
+        { label: "总的推送次数", data: [0, 0, 0], backgroundColor: 'lightblue' },
         { label: "成功次数", data: [0, 0, 0], backgroundColor: 'green' },
-        { label: "失败次数", data: [0, 0, 0], backgroundColor: 'orange' },
-        { label: "成功比例 (%)", data: [0, 0, 0], backgroundColor: 'blue' }
+        { label: "成功比例 (%)", data: [0, 0, 0], backgroundColor: 'orange' }
       ]
     },
     options: {
