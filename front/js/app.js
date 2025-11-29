@@ -126,6 +126,46 @@ function queryDevices() {
 }
 
 
+//update device info
+function editDevice(mac) {
+  const newName = prompt("请输入新的设备名称:");
+  const newVersion = prompt("请输入新的软件版本:");
+  const newStatus = prompt("请输入新的状态 (online/offline):");
+
+  const payload = {
+    device_name: newName,
+    firmware_version: newVersion,
+    status: newStatus
+  };
+
+  fetch(`http://localhost:8080/api/devices/${mac}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("设备修改成功: " + JSON.stringify(data));
+    queryDevices();
+  })
+  .catch(err => console.error("修改失败:", err));
+}
+
+//delete device function
+function deleteDevice(mac) {
+  if (!confirm(`确定要删除设备 ${mac} 吗？`)) return;
+
+  fetch(`http://localhost:8080/api/devices/${mac}`, {
+    method: "DELETE"
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("设备删除成功: " + JSON.stringify(data));
+    queryDevices();
+  })
+  .catch(err => console.error("删除失败:", err));
+}
+
 
 
 
@@ -292,6 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
