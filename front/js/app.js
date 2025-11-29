@@ -266,7 +266,7 @@ function deleteSoftware(version) {
 
 //=======================below for OTA task =================
 
-function refreshTasks() {
+function refreshTask() {
   Promise.all([
     fetch("http://localhost:8080/api/devices").then(res => res.json()),
     fetch("http://localhost:8080/api/software").then(res => res.json())
