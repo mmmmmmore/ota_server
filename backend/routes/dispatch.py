@@ -1,26 +1,69 @@
+import os
+import json
+import socket
+from datetime import datetime
 from flask import Blueprint, request, jsonify
 
 dispatch_bp = Blueprint("dispatch", __name__)
-task_results = {}
 
-@dispatch_bp.route("/api/dispatch", methods=["POST"])
-def dispatch_task():
-    data = request.json
-    target = data.get("target", [])
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+TASK_DIR = os.path.join(BASE_DIR, "..", "db", "tasks")
+os.makedirs(TASK_DIR, exist_ok=True)
+
+GW_IP = "192.168.4.1"
+GW_PORT = 9000  # 假设网关监听端口9000
+
+def is_gateway_online():
+    try:
+        sock = socket.create_connection((GW_IP, GW_PORT), timeout=3)
+        sock.close()
+        return True
+    except Exception:
+        return False
+
+@dispatch_bp.route("/api/dispatch/push", methods=["POST"])
+def push_task():
+    data = request.get_json()
+    device_name = data.get("device_name")
+    client_id = data.get("client_id")
     version = data.get("version")
-    url = data.get("url")
 
-    task_id = str(len(task_results) + 1)
-    task_results[task_id] = [{"name": t, "result": "pending"} for t in target]
+    if not device_name or not client_id or not version:
+        return jsonify({"error": "缺少必要字段"}), 400
 
-    return jsonify({"status": "dispatched", "task_id": task_id})
+    # 生成任务 JSON
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    task = {
+        "device_name": device_name,
+        "client_id": client_id,
+        "version": version,
+        "timestamp": timestamp,
+        "status": "pending"
+    }
 
-@dispatch_bp.route("/api/status", methods=["GET"])
-def get_status():
-    task_id = request.args.get("task_id")
-    if task_id in task_results:
-        for res in task_results[task_id]:
-            if res["result"] == "pending":
-                res["result"] = "success"  # 简化逻辑：直接成功
-        return jsonify(task_results[task_id])
-    return jsonify({"status": "no task"}), 404
+    # 保存任务文件
+    task_file = os.path.join(TASK_DIR, f"task_{client_id}_{timestamp}.json")
+    with open(task_file, "w") as f:
+        json.dump(task, f, indent=2)
+
+    # 检查网关是否在线
+    if not is_gateway_online():
+        task["status"] = "failed"
+        with open(task_file, "w") as f:
+            json.dump(task, f, indent=2)
+        return jsonify({"error": "网关离线，请连接后重新测试"}), 503
+
+    # 推送任务到网关
+    try:
+        sock = socket.create_connection((GW_IP, GW_PORT), timeout=5)
+        sock.sendall(json.dumps(task).encode("utf-8"))
+        sock.close()
+        task["status"] = "success"
+        with open(task_file, "w") as f:
+            json.dump(task, f, indent=2)
+        return jsonify({"message": "任务推送成功", "task": task}), 200
+    except Exception as e:
+        task["status"] = "failed"
+        with open(task_file, "w") as f:
+            json.dump(task, f, indent=2)
+        return jsonify({"error": f"推送失败: {str(e)}"}), 500
