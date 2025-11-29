@@ -447,6 +447,58 @@ function pollTaskStatus(taskId, deviceName) {
   }, 2000);
 }
 
+
+
+//---------------ota result summary ------------------//
+
+function showStats() {
+  fetch("http://localhost:8080/api/dispatch/stats")
+    .then(res => res.json())
+    .then(stats => {
+      const ctx = document.getElementById("updateChart").getContext("2d");
+
+      const labels = Object.keys(stats);
+      const totalData = labels.map(cid => stats[cid].total);
+      const successData = labels.map(cid => stats[cid].success);
+      const percentData = labels.map(cid => stats[cid].percent);
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "总推送次数",
+              data: totalData,
+              backgroundColor: "lightblue"
+            },
+            {
+              label: "成功次数",
+              data: successData,
+              backgroundColor: "green"
+            },
+            {
+              label: "成功率 (%)",
+              data: percentData,
+              backgroundColor: "orange"
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: { beginAtZero: true }
+          }
+        }
+      });
+    })
+    .catch(err => console.error("统计失败:", err));
+}
+
+
+
+
+
 // ---------------- 初始化 ---------------- //
 document.addEventListener("DOMContentLoaded", () => {
   ["Vehicle_1", "Vehicle_2", "Vehicle_3"].forEach(renderPartition);
@@ -470,6 +522,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
