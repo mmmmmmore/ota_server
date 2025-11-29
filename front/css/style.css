@@ -75,3 +75,28 @@ button {
 }
 .active { background-color: green; }
 .inactive { background-color: grey; }
+
+.partition {
+  display: flex;
+  gap: 5px;
+}
+
+.box {
+  width: 40px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.box.active {
+  background-color: green;
+  color: white;
+}
+
+.box:not(.active) {
+  background-color: lightgray;
+  color: black;
+}
