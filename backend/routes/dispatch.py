@@ -13,6 +13,26 @@ os.makedirs(TASK_DIR, exist_ok=True)
 GW_IP = "192.168.4.1"
 GW_PORT = 9000  # 假设网关监听端口9000
 
+
+def create_task_file(device_name, client_id, version):
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"{timestamp}_{device_name}_{client_id}.json"
+    filepath = os.path.join(TASK_DIR, filename)
+    
+    task = {
+        "device_name": device_name,
+        "client_id": client_id,
+        "version": version,
+        "timestamp": timestamp,
+        "status": "pending"
+    }
+    
+    with open(filepath, "w") as f:
+        json.dump(task, f, indent=2)
+    
+    return filepath, task
+
+
 def is_gateway_online():
     try:
         sock = socket.create_connection((GW_IP, GW_PORT), timeout=3)
@@ -20,6 +40,10 @@ def is_gateway_online():
         return True
     except Exception:
         return False
+
+
+
+
 
 @dispatch_bp.route("/api/dispatch/push", methods=["POST"])
 def push_task():
@@ -67,3 +91,12 @@ def push_task():
         with open(task_file, "w") as f:
             json.dump(task, f, indent=2)
         return jsonify({"error": f"推送失败: {str(e)}"}), 500
+
+
+
+def update_task_status(filepath, task, status, error=None):
+    task["status"] = status
+    if error:
+        task["error"] =error
+    with open(filepath, "w") as f:
+        json.dump(task, f, indent=2)
