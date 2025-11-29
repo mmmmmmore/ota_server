@@ -4,3 +4,10 @@
 127.0.0.1 - - [28/Nov/2025 17:13:33] "POST /api/upload HTTP/1.1" 200 -
 127.0.0.1 - - [28/Nov/2025 17:14:30] "GET /api/software HTTP/1.1" 200 -
 127.0.0.1 - - [28/Nov/2025 17:14:30] "GET /favicon.ico HTTP/1.1" 404 -
+
+
+统计失败: Error: Canvas is already in use. Chart with ID '0' must be destroyed before the canvas with ID 'updateChart' can be reused.
+    Tn https://cdn.jsdelivr.net/npm/chart.js:13
+    showStats file:///Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/front/js/app.js:465
+    promise callback*showStats file:///Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/front/js/app.js:457
+    onclick file:///Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/front/index.html:1
