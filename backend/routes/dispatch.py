@@ -55,42 +55,23 @@ def push_task():
     if not device_name or not client_id or not version:
         return jsonify({"error": "缺少必要字段"}), 400
 
-    # 生成任务 JSON
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    task = {
-        "device_name": device_name,
-        "client_id": client_id,
-        "version": version,
-        "timestamp": timestamp,
-        "status": "pending"
-    }
-
-    # 保存任务文件
-    task_file = os.path.join(TASK_DIR, f"task_{client_id}_{timestamp}.json")
-    with open(task_file, "w") as f:
-        json.dump(task, f, indent=2)
+    filepath, task = create_task_file(device_name, client_id, version)
 
     # 检查网关是否在线
     if not is_gateway_online():
-        task["status"] = "failed"
-        with open(task_file, "w") as f:
-            json.dump(task, f, indent=2)
-        return jsonify({"error": "网关离线，请连接后重新测试"}), 503
+        update_task_status(filepath, task, "failed", "Network not connect to GW, please retry connection... ")
+        return jsonify({"error", "Network Connection Err"}), 503
 
     # 推送任务到网关
     try:
         sock = socket.create_connection((GW_IP, GW_PORT), timeout=5)
         sock.sendall(json.dumps(task).encode("utf-8"))
         sock.close()
-        task["status"] = "success"
-        with open(task_file, "w") as f:
-            json.dump(task, f, indent=2)
-        return jsonify({"message": "任务推送成功", "task": task}), 200
+        update_task_status(filepath, task, "success")
+        return jsonify({"message": "OTA Push Success ", "task": task}), 200
     except Exception as e:
-        task["status"] = "failed"
-        with open(task_file, "w") as f:
-            json.dump(task, f, indent=2)
-        return jsonify({"error": f"推送失败: {str(e)}"}), 500
+        update_task_status(filepath, task, "failed", str(e))
+        return jsonify({"error": f"Push Err: {str(e)}"}), 500
 
 
 
@@ -99,4 +80,5 @@ def update_task_status(filepath, task, status, error=None):
     if error:
         task["error"] =error
     with open(filepath, "w") as f:
+
         json.dump(task, f, indent=2)
