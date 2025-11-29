@@ -114,6 +114,9 @@ function queryDevices() {
           <td>${dev.firmware_version || ""}</td>
           <td>${dev.partition || ""}</td>
           <td>${dev.status || ""}</td>
+          <td>
+            <button onclick="editDevice('${dev.mac_address}')">Edit</button>
+            <button onclick="deleteDevices('${dev.mac_address}')">Delete</button>
         `;
 
         tbody.appendChild(row);
