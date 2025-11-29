@@ -84,10 +84,6 @@ def update_device(mac_address):
             # 更新允许修改的字段
             d["device_name"] = data.get("device_name", d["device_name"])
             d["client_id"] = data.get("client_id", d.get("client_id"))
-            d["firmware_version"] = data.get("firmware_version", d["firmware_version"])
-            d["ip"] = data.get("ip", d["ip"])
-            d["partition"] = data.get("partition", d["partition"])
-            d["status"] = data.get("status", d["status"])
             save_devices(devices)
             return jsonify(d), 200
 

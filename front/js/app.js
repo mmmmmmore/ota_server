@@ -116,7 +116,7 @@ function queryDevices() {
           <td>${dev.status || ""}</td>
           <td>
             <button onclick="editDevice('${dev.mac_address}')">Edit</button>
-            <button onclick="deleteDevices('${dev.mac_address}')">Delete</button>
+            <button onclick="deleteDevice('${dev.mac_address}')">Delete</button>
         `;
 
         tbody.appendChild(row);
@@ -129,13 +129,11 @@ function queryDevices() {
 //update device info
 function editDevice(mac) {
   const newName = prompt("请输入新的设备名称:");
-  const newVersion = prompt("请输入新的软件版本:");
-  const newStatus = prompt("请输入新的状态 (online/offline):");
+  const clientId = prompt("请输入设备Client ID (可选):");
 
   const payload = {
     device_name: newName,
-    firmware_version: newVersion,
-    status: newStatus
+    client_id: clientId,
   };
 
   fetch(`http://localhost:8080/api/devices/${mac}`, {

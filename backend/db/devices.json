@@ -1,8 +1,8 @@
 [
   {
-    "device_name": "vehicle1",
+    "device_name": "veh2",
     "mac_address": "aabbcc",
-    "client_id": "111",
+    "client_id": "798",
     "ip": null,
     "version": "unknown",
     "partition": null,
