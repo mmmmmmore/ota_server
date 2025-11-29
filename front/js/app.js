@@ -234,6 +234,39 @@ function querySoftware() {
 }
 
 
+function editSoftware(version) {
+  const newChanges = prompt("请输入新的变化点说明:");
+  const newMd5 = prompt("请输入新的MD5值:");
+
+  fetch(`http://localhost:8080/api/software/${version}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ changes: newChanges, md5: newMd5 })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("修改成功: " + JSON.stringify(data));
+    querySoftware();
+  });
+}
+
+
+
+function deleteSoftware(version) {
+  if (!confirm(`确定要删除版本 ${version} 吗？`)) return;
+
+  fetch(`http://localhost:8080/api/software/${version}`, { method: "DELETE" })
+    .then(res => res.json())
+    .then(data => {
+      alert("删除成功: " + JSON.stringify(data));
+      querySoftware();
+    });
+}
+
+
+
+
+
 
 
 // 单设备更新
@@ -335,6 +368,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
