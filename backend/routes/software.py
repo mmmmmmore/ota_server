@@ -10,15 +10,15 @@ software_bp = Blueprint("software", __name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_DIR = os.path.join(BASE_DIR,'..','db')
 SOFTWARE_FILE = os.path.join(DB_DIR, "softwares.json")
-FIRMWARE_DIR = os.path.join(BASE_DIR, "firmware")
 
-os.makedirs(FIRMWARE_DIR, exist_ok=True)
 
+## initiate check
+if not os.path.exists(SOFTWARE_FILE):
+    with open(SOFTWARE_FILE, "w") as f:
+        json.dump([],f)
         
 
 def load_softwares():
-    if not os.path.exists(SOFTWARE_FILE):
-        return []
     with open(SOFTWARE_FILE, 'r') as f:
         return json.load(f)
     
