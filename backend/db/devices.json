@@ -1,0 +1,11 @@
+[
+  {
+    "device_name": "vehicle1",
+    "mac_address": "aabbcc",
+    "client_id": "111",
+    "ip": null,
+    "version": "unknown",
+    "partition": null,
+    "status": null
+  }
+]

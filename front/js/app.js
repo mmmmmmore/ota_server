@@ -136,7 +136,7 @@ function newDevices() {
   };
 
   // 调用后端接口
-  fetch('/devices/register', {
+  fetch('http://localhost:8080/api/devices/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
