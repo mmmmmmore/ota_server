@@ -267,8 +267,6 @@ function deleteSoftware(version) {
 
 
 
-
-
 // 单设备更新
 function updateDevice(deviceName) {
   const version = document.getElementById(`ver-${deviceName}`).value;

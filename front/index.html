@@ -76,76 +76,20 @@
         <thead>
           <tr>
             <th>设备名称</th>
+            <th>ECUID</th>
             <th>软件版本</th>
             <th>当前运行分区</th>
-            <th>选择更新</th>
-            <th>更新结果</th>
+            <th>OTA_Action</th>
+            <th>OTA_Result</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Vehicle_1</td>
-            <td>
-              <select id="ver-Vehicle_1">
-                <option>v1.0.0</option>
-                <option>v1.0.1</option>
-                <option>v1.1.0</option>
-                <option>v2.0.0</option>
-              </select>
-            </td>
-            <td id="partition-Vehicle_1"></td>
-            <td><button onclick="updateDevice('Vehicle_1')">更新</button></td>
-            <td id="status-Vehicle_1">待执行</td>
-          </tr>
-          <tr>
-            <td>Vehicle_2</td>
-            <td>
-              <select id="ver-Vehicle_2">
-                <option>v1.0.0</option>
-                <option>v1.0.1</option>
-                <option>v1.1.0</option>
-                <option>v2.0.0</option>
-              </select>
-            </td>
-            <td id="partition-Vehicle_2"></td>
-            <td><button onclick="updateDevice('Vehicle_2')">更新</button></td>
-            <td id="status-Vehicle_2">待执行</td>
-          </tr>
-          <tr>
-            <td>Vehicle_3</td>
-            <td>
-              <select id="ver-Vehicle_3">
-                <option>v1.0.0</option>
-                <option>v1.0.1</option>
-                <option>v1.1.0</option>
-                <option>v2.0.0</option>
-              </select>
-            </td>
-            <td id="partition-Vehicle_3"></td>
-            <td><button onclick="updateDevice('Vehicle_3')">更新</button></td>
-            <td id="status-Vehicle_3">待执行</td>
-          </tr>
-          <!-- Update All-->
-          <tr>
-            <td>选择全部设备</td>
-            <td>
-                <select id="ver-All">
-                    <option>v1.0.0</option>
-                    <option>v1.0.1</option>
-                    <option>v1.1.0</option>
-                    <option>v1.2.0</option>
-                    <option>v2.0.0</option>
-                </select>
-            </td>
-            <td><!-- 全部设备更新，不显示分区 --></td>
-            <td><button onclick="updateAll()">更新全部</button></td>
-            <td id="status-All">待执行</td>
-          </tr>
+        <tbody id="tasks-tbody">
+          <!--  Dynamic update by JS-->          
         </tbody>
       </table>
-
+      <button onclick="refreshTask()">Task_Fresh</button>
       <!-- add chart-->
-      <canvas id="updateChart" width="600" height="300"></canvas>
+      <canvas id="updateChart" width="1200" height="400"></canvas>
     </div>
   </div>
 
