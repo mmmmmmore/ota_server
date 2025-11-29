@@ -264,6 +264,44 @@ function deleteSoftware(version) {
 }
 
 
+//=======================below for OTA task =================
+
+function refreshTasks() {
+  Promise.all([
+    fetch("http://localhost:8080/api/devices").then(res => res.json()),
+    fetch("http://localhost:8080/api/software").then(res => res.json())
+  ])
+  .then(([devices, software]) => {
+    const tbody = document.getElementById("tasks-tbody");
+    tbody.innerHTML = "";
+
+    devices.forEach(dev => {
+      const row = document.createElement("tr");
+
+      // 构建软件版本下拉菜单
+      let versionOptions = "";
+      software.forEach(s => {
+        versionOptions += `<option value="${s.version}">${s.version}</option>`;
+      });
+
+      row.innerHTML = `
+        <td>${dev.device_name}</td>
+        <td>${dev.client_id}</td>
+        <td>
+          <select id="ver-${dev.client_id}">
+            ${versionOptions}
+          </select>
+        </td>
+        <td>${dev.partition || ""}</td>
+        <td><button onclick="pushOTA('${dev.client_id}')">OTA推送</button></td>
+        <td id="status-${dev.client_id}">待执行</td>
+      `;
+
+      tbody.appendChild(row);
+    });
+  })
+  .catch(err => console.error("刷新任务列表失败:", err));
+}
 
 
 
@@ -366,6 +404,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
