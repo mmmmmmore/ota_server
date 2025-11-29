@@ -28,6 +28,8 @@ function partitionHTML(isAActive) {
 function uploadFirmware() {
   const fileInput = document.getElementById("firmwareFile");
   const versionInput = document.getElementById("firmwareVersion");
+  const md5Input = document.getElementById("firmwareMD5");
+  const changeInput = document.getElementById("changenote");
 
   if (!fileInput.files.length) {
     alert("请先选择固件文件");
@@ -35,25 +37,22 @@ function uploadFirmware() {
   }
   const file = fileInput.files[0];
   const version = versionInput.value || "unknown";
+  const md5 = md5Input.value || "";
+  const changes =changeInput.value || "";
 
   const formData = new FormData();
   formData.append("file", file);
   formData.append("version", version);
+  formData.append("md5",md5);
+  formData.append("changes",changes)
+
     fetch("http://localhost:8080/api/upload", { method: "POST", body: formData })
-      .then(res => {
-        console.log("状态码:", res.status);
-        return res.text(); // 打印原始响应
+    .then(res =>res.json() )  
+    .then(data => {
+      alert("Upload Success: "+JSON.stringify(data));
+      querySoftware();  //fresh the sw list
       })
-      .then(text => {
-        console.log("原始响应:", text);
-        try {
-          const data = JSON.parse(text);
-          console.log("解析成功:", data);
-        } catch (e) {
-          console.error("JSON解析失败:", e);
-        }
-      })
-      .catch(err => console.error("请求失败:", err));
+    .catch(err => console.error("请求失败:", err));
   
 }
 
