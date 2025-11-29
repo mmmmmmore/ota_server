@@ -329,7 +329,7 @@ function refreshTask() {
           </select>
         </td>
         <td>${renderPartition(dev.partition || "")}</td>
-        <td><button onclick="pushOTA('${dev.client_id}')">OTA推送</button></td>
+        <td><button onclick="pushOTA('${dev.client_id}', '${dev.device_name}')">OTA推送</button></td>
         <td id="status-${dev.client_id}">待执行</td>
       `;
 

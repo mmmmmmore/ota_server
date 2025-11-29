@@ -52,8 +52,8 @@ def push_task():
     client_id = data.get("client_id")
     version = data.get("version")
 
-    if not device_name or not client_id or not version:
-        return jsonify({"error": "缺少必要字段"}), 400
+    #if not device_name or not client_id or not version:
+    #    return jsonify({"error": "缺少必要字段"}), 400
 
     filepath, task = create_task_file(device_name, client_id, version)
 
