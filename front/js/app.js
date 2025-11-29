@@ -165,8 +165,6 @@ function deleteDevice(mac) {
 }
 
 
-
-
 //add create new device function
 function newDevices() {
   // 简单示例：弹出输入框收集信息
@@ -209,23 +207,28 @@ function newDevices() {
 }
 
 
-
-
-
 // 查询软件版本
 function querySoftware() {
   fetch("http://localhost:8080/api/software")
     .then(res => res.json())
-    .then(versions => {
+    .then(list => {
       const tbody = document.getElementById("software-tbody");
       tbody.innerHTML = "";
-      versions.forEach(v => {
+
+      list.forEach(s => {
+        const row = document.createElement("tr");
         tbody.innerHTML += `<tr>
-          <td>${v.version}</td>
-          <td>${v.date}</td>
-          <td>${v.hardware}</td>
-          <td>${v.changes}</td>
-        </tr>`;
+          <td>${s.version}</td>
+          <td>${s.date}</td>
+          <td>${s.changes}</td>
+          <td>${v.md5}</td>
+          <td>
+            <button onclick="editSoftware('${s.version}')">Edit</button>
+            <button onclick="deleteSoftware('${s.version}')">Delete</button>
+          <td>
+        </tr>
+        `;
+        tbody.appendChild(row);
       });
     })
     .catch(err => alert("软件查询失败: " + err));

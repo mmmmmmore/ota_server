@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 import os,json
 
 
@@ -51,7 +51,7 @@ def upload_software():
     if not data or "version" not in data or "release_date" not in data:
         return jsonify({"error": "缺少必要字段"}), 400
 
-    software_list = load_software()
+    software_list = load_softwares()
 
     # 检查是否已存在版本
     for s in software_list:
@@ -66,7 +66,7 @@ def upload_software():
     }
 
     software_list.append(new_entry)
-    save_software(software_list)
+    save_softwares(software_list)
 
     return jsonify(new_entry), 201
 
@@ -76,14 +76,14 @@ def upload_software():
 @software_bp.route("/api/software/<version>", methods=["PUT"])
 def update_software(version):
     data = request.get_json()
-    software_list = load_software()
+    software_list = load_softwares()
 
     for s in software_list:
         if s["version"] == version:
             s["release_date"] = data.get("release_date", s["release_date"])
             s["changes"] = data.get("changes", s["changes"])
             s["md5"] = data.get("md5", s["md5"])
-            save_software(software_list)
+            save_softwares(software_list)
             return jsonify(s), 200
 
     return jsonify({"error": "版本未找到"}), 404
@@ -95,13 +95,13 @@ def update_software(version):
 
 @software_bp.route("/api/software/<version>", methods=["DELETE"])
 def delete_software(version):
-    software_list = load_software()
+    software_list = load_softwares()
     new_list = [s for s in software_list if s["version"] != version]
 
     if len(new_list) == len(software_list):
         return jsonify({"error": "版本未找到"}), 404
 
-    save_software(new_list)
+    save_softwares(new_list)
     return jsonify({"message": f"版本 {version} 已删除"}), 200
 
 
