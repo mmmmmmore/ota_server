@@ -9,7 +9,7 @@ software_bp = Blueprint("software", __name__)
 ## JSON save path
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_DIR = os.path.join(BASE_DIR,'..','db')
-SOFTWARE_FILE = os.path.join(DB_DIR, "softwares.json")
+SOFTWARE_FILE = os.path.join(DB_DIR, "software_list.json")
 
 
 ## initiate check

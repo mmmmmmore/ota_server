@@ -1,45 +1,19 @@
 from flask import Blueprint, request, jsonify
 import os
 from datetime import datetime
-
-upload_bp = Blueprint("upload", __name__)
-FIRMWARE_DIR = os.path.join(os.path.dirname(__file__), "../firmware")
-os.makedirs(FIRMWARE_DIR, exist_ok=True)
-
-software_versions = []  # 引用或共享版本列表
-
-@upload_bp.route("/api/upload", methods=["POST"])
-def upload_firmware():
-    file = request.files.get("file")
-    version = request.form.get("version", "unknown")
-    if file:
-        # 改进：按版本号命名文件，避免覆盖
-        filename = f"firmware_{version}.bin"
-        filepath = os.path.join(FIRMWARE_DIR, filename)
-        file.save(filepath)
-
-        software_versions.append({
-            "version": version,
-            "date": datetime.now().strftime("%Y-%m-%d"),
-            "hardware": request.form.get("hardware", "HW_Ax"),
-            "changes": request.form.get("changes", "新上传版本"),
-            "file": filename
-        })
-        return jsonify({"status": "ok", "version": version})
-    return jsonify({"status": "fail"}), 400
-
-import os, json
-from flask import Blueprint, request, jsonify
-from datetime import datetime
+import json
 
 upload_bp = Blueprint("upload", __name__)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_DIR = os.path.join(BASE_DIR, "..", "db")
 SOFTWARE_FILE = os.path.join(DB_DIR, "software_list.json")
-FIRMWARE_DIR = os.path.join(DB_DIR, "firmware")
-
+FIRMWARE_DIR = os.path.join(BASE_DIR, "firmware")
 os.makedirs(FIRMWARE_DIR, exist_ok=True)
+
+software_versions = []  # 引用或共享版本列表
+
+
 
 def load_software():
     if not os.path.exists(SOFTWARE_FILE):
@@ -62,7 +36,7 @@ def upload_firmware():
         return jsonify({"error": "缺少必要字段"}), 400
 
     # 保存固件文件，以版本号命名
-    save_path = os.path.join(FIRMWARE_DIR, f"{version}_{file.filename}")
+    save_path = os.path.join(FIRMWARE_DIR, f"{file.filename}_{version}")
     file.save(save_path)
 
     # 更新 software_list.json

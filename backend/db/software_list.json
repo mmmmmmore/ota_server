@@ -1,0 +1,14 @@
+[
+  {
+    "version": "v2.1.6",
+    "release_date": "2025-11-29",
+    "changes": "initial version",
+    "md5": "mm5"
+  },
+  {
+    "version": "v2.1.10",
+    "release_date": "2025-11-29",
+    "changes": "update ota function",
+    "md5": "mm10"
+  }
+]

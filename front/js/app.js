@@ -220,7 +220,7 @@ function querySoftware() {
           <td>${s.version}</td>
           <td>${s.date}</td>
           <td>${s.changes}</td>
-          <td>${v.md5}</td>
+          <td>${s.md5}</td>
           <td>
             <button onclick="editSoftware('${s.version}')">Edit</button>
             <button onclick="deleteSoftware('${s.version}')">Delete</button>
@@ -232,6 +232,9 @@ function querySoftware() {
     })
     .catch(err => alert("软件查询失败: " + err));
 }
+
+
+
 
 // 单设备更新
 function updateDevice(deviceName) {
