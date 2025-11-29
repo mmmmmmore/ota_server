@@ -80,5 +80,34 @@ def update_task_status(filepath, task, status, error=None):
     if error:
         task["error"] =error
     with open(filepath, "w") as f:
-
         json.dump(task, f, indent=2)
+
+
+@dispatch_bp.route("/api/dispatch/stats", methods=["GET"])
+def get_stats():
+    stats = {}
+    for filename in os.listdir(TASK_DIR):
+        if filename.endswith(".json"):
+            filepath = os.path.join(TASK_DIR, filename)
+            with open(filepath, "r") as f:
+                task = json.load(f)
+            client_id = task.get("client_id")
+            status = task.get("status")
+            if not client_id:
+                continue
+            if client_id not in stats:
+                stats[client_id] = {"total": 0, "success": 0}
+            stats[client_id]["total"] += 1
+            if status == "success":
+                stats[client_id]["success"] += 1
+
+    # 计算百分比
+    for cid, data in stats.items():
+        total = data["total"]
+        success = data["success"]
+        data["percent"] = round(success / total * 100, 2) if total > 0 else 0
+
+    return jsonify(stats)
+
+
+
