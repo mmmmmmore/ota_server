@@ -111,7 +111,7 @@ function queryDevices() {
           <td>${dev.mac_address || ""}</td>
           <td>${dev.ip || ""}</td>
           <td>${dev.firmware_version || ""}</td>
-          <td>${dev.partition || ""}</td>
+          <td>${renderPartition(dev.partition)}</td>
           <td>${dev.status || ""}</td>
           <td>
             <button onclick="editDevice('${dev.mac_address}')">Edit</button>
@@ -129,10 +129,12 @@ function queryDevices() {
 function editDevice(mac) {
   const newName = prompt("请输入新的设备名称:");
   const clientId = prompt("请输入设备Client ID (可选):");
+  const newPartition = prompt("请输入新的运行分区 A/B “）；
 
   const payload = {
     device_name: newName,
     client_id: clientId,
+    partition: newPartition
   };
 
   fetch(`http://localhost:8080/api/devices/${mac}`, {
@@ -162,6 +164,40 @@ function deleteDevice(mac) {
   })
   .catch(err => console.error("删除失败:", err));
 }
+
+
+
+function renderPartition(partition) {
+  if (!partition) {
+    // 默认情况：A、B 都灰色
+    return `
+      <div class="partition">
+        <div class="box inactive">A</div>
+        <div class="box inactive">B</div>
+      </div>
+    `;
+  }
+
+  if (partition === "A") {
+    return `
+      <div class="partition">
+        <div class="box active">A</div>
+        <div class="box inactive">B</div>
+      </div>
+    `;
+  }
+
+  if (partition === "B") {
+    return `
+      <div class="partition">
+        <div class="box inactive">A</div>
+        <div class="box active">B</div>
+      </div>
+    `;
+  }
+}
+
+
 
 
 //add create new device function
@@ -292,7 +328,7 @@ function refreshTask() {
             ${versionOptions}
           </select>
         </td>
-        <td>${dev.partition || ""}</td>
+        <td>${renderPartition(dev.partition || "")}</td>
         <td><button onclick="pushOTA('${dev.client_id}')">OTA推送</button></td>
         <td id="status-${dev.client_id}">待执行</td>
       `;
@@ -404,6 +440,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
