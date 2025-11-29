@@ -1,20 +1,20 @@
 // 统计数据
-const stats = {
-  "Vehicle_1": { success: 0, total: 0 },
-  "Vehicle_2": { success: 0, total: 0 },
-  "Vehicle_3": { success: 0, total: 0 }
-};
+//const stats = {
+//  "Vehicle_1": { success: 0, total: 0 },
+//  "Vehicle_2": { success: 0, total: 0 },
+//  "Vehicle_3": { success: 0, total: 0 }
+//};
 
 let statsChart = null; // 在全局定义一个变量保存图表实例
+const stats = {};
 
-
-
+const partition ={};
 // 分区状态：true=A运行；false=B运行
-const partitions = {
-  "Vehicle_1": true,
-  "Vehicle_2": true,
-  "Vehicle_3": true
-};
+//const partitions = {
+//  "Vehicle_1": true,
+//  "Vehicle_2": true,
+//  "Vehicle_3": true
+//};
 
 // 菜单切换
 function showSection(sectionId) {
@@ -61,11 +61,11 @@ function uploadFirmware() {
 }
 
 
-function renderPartition(deviceName) {
-  const html = partitionHTML(partitions[deviceName]);
-  const cells = document.querySelectorAll(`#partition-${deviceName}`);
-  cells.forEach(cell => { cell.innerHTML = html; });
-}
+//function renderPartition(deviceName) {
+//  const html = partitionHTML(partitions[deviceName]);
+//  const cells = document.querySelectorAll(`#partition-${deviceName}`);
+//  cells.forEach(cell => { cell.innerHTML = html; });
+//}
 
 function setStatus(deviceName, text, color) {
   const cell = document.getElementById(`status-${deviceName}`);
@@ -75,26 +75,26 @@ function setStatus(deviceName, text, color) {
 }
 
 // 图表对象
-let updateChart = null;
+//let updateChart = null;
 
 // 更新统计并刷新图表
-function updateStats(deviceName, success) {
-  stats[deviceName].total++;
-  if (success) stats[deviceName].success++;
-
-  if (!updateChart) return;
-
-  const successData = Object.values(stats).map(s => s.success);
-  const failData = Object.values(stats).map(s => s.total - s.success);
-  const ratioData = Object.values(stats).map(s =>
-    s.total > 0 ? Math.round((s.success / s.total) * 100) : 0
-  );
-
-  updateChart.data.datasets[0].data = successData;
-  updateChart.data.datasets[1].data = failData;
-  updateChart.data.datasets[2].data = ratioData;
-  updateChart.update();
-}
+//function updateStats(deviceName, success) {
+//  stats[deviceName].total++;
+//  if (success) stats[deviceName].success++;
+//
+//  if (!updateChart) return;
+//
+//  const successData = Object.values(stats).map(s => s.success);
+//  const failData = Object.values(stats).map(s => s.total - s.success);
+//  const ratioData = Object.values(stats).map(s =>
+//    s.total > 0 ? Math.round((s.success / s.total) * 100) : 0
+//  );
+//
+//  updateChart.data.datasets[0].data = successData;
+//  updateChart.data.datasets[1].data = failData;
+//  updateChart.data.datasets[2].data = ratioData;
+//  updateChart.update();
+//}
 
 // ---------------- API 对接 ---------------- //
 
