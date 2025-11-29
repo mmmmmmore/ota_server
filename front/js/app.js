@@ -39,9 +39,6 @@ function uploadFirmware() {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("version", version);
-
-
-
     fetch("http://localhost:8080/api/upload", { method: "POST", body: formData })
       .then(res => {
         console.log("状态码:", res.status);
@@ -101,18 +98,33 @@ function updateStats(deviceName, success) {
 // 查询设备信息
 function queryDevices() {
   fetch("http://localhost:8080/api/devices")
-    .then(res => res.json())
+    .then(response => response.json())
     .then(devices => {
-      devices.forEach(d => {
-        // 更新分区显示
-        partitions[d.name] = d.partition === "A";
-        renderPartition(d.name);
-        // 更新状态
-        setStatus(d.name, d.status, d.status === "online" ? "green" : "red");
+      const tbody = document.getElementById("devices-tbody");
+      tbody.innerHTML = ""; // 清空旧内容
+
+      devices.forEach(dev => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+          <td>${dev.device_name || ""}</td>
+          <td>${dev.client_id || ""}</td>
+          <td>${dev.mac_address || ""}</td>
+          <td>${dev.ip || ""}</td>
+          <td>${dev.firmware_version || ""}</td>
+          <td>${dev.partition || ""}</td>
+          <td>${dev.status || ""}</td>
+        `;
+
+        tbody.appendChild(row);
       });
     })
-    .catch(err => alert("设备查询失败: " + err));
+    .catch(error => console.error("查询设备失败:", error));
 }
+
+
+
+
 
 //add create new device function
 function newDevices() {
@@ -277,6 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
