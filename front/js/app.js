@@ -341,6 +341,32 @@ function refreshTask() {
 
 
 
+function pushOTA(clientId, deviceName) {
+  const version = document.getElementById(`ver-${clientId}`).value;
+
+  fetch("http://localhost:8080/api/dispatch/push", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ client_id: clientId, device_name: deviceName, version: version })
+  })
+  .then(res => res.json())
+  .then(data => {
+    const statusCell = document.getElementById(`status-${clientId}`);
+    if (data.error) {
+      statusCell.innerText = "失败: " + data.error;
+    } else {
+      statusCell.innerText = "成功: " + data.message;
+    }
+  })
+  .catch(err => {
+    document.getElementById(`status-${clientId}`).innerText = "推送异常";
+    console.error("推送失败:", err);
+  });
+}
+
+
+
+
 // 单设备更新
 function updateDevice(deviceName) {
   const version = document.getElementById(`ver-${deviceName}`).value;
@@ -440,6 +466,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
