@@ -1,14 +1,23 @@
 [
   {
+    "version": "v2.1.4",
+    "release_date": "2025-11-29",
+    "changes": "test version",
+    "md5": "mmm404",
+    "filename": "esp32_wifi_control_v2.1.4.bin_v2.1.4"
+  },
+  {
     "version": "v2.1.6",
     "release_date": "2025-11-29",
-    "changes": "initial version",
-    "md5": "mm5"
+    "changes": "feature1",
+    "md5": "mmm606",
+    "filename": "esp32_wifi_control_v2.1.6.bin_v2.1.6"
   },
   {
     "version": "v2.1.10",
     "release_date": "2025-11-29",
-    "changes": "update ota function",
-    "md5": "mm10"
+    "changes": "feature2",
+    "md5": "mmm110",
+    "filename": "esp32_wifi_control_v2.1.10.bin_v2.1.10"
   }
 ]

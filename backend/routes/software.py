@@ -8,7 +8,7 @@ software_bp = Blueprint("software", __name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_DIR = os.path.join(BASE_DIR, "..", "db")
 SOFTWARE_FILE = os.path.join(DB_DIR, "software_list.json")
-FIRMWARE_DIR = os.path.join(DB_DIR, "firmware")
+FIRMWARE_DIR = os.path.join(BASE_DIR, '..', "firmware")
 
 # 确保目录存在
 os.makedirs(FIRMWARE_DIR, exist_ok=True)
@@ -43,7 +43,7 @@ def upload_software():
         return jsonify({"error": "缺少必要字段"}), 400
 
     # 保存固件文件，以版本号命名
-    save_path = os.path.join(FIRMWARE_DIR, f"{version}_{file.filename}")
+    save_path = os.path.join(FIRMWARE_DIR, f"{file.filename}")
     file.save(save_path)
 
     # 更新 JSON 列表
@@ -58,7 +58,7 @@ def upload_software():
         "release_date": datetime.now().strftime("%Y-%m-%d"),
         "changes": changes or "",
         "md5": md5 or "",
-        "filename": f"{version}_{file.filename}"  # 记录固件文件名
+        "filename": f"{file.filename}"  # 记录固件文件名
     }
     software_list.append(new_entry)
     save_software(software_list)

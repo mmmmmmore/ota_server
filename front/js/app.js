@@ -46,7 +46,7 @@ function uploadFirmware() {
   formData.append("md5",md5);
   formData.append("changes",changes)
 
-    fetch("http://localhost:8080/api/upload", { method: "POST", body: formData })
+    fetch("http://localhost:8080/api/software/upload", { method: "POST", body: formData })
     .then(res =>res.json() )  
     .then(data => {
       alert("Upload Success: "+JSON.stringify(data));
