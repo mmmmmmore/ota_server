@@ -71,3 +71,39 @@ def register_device():
     save_devices(devices)
 
     return jsonify(new_device), 201
+
+
+
+@devices_bp.route("/api/devices/<mac_address>", methods=["PUT"])
+def update_device(mac_address):
+    data = request.get_json()
+    devices = load_devices()
+
+    for d in devices:
+        if d["mac_address"] == mac_address:
+            # 更新允许修改的字段
+            d["device_name"] = data.get("device_name", d["device_name"])
+            d["client_id"] = data.get("client_id", d.get("client_id"))
+            d["firmware_version"] = data.get("firmware_version", d["firmware_version"])
+            d["ip"] = data.get("ip", d["ip"])
+            d["partition"] = data.get("partition", d["partition"])
+            d["status"] = data.get("status", d["status"])
+            save_devices(devices)
+            return jsonify(d), 200
+
+    return jsonify({"error": "设备未找到"}), 404
+
+
+
+@devices_bp.route("/api/devices/<mac_address>", methods=["DELETE"])
+def delete_device(mac_address):
+    devices = load_devices()
+    new_devices = [d for d in devices if d["mac_address"] != mac_address]
+
+    if len(new_devices) == len(devices):
+        return jsonify({"error": "设备未找到"}), 404
+
+    save_devices(new_devices)
+    return jsonify({"message": f"设备 {mac_address} 已删除"}), 200
+
+
