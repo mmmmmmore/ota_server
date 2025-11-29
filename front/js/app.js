@@ -129,7 +129,7 @@ function queryDevices() {
 function editDevice(mac) {
   const newName = prompt("请输入新的设备名称:");
   const clientId = prompt("请输入设备Client ID (可选):");
-  const newPartition = prompt("请输入新的运行分区 A/B “）；
+  const newPartition = prompt("Please input Partition A/B ");
 
   const payload = {
     device_name: newName,

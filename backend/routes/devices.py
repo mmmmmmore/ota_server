@@ -64,7 +64,7 @@ def register_device():
         "client_id": data.get("client_id"),
         "ip": None,
         "version": data.get("version", "unknown"),
-        "partition": "A",
+        "partition": None,
         "status": None
     }
     devices.append(new_device)
@@ -84,6 +84,7 @@ def update_device(mac_address):
             # 更新允许修改的字段
             d["device_name"] = data.get("device_name", d["device_name"])
             d["client_id"] = data.get("client_id", d.get("client_id"))
+            d["partition"] = data.get("partition", d.get("partition"))
             save_devices(devices)
             return jsonify(d), 200
 

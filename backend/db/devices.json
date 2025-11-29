@@ -1,11 +1,20 @@
 [
   {
-    "device_name": "veh2",
+    "device_name": "Vehicle1",
     "mac_address": "aabbcc",
+    "client_id": "799",
+    "ip": null,
+    "version": "unknown",
+    "partition": "B",
+    "status": null
+  },
+  {
+    "device_name": "Vehicle2",
+    "mac_address": "797",
     "client_id": "798",
     "ip": null,
     "version": "unknown",
-    "partition": null,
+    "partition": "A",
     "status": null
   }
 ]
