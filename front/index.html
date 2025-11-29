@@ -24,30 +24,16 @@
         <thead>
           <tr>
             <th>设备名称</th>
-            <th>IP地址</th>
-            <th>软件版本</th>
-            <th>当前运行分区</th>
+            <th>ECUID</th>
+            <th>MacAddr</th>
+            <th>IP</th>
+            <th>SW_Version</th>
+            <th>Current_Partition</th>
+            <th>Connection</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Vehicle_1</td>
-            <td>192.168.4.2</td>
-            <td>v1.0.0</td>
-            <td id="partition-Vehicle_1"></td>
-          </tr>
-          <tr>
-            <td>Vehicle_2</td>
-            <td>192.168.4.3</td>
-            <td>v1.0.0</td>
-            <td id="partition-Vehicle_2"></td>
-          </tr>
-          <tr>
-            <td>Vehicle_3</td>
-            <td>192.168.4.4</td>
-            <td>v1.0.0</td>
-            <td id="partition-Vehicle_3"></td>
-          </tr>
+        <tbody id="devices-tbody">
+          <!-- Dynamic Fulfill by Devices JSON-->
         </tbody>
       </table>
       <button onclick="queryDevices()">查询设备信息</button>
