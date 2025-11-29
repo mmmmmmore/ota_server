@@ -349,18 +349,22 @@ function pushOTA(clientId, deviceName) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ client_id: clientId, device_name: deviceName, version: version })
   })
-  .then(res => res.json())
+  .then(res => {
+    if (!res.ok) {
+      // 如果返回非200状态码，直接抛出错误
+      return res.json().then(err => { throw new Error(err.error || "请求失败"); });
+    }
+    return res.json();
+  })
   .then(data => {
     const statusCell = document.getElementById(`status-${clientId}`);
-    if (data.error) {
-      statusCell.innerText = "失败: " + data.error;
-    } else {
-      statusCell.innerText = "成功: " + data.message;
-    }
+    statusCell.innerText = "成功: " + data.message;
+    alert("任务推送成功！");
   })
   .catch(err => {
-    document.getElementById(`status-${clientId}`).innerText = "推送异常";
-    console.error("推送失败:", err);
+    const statusCell = document.getElementById(`status-${clientId}`);
+    statusCell.innerText = "失败: " + err.message;
+    alert("推送失败: " + err.message);
   });
 }
 
@@ -466,6 +470,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
 
