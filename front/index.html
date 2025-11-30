@@ -2,163 +2,64 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>OTA_Management</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>GW OTA Gateway</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <!-- 左侧菜单栏 -->
   <div class="sidebar">
-    <h2>OTA_Management</h2>
-    <div class="menu-item" onclick="showSection('devices')">OTA设备</div>
-    <div class="menu-item" onclick="showSection('software')">OTA软件</div>
-    <div class="menu-item" onclick="showSection('tasks')">OTA任务</div>
+    <h2>GW Gateway</h2>
+    <div class="menu-item" onclick="showSection('navigation')">Navigation</div>
+    <div class="menu-item" onclick="showSection('radio')">Radio</div>
+    <div class="menu-item" onclick="showSection('game')">Game</div>
+    <div class="menu-item" onclick="showSection('system')">System</div>
+    <div class="menu-item" onclick="showSection('update')">Update</div>
   </div>
 
   <!-- 主内容区 -->
   <div class="content">
-    <!-- OTA设备 -->
-    <div id="devices" class="section">
-      <h3>已连接设备</h3>
+    <!-- Navigation -->
+    <div id="navigation" class="section">
+      <h3>Navigation</h3>
+      <img src="/assets/Navigation.png" alt="Navigation">
+    </div>
+
+    <!-- Radio -->
+    <div id="radio" class="section hidden">
+      <h3>Radio</h3>
+      <img src="/assets/Radio.png" alt="Radio">
+    </div>
+
+    <!-- Game -->
+    <div id="game" class="section hidden">
+      <h3>Game</h3>
+      <img src="/assets/Game.png" alt="Game">
+    </div>
+
+    <!-- System -->
+    <div id="system" class="section hidden">
+      <h3>System Information</h3>
+      <p>当前网关状态：负责 OTA 任务转发与设备管理。</p>
+    </div>
+
+    <!-- Update -->
+    <div id="update" class="section hidden">
+      <h3>设备更新</h3>
       <table>
         <thead>
           <tr>
             <th>设备名称</th>
-            <th>IP地址</th>
-            <th>软件版本</th>
-            <th>当前运行分区</th>
+            <th>当前版本</th>
+            <th>操作</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Vehicle_1</td>
-            <td>192.168.4.2</td>
-            <td>v1.0.0</td>
-            <td id="partition-Vehicle_1"></td>
-          </tr>
-          <tr>
-            <td>Vehicle_2</td>
-            <td>192.168.4.3</td>
-            <td>v1.0.0</td>
-            <td id="partition-Vehicle_2"></td>
-          </tr>
-          <tr>
-            <td>Vehicle_3</td>
-            <td>192.168.4.4</td>
-            <td>v1.0.0</td>
-            <td id="partition-Vehicle_3"></td>
-          </tr>
+        <tbody id="update-tbody">
+          <!-- 动态填充，后续与 app/client_register 对接 -->
         </tbody>
       </table>
-      <button onclick="queryDevices()">查询设备信息</button>
-    </div>
-
-    <!-- OTA软件 -->
-    <div id="software" class="section hidden">
-      <h3>可用软件版本</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>版本编号</th>
-            <th>生成日期</th>
-            <th>适用硬件版本</th>
-            <th>变化点</th>
-          </tr>
-        </thead>
-        <tbody id="software-tbody">
-          <!-- 动态填充 -->
-        </tbody>
-      </table>
-      <button onclick="querySoftware()">查询软件版本</button>
-
-      <!-- 新增：固件上传入口 -->
-      <h4>上传新固件</h4>
-      <input type="file" id="firmwareFile" />
-      <input type="text" id="firmwareVersion" placeholder="版本号 (如 v1.3.0)" />
-      <button onclick="uploadFirmware()">上传固件</button>
-    </div>
-
-    <!-- OTA任务 -->
-    <div id="tasks" class="section hidden">
-      <h3>OTA任务管理</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>设备名称</th>
-            <th>软件版本</th>
-            <th>当前运行分区</th>
-            <th>选择更新</th>
-            <th>更新结果</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Vehicle_1</td>
-            <td>
-              <select id="ver-Vehicle_1">
-                <option>v1.0.0</option>
-                <option>v1.0.1</option>
-                <option>v1.1.0</option>
-                <option>v2.0.0</option>
-              </select>
-            </td>
-            <td id="partition-Vehicle_1"></td>
-            <td><button onclick="updateDevice('Vehicle_1')">更新</button></td>
-            <td id="status-Vehicle_1">待执行</td>
-          </tr>
-          <tr>
-            <td>Vehicle_2</td>
-            <td>
-              <select id="ver-Vehicle_2">
-                <option>v1.0.0</option>
-                <option>v1.0.1</option>
-                <option>v1.1.0</option>
-                <option>v2.0.0</option>
-              </select>
-            </td>
-            <td id="partition-Vehicle_2"></td>
-            <td><button onclick="updateDevice('Vehicle_2')">更新</button></td>
-            <td id="status-Vehicle_2">待执行</td>
-          </tr>
-          <tr>
-            <td>Vehicle_3</td>
-            <td>
-              <select id="ver-Vehicle_3">
-                <option>v1.0.0</option>
-                <option>v1.0.1</option>
-                <option>v1.1.0</option>
-                <option>v2.0.0</option>
-              </select>
-            </td>
-            <td id="partition-Vehicle_3"></td>
-            <td><button onclick="updateDevice('Vehicle_3')">更新</button></td>
-            <td id="status-Vehicle_3">待执行</td>
-          </tr>
-          <!-- Update All-->
-          <tr>
-            <td>选择全部设备</td>
-            <td>
-                <select id="ver-All">
-                    <option>v1.0.0</option>
-                    <option>v1.0.1</option>
-                    <option>v1.1.0</option>
-                    <option>v1.2.0</option>
-                    <option>v2.0.0</option>
-                </select>
-            </td>
-            <td><!-- 全部设备更新，不显示分区 --></td>
-            <td><button onclick="updateAll()">更新全部</button></td>
-            <td id="status-All">待执行</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- add chart-->
-      <canvas id="updateChart" width="600" height="300"></canvas>
     </div>
   </div>
 
-  <script src="js/app.js"></script>
+  <script src="/js/app.js"></script>
 </body>
 </html>
-
