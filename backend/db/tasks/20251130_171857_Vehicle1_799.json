@@ -1,0 +1,8 @@
+{
+  "device_name": "Vehicle1",
+  "client_id": "799",
+  "version": "v2.1.4",
+  "timestamp": "20251130_171857",
+  "status": "failed",
+  "error": "Network not connect to GW, please retry connection... "
+}
