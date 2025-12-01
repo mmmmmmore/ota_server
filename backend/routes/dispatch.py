@@ -66,6 +66,7 @@ def push_task():
         sock = socket.create_connection((GW_IP, GW_PORT), timeout=5)
         sock.sendall(json.dumps(task).encode("utf-8"))
         response = sock.recv(1024).decode("utf-8")
+        print("GW response : ", response)
         sock.close()
         update_task_status(filepath, task, "success", response)
         return jsonify({"message": "OTA Push Success", "task": task, "gw_response": response}), 200
@@ -109,6 +110,7 @@ def get_stats():
         data["percent"] = round(success / total * 100, 2) if total > 0 else 0
 
     return jsonify(stats)
+
 
 
 
