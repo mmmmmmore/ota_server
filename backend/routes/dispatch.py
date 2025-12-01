@@ -11,7 +11,7 @@ TASK_DIR = os.path.join(BASE_DIR, "..", "db", "tasks")
 os.makedirs(TASK_DIR, exist_ok=True)
 
 GW_IP = "192.168.4.1"
-GW_PORT = 9000  # 假设网关监听端口9000
+GW_PORT = 9001  # 假设网关监听端口9000
 OTA_Ser_IP = "192.168.4.2"  # server IP
 
 
