@@ -3,6 +3,9 @@ import json
 import socket
 from datetime import datetime
 from flask import Blueprint, request, jsonify
+import netifaces
+
+
 
 dispatch_bp = Blueprint("dispatch", __name__)
 
@@ -13,6 +16,13 @@ os.makedirs(TASK_DIR, exist_ok=True)
 GW_IP = "192.168.4.1"
 GW_PORT = 9001  # 假设网关监听端口9000
 #OTA_Ser_IP = "192.168.4.2"  # server IP
+
+
+
+def get_ip(interface="en0"):  # Mac 上 Wi-Fi 一般是 en0
+    addrs = netifaces.ifaddresses(interface)
+    return addrs[netifaces.AF_INET][0]['addr']
+
 
 def get_local_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -33,7 +43,7 @@ def create_task_file(device_name, client_id, version):
 
     # 每次任务生成时动态获取当前 IP
     current_ip = get_local_ip()
-
+    print(get_ip("en0"))  # 应该返回 192.168.4.2
     task = {
         "task_id": task_id,
         "device_name": device_name,
@@ -124,6 +134,7 @@ def get_stats():
         data["percent"] = round(success / total * 100, 2) if total > 0 else 0
 
     return jsonify(stats)
+
 
 
 
