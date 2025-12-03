@@ -19,5 +19,5 @@ app.register_blueprint(dispatch_bp)
 app.register_blueprint(download_bp)
 
 if __name__ == "__main__":
-    context = ("server_cert.pem","server_key.pem")
+    context = ("server.crt","server.key")
     app.run(host="0.0.0.0", port=8080, debug=True,  ssl_context = context)

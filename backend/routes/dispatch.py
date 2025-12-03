@@ -42,8 +42,8 @@ def create_task_file(device_name, client_id, version):
     filepath = os.path.join(TASK_DIR, filename)
 
     # 每次任务生成时动态获取当前 IP
-    current_ip = get_local_ip()
-    print(get_ip("en0"))  # 应该返回 192.168.4.2
+    current_ip = get_ip()
+    #print(get_ip("en0"))  # 应该返回 192.168.4.2
     task = {
         "task_id": task_id,
         "device_name": device_name,

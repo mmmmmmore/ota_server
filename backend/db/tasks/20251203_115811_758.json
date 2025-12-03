@@ -1,0 +1,10 @@
+{
+  "task_id": "20251203_115811_758",
+  "device_name": "Veh1_SCM1",
+  "client_id": "758",
+  "version": "v2.1.4",
+  "firmware_url": "https://192.168.100.200:8080/firmware/firmware_v2.1.4.bin",
+  "timestamp": "20251203_115811",
+  "status": "failed",
+  "error": "timed out"
+}
