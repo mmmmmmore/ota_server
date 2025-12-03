@@ -50,7 +50,7 @@ function uploadFirmware() {
   formData.append("md5",md5);
   formData.append("changes",changes)
 
-    fetch("http://localhost:8080/api/software/upload", { method: "POST", body: formData })
+    fetch("https://localhost:8080/api/software/upload", { method: "POST", body: formData })
     .then(res =>res.json() )  
     .then(data => {
       alert("Upload Success: "+JSON.stringify(data));
@@ -100,7 +100,7 @@ function setStatus(deviceName, text, color) {
 
 // 查询设备信息
 function queryDevices() {
-  fetch("http://localhost:8080/api/devices")
+  fetch("https://localhost:8080/api/devices")
     .then(response => response.json())
     .then(devices => {
       const tbody = document.getElementById("devices-tbody");
@@ -141,7 +141,7 @@ function editDevice(mac) {
     partition: newPartition
   };
 
-  fetch(`http://localhost:8080/api/devices/${mac}`, {
+  fetch(`https://localhost:8080/api/devices/${mac}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
@@ -158,7 +158,7 @@ function editDevice(mac) {
 function deleteDevice(mac) {
   if (!confirm(`确定要删除设备 ${mac} 吗？`)) return;
 
-  fetch(`http://localhost:8080/api/devices/${mac}`, {
+  fetch(`https://localhost:8080/api/devices/${mac}`, {
     method: "DELETE"
   })
   .then(res => res.json())
@@ -226,7 +226,7 @@ function newDevices() {
   };
 
   // 调用后端接口
-  fetch('http://localhost:8080/api/devices/register', {
+  fetch('https://localhost:8080/api/devices/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -248,7 +248,7 @@ function newDevices() {
 
 // 查询软件版本
 function querySoftware() {
-  fetch("http://localhost:8080/api/software")
+  fetch("https://localhost:8080/api/software")
     .then(res => res.json())
     .then(list => {
       const tbody = document.getElementById("software-tbody");
@@ -278,7 +278,7 @@ function editSoftware(version) {
   const newChanges = prompt("请输入新的变化点说明:");
   const newMd5 = prompt("请输入新的MD5值:");
 
-  fetch(`http://localhost:8080/api/software/${version}`, {
+  fetch(`https://localhost:8080/api/software/${version}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ changes: newChanges, md5: newMd5 })
@@ -295,7 +295,7 @@ function editSoftware(version) {
 function deleteSoftware(version) {
   if (!confirm(`确定要删除版本 ${version} 吗？`)) return;
 
-  fetch(`http://localhost:8080/api/software/${version}`, { method: "DELETE" })
+  fetch(`https://localhost:8080/api/software/${version}`, { method: "DELETE" })
     .then(res => res.json())
     .then(data => {
       alert("删除成功: " + JSON.stringify(data));
@@ -308,8 +308,8 @@ function deleteSoftware(version) {
 
 function refreshTask() {
   Promise.all([
-    fetch("http://localhost:8080/api/devices").then(res => res.json()),
-    fetch("http://localhost:8080/api/software").then(res => res.json())
+    fetch("https://localhost:8080/api/devices").then(res => res.json()),
+    fetch("https://localhost:8080/api/software").then(res => res.json())
   ])
   .then(([devices, software]) => {
     const tbody = document.getElementById("tasks-tbody");
@@ -348,7 +348,7 @@ function refreshTask() {
 function pushOTA(clientId, deviceName) {
   const version = document.getElementById(`ver-${clientId}`).value;
 
-  fetch("http://localhost:8080/api/dispatch/push", {
+  fetch("https://localhost:8080/api/dispatch/push", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ client_id: clientId, device_name: deviceName, version: version })
@@ -380,7 +380,7 @@ function updateDevice(deviceName) {
   const version = document.getElementById(`ver-${deviceName}`).value;
   setStatus(deviceName, "更新中...", "black");
 
-  fetch("http://localhost:8080/api/dispatch", {
+  fetch("https://localhost:8080/api/dispatch", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -405,7 +405,7 @@ function updateAll() {
   statusAll.textContent = "更新中...";
   statusAll.style.color = "black";
 
-  fetch("http://localhost:8080/api/dispatch", {
+  fetch("https://localhost:8080/api/dispatch", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -429,7 +429,7 @@ function updateAll() {
 // 轮询任务状态
 function pollTaskStatus(taskId, deviceName) {
   setTimeout(() => {
-    fetch(`http://localhost:8080/api/status?task_id=${taskId}`)
+    fetch(`https://localhost:8080/api/status?task_id=${taskId}`)
       .then(res => res.json())
       .then(results => {
         results.forEach(r => {
@@ -457,7 +457,7 @@ function pollTaskStatus(taskId, deviceName) {
 
 
 function showStats() {
-  fetch("http://localhost:8080/api/dispatch/stats")
+  fetch("https://localhost:8080/api/dispatch/stats")
     .then(res => res.json())
     .then(stats => {
       

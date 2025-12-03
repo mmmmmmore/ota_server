@@ -12,7 +12,7 @@ os.makedirs(TASK_DIR, exist_ok=True)
 
 GW_IP = "192.168.4.1"
 GW_PORT = 9001  # 假设网关监听端口9000
-OTA_Ser_IP = "192.168.4.2"  # server IP
+#OTA_Ser_IP = "192.168.4.2"  # server IP
 
 def get_local_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

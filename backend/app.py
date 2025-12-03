@@ -9,7 +9,7 @@ from routes.dispatch import dispatch_bp
 from routes.download import download_bp
 
 app = Flask(__name__)
-CORS(app)  # 解决跨域问题，前端不同源也能访问
+CORS(app, resources={r"/*":{"origins":"*"}},supports_credentials=True)  # 解决跨域问题，前端不同源也能访问 # config the cert
 
 # 注册蓝图
 app.register_blueprint(devices_bp)
