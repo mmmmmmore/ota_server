@@ -1,12 +1,14 @@
 from flask import Flask
 from flask_cors import CORS
 
+
 # 导入蓝图
 from routes.devices import devices_bp
 from routes.software import software_bp
 from routes.upload import upload_bp
 from routes.dispatch import dispatch_bp
 from routes.download import download_bp
+from routes.dispatch import connect_gateway
 
 app = Flask(__name__)
 CORS(app, resources={r"/*":{"origins":"*"}},supports_credentials=True)  # 解决跨域问题，前端不同源也能访问 # config the cert
@@ -19,5 +21,6 @@ app.register_blueprint(dispatch_bp)
 app.register_blueprint(download_bp)
 
 if __name__ == "__main__":
+    connect_gateway()
     context = ("server.crt","server.key")
     app.run(host="0.0.0.0", port=8080, debug=True,  ssl_context = context)
