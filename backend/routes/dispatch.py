@@ -4,7 +4,8 @@ import socket
 from datetime import datetime
 from flask import Blueprint, request, jsonify
 import netifaces
-
+import threading
+import time
 
 
 dispatch_bp = Blueprint("dispatch", __name__)
@@ -16,7 +17,47 @@ os.makedirs(TASK_DIR, exist_ok=True)
 GW_IP = "192.168.4.1"
 GW_PORT = 9001  # 假设网关监听端口9000
 #OTA_Ser_IP = "192.168.4.2"  # server IP
+## for long connection and keep alive
+gw_sock = None
+last_seen = None
 
+def connect_gateway():
+    global gw_sock
+    while True:
+        try:
+            gw_sock = socket.create_connection((GW_IP, GW_PORT), timeout=5)
+            print("Connected to GW")
+            # 启动接收线程
+            threading.Thread(target=recv_loop, daemon=True).start()
+            break
+        except Exception as e:
+            print("Connect GW failed:", e)
+            time.sleep(5)
+
+
+def recv_loop():
+    global gw_sock, last_seen
+    while True:
+        try:
+            data = gw_sock.recv(1024).decode("utf-8")
+            if not data:
+                print("GW disconnected")
+                gw_sock.close()
+                connect_gateway()
+                break
+            msg = json.loads(data)
+            if msg.get("msg_type") == "keep_alive":
+                ack = {"msg_type": "keep_alive_ack"}
+                gw_sock.sendall(json.dumps(ack).encode("utf-8"))
+                last_seen = time.time()
+                print("Sent keep_alive_ack to GW")
+            else:
+                print("GW message:", msg)
+        except Exception as e:
+            print("Recv loop error:", e)
+            gw_sock.close()
+            connect_gateway()
+            break
 
 
 def get_ip(interface="en0"):  # Mac 上 Wi-Fi 一般是 en0
@@ -75,6 +116,7 @@ def is_gateway_online():
 
 @dispatch_bp.route("/api/dispatch/push", methods=["POST"])
 def push_task():
+    global gw_sock
     data = request.get_json()
     device_name = data.get("device_name")
     client_id = data.get("client_id")
@@ -82,18 +124,14 @@ def push_task():
 
     filepath, task = create_task_file(device_name, client_id, version)
 
-    if not is_gateway_online():
-        update_task_status(filepath, task, "failed", "GW not reachable")
-        return jsonify({"error": "Network Connection Err"}), 503
+    if gw_sock is None:
+        update_task_status(filepath, task, "failed", "GW not connected")
+        return jsonify({"error": "GW not connected"}), 503
 
     try:
-        sock = socket.create_connection((GW_IP, GW_PORT), timeout=5)
-        sock.sendall(json.dumps(task).encode("utf-8"))
-        response = sock.recv(1024).decode("utf-8")
-        print("GW response : ", response)
-        sock.close()
-        update_task_status(filepath, task, "success", response)
-        return jsonify({"message": "OTA Push Success", "task": task, "gw_response": response}), 200
+        gw_sock.sendall(json.dumps(task).encode("utf-8"))
+        update_task_status(filepath, task, "success")
+        return jsonify({"message": "OTA Push Success", "task": task}), 200
     except Exception as e:
         update_task_status(filepath, task, "failed", str(e))
         return jsonify({"error": f"Push Err: {str(e)}"}), 500
@@ -134,6 +172,7 @@ def get_stats():
         data["percent"] = round(success / total * 100, 2) if total > 0 else 0
 
     return jsonify(stats)
+
 
 
 
