@@ -86,6 +86,7 @@ def create_task_file(device_name, client_id, version):
     current_ip = get_ip()
     #print(get_ip("en0"))  # 应该返回 192.168.4.2
     task = {
+        "msg_type":"ota_task",  # msg type for GW msg handler
         "task_id": task_id,
         "device_name": device_name,
         "client_id": client_id,
