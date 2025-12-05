@@ -1,23 +1,5 @@
 [
   {
-    "device_name": "Vehicle1",
-    "mac_address": "aabbcc",
-    "client_id": "799",
-    "ip": null,
-    "version": "unknown",
-    "partition": "B",
-    "status": null
-  },
-  {
-    "device_name": "Vehicle2",
-    "mac_address": "797",
-    "client_id": "798",
-    "ip": null,
-    "version": "unknown",
-    "partition": "A",
-    "status": null
-  },
-  {
     "device_name": "Veh1_SCM1",
     "mac_address": "1C:DB:D4:AF:1F:60",
     "client_id": "758",
