@@ -8,10 +8,13 @@ from routes.software import software_bp
 from routes.upload import upload_bp
 from routes.dispatch import dispatch_bp
 from routes.download import download_bp
-from routes.dispatch import connect_gateway
+from routes.dispatch import tcp_client
 
 app = Flask(__name__)
 CORS(app, resources={r"/*":{"origins":"*"}},supports_credentials=True)  # 解决跨域问题，前端不同源也能访问 # config the cert
+
+
+int_done = False
 
 # 注册蓝图
 app.register_blueprint(devices_bp)
@@ -20,7 +23,11 @@ app.register_blueprint(upload_bp)
 app.register_blueprint(dispatch_bp)
 app.register_blueprint(download_bp)
 
+
+
+
+
 if __name__ == "__main__":
-    connect_gateway()
+    tcp_client.manager_thread.start()
     context = ("server.crt","server.key")
     app.run(host="0.0.0.0", port=8080, debug=True,  ssl_context = context)
