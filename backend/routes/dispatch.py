@@ -125,9 +125,9 @@ def push_task():
         return jsonify({"error": "GW not connected"}), 503
 
     try:
-        payload = json.dumps(task).encode("utf-8")
+        payload = json.dumps(task)+'\n'
         print(f"[DISPATCH sending OTA task to GW : {task}")
-        gw_sock.sendall(payload)
+        gw_sock.sendall(payload.encode("utf-8"))
         update_task_status(filepath, task, "success")
         return jsonify({"message": "OTA Push Success", "task": task}), 200
     except Exception as e:
