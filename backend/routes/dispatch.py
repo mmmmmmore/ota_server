@@ -24,6 +24,33 @@ GW_PORT = 9001
 gw_sock = None
 last_seen = None
 
+
+
+def is_socket_alive(sock):
+    try:
+        sock.setblocking(False)
+        data = sock.recv(1, socket.MSG_PEEK)
+        sock.setblocking(True)
+        return True
+    except BlockingIOError:
+        sock.setblocking(True)
+        return True
+    except:
+        sock.setblocking(True)
+        return False
+
+
+def get_socket():
+    global gw_sock
+    if gw_sock and is_socket_alive(gw_sock):
+        return gw_sock
+
+    print("[TCP] reconnecting...")
+    connect_gateway()
+    return gw_sock
+
+
+
 def connect_gateway():
     global gw_sock
     while True:
@@ -73,12 +100,8 @@ def recv_loop():
             connect_gateway()
             break
 
-def get_socket():
-    """提供当前的 GW socket 给外部调用"""
-    global gw_sock
-    if gw_sock and gw_sock.fileno() != -1 :
-        return gw_sock
-    return None
+
+
 
 
 
@@ -118,6 +141,7 @@ send_lock = threading.Lock()
 
 @dispatch_bp.route("/api/dispatch/push", methods=["POST"])
 def push_task():
+    global gw_sock
     data = request.get_json()
     device_name = data.get("device_name")
     client_id = data.get("client_id")
@@ -131,8 +155,8 @@ def push_task():
         return jsonify({"error": "GW not connected"}), 503
 
     try:
-        payload = json.dumps(task)+'\n'
-        print(f"[DISPATCH sending OTA task to GW : {payload}")
+        payload = json.dumps(task)
+        print(f"[DISPATCH] sending OTA task to GW : {payload}", flush= True)
         with send_lock:
             gw_sock.sendall(payload.encode("utf-8"))
         update_task_status(filepath, task, "success")

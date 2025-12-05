@@ -1,0 +1,9 @@
+{
+  "task_id": "20251205_185053_759",
+  "device_name": "Veh1_SCM2",
+  "client_id": "759",
+  "version": "v2.1.4",
+  "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.4.bin",
+  "timestamp": "20251205_185053",
+  "status": "success"
+}
