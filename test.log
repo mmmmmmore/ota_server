@@ -1,0 +1,37 @@
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+127.0.0.1 - - [05/Dec/2025 16:47:37] "GET /api/devices HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2025 16:47:37] "GET /api/software HTTP/1.1" 200 -
+[TCP] Sent keep_alive_ack to GW
+127.0.0.1 - - [05/Dec/2025 16:47:39] "OPTIONS /api/dispatch/push HTTP/1.1" 200 -
+f[DISPATCH sending OTA task to GW : {task}
+127.0.0.1 - - [05/Dec/2025 16:47:39] "POST /api/dispatch/push HTTP/1.1" 200 -
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+127.0.0.1 - - [05/Dec/2025 16:48:18] "OPTIONS /api/dispatch/push HTTP/1.1" 200 -
+f[DISPATCH sending OTA task to GW : {task}
+127.0.0.1 - - [05/Dec/2025 16:48:18] "POST /api/dispatch/push HTTP/1.1" 200 -
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+127.0.0.1 - - [05/Dec/2025 16:48:59] "OPTIONS /api/dispatch/push HTTP/1.1" 200 -
+f[DISPATCH sending OTA task to GW : {task}
+127.0.0.1 - - [05/Dec/2025 16:48:59] "POST /api/dispatch/push HTTP/1.1" 200 -
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
