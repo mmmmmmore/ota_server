@@ -73,7 +73,10 @@ def recv_loop():
 
 def get_socket():
     """提供当前的 GW socket 给外部调用"""
-    return gw_sock
+    global gw_sock
+    if gw_sock and gw_sock.fileno() != -1 :
+        return gw_sock
+    return None
 
 
 
@@ -122,9 +125,12 @@ def push_task():
         return jsonify({"error": "GW not connected"}), 503
 
     try:
-        gw_sock.sendall(json.dumps(task).encode("utf-8"))
+        payload = json.dumps(task).encode("utf-8")
+        print("f[DISPATCH sending OTA task to GW : {task}")
+        gw_sock.sendall(payload)
         update_task_status(filepath, task, "success")
         return jsonify({"message": "OTA Push Success", "task": task}), 200
     except Exception as e:
         update_task_status(filepath, task, "failed", str(e))
         return jsonify({"error": f"Push Err: {str(e)}"}), 500
+
