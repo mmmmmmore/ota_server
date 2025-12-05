@@ -1,37 +1,158 @@
 [TCP] Sent keep_alive_ack to GW
-[TCP] Sent keep_alive_ack to GW
-[TCP] Sent keep_alive_ack to GW
-127.0.0.1 - - [05/Dec/2025 16:47:37] "GET /api/devices HTTP/1.1" 200 -
-127.0.0.1 - - [05/Dec/2025 16:47:37] "GET /api/software HTTP/1.1" 200 -
-[TCP] Sent keep_alive_ack to GW
-127.0.0.1 - - [05/Dec/2025 16:47:39] "OPTIONS /api/dispatch/push HTTP/1.1" 200 -
-f[DISPATCH sending OTA task to GW : {task}
-127.0.0.1 - - [05/Dec/2025 16:47:39] "POST /api/dispatch/push HTTP/1.1" 200 -
-[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] No keep_alive for 30s, reconnecting...
 [TCP] Connected to GW
 [TCP] Sent keep_alive_ack to GW
 [TCP] Sent keep_alive_ack to GW
 [TCP] Sent keep_alive_ack to GW
+[TCP] No keep_alive for 30s, reconnecting...
+[TCP] Connected to GW
+[TCP] Sent keep_alive_ack to GW
+127.0.0.1 - - [05/Dec/2025 16:55:44] "GET /api/devices HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2025 16:55:44] "GET /api/software HTTP/1.1" 200 -
+127.0.0.1 - - [05/Dec/2025 16:55:45] "OPTIONS /api/dispatch/push HTTP/1.1" 200 -
+[DISPATCH sending OTA task to GW : {'msg_type': 'ota_task', 'task_id': '20251205_165545_758', 'device_name': 'Veh1_SCM1', 'client_id': '758', 'version': 'v2.1.4', 'firmware_url': 'https://192.168.4.2:8080/firmware/firmware_v2.1.4.bin', 'timestamp': '20251205_165545', 'status': 'pending'}
+127.0.0.1 - - [05/Dec/2025 16:55:45] "POST /api/dispatch/push HTTP/1.1" 200 -
+[TCP] Sent keep_alive_ack to GW
+[TCP] Sent keep_alive_ack to GW
+[TCP] No keep_alive for 30s, reconnecting...
+[TCP] Connected to GW
 [TCP] Sent keep_alive_ack to GW
 [TCP] Sent keep_alive_ack to GW
 [TCP] Sent keep_alive_ack to GW
+[TCP] No keep_alive for 30s, reconnecting...
+[TCP] Connected to GW
 [TCP] Sent keep_alive_ack to GW
-127.0.0.1 - - [05/Dec/2025 16:48:18] "OPTIONS /api/dispatch/push HTTP/1.1" 200 -
-f[DISPATCH sending OTA task to GW : {task}
-127.0.0.1 - - [05/Dec/2025 16:48:18] "POST /api/dispatch/push HTTP/1.1" 200 -
+
+
+I (30873) GW_TCP_SERVER: Client connected, sock=37, ip=192.168.4.3, port=58751
+I (30873) GW_TCP_SERVER: Received 130 bytes from client 37: {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.3"}
+I (30893) GW_TCP_SERVER: [CLIENT]Received msg_type =register from sock 37
+I (30903) GW_MSG_HANDLER: Processing message from sock 37 (role=2): {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.3"}
+I (30913) CLIENT_REGISTER: Saving client register: name=Veh1_SCM1, id=758, mac=1C:DB:D4:AF:1F:60, ip=192.168.4.3, ver=1.1.0, sock=37
+I (31553) GW_TCP_SERVER: Received 30 bytes from client 38: {"msg_type": "keep_alive_ack"}
+I (31553) GW_TCP_SERVER: [OTA] Received keep_alive_ack from sock 38
+I (31553) GW_TCP_SERVER: Received 29 bytes from client 37: {"msg_type":"keep_alive_ack"}
+I (31563) GW_TCP_SERVER: [CLIENT] Received keep_alive_ack from sock 37
+I (36553) GW_TCP_SERVER: Received 30 bytes from client 38: {"msg_type": "keep_alive_ack"}
+I (36553) GW_TCP_SERVER: [OTA] Received keep_alive_ack from sock 38
+I (36553) GW_TCP_SERVER: Received 29 bytes from client 37: {"msg_type":"keep_alive_ack"}
+I (36563) GW_TCP_SERVER: [CLIENT] Received keep_alive_ack from sock 37
+I (41553) GW_TCP_SERVER: Received 30 bytes from client 38: {"msg_type": "keep_alive_ack"}
+I (41553) GW_TCP_SERVER: [OTA] Received keep_alive_ack from sock 38
+I (41553) GW_TCP_SERVER: Received 29 bytes from client 37: {"msg_type":"keep_alive_ack"}
+I (41563) GW_TCP_SERVER: [CLIENT] Received keep_alive_ack from sock 37
+I (46553) GW_TCP_SERVER: Received 30 bytes from client 38: {"msg_type": "keep_alive_ack"}
+I (46553) GW_TCP_SERVER: [OTA] Received keep_alive_ack from sock 38
+I (46553) GW_TCP_SERVER: Received 29 bytes from client 37: {"msg_type":"keep_alive_ack"}
+I (46563) GW_TCP_SERVER: [CLIENT] Received keep_alive_ack from sock 37
+I (51553) GW_TCP_SERVER: Received 30 bytes from client 38: {"msg_type": "keep_alive_ack"}
+I (51553) GW_TCP_SERVER: [OTA] Received keep_alive_ack from sock 38
+I (51553) GW_TCP_SERVER: Received 29 bytes from client 37: {"msg_type":"keep_alive_ack"}
+I (51563) GW_TCP_SERVER: [CLIENT] Received keep_alive_ack from sock 37
+I (56553) GW_TCP_SERVER: Received 30 bytes from client 38: {"msg_type": "keep_alive_ack"}
+I (56553) GW_TCP_SERVER: [OTA] Received keep_alive_ack from sock 38
+I (56553) GW_TCP_SERVER: Received 29 bytes from client 37: {"msg_type":"keep_alive_ack"}
+I (56563) GW_TCP_SERVER: [CLIENT] Received keep_alive_ack from sock 37
+I (61553) GW_TCP_SERVER: Received 29 bytes from client 37: {"msg_type":"keep_alive_ack"}
+I (61553) GW_TCP_SERVER: [CLIENT] Received keep_alive_ack from sock 37
+I (61553) GW_TCP_SERVER: Received 30 bytes from client 38: {"msg_type": "keep_alive_ack"}
+I (61563) GW_TCP_SERVER: [OTA] Received keep_alive_ack from sock 38
+I (66563) GW_TCP_SERVER: Received 29 bytes from client 37: {"msg_type":"keep_alive_ack"}
+I (66563) GW_TCP_SERVER: [CLIENT] Received keep_alive_ack from sock 37
+I (66563) GW_TCP_SERVER: Received 30 bytes from client 38: {"msg_type": "keep_alive_ack"}
+I (66573) GW_TCP_SERVER: [OTA] Received keep_alive_ack from sock 38
+I (71553) GW_TCP_SERVER: Received 30 bytes from client 38: {"msg_type": "keep_alive_ack"}
+I (71553) GW_TCP_SERVER: [OTA] Received keep_alive_ack from sock 38
+I (71553) GW_TCP_SERVER: Received 29 bytes from client 37: {"msg_type":"keep_alive_ack"}
+I (71563) GW_TCP_SERVER: [CLIENT] Received keep_alive_ack from sock 37
+I (76553) GW_TCP_SERVER: Received 30 bytes from client 38: {"msg_type": "keep_alive_ack"}
+I (76553) GW_TCP_SERVER: [OTA] Received keep_alive_ack from sock 38
+I (76553) GW_TCP_SERVER: Received 29 bytes from client 37: {"msg_type":"keep_alive_ack"}
+I (76563) GW_TCP_SERVER: [CLIENT] Received keep_alive_ack from sock 37
+I (81553) GW_TCP_SERVER: Received 29 bytes from client 37: {"msg_type":"keep_alive_ack"}
+I (81553) GW_TCP_SERVER: [CLIENT] Received keep_alive_ack from sock 37
+I (81563) GW_TCP_SERVER: Received 30 bytes from client 38: {"msg_type": "keep_alive_ack"}
+I (81563) GW_TCP_SERVER: [OTA] Received keep_alive_ack from sock 38
+I (86553) GW_TCP_SERVER: Received 30 bytes from client 38: {"msg_type": "keep_alive_ack"}
+I (86553) GW_TCP_SERVER: [OTA] Received keep_alive_ack from sock 38
+I (86563) GW_TCP_SERVER: Received 29 bytes from client 37: {"msg_type":"keep_alive_ack"}
+I (86563) GW_TCP_SERVER: [CLIENT] Received keep_alive_ack from sock 37
+I (91553) GW_TCP_SERVER: Received 29 bytes from client 37: {"msg_type":"keep_alive_ack"}
+I (91553) GW_TCP_SERVER: [CLIENT] Received keep_alive_ack from sock 37
+I (91563) GW_TCP_SERVER: Received 30 bytes from client 38: {"msg_type": "keep_alive_ack"}
+I (91563) GW_TCP_SERVER: [OTA] Received keep_alive_ack from sock 38
+
+
+
+
+
 [TCP] Sent keep_alive_ack to GW
 [TCP] Sent keep_alive_ack to GW
-[TCP] Sent keep_alive_ack to GW
-[TCP] Sent keep_alive_ack to GW
-[TCP] Sent keep_alive_ack to GW
-[TCP] Sent keep_alive_ack to GW
-[TCP] Sent keep_alive_ack to GW
-[TCP] Sent keep_alive_ack to GW
-[TCP] Sent keep_alive_ack to GW
-127.0.0.1 - - [05/Dec/2025 16:48:59] "OPTIONS /api/dispatch/push HTTP/1.1" 200 -
-f[DISPATCH sending OTA task to GW : {task}
-127.0.0.1 - - [05/Dec/2025 16:48:59] "POST /api/dispatch/push HTTP/1.1" 200 -
-[TCP] Sent keep_alive_ack to GW
-[TCP] Sent keep_alive_ack to GW
-[TCP] Sent keep_alive_ack to GW
-[TCP] Sent keep_alive_ack to GW
+[TCP] No keep_alive for 30s, reconnecting...
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Recv loop error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW

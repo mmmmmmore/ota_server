@@ -126,7 +126,7 @@ def push_task():
 
     try:
         payload = json.dumps(task).encode("utf-8")
-        print("f[DISPATCH sending OTA task to GW : {task}")
+        print(f"[DISPATCH sending OTA task to GW : {task}")
         gw_sock.sendall(payload)
         update_task_status(filepath, task, "success")
         return jsonify({"message": "OTA Push Success", "task": task}), 200
