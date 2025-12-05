@@ -36,6 +36,8 @@ def connect_gateway():
             print("[TCP] Connect GW failed:", e)
             time.sleep(5)
 
+
+
 def recv_loop():
     global gw_sock, last_seen
     gw_sock.settimeout(15)  # 设置接收超时
@@ -110,6 +112,10 @@ def update_task_status(filepath, task, status, error=None):
     with open(filepath, "w") as f:
         json.dump(task, f, indent=2)
 
+
+send_lock = threading.Lock()
+
+
 @dispatch_bp.route("/api/dispatch/push", methods=["POST"])
 def push_task():
     data = request.get_json()
@@ -126,11 +132,13 @@ def push_task():
 
     try:
         payload = json.dumps(task)+'\n'
-        print(f"[DISPATCH sending OTA task to GW : {task}")
-        gw_sock.sendall(payload.encode("utf-8"))
+        print(f"[DISPATCH sending OTA task to GW : {payload}")
+        with send_lock:
+            gw_sock.sendall(payload.encode("utf-8"))
         update_task_status(filepath, task, "success")
         return jsonify({"message": "OTA Push Success", "task": task}), 200
     except Exception as e:
+        print(f"[Dispathc] sendall failed :{e}", flush= True)
         update_task_status(filepath, task, "failed", str(e))
         return jsonify({"error": f"Push Err: {str(e)}"}), 500
 
