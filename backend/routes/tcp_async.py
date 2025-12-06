@@ -34,6 +34,8 @@ class GatewayClient:
                             obj = json.loads(msg)
                             if obj.get("msg_type") == "keep_alive":
                                 ack = {"msg_type": "keep_alive_ack"}
+                                if "seq" in obj: 
+                                    ack["seq"] = obj["seq"]
                                 writer.write((json.dumps(ack) + "\n").encode())
                                 await writer.drain()
                                 print("[TCP] Sent keep_alive_ack")
