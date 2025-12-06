@@ -485,3 +485,24 @@ I (151683) GW_TCP_SERVER: [OTA] Received keep_alive_ack from sock 37
 I (156633) GW_TCP_SERVER: Received 29 bytes from client 38: {"msg_type":"keep_alive_ack"}
 I (156633) GW_TCP_SERVER: [CLIENT] Received keep_alive_ack from sock 38
 I (156693) GW_TCP_SERVER: Received 31 bytes from client 37: {"msg_type": "keep_alive_ack"}
+
+
+
+251206-120800
+
+[TCP] Sent keep_alive_ack
+[TCP] Sent keep_alive_ack
+[TCP] Sent keep_alive_ack
+[TCP] Sent keep_alive_ack
+127.0.0.1 - - [06/Dec/2025 12:07:04] "OPTIONS /api/dispatch/push HTTP/1.1" 200 -
+127.0.0.1 - - [06/Dec/2025 12:07:04] "POST /api/dispatch/push HTTP/1.1" 200 -
+[TCP] Sent task: {"msg_type": "ota_task", "task_id": "20251206_120704_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.4", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.4.bin", "timestamp": "20251206_120704", "status": "pending"}
+[TCP] Sent keep_alive_ack
+[TCP] Sent keep_alive_ack
+[TCP] Sent keep_alive_ack
+192.168.4.3 - - [06/Dec/2025 12:07:14] "GET /firmware/firmware_v2.1.4.bin HTTP/1.1" 404 -
+[TCP] Sent keep_alive_ack
+[TCP] Sent keep_alive_ack
+[TCP] Sent keep_alive_ack
+
+
