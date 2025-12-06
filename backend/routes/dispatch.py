@@ -10,7 +10,8 @@ import time
 import struct
 import queue
 import traceback
-
+import asyncio
+from routes.tcp_async import GatewayClient
 
 dispatch_bp = Blueprint("dispatch", __name__)
 
@@ -18,8 +19,24 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TASK_DIR = os.path.join(BASE_DIR, "..", "db", "tasks")
 os.makedirs(TASK_DIR, exist_ok=True)
 
+
 GW_IP = "192.168.4.1"
-GW_PORT = 9001
+GW_TCP_PORT = 9001
+task_queue = None
+loop = None
+
+def start_asyncio():
+    global loop, task_queue
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    task_queue = asyncio.Queue()
+    client = GatewayClient(GW_IP, GW_TCP_PORT, task_queue)
+    loop.run_until_complete(client.run())
+
+tcpthread = threading.Thread(target= start_asyncio, daemon=True )
+
+
+
 
 
 

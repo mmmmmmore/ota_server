@@ -156,3 +156,224 @@ I (91563) GW_TCP_SERVER: [OTA] Received keep_alive_ack from sock 38
 [TCP] Connected to GW
 [TCP] Recv loop error: [Errno 54] Connection reset by peer
 [TCP] Connected to GW
+
+
+
+
+
+251206-100900
+
+
+I (1557) WEB_OTAGW: OTA Gateway Webserver started
+系统初始化完成，等待客户端连接...
+I (1557) main_task: Returned from app_main()
+I (7007) wifi:new:<1,0>, old:<1,1>, ap:<1,0>, sta:<255,255>, prof:1, snd_ch_cfg:0x0
+I (7007) wifi:station: a4:5e:60:c5:69:75 join, AID=1, bgn, 20
+I (7047) wifi:<ba-add>idx:2 (ifx:1, a4:5e:60:c5:69:75), tid:6, ssn:2, winSize:64
+I (8067) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.2
+I (13677) wifi:<ba-add>idx:3 (ifx:1, a4:5e:60:c5:69:75), tid:0, ssn:0, winSize:64
+I (858667) GW_TCP_SERVER: Client connected, sock=37, ip=192.168.4.2, port=50126
+I (858667) GW_TCP_SERVER: OTA Server socket set: 37
+W (888667) GW_TCP_SERVER: Sock 37 timed out (no keep_alive_ack), closing
+I (888667) GW_TCP_SERVER: Closing client socket 37
+W (888667) GW_TCP_SERVER: OTA Server disconnected
+I (888667) GW_TCP_SERVER: Client connected, sock=37, ip=192.168.4.2, port=50129
+I (888677) GW_TCP_SERVER: OTA Server socket set: 37
+I (888677) GW_TCP_SERVER: Received 254 bytes from client 37: {"msg_type": "ota_task", "task_id": "20251206_100729_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.4", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.4.bin", "timestamp": "20251206_100729", "status": "pending"}
+
+I (888707) GW_TCP_SERVER: [OTA]Received msg_type =ota_task from sock 37
+I (888717) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "ota_task", "task_id": "20251206_100729_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.4", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.4.bin", "timestamp": "20251206_100729", "status": "pending"}
+
+I (888737) GW_MSG_HANDLER: GW Rx ota task, schedule delay dispatch to otaapp 
+Guru Meditation Error: Core  0 panic'ed (StoreProhibited). Exception was unhandled.
+
+Core  0 register dump:
+PC      : 0x40055835  PS      : 0x00060e30  A0      : 0x8200cd3a  A1      : 0x3fcbfcb0  
+--- 0x40055835: strncpy in ROM
+A2      : 0x00000000  A3      : 0x3fca6be0  A4      : 0x0000003f  A5      : 0x0000ff00  
+A6      : 0x00ff0000  A7      : 0xff000000  A8      : 0x35323032  A9      : 0x3fcbfc80  
+A10     : 0x00000000  A11     : 0x000000ff  A12     : 0x00000000  A13     : 0x0000000c  
+A14     : 0x3c0a682f  A15     : 0x00000804  SAR     : 0x00000014  EXCCAUSE: 0x0000001d  
+EXCVADDR: 0x00000000  LBEG    : 0x40055825  LEND    : 0x4005583f  LCOUNT  : 0xffffffff  
+--- 0x40055825: strncpy in ROM
+--- 0x4005583f: strncpy in ROM
+
+
+Backtrace: 0x40055832:0x3fcbfcb0 0x4200cd37:0x3fcbfcc0 0x4200d92c:0x3fcbfd10 0x4209a346:0x00000000 |<-CORRUPTED
+--- 0x40055832: strncpy in ROM
+--- 0x4200cd37: msg_handler_process at /Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/handler/msg_handler/msg_handler.c:90
+--- 0x4200d92c: tcp_server_task at /Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/protocol/tcp_server/tcp_server.c:235
+--- 0x4209a346: vPortTaskWrapper at /Users/maochun/esp32prj/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+
+
+
+
+ELF file SHA256: cbad08123
+
+Rebooting...
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4037d235
+--- 0x4037d235: esp_restart_noos at /Users/maochun/esp32prj/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:164
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x16fc
+load:0x403c8700,len:0xf14
+--- 0x403c8700: _stext at ??:?
+load:0x403cb700,len:0x3214
+entry 0x403c8930
+--- 0x403c8930: call_start_cpu0 at /Users/maochun/esp32prj/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+I (29) boot: ESP-IDF v6.0-dev-2039-g2044fba6e7 2nd stage bootloader
+I (29) boot: compile time Dec  5 2025 11:19:21
+I (29) boot: Multicore bootloader
+I (31) boot: chip revision: v0.2
+I (34) boot: efuse block revision: v1.3
+I (37) qio_mode: Enabling default flash chip QIO
+I (42) boot.esp32s3: Boot SPI Speed : 80MHz
+I (46) boot.esp32s3: SPI Mode       : QIO
+I (49) boot.esp32s3: SPI Flash Size : 16MB
+I (53) boot: Enabling RNG early entropy source...
+I (58) boot: Partition Table:
+I (60) boot: ## Label            Usage          Type ST Offset   Length
+I (67) boot:  0 nvs              WiFi data        01 02 00009000 00005000
+I (73) boot:  1 otadata          OTA data         01 00 0000e000 00002000
+I (80) boot:  2 app0             OTA app          00 10 00010000 00400000
+I (86) boot:  3 app1             OTA app          00 11 00410000 00400000
+I (93) boot:  4 spiffs           Unknown data     01 82 00810000 00770000
+I (99) boot: End of partition table
+I (103) esp_image: segment 0: paddr=00010020 vaddr=3c0a0020 size=1ea38h (125496) map
+I (129) esp_image: segment 1: paddr=0002ea60 vaddr=3fc99700 size=015b8h (  5560) load
+I (130) esp_image: segment 2: paddr=00030020 vaddr=42000020 size=9d548h (644424) map
+I (230) esp_image: segment 3: paddr=000cd570 vaddr=3fc9acb8 size=03b80h ( 15232) load
+I (233) esp_image: segment 4: paddr=000d10f8 vaddr=40374000 size=15684h ( 87684) load
+I (251) esp_image: segment 5: paddr=000e6784 vaddr=50000000 size=00020h (    32) load
+I (261) boot: Loaded app from partition at offset 0x10000
+I (261) boot: Disabling RNG early entropy source...
+I (271) octal_psram: vendor id    : 0x0d (AP)
+I (271) octal_psram: dev id       : 0x02 (generation 3)
+I (271) octal_psram: density      : 0x03 (64 Mbit)
+I (273) octal_psram: good-die     : 0x01 (Pass)
+I (277) octal_psram: Latency      : 0x01 (Fixed)
+I (282) octal_psram: VCC          : 0x01 (3V)
+I (286) octal_psram: SRF          : 0x01 (Fast Refresh)
+I (291) octal_psram: BurstType    : 0x01 (Hybrid Wrap)
+I (296) octal_psram: BurstLen     : 0x01 (32 Byte)
+I (300) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)
+I (305) octal_psram: DriveStrength: 0x00 (1/1)
+I (310) MSPI Timing: PSRAM timing tuning index: 5
+I (314) esp_psram: Found 8MB PSRAM device
+I (318) esp_psram: Speed: 80MHz
+I (321) cpu_start: Multicore app
+I (756) esp_psram: SPI SRAM memory test OK
+I (764) cpu_start: GPIO 44 and 43 are used as console UART I/O pins
+I (765) cpu_start: Pro cpu start user code
+I (765) cpu_start: cpu freq: 160000000 Hz
+I (767) app_init: Application information:
+I (770) app_init: Project name:     ota_gw
+I (774) app_init: App version:      2.1.1
+I (778) app_init: Compile time:     Dec  5 2025 12:48:53
+I (783) app_init: ELF file SHA256:  cbad08123...
+I (787) app_init: ESP-IDF:          v6.0-dev-2039-g2044fba6e7
+I (793) efuse_init: Min chip rev:     v0.0
+I (797) efuse_init: Max chip rev:     v0.99 
+I (801) efuse_init: Chip rev:         v0.2
+I (805) heap_init: Initializing. RAM available for dynamic allocation:
+I (811) heap_init: At 3FCA37B0 len 00045F60 (279 KiB): RAM
+I (816) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+I (821) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+I (826) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM
+I (832) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator
+I (839) spi_flash: detected chip: boya
+I (842) spi_flash: flash io: qio
+W (845) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`
+I (854) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (861) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (868) main_task: Started on CPU0
+I (888) main_task: Calling app_main()
+ESP32S3 Boot Success...
+I (908) pp: pp rom version: e7ae62f
+I (908) net80211: net80211 rom version: e7ae62f
+I (918) wifi:wifi driver task: 3fca84d8, prio:23, stack:6656, core=0
+I (928) wifi:wifi firmware version: df85326
+I (928) wifi:wifi certification version: v7.0
+I (928) wifi:config NVS flash: enabled
+I (928) wifi:config nano formatting: disabled
+I (928) wifi:Init data frame dynamic rx buffer num: 64
+I (938) wifi:Init static rx mgmt buffer num: 5
+I (938) wifi:Init management short buffer num: 32
+I (938) wifi:Init static tx buffer num: 32
+I (948) wifi:Init tx cache buffer num: 32
+I (948) wifi:Init static tx FG buffer num: 2
+I (958) wifi:Init static rx buffer size: 1600
+I (958) wifi:Init static rx buffer num: 16
+I (958) wifi:Init dynamic rx buffer num: 64
+I (968) wifi_init: rx ba win: 6
+I (968) wifi_init: accept mbox: 6
+I (968) wifi_init: tcpip mbox: 32
+I (978) wifi_init: udp mbox: 6
+I (978) wifi_init: tcp mbox: 6
+I (978) wifi_init: tcp tx win: 5760
+I (988) wifi_init: tcp rx win: 5760
+I (988) wifi_init: tcp mss: 1440
+I (988) wifi_init: WiFi/LWIP prefer SPIRAM
+I (988) wifi_init: WiFi IRAM OP enabled
+I (998) wifi_init: WiFi RX IRAM OP enabled
+I (1008) phy_init: phy_version 701,f4f1da3a,Mar  3 2025,15:50:10
+I (1048) wifi:mode : softAP (dc:b4:d9:10:4d:b1)
+I (1048) wifi:Total power save buffer number: 16
+I (1048) wifi:Init max length of beacon: 752/752
+I (1048) wifi:Init max length of beacon: 752/752
+I (1048) esp_netif_lwip: DHCP server started on interface WIFI_AP_DEF with IP: 192.168.4.1
+I (1058) wifi_ap: SoftAP started: SSID=OTA-GW, gateway=192.168.4.1, netmask=255.255.255.0, protocol=b/g/n, PMF=capable/not-required
+I (1068) PSRAM: PSRAM size: 8388608 bytes
+I (1078) PSRAM: Free heap: 8538404 bytes
+I (1078) PSRAM: PSRAM is initialized and ready.
+I (1078) PSRAM: Successfully allocated 1KB from PSRAM.
+I (1528) SPIFFS: SPIFFS mounted successfully
+I (1528) SPIFFS: Partition size: total=7161281, used=2937453
+I (1528) common_gpio: Starting GPIO initialization...
+I (1528) common_gpio: STBY GPIO 17 set to HIGH
+I (1528) common_gpio: Motor GPIOs initialized
+I (1538) common_gpio: All GPIOs initialized
+I (1538) common_gpio: LEDC channels initialized
+I (1548) GW_TCP_SERVER: tcp_server_task started on port 9001
+I (1548) GW_TCP_SERVER: TCP Server listening on port 9001
+I (1558) GW_TCP_SERVER: tcp_server_task started on port 9002
+I (1558) GW_TCP_SERVER: TCP Server listening on port 9002
+I (1568) GW_MSG_HANDLER: GW Message handler initialized
+I (1568) WEB_OTAGW: OTA Gateway Webserver started
+系统初始化完成，等待客户端连接...
+I (1578) main_task: Returned from app_main()
+I (10408) wifi:new:<1,0>, old:<1,1>, ap:<1,0>, sta:<255,255>, prof:1, snd_ch_cfg:0x0
+I (10408) wifi:station: a4:5e:60:c5:69:75 join, AID=1, bgn, 20
+I (10488) wifi:<ba-add>idx:2 (ifx:1, a4:5e:60:c5:69:75), tid:6, ssn:86, winSize:64
+I (10488) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.2
+I (10638) wifi:<ba-add>idx:3 (ifx:1, a4:5e:60:c5:69:75), tid:0, ssn:2126, winSize:64
+I (39908) GW_TCP_SERVER: Client connected, sock=37, ip=192.168.4.2, port=50296
+I (39908) GW_TCP_SERVER: OTA Server socket set: 37
+W (69908) GW_TCP_SERVER: Sock 37 timed out (no keep_alive_ack), closing
+I (69908) GW_TCP_SERVER: Closing client socket 37
+W (69908) GW_TCP_SERVER: OTA Server disconnected
+
+
+
+server log
+ * Restarting with stat
+[TCP] Connected to GW
+ * Debugger is active!
+ * Debugger PIN: 296-762-680
+127.0.0.1 - - [06/Dec/2025 10:07:24] "GET /api/devices HTTP/1.1" 200 -
+127.0.0.1 - - [06/Dec/2025 10:07:24] "GET /api/software HTTP/1.1" 200 -
+127.0.0.1 - - [06/Dec/2025 10:07:29] "OPTIONS /api/dispatch/push HTTP/1.1" 200 -
+127.0.0.1 - - [06/Dec/2025 10:07:29] "POST /api/dispatch/push HTTP/1.1" 200 -
+[TCP] Sent task: {"msg_type": "ota_task", "task_id": "20251206_100729_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.4", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.4.bin", "timestamp": "20251206_100729", "status": "pending"}
+[TCP] Parse error: Extra data: line 1 column 26 (char 25) {"msg_type":"keep_alive"}{"msg_type":"keep_alive"}{"msg_type":"keep_alive"}{"msg_type":"keep_alive"}{"msg_type":"keep_alive"}{"msg_type":"keep_alive"}
+[TCP] GW disconnected
+127.0.0.1 - - [06/Dec/2025 10:08:15] "OPTIONS /api/dispatch/push HTTP/1.1" 200 -
+127.0.0.1 - - [06/Dec/2025 10:08:15] "POST /api/dispatch/push HTTP/1.1" 200 -
+[TCP] Sent task: {"msg_type": "ota_task", "task_id": "20251206_100815_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.4", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.4.bin", "timestamp": "20251206_100815", "status": "pending"}
+[TCP] Connection error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
+[TCP] Parse error: Extra data: line 1 column 26 (char 25) {"msg_type":"keep_alive"}{"msg_type":"keep_alive"}{"msg_type":"keep_alive"}{"msg_type":"keep_alive"}{"msg_type":"keep_alive"}{"msg_type":"keep_alive"}
+[TCP] GW disconnected
