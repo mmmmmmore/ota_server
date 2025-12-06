@@ -14,11 +14,14 @@ class GatewayClient:
 
                 async def sender():
                     while True:
-                        task = await self.queue.get()
+                        filepath, task = await self.queue.get()
                         payload = json.dumps(task) + "\n"
                         writer.write(payload.encode())
                         await writer.drain()
                         print(f"[TCP] Sent task: {payload.strip()}")
+                        task["status"] = "success"
+                        with open(filepath, "w") as f:
+                            json.dump(task, f, indent=2)
 
                 async def receiver():
                     while True:
@@ -43,3 +46,4 @@ class GatewayClient:
             except Exception as e:
                 print("[TCP] Connection error:", e)
                 await asyncio.sleep(5)
+
