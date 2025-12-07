@@ -112,3 +112,11 @@ Client 通过 URL 下载固件。
 保存设备、版本、任务状态。
 
 可选轻量级 SQLite 或生产级 MySQL/PostgreSQL。
+
+
+
+% openssl genrsa -out rootCA.key 2048      
+ openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.pem   -subj "/CN=MyTestCA"
+  openssl genrsa -out server.key 2048    
+  openssl req -new -key server.key -out server.csr -subj "/CN=ota.test.local"      
+  openssl x509 -req -in server.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial  -out server.crt -days 365 -sha256 -extfile san.cnf -extensions v3_req
