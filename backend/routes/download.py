@@ -1,4 +1,9 @@
 from flask import Blueprint, send_from_directory
+import os
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+TASK_DIR = os.path.join(BASE_DIR, "firmware")
 
 download_bp = Blueprint("download", __name__)
 

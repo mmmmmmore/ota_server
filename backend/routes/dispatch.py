@@ -67,7 +67,7 @@ def create_task_file(device_name, client_id, version):
         "device_name": device_name,
         "client_id": client_id,
         "version": version,
-        "firmware_url": f"https://{current_ip}:8080/firmware/firmware_{version}.bin",
+        "firmware_url": f"https://{current_ip}:8080/firmware/firmware_v2.0.1.bin",
         "timestamp": timestamp,
         "status": "pending"
     }
