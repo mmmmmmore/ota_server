@@ -1,0 +1,34 @@
+
+
+
+I (176554) GW_TCP_SERVER: [CLIENT] Received keep_alive_ack from sock 37
+I (176554) GW_TCP_SERVER: Received 31 bytes from client 38: {"msg_type": "keep_alive_ack"}
+
+I (176564) GW_TCP_SERVER: [OTA] Received keep_alive_ack from sock 38
+I (177234) GW_TCP_SERVER: Received 254 bytes from client 38: {"msg_type": "ota_task", "task_id": "20251207_120726_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.4", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.4.bin", "timestamp": "20251207_120726", "status": "pending"}
+
+I (177254) GW_TCP_SERVER: [OTA]Received msg_type =ota_task from sock 38
+I (177254) GW_MSG_HANDLER: Processing message from sock 38 (role=1): {"msg_type": "ota_task", "task_id": "20251207_120726_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.4", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.4.bin", "timestamp": "20251207_120726", "status": "pending"}
+
+I (177284) GW_MSG_HANDLER: GW Rx ota task, schedule delay dispatch to otaapp 
+I (179524) GW_TCP_SERVER: Received 254 bytes from client 38: {"msg_type": "ota_task", "task_id": "20251207_120729_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.4", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.4.bin", "timestamp": "20251207_120729", "status": "pending"}
+
+I (179544) GW_TCP_SERVER: [OTA]Received msg_type =ota_task from sock 38
+I (179544) GW_MSG_HANDLER: Processing message from sock 38 (role=1): {"msg_type": "ota_task", "task_id": "20251207_120729_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.4", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.4.bin", "timestamp": "20251207_120729", "status": "pending"}
+
+I (179574) GW_MSG_HANDLER: GW Rx ota task, schedule delay dispatch to otaapp 
+I (181414) GW_TCP_SERVER: Received 254 bytes from client 38: {"msg_type": "ota_task", "task_id": "20251207_120731_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.4", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.4.bin", "timestamp": "20251207_120731", "status": "pending"}
+
+I (181434) GW_TCP_SERVER: [OTA]Received msg_type =ota_task from sock 38
+I (181434) GW_MSG_HANDLER: Processing message from sock 38 (role=1): {"msg_type": "ota_task", "task_id": "20251207_120731_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.4", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.4.bin", "timestamp": "20251207_120731", "status": "pending"}
+
+I (181464) GW_MSG_HANDLER: GW Rx ota task, schedule delay dispatch to otaapp 
+I (181554) GW_TCP_SERVER: Received 31 bytes from client 38: {"msg_type": "keep_alive_ack"}
+
+I (181554) GW_TCP_SERVER: [OTA] Received keep_alive_ack from sock 38
+I (181554) GW_TCP_SERVER: Received 29 bytes from client 37: {"msg_type":"keep_alive_ack"}
+I (181564) GW_TCP_SERVER: [CLIENT] Received keep_alive_ack from sock 37
+I (183464) GW_TCP_SERVER: Received 254 bytes from client 38: {"msg_type": "ota_task", "task_id": "20251207_120733_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.4", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.4.bin", "timestamp": "20251207_120733", "status": "pending"}
+
+I (183484) GW_TCP_SERVER: [OTA]Received msg_type =ota_task from sock 38
+I (183494) GW_MSG_HANDLER: Processing message from sock 38 (role=1): {"msg_type": "ota_task", "task_id": "20251207_120733_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.4", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.4.bin", "timestamp": "20251207_120733", "status": "pending"}
