@@ -1,0 +1,38 @@
+
+
+I (1383792) msg_handler: Sent keep_alive_ack to GW
+I (1384772) tcp_client: Received 203 bytes: {"msg_type":"ota_task","task_id":"20251207_103517_758","device_name":"Veh1_SCM1","client_id":"758","version":"v2.1.4","firmware_url":"https://192.168.4.4:8080/firmware/firmware_v2.1.4.bin","features":""}
+I (1384782) msg_handler: Received OTA task
+I (1384782) OTA_HANDLER: Starting OTA from URL: https://192.168.4.4:8080/firmware/firmware_v2.1.4.bin
+E (1384862) esp-tls-mbedtls: mbedtls_ssl_handshake returned -0x2700
+I (1384862) esp-tls-mbedtls: Failed to verify peer certificate!
+E (1384862) esp-tls: Failed to open new connection
+E (1384862) transport_base: Failed to open a new connection
+E (1384872) HTTP_CLIENT: Connection failed, sock < 0
+E (1384872) esp_https_ota: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT
+E (1384882) esp_https_ota: Failed to establish HTTP connection
+E (1384892) OTA_HANDLER: OTA Failed
+I (1384902) tcp_client: Message sent: {"client":"Client_1","version":"unknown","result":"fail"}
+I (1384902) OTA_HANDLER: Reported OTA result: {"client":"Client_1","version":"unknown","result":"fail"}
+I (1388792) tcp_client: Received 26 bytes: {"msg_type":"keep_alive"}
+
+I (1388792) msg_handler: Sent keep_alive_ack to GW
+I (1389942) tcp_client: Received 203 bytes: {"msg_type":"ota_task","task_id":"20251207_103517_758","device_name":"Veh1_SCM1","client_id":"758","version":"v2.1.4","firmware_url":"https://192.168.4.4:8080/firmware/firmware_v2.1.4.bin","features":""}
+I (1389952) msg_handler: Received OTA task
+I (1389962) OTA_HANDLER: Starting OTA from URL: https://192.168.4.4:8080/firmware/firmware_v2.1.4.bin
+E (1390102) esp-tls-mbedtls: mbedtls_ssl_handshake returned -0x2700
+I (1390102) esp-tls-mbedtls: Failed to verify peer certificate!
+E (1390102) esp-tls: Failed to open new connection
+E (1390102) transport_base: Failed to open a new connection
+E (1390112) HTTP_CLIENT: Connection failed, sock < 0
+E (1390112) esp_https_ota: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT
+E (1390122) esp_https_ota: Failed to establish HTTP connection
+E (1390122) OTA_HANDLER: OTA Failed
+I (1390142) tcp_client: Message sent: {"client":"Client_1","version":"unknown","result":"fail"}
+I (1390142) OTA_HANDLER: Reported OTA result: {"client":"Client_1","version":"unknown","result":"fail"}
+I (1393792) tcp_client: Received 26 bytes: {"msg_type":"keep_alive"}
+
+I (1393792) msg_handler: Sent keep_alive_ack to GW
+I (1398792) tcp_client: Received 26 bytes: {"msg_type":"keep_alive"}
+
+I (1398792) msg_handler: Sent keep_alive_ack to GW
