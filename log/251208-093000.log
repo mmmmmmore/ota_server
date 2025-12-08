@@ -1,0 +1,27 @@
+
+W (601904) GW_TCP_SERVER: OTA Server disconnected
+I (601904) GW_TCP_SERVER: Client connected, sock=37, ip=192.168.4.2, port=65120
+I (601914) GW_TCP_SERVER: OTA Server socket set: 37
+I (601914) GW_TCP_SERVER: Received 511 bytes from client 37: {"msg_type": "hello", "role": "ota_server"}
+{"msg_type": "ota_task", "task_id": "20251208_091936_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.3", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.3.bin", "timestamp": "20251208_091936", "status": "pending"}
+{"msg_type": "ota_task", "task_id": "20251208_092052_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.3", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.3.bin", "timestamp":
+I (601964) GW_TCP_SERVER: [OTA]Received msg_type =hello from sock 37
+I (601974) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "hello", "role": "ota_server"}
+{"msg_type": "ota_task", "task_id": "20251208_091936_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.3", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.3.bin", "timestamp": "20251208_091936", "status": "pending"}
+{"msg_type": "ota_task", "task_id": "20251208_092052_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.3", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.3.bin", "timestamp":
+I (602024) GW_TCP_SERVER: Received 511 bytes from client 37:  "20251208_092052", "status": "pending"}
+{"msg_type": "ota_task", "task_id": "20251208_092101_760", "device_name": "Veh2_SCM3", "client_id": "760", "version": "v2.1.10", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.10.bin", "timestamp": "20251208_092101", "status": "pending"}
+{"msg_type": "ota_task", "task_id": "20251208_092246_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.3", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.3.bin", "timestamp": 
+W (602074) GW_TCP_SERVER: failed to parse JSON from sock 37 : raw is  "20251208_092052", "status": "pending"}
+{"msg_type": "ota_task", "task_id": "20251208_092101_760", "device_name": "Veh2_SCM3", "client_id": "760", "version": "v2.1.10", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.10.bin", "timestamp": "20251208_092101", "status": "pending"}
+{"msg_type": "ota_task", "task_id": "20251208_092246_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.3", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.3.bin", "timestamp": 
+I (602124) GW_TCP_SERVER: Received 294 bytes from client 37: "20251208_092246", "status": "pending"}
+{"msg_type": "ota_task", "task_id": "20251208_092248_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.3", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.3.bin", "timestamp": "20251208_092248", "status": "pending"}
+
+W (602154) GW_TCP_SERVER: failed to parse JSON from sock 37 : raw is "20251208_092246", "status": "pending"}
+{"msg_type": "ota_task", "task_id": "20251208_092248_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.1.3", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.3.bin", "timestamp": "20251208_092248", "status": "pending"}
+
+I (602184) GW_TCP_SERVER: Received 254 bytes from client 37: {"msg_type": "ota_task", "task_id": "20251208_092547_759", "device_name": "Veh1_SCM2", "client_id": "759", "version": "v2.1.4", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.4.bin", "timestamp": "20251208_092547", "status": "pending"}
+
+I (602214) GW_TCP_SERVER: [OTA]Received msg_type =ota_task from sock 37
+I (602214) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "ota_task", "task_id": "20251208_092547_759", "device_name": "Veh1_SCM2", "client_id": "759", "version": "v2.1.4", "firmware_url": "https://192.168.4.2:8080/firmware/firmware_v2.1.4.bin", "timestamp": "20251208_092547", "status": "pending"}
