@@ -1,0 +1,34 @@
+
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/handler/msg_handler/msg_handler.c: In function 'msg_handler_process':
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/handler/msg_handler/msg_handler.c:115:30: error: initialization of 'cJSON *' from incompatible pointer type 'char *' [-Wincompatible-pointer-types]
+  115 |             cJSON *task_id = cJSON_GetObjectItem(root,"task_id")->valuestring;
+      |                              ^~~~~~~~~~~~~~~~~~~
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/handler/msg_handler/msg_handler.c:116:32: error: initialization of 'cJSON *' from incompatible pointer type 'char *' [-Wincompatible-pointer-types]
+  116 |             cJSON *ota_state = cJSON_GetObjectItem(root,"state")->valuestring;
+      |                                ^~~~~~~~~~~~~~~~~~~
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/handler/msg_handler/msg_handler.c:118:24: error: 'taskid_item' undeclared (first use in this function)
+  118 |             if (strcmp(taskid_item->valuestring, "Null") == 0){
+      |                        ^~~~~~~~~~~
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/handler/msg_handler/msg_handler.c:118:24: note: each undeclared identifier is reported only once for each function it appears in
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/handler/msg_handler/msg_handler.c:121:53: error: passing argument 1 of 'ota_handler_client_result_after_ota' from incompatible pointer type [-Wincompatible-pointer-types]
+  121 |                 ota_handler_client_result_after_ota(task_id, ota_state);
+      |                                                     ^~~~~~~
+      |                                                     |
+      |                                                     cJSON *
+In file included from /Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/handler/msg_handler/msg_handler.h:6,
+                 from /Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/handler/msg_handler/msg_handler.c:1:
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/app/otaapp/otaapp.h:92:54: note: expected 'const char *' but argument is of type 'cJSON *'
+   92 | void ota_handler_client_result_after_ota(const char *task_id, const char *ota_state);
+      |                                          ~~~~~~~~~~~~^~~~~~~
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/handler/msg_handler/msg_handler.c:121:62: error: passing argument 2 of 'ota_handler_client_result_after_ota' from incompatible pointer type [-Wincompatible-pointer-types]
+  121 |                 ota_handler_client_result_after_ota(task_id, ota_state);
+      |                                                              ^~~~~~~~~
+      |                                                              |
+      |                                                              cJSON *
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/app/otaapp/otaapp.h:92:75: note: expected 'const char *' but argument is of type 'cJSON *'
+   92 | void ota_handler_client_result_after_ota(const char *task_id, const char *ota_state);
+      |                                                               ~~~~~~~~~~~~^~~~~~~~~
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/handler/msg_handler/msg_handler.c: In function 'msg_handler_get_progress_json':
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/handler/msg_handler/msg_handler.c:152:13: error: 'client_task_status' undeclared (first use in this function)
+  152 |         if (client_task_status[i].client_id[0]) {
+      |             ^~~~~~~~~~~~~~~~~~
