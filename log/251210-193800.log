@@ -1,0 +1,18 @@
+GW build error
+
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/app/otaapp/otaapp.c: In function 'ota_handler_on_accept':
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/app/otaapp/otaapp.c:106:38: error: assignment to expression with array type
+  106 |     ota_handler_progress.task_id_sts = task_id;
+      |                                      ^
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/app/otaapp/otaapp.c: At top level:
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/app/otaapp/otaapp.c:17:12: warning: 'client_count' defined but not used [-Wunused-variable]
+   17 | static int client_count = 0;
+      |            ^~~~~~~~~~~~
+[6/16] Building C object esp-idf/msg_handler/CMakeFiles/__idf_msg_handler.dir/msg_handler.c.obj
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/handler/msg_handler/msg_handler.c:22:27: warning: 'find_or_create_task' defined but not used [-Wunused-function]
+   22 | static ota_client_task_t* find_or_create_task(const char *task_id) {
+      |                           ^~~~~~~~~~~~~~~~~~~
+[7/16] Building C object esp-idf/webserver/CMakeFiles/__idf_webserver.dir/webserver.c.obj
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/protocol/webserver/webserver.c: In function 'progress_info_handler':
+/Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/protocol/webserver/webserver.c:138:18: warning: initialization discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  138 |     char *json = ota_handler_get_progress_json();
