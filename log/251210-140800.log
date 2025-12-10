@@ -1,0 +1,76 @@
+GW print: 
+
+I (2233304) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.2
+I (2234344) wifi:<ba-add>idx:2 (ifx:1, 1c:db:d4:af:1f:60), tid:0, ssn:0, winSize:64
+I (2234364) GW_TCP_SERVER: Client connected, sock=37, ip=192.168.4.2, port=65346
+I (2234364) GW_TCP_SERVER: Rx 130 bytes from client 37 :::{"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"} , 
+I (2234584) GW_TCP_SERVER: Rx 55 bytes from client 37 :::{"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"}{"msg_type":"ota_result","task_id":"Null","state":"NA"} , 
+I (2236624) GW_TCP_SERVER: Rx 29 bytes from client 37 :::{"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"}{"msg_type":"ota_result","task_id":"Null","state":"NA"}{"msg_type":"keep_alive_ack"} , 
+I (2241624) GW_TCP_SERVER: Rx 29 bytes from client 37 :::{"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"}{"msg_type":"ota_result","task_id":"Null","state":"NA"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"} , 
+I (2246624) GW_TCP_SERVER: Rx 29 bytes from client 37 :::{"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"}{"msg_type":"ota_result","task_id":"Null","state":"NA"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"} , 
+I (2251644) GW_TCP_SERVER: Rx 29 bytes from client 37 :::{"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"}{"msg_type":"ota_result","task_id":"Null","state":"NA"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"} , 
+I (2256624) GW_TCP_SERVER: Rx 29 bytes from client 37 :::{"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"}{"msg_type":"ota_result","task_id":"Null","state":"NA"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"} , 
+I (2261624) GW_TCP_SERVER: Rx 29 bytes from client 37 :::{"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"}{"msg_type":"ota_result","task_id":"Null","state":"NA"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"} , 
+I (2266634) GW_TCP_SERVER: Rx 29 bytes from client 37 :::{"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"}{"msg_type":"ota_result","task_id":"Null","state":"NA"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"} , 
+I (2271624) GW_TCP_SERVER: Rx 29 bytes from client 37 :::{"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"}{"msg_type":"ota_result","task_id":"Null","state":"NA"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"} , 
+I (2276624) GW_TCP_SERVER: Rx 29 bytes from client 37 :::{"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"}{"msg_type":"ota_result","task_id":"Null","state":"NA"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"} , 
+I (2281664) GW_TCP_SERVER: Rx 29 bytes from client 37 :::{"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"}{"msg_type":"ota_result","task_id":"Null","state":"NA"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"} , 
+I (2286624) GW_TCP_SERVER: Rx 29 bytes from client 37 :::{"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"}{"msg_type":"ota_result","task_id":"Null","state":"NA"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"}{"msg_type":"keep_alive_ack"} , 
+I (2288364) wifi:starting SA query procedure with STA(1c:db:d4:af:1f:60)
+I (2288364) wifi:Send SA Query req with transaction id e50
+I (2288564) wifi:Send SA Query req with transaction id e51
+
+
+
+client
+
+系统初始化完成，等待客户端连接...
+I (732) main_task: Returned from app_main()
+I (2322) wifi:state: assoc -> assoc (0x0)
+I (2332) wifi:state: assoc -> run (0x10)
+I (2352) wifi:connected with OTA-GW, aid = 1, channel 1, 40U, bssid = dc:b4:d9:10:4d:b1
+I (2352) wifi:security: WPA2-PSK, phy: bgn, rssi: -26
+I (2362) wifi:pm start, type: 0
+
+I (2362) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (2362) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (2372) wifi:AP's beacon interval = 102400 us, DTIM period = 1
+I (3402) esp_netif_handlers: sta ip: 192.168.4.2, mask: 255.255.255.0, gw: 192.168.4.1
+I (3402) WIFI_STA: Got IP: 192.168.4.2
+I (3402) WIFI_STA: Netmask: 255.255.255.0
+I (3402) WIFI_STA: Gateway: 192.168.4.1
+I (3402) WIFI_STA: Connected to OTA-GW (192.168.4.1), OTA Server reachable at 192.168.4.2
+I (3412) WIFI_STA: Client MAC: 1C:DB:D4:AF:1F:60
+I (3422) tcp_client: Connecting to GW 192.168.4.1:9002
+I (3432) wifi:<ba-add>idx:0 (ifx:0, dc:b4:d9:10:4d:b1), tid:0, ssn:0, winSize:64
+I (3432) tcp_client: Successfully connected to GW
+I (3432) msg_handler: TCP connection established, sending client register
+I (3442) client_register: Sending register info to GW: {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"}
+I (3462) tcp_client: Message sent: {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"}
+I (3472) OTA_HANDLER_Client: Sending register info to GW: {"msg_type":"ota_result","task_id":"Null","state":"NA"}
+I (3482) tcp_client: Message sent: {"msg_type":"ota_result","task_id":"Null","state":"NA"}
+I (8932) tcp_client: Received 26 bytes: {"msg_type":"keep_alive"}
+
+I (8932) msg_handler: Sent keep_alive_ack to GW
+I (13942) tcp_client: Received 26 bytes: {"msg_type":"keep_alive"}
+
+I (13942) msg_handler: Sent keep_alive_ack to GW
+I (18932) tcp_client: Received 26 bytes: {"msg_type":"keep_alive"}
+
+I (18932) msg_handler: Sent keep_alive_ack to GW
+I (23932) tcp_client: Received 26 bytes: {"msg_type":"keep_alive"}
+
+I (23932) msg_handler: Sent keep_alive_ack to GW
+I (28932) tcp_client: Received 26 bytes: {"msg_type":"keep_alive"}
+
+I (28932) msg_handler: Sent keep_alive_ack to GW
+I (33932) tcp_client: Received 26 bytes: {"msg_type":"keep_alive"}
+
+I (33932) msg_handler: Sent keep_alive_ack to GW
+I (38932) tcp_client: Received 26 bytes: {"msg_type":"keep_alive"}
+
+I (38932) msg_handler: Sent keep_alive_ack to GW
+I (43932) tcp_client: Received 26 bytes: {"msg_type":"keep_alive"}
+
+I (43932) msg_handler: Sent keep_alive_ack to GW
+I (48932) tcp_client: Received 26 bytes: {"msg_type":"keep_alive"}
