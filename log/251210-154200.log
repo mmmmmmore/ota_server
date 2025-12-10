@@ -1,0 +1,12 @@
+client build error
+
+/Users/maochun/esp32prj/Project_CAM/branch/ota_Client/ota_client/handler/ota_handler/ota_handler.c: In function 'send_json_gw':
+/Users/maochun/esp32prj/Project_CAM/branch/ota_Client/ota_client/handler/ota_handler/ota_handler.c:159:16: error: 'return' with a value, in function returning void [-Wreturn-mismatch]
+  159 |         return tcp_client_send(json_with_newline);
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/maochun/esp32prj/Project_CAM/branch/ota_Client/ota_client/handler/ota_handler/ota_handler.c:141:13: note: declared here
+  141 | static void send_json_gw(const char *task_json){
+      |             ^~~~~~~~~~~~
+/Users/maochun/esp32prj/Project_CAM/branch/ota_Client/ota_client/handler/ota_handler/ota_handler.c: In function 'client_send_ota_result':
+/Users/maochun/esp32prj/Project_CAM/branch/ota_Client/ota_client/handler/ota_handler/ota_handler.c:138:1: error: control reaches end of non-void function [-Werror=return-type]
+  138 | }
