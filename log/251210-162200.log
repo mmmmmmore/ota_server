@@ -1,0 +1,45 @@
+
+
+GW log
+
+
+I (2558) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.2
+I (3598) wifi:<ba-add>idx:2 (ifx:1, 1c:db:d4:af:1f:60), tid:0, ssn:0, winSize:64
+I (3608) GW_TCP_SERVER: Client connected, sock=37, ip=192.168.4.2, port=53200
+I (3628) GW_TCP_SERVER: Rx 131 bytes from client 37 :::{"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"}
+ , 
+I (3628) GW_TCP_SERVER: Rx JSON from sock 37 :: {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"}
+I (3648) GW_TCP_SERVER: [CLIENT] Rx msg_type = register from sock37 
+I (3658) GW_MSG_HANDLER: Processing message from sock 37 (role=2): {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"1C:DB:D4:AF:1F:60","version":"1.1.0","ip":"192.168.4.2"}
+I (3668) CLIENT_REGISTER: Saving client register: name=Veh1_SCM1, id=758, mac=1C:DB:D4:AF:1F:60, ip=192.168.4.2, ver=1.1.0, sock=37
+I (3848) GW_TCP_SERVER: Rx 56 bytes from client 37 :::{"msg_type":"ota_result","task_id":"Null","state":"NA"}
+ , 
+I (3848) GW_TCP_SERVER: Rx JSON from sock 37 :: {"msg_type":"ota_result","task_id":"Null","state":"NA"}
+I (3858) GW_TCP_SERVER: [CLIENT] Rx msg_type = ota_result from sock37 
+I (3858) GW_MSG_HANDLER: Processing message from sock 37 (role=2): {"msg_type":"ota_result","task_id":"Null","state":"NA"}
+I (3868) GW_MSG_HANDLER:  Normal Client Start, no OTA result report
+
+assert failed: tlsf_free tlsf.c:630 (!block_is_free(block) && "block already marked as free")
+HINT: CORRUPT HEAP: heap metadata corrupted resulting in TLSF malfunction.
+Make sure you are not making out of bound writing on the memory you allocate in your application.
+Make sure you are not writing on freed memory.
+For more information run 'idf.py docs -sp api-reference/system/heap_debug.html'.
+
+
+Backtrace: 0x4037d0a5:0x3fcc45d0 0x4037d06d:0x3fcc45f0 0x40383411:0x3fcc4610 0x40380e76:0x3fcc4730 0x40380d1c:0x3fcc4750 0x4037601a:0x3fcc4770 0x403834ad:0x3fcc4790 0x4200f0f7:0x3fcc47b0 0x4200f0c1:0x3fcc47d0 0x4200e0c9:0x3fcc47f0 0x4200d9a8:0x3fcc4830 0x4200dd0b:0x3fcc4c70 0x4209a67a:0x3fcc4dd0
+--- 0x4037d0a5: panic_abort at /Users/maochun/esp32prj/esp-idf/components/esp_system/panic.c:480
+--- 0x4037d06d: esp_system_abort at /Users/maochun/esp32prj/esp-idf/components/esp_system/port/esp_system_chip.c:87
+--- 0x40383411: __assert_func at /Users/maochun/esp32prj/esp-idf/components/newlib/src/assert.c:81
+--- 0x40380e76: tlsf_free at /Users/maochun/esp32prj/esp-idf/components/heap/tlsf/tlsf.c:630
+--- 0x40380d1c: multi_heap_free_impl at /Users/maochun/esp32prj/esp-idf/components/heap/multi_heap.c:240
+--- 0x4037601a: heap_caps_free at /Users/maochun/esp32prj/esp-idf/components/heap/heap_caps_base.c:86
+--- 0x403834ad: free at /Users/maochun/esp32prj/esp-idf/components/newlib/src/heap.c:34
+--- 0x4200f0f7: cJSON_Delete at /Users/maochun/esp32prj/esp-idf/components/json/cJSON/cJSON.c:273
+--- 0x4200f0c1: cJSON_Delete at /Users/maochun/esp32prj/esp-idf/components/json/cJSON/cJSON.c:261
+--- 0x4200e0c9: msg_handler_process at /Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/handler/msg_handler/msg_handler.c:131
+--- 0x4200d9a8: process_stream_json at /Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/protocol/tcp_server/tcp_server.c:203
+--- 0x4200dd0b: tcp_server_task at /Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/protocol/tcp_server/tcp_server.c:310
+--- 0x4209a67a: vPortTaskWrapper at /Users/maochun/esp32prj/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+
+
+
