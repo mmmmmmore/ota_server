@@ -92,6 +92,7 @@ def push_task():
 
     # simply enqueue task to tcp_client send queue
     try:
+        json_str = json.dumps(task)+ "\n"
         # 把任务放入 asyncio 队列，由 TCP 客户端负责发送
         asyncio.run_coroutine_threadsafe(task_queue.put((filepath, task)), loop)
         return jsonify({"message": "OTA Task queued", "task": task}), 200
