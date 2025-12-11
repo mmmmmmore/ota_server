@@ -1,0 +1,35 @@
+
+
+
+I (22138) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.2
+I (22258) wifi:<ba-add>idx:2 (ifx:1, f0:9e:4a:94:9d:37), tid:0, ssn:19, winSize:64
+I (22508) wifi:station: f0:9e:4a:94:9d:37 leave, AID = 1, reason = 1, bss_flags is 756835, bss:0x3c0d0da8
+I (22508) wifi:new:<1,0>, old:<1,1>, ap:<1,1>, sta:<255,255>, prof:1, snd_ch_cfg:0x0
+I (22518) wifi:<ba-del>idx:2, tid:0
+I (22518) wifi:new:<1,1>, old:<1,0>, ap:<1,1>, sta:<255,255>, prof:1, snd_ch_cfg:0x0
+I (26608) wifi:new:<1,1>, old:<1,1>, ap:<1,1>, sta:<255,255>, prof:1, snd_ch_cfg:0x0
+I (26608) wifi:station: f0:9e:4a:94:9d:37 join, AID=1, bgn, 40U
+I (26668) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.2
+I (26978) wifi:<ba-add>idx:2 (ifx:1, f0:9e:4a:94:9d:37), tid:0, ssn:22, winSize:64
+I (31498) GW_TCP_SERVER: Client connected, sock=37, ip=192.168.4.2, port=63915
+I (31498) GW_TCP_SERVER: OTA Server socket set: 37
+I (31498) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 44,  raw = {"msg_type": "hello", "role": "ota_server"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 68 65 6C 6C 6F 22 2C 20 22 72 6F 6C 65 22 3A 20 22 6F 74 61 5F 73 65 72 76 65 72 22 7D 0A 
+I (31518) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 44  rx_len(before)= 0
+I (31528) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "hello", "role": "ota_server"}
+
+I (31538) GW_TCP_SERVER: tcp-
+***ERROR*** A stack overflow in task tcp_server_9001 has been detected.
+
+
+Backtrace: 0x4037d0a5:0x3fcc2450 0x4037d06d:0x3fcc2470 0x4209ab7e:0x3fcc2490 0x4037e357:0x3fcc2510 0x4037d920:0x3fcc2530 0x4037d916:0xffffffff |<-CORRUPTED
+--- 0x4037d0a5: panic_abort at /Users/maochun/esp32prj/esp-idf/components/esp_system/panic.c:480
+--- 0x4037d06d: esp_system_abort at /Users/maochun/esp32prj/esp-idf/components/esp_system/port/esp_system_chip.c:87
+--- 0x4209ab7e: vApplicationStackOverflowHook at /Users/maochun/esp32prj/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+--- 0x4037e357: vTaskSwitchContext at /Users/maochun/esp32prj/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3698
+--- 0x4037d920: _frxt_dispatch at /Users/maochun/esp32prj/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+--- 0x4037d916: _frxt_int_exit at /Users/maochun/esp32prj/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+
+
+

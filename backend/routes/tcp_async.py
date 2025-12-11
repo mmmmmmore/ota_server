@@ -14,7 +14,7 @@ class GatewayClient:
                 hellp_msg ={"msg_type":"hello", "role":"ota_server"}
                 reader, writer = await asyncio.open_connection(self.ip, self.port)
                 print("[TCP] Connected to GW")
-                hello_payload = json.dumps(hellp_msg) +'\n'
+                #hello_payload = json.dumps(hellp_msg) +'\n'
                 writer.write((json.dumps(hellp_msg)+'\n').encode())
                 await writer.drain()
                 print("[TCP] Tx hello to OTA GW finished")
