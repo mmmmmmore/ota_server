@@ -1,0 +1,704 @@
+GW  uart log
+
+
+I (884) main_task: Calling app_main()
+ESP32S3 Boot Success...
+I (904) pp: pp rom version: e7ae62f
+I (904) net80211: net80211 rom version: e7ae62f
+I (914) wifi:wifi driver task: 3fcabaa0, prio:23, stack:6656, core=0
+I (914) wifi:wifi firmware version: df85326
+I (914) wifi:wifi certification version: v7.0
+I (914) wifi:config NVS flash: enabled
+I (914) wifi:config nano formatting: disabled
+I (924) wifi:Init data frame dynamic rx buffer num: 64
+I (924) wifi:Init static rx mgmt buffer num: 5
+I (934) wifi:Init management short buffer num: 32
+I (934) wifi:Init static tx buffer num: 32
+I (944) wifi:Init tx cache buffer num: 32
+I (944) wifi:Init static tx FG buffer num: 2
+I (944) wifi:Init static rx buffer size: 1600
+I (954) wifi:Init static rx buffer num: 16
+I (954) wifi:Init dynamic rx buffer num: 64
+I (964) wifi_init: rx ba win: 6
+I (964) wifi_init: accept mbox: 6
+I (964) wifi_init: tcpip mbox: 32
+I (964) wifi_init: udp mbox: 6
+I (974) wifi_init: tcp mbox: 6
+I (974) wifi_init: tcp tx win: 5760
+I (974) wifi_init: tcp rx win: 5760
+I (984) wifi_init: tcp mss: 1440
+I (984) wifi_init: WiFi/LWIP prefer SPIRAM
+I (984) wifi_init: WiFi IRAM OP enabled
+I (994) wifi_init: WiFi RX IRAM OP enabled
+I (994) phy_init: phy_version 701,f4f1da3a,Mar  3 2025,15:50:10
+I (1034) wifi:mode : softAP (dc:b4:d9:10:4d:b1)
+I (1034) wifi:Total power save buffer number: 16
+I (1034) wifi:Init max length of beacon: 752/752
+I (1044) wifi:Init max length of beacon: 752/752
+I (1044) esp_netif_lwip: DHCP server started on interface WIFI_AP_DEF with IP: 192.168.4.1
+I (1054) wifi_ap: SoftAP started: SSID=OTA-GW, gateway=192.168.4.1, netmask=255.255.255.0, protocol=b/g/n, PMF=capable/not-required
+I (1064) PSRAM: PSRAM size: 8388608 bytes
+I (1064) PSRAM: Free heap: 8524644 bytes
+I (1074) PSRAM: PSRAM is initialized and ready.
+I (1074) PSRAM: Successfully allocated 1KB from PSRAM.
+I (1514) SPIFFS: SPIFFS mounted successfully
+I (1514) SPIFFS: Partition size: total=7161281, used=2939461
+I (1514) common_gpio: Starting GPIO initialization...
+I (1514) common_gpio: STBY GPIO 17 set to HIGH
+I (1514) common_gpio: Motor GPIOs initialized
+I (1524) common_gpio: All GPIOs initialized
+I (1524) common_gpio: LEDC channels initialized
+I (1534) GW_TCP_SERVER: tcp_server_task started on port 9001
+I (1534) GW_TCP_SERVER: TCP Server listening on port 9001
+I (1544) GW_TCP_SERVER: tcp_server_task started on port 9002
+I (1544) GW_TCP_SERVER: TCP Server listening on port 9002
+I (1554) WEB_OTAGW: OTA Gateway Webserver started
+系统初始化完成，等待客户端连接...
+I (1564) main_task: Returned from app_main()
+I (22224) wifi:new:<1,0>, old:<1,1>, ap:<1,0>, sta:<255,255>, prof:1, snd_ch_cfg:0x0
+I (22224) wifi:station: a4:5e:60:c5:69:75 join, AID=1, bgn, 20
+I (22394) wifi:<ba-add>idx:2 (ifx:1, a4:5e:60:c5:69:75), tid:6, ssn:2, winSize:64
+I (22404) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.2
+I (22634) wifi:<ba-add>idx:3 (ifx:1, a4:5e:60:c5:69:75), tid:0, ssn:0, winSize:64
+I (32124) GW_TCP_SERVER: Client connected, sock=37, ip=192.168.4.2, port=52387
+I (32124) GW_TCP_SERVER: OTA Server socket set: 37
+I (32124) GW_TCP_SERVER: tcp rx all raw data:  :: len = 44,  raw = {"msg_type": "hello", "role": "ota_server"}
+
+I (32134) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 44  rx_len(before)= 0
+I (32144) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "hello", "role": "ota_server"}
+
+I (32154) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 44 , buffers = {"msg_type": "hello", "role": "ota_server"}
+
+I (32164) GW_TCP_SERVER: tcp-00-04-Rx 44 bytes from client 37 ::{"msg_type": "hello", "role": "ota_server"}
+ , 
+W (32174) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 44
+W (32184) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "hello", "role": "ota_server"}
+ 
+I (32194) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "hello", "role": "ota_server"}
+I (32204) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = hello from sock37 
+I (32214) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "hello", "role": "ota_server"}
+I (32224) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "hello", "role": "ota_server"}
+I (32234) GW_MSG_HANDLER: OTA server hello received on sock 37
+W (32234) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 44,  remain = 0
+W (32244) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (32254) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (36554) GW_TCP_SERVER: tcp rx all raw data:  :: len = 32,  raw = {"msg_type": "keep_alive_ack0"}
+
+I (36554) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 32  rx_len(before)= 0
+I (36564) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack0"}
+ta_server"}
+
+I (36574) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 32 , buffers = {"msg_type": "keep_alive_ack0"}
+
+I (36584) GW_TCP_SERVER: tcp-00-04-Rx 32 bytes from client 37 ::{"msg_type": "keep_alive_ack0"}
+ , 
+W (36594) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 32
+W (36594) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack0"}
+ 
+I (36604) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack0"}
+I (36614) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack0 from sock37 
+I (36624) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack0"}
+I (36634) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack0"}
+I (36644) GW_MSG_HANDLER: non known json data rxed.
+W (36644) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 32,  remain = 0
+W (36654) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (36664) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (41554) GW_TCP_SERVER: tcp rx all raw data:  :: len = 32,  raw = {"msg_type": "keep_alive_ack1"}
+
+I (41554) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 32  rx_len(before)= 0
+I (41564) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack1"}
+
+I (41574) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 32 , buffers = {"msg_type": "keep_alive_ack1"}
+
+I (41584) GW_TCP_SERVER: tcp-00-04-Rx 32 bytes from client 37 ::{"msg_type": "keep_alive_ack1"}
+ , 
+W (41594) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 32
+W (41594) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack1"}
+ 
+I (41604) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack1"}
+I (41614) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack1 from sock37 
+I (41624) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack1"}
+I (41634) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack1"}
+I (41644) GW_MSG_HANDLER: non known json data rxed.
+W (41644) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 32,  remain = 0
+W (41654) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (41664) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (46644) GW_TCP_SERVER: tcp rx all raw data:  :: len = 32,  raw = {"msg_type": "keep_alive_ack2"}
+
+I (46644) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 32  rx_len(before)= 0
+I (46644) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack2"}
+
+I (46664) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 32 , buffers = {"msg_type": "keep_alive_ack2"}
+
+I (46674) GW_TCP_SERVER: tcp-00-04-Rx 32 bytes from client 37 ::{"msg_type": "keep_alive_ack2"}
+ , 
+W (46674) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 32
+W (46684) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack2"}
+ 
+I (46694) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack2"}
+I (46704) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack2 from sock37 
+I (46714) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack2"}
+I (46724) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack2"}
+I (46734) GW_MSG_HANDLER: non known json data rxed.
+W (46734) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 32,  remain = 0
+W (46744) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (46754) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (51554) GW_TCP_SERVER: tcp rx all raw data:  :: len = 32,  raw = {"msg_type": "keep_alive_ack3"}
+
+I (51554) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 32  rx_len(before)= 0
+I (51564) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack3"}
+
+I (51574) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 32 , buffers = {"msg_type": "keep_alive_ack3"}
+
+I (51584) GW_TCP_SERVER: tcp-00-04-Rx 32 bytes from client 37 ::{"msg_type": "keep_alive_ack3"}
+ , 
+W (51594) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 32
+W (51594) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack3"}
+ 
+I (51604) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack3"}
+I (51614) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack3 from sock37 
+I (51624) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack3"}
+I (51634) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack3"}
+I (51644) GW_MSG_HANDLER: non known json data rxed.
+W (51644) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 32,  remain = 0
+W (51654) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (51664) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (56554) GW_TCP_SERVER: tcp rx all raw data:  :: len = 32,  raw = {"msg_type": "keep_alive_ack4"}
+
+I (56554) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 32  rx_len(before)= 0
+I (56564) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack4"}
+
+I (56574) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 32 , buffers = {"msg_type": "keep_alive_ack4"}
+
+I (56584) GW_TCP_SERVER: tcp-00-04-Rx 32 bytes from client 37 ::{"msg_type": "keep_alive_ack4"}
+ , 
+W (56594) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 32
+W (56604) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack4"}
+ 
+I (56614) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack4"}
+I (56624) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack4 from sock37 
+I (56624) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack4"}
+I (56634) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack4"}
+I (56644) GW_MSG_HANDLER: non known json data rxed.
+W (56654) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 32,  remain = 0
+W (56654) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (56664) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (61574) GW_TCP_SERVER: tcp rx all raw data:  :: len = 32,  raw = {"msg_type": "keep_alive_ack5"}
+
+I (61574) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 32  rx_len(before)= 0
+I (61574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack5"}
+
+I (61584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 32 , buffers = {"msg_type": "keep_alive_ack5"}
+
+I (61594) GW_TCP_SERVER: tcp-00-04-Rx 32 bytes from client 37 ::{"msg_type": "keep_alive_ack5"}
+ , 
+W (61604) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 32
+W (61614) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack5"}
+ 
+I (61624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack5"}
+I (61634) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack5 from sock37 
+I (61644) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack5"}
+I (61654) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack5"}
+I (61664) GW_MSG_HANDLER: non known json data rxed.
+W (61664) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 32,  remain = 0
+W (61674) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (61684) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (66584) GW_TCP_SERVER: tcp rx all raw data:  :: len = 32,  raw = {"msg_type": "keep_alive_ack6"}
+
+I (66584) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 32  rx_len(before)= 0
+I (66594) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack6"}
+
+I (66604) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 32 , buffers = {"msg_type": "keep_alive_ack6"}
+
+I (66614) GW_TCP_SERVER: tcp-00-04-Rx 32 bytes from client 37 ::{"msg_type": "keep_alive_ack6"}
+ , 
+W (66624) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 32
+W (66634) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack6"}
+ 
+I (66644) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack6"}
+I (66654) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack6 from sock37 
+I (66664) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack6"}
+I (66674) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack6"}
+I (66684) GW_MSG_HANDLER: non known json data rxed.
+W (66684) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 32,  remain = 0
+W (66694) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (66694) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (71554) GW_TCP_SERVER: tcp rx all raw data:  :: len = 32,  raw = {"msg_type": "keep_alive_ack7"}
+
+I (71554) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 32  rx_len(before)= 0
+I (71564) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack7"}
+
+I (71574) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 32 , buffers = {"msg_type": "keep_alive_ack7"}
+
+I (71584) GW_TCP_SERVER: tcp-00-04-Rx 32 bytes from client 37 ::{"msg_type": "keep_alive_ack7"}
+ , 
+W (71594) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 32
+W (71594) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack7"}
+ 
+I (71604) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack7"}
+I (71614) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack7 from sock37 
+I (71624) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack7"}
+I (71634) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack7"}
+I (71644) GW_MSG_HANDLER: non known json data rxed.
+W (71644) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 32,  remain = 0
+W (71654) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (71664) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (76554) GW_TCP_SERVER: tcp rx all raw data:  :: len = 32,  raw = {"msg_type": "keep_alive_ack8"}
+
+I (76554) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 32  rx_len(before)= 0
+I (76564) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack8"}
+
+I (76574) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 32 , buffers = {"msg_type": "keep_alive_ack8"}
+
+I (76584) GW_TCP_SERVER: tcp-00-04-Rx 32 bytes from client 37 ::{"msg_type": "keep_alive_ack8"}
+ , 
+W (76594) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 32
+W (76594) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack8"}
+ 
+I (76604) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack8"}
+I (76614) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack8 from sock37 
+I (76624) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack8"}
+I (76634) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack8"}
+I (76644) GW_MSG_HANDLER: non known json data rxed.
+W (76644) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 32,  remain = 0
+W (76654) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (76664) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (81564) GW_TCP_SERVER: tcp rx all raw data:  :: len = 32,  raw = {"msg_type": "keep_alive_ack9"}
+
+I (81564) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 32  rx_len(before)= 0
+I (81574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack9"}
+
+I (81584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 32 , buffers = {"msg_type": "keep_alive_ack9"}
+
+I (81594) GW_TCP_SERVER: tcp-00-04-Rx 32 bytes from client 37 ::{"msg_type": "keep_alive_ack9"}
+ , 
+W (81604) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 32
+W (81614) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack9"}
+ 
+I (81624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack9"}
+I (81624) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack9 from sock37 
+I (81634) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack9"}
+I (81644) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack9"}
+I (81654) GW_MSG_HANDLER: non known json data rxed.
+W (81664) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 32,  remain = 0
+W (81664) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (81674) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (84474) wifi:<ba-add>idx:4 (ifx:1, a4:5e:60:c5:69:75), tid:1, ssn:0, winSize:64
+I (86554) GW_TCP_SERVER: tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack10"}
+
+I (86554) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 33  rx_len(before)= 0
+I (86564) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack10"}
+a_server"}
+
+I (86574) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack10"}
+
+I (86584) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack10"}
+ , 
+W (86594) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 33
+W (86594) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack10"}
+ 
+I (86604) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack10"}
+I (86614) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack10 from sock37 
+I (86624) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack10"}
+I (86634) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack10"}
+I (86644) GW_MSG_HANDLER: non known json data rxed.
+W (86644) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 33,  remain = 0
+W (86654) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (86664) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (91554) GW_TCP_SERVER: tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack11"}
+
+I (91554) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 33  rx_len(before)= 0
+I (91564) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack11"}
+
+I (91574) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack11"}
+
+I (91584) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack11"}
+ , 
+W (91594) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 33
+W (91594) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack11"}
+ 
+I (91614) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack11"}
+I (91614) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack11 from sock37 
+I (91624) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack11"}
+I (91634) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack11"}
+I (91644) GW_MSG_HANDLER: non known json data rxed.
+W (91654) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 33,  remain = 0
+W (91654) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (91664) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (96554) GW_TCP_SERVER: tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack12"}
+
+I (96554) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 33  rx_len(before)= 0
+I (96564) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack12"}
+
+I (96574) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack12"}
+
+I (96584) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack12"}
+ , 
+W (96594) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 33
+W (96594) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack12"}
+ 
+I (96614) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack12"}
+I (96614) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack12 from sock37 
+I (96624) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack12"}
+I (96634) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack12"}
+I (96644) GW_MSG_HANDLER: non known json data rxed.
+W (96654) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 33,  remain = 0
+W (96654) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (96664) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (101554) GW_TCP_SERVER: tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack13"}
+
+I (101554) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 33  rx_len(before)= 0
+I (101564) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack13"}
+
+I (101574) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack13"}
+
+I (101584) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack13"}
+ , 
+W (101594) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 33
+W (101594) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack13"}
+ 
+I (101614) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack13"}
+I (101614) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack13 from sock37 
+I (101624) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack13"}
+I (101634) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack13"}
+I (101644) GW_MSG_HANDLER: non known json data rxed.
+W (101654) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 33,  remain = 0
+W (101654) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (101664) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (106554) GW_TCP_SERVER: tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack14"}
+
+I (106554) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 33  rx_len(before)= 0
+I (106564) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack14"}
+
+I (106574) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack14"}
+
+I (106584) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack14"}
+ , 
+W (106594) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 33
+W (106594) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack14"}
+ 
+I (106604) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack14"}
+I (106614) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack14 from sock37 
+I (106624) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack14"}
+I (106634) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack14"}
+I (106644) GW_MSG_HANDLER: non known json data rxed.
+W (106654) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 33,  remain = 0
+W (106654) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (106664) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (111554) GW_TCP_SERVER: tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack15"}
+
+I (111554) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 33  rx_len(before)= 0
+I (111564) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack15"}
+
+I (111574) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack15"}
+
+I (111584) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack15"}
+ , 
+W (111594) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 33
+W (111594) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack15"}
+ 
+I (111604) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack15"}
+I (111614) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack15 from sock37 
+I (111624) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack15"}
+I (111634) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack15"}
+I (111644) GW_MSG_HANDLER: non known json data rxed.
+W (111654) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 33,  remain = 0
+W (111654) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (111664) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (116554) GW_TCP_SERVER: tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack16"}
+
+I (116554) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 33  rx_len(before)= 0
+I (116564) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack16"}
+
+I (116574) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack16"}
+
+I (116584) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack16"}
+ , 
+W (116594) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 33
+W (116594) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack16"}
+ 
+I (116604) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack16"}
+I (116614) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack16 from sock37 
+I (116624) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack16"}
+I (116634) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack16"}
+I (116644) GW_MSG_HANDLER: non known json data rxed.
+W (116654) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 33,  remain = 0
+W (116654) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (116664) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (121674) GW_TCP_SERVER: tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack17"}
+
+I (121674) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 33  rx_len(before)= 0
+I (121684) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack17"}
+
+I (121694) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack17"}
+
+I (121704) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack17"}
+ , 
+W (121714) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 33
+W (121724) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack17"}
+ 
+I (121734) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack17"}
+I (121734) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack17 from sock37 
+I (121744) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack17"}
+I (121754) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack17"}
+I (121764) GW_MSG_HANDLER: non known json data rxed.
+W (121774) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 33,  remain = 0
+W (121774) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (121784) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (126674) GW_TCP_SERVER: tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack18"}
+
+I (126674) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 33  rx_len(before)= 0
+I (126684) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack18"}
+
+I (126694) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack18"}
+
+I (126704) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack18"}
+ , 
+W (126714) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 33
+W (126714) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack18"}
+ 
+I (126724) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack18"}
+I (126734) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack18 from sock37 
+I (126744) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack18"}
+I (126754) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack18"}
+I (126764) GW_MSG_HANDLER: non known json data rxed.
+W (126774) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 33,  remain = 0
+W (126774) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (126784) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (131674) GW_TCP_SERVER: tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack19"}
+
+I (131674) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 33  rx_len(before)= 0
+I (131684) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack19"}
+
+I (131694) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack19"}
+
+I (131704) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack19"}
+ , 
+W (131714) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 33
+W (131714) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack19"}
+ 
+I (131734) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack19"}
+I (131734) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack19 from sock37 
+I (131744) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack19"}
+I (131754) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack19"}
+I (131764) GW_MSG_HANDLER: non known json data rxed.
+W (131774) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 33,  remain = 0
+W (131774) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (131784) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (136674) GW_TCP_SERVER: tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack20"}
+
+I (136674) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 33  rx_len(before)= 0
+I (136684) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack20"}
+
+I (136694) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack20"}
+
+I (136704) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack20"}
+ , 
+W (136714) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 33
+W (136724) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack20"}
+ 
+I (136734) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack20"}
+I (136744) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack20 from sock37 
+I (136744) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack20"}
+I (136754) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack20"}
+I (136764) GW_MSG_HANDLER: non known json data rxed.
+W (136774) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 33,  remain = 0
+W (136774) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (136784) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (141674) GW_TCP_SERVER: tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack21"}
+
+I (141674) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 33  rx_len(before)= 0
+I (141684) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack21"}
+
+I (141694) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack21"}
+
+I (141704) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack21"}
+ , 
+W (141714) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 33
+W (141714) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack21"}
+ 
+I (141724) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack21"}
+I (141734) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack21 from sock37 
+I (141744) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack21"}
+I (141754) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack21"}
+I (141764) GW_MSG_HANDLER: non known json data rxed.
+W (141764) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 33,  remain = 0
+W (141774) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (141784) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (158274) wifi:starting SA query procedure with STA(a4:5e:60:c5:69:75)
+I (158284) wifi:Send SA Query req with transaction id a18
+I (158484) wifi:Send SA Query req with transaction id a19
+I (158684) wifi:Send SA Query req with transaction id a1a
+I (158884) wifi:Send SA Query req with transaction id a1b
+I (159084) wifi:Send SA Query req with transaction id a1c
+I (159284) wifi:Send SA Query req with transaction id a1d
+I (159304) wifi:STA not responded to 6 SA Query attempts, Reset connection sending disassoc
+I (159304) wifi:station: a4:5e:60:c5:69:75 leave, AID = 1, reason = 209, bss_flags is 691299, bss:0x3c0d0da8
+I (159314) wifi:new:<1,0>, old:<1,0>, ap:<1,0>, sta:<255,255>, prof:1, snd_ch_cfg:0x0
+I (159314) wifi:<ba-del>idx:3, tid:0
+I (159324) wifi:<ba-del>idx:4, tid:1
+I (159324) wifi:<ba-del>idx:2, tid:6
+I (159334) wifi:new:<1,1>, old:<1,0>, ap:<1,1>, sta:<255,255>, prof:1, snd_ch_cfg:0x0
+I (166624) wifi:new:<1,0>, old:<1,1>, ap:<1,0>, sta:<255,255>, prof:1, snd_ch_cfg:0x0
+I (166624) wifi:station: a4:5e:60:c5:69:75 join, AID=1, bgn, 20
+I (166654) wifi:<ba-add>idx:2 (ifx:1, a4:5e:60:c5:69:75), tid:6, ssn:2, winSize:64
+I (166664) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.2
+I (166694) wifi:<ba-add>idx:3 (ifx:1, a4:5e:60:c5:69:75), tid:0, ssn:0, winSize:64
+I (168884) GW_TCP_SERVER: tcp rx all raw data:  :: len = 165,  raw = {"msg_type": "keep_alive_ack22"}
+{"msg_type": "keep_alive_ack23"}
+{"msg_type": "keep_alive_ack24"}
+{"msg_type": "keep_alive_ack25"}
+{"msg_type": "keep_alive_ack26"}
+
+I (168894) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 165  rx_len(before)= 0
+I (168904) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack22"}
+{"msg_type": "keep_alive_ack23"}
+{"msg_type": "keep_alive_ack24"}
+{"msg_type": "keep_alive_ack25"}
+{"msg_type": "keep_alive_ack26"}
+
+I (168924) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 165 , buffers = {"msg_type": "keep_alive_ack22"}
+{"msg_type": "keep_alive_ack23"}
+{"msg_type": "keep_alive_ack24"}
+{"msg_type": "keep_alive_ack25"}
+{"msg_type": "keep_alive_ack26"}
+
+I (168954) GW_TCP_SERVER: tcp-00-04-Rx 165 bytes from client 37 ::{"msg_type": "keep_alive_ack22"}
+{"msg_type": "keep_alive_ack23"}
+{"msg_type": "keep_alive_ack24"}
+{"msg_type": "keep_alive_ack25"}
+{"msg_type": "keep_alive_ack26"}
+ , 
+W (168974) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 165
+W (168974) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack22"}
+{"msg_type": "keep_alive_ack23"}
+{"msg_type": "keep_alive_ack24"}
+{"msg_type": "keep_alive_ack25"}
+{"msg_type": "keep_alive_ack26"}
+ 
+I (169004) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack22"}
+I (169014) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack22 from sock37 
+I (169014) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack22"}
+I (169024) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack22"}
+I (169034) GW_MSG_HANDLER: non known json data rxed.
+W (169044) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 33,  remain = 132
+W (169044) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack23"}
+{"msg_type": "keep_alive_ack24"}
+{"msg_type": "keep_alive_ack25"}
+{"msg_type": "keep_alive_ack26"}
+ 
+I (169064) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack23"}
+I (169074) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack23 from sock37 
+I (169084) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack23"}
+I (169094) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack23"}
+I (169104) GW_MSG_HANDLER: non known json data rxed.
+W (169104) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 66,  remain = 99
+W (169114) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack24"}
+{"msg_type": "keep_alive_ack25"}
+{"msg_type": "keep_alive_ack26"}
+ 
+I (169134) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack24"}
+I (169144) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack24 from sock37 
+I (169154) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack24"}
+I (169164) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack24"}
+I (169174) GW_MSG_HANDLER: non known json data rxed.
+W (169174) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 99,  remain = 66
+W (169184) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack25"}
+{"msg_type": "keep_alive_ack26"}
+ 
+I (169194) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack25"}
+I (169204) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack25 from sock37 
+I (169214) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack25"}
+I (169224) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack25"}
+I (169234) GW_MSG_HANDLER: non known json data rxed.
+W (169234) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 132,  remain = 33
+W (169244) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack26"}
+ 
+I (169254) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack26"}
+I (169264) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack26 from sock37 
+I (169274) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack26"}
+I (169284) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack26"}
+I (169294) GW_MSG_HANDLER: non known json data rxed.
+W (169294) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 165,  remain = 0
+W (169304) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (169314) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (171734) GW_TCP_SERVER: tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack27"}
+
+I (171734) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 33  rx_len(before)= 0
+I (171734) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack27"}
+{"msg_type": "keep_alive_ack23"}
+{"msg_type": "keep_alive_ack24"}
+{"msg_type": "keep_alive_ack25"}
+{"msg_type": "keep_alive_ack26"}
+
+I (171764) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack27"}
+
+I (171774) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack27"}
+ , 
+W (171784) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 33
+W (171784) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack27"}
+ 
+I (171794) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack27"}
+I (171804) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack27 from sock37 
+I (171814) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack27"}
+I (171824) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack27"}
+I (171834) GW_MSG_HANDLER: non known json data rxed.
+W (171834) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 33,  remain = 0
+W (171844) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (171854) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (176734) GW_TCP_SERVER: tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack28"}
+
+I (176734) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 33  rx_len(before)= 0
+I (176744) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack28"}
+
+I (176754) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack28"}
+
+I (176764) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack28"}
+ , 
+W (176774) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 33
+W (176784) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack28"}
+ 
+I (176794) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack28"}
+I (176804) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack28 from sock37 
+I (176804) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack28"}
+I (176814) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack28"}
+I (176824) GW_MSG_HANDLER: non known json data rxed.
+W (176834) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 33,  remain = 0
+W (176834) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (176844) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (181734) GW_TCP_SERVER: tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack29"}
+
+I (181734) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 33  rx_len(before)= 0
+I (181744) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack29"}
+
+I (181754) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack29"}
+
+I (181764) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack29"}
+ , 
+W (181774) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 33
+W (181784) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack29"}
+ 
+I (181794) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack29"}
+I (181804) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack29 from sock37 
+I (181804) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack29"}
+I (181814) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack29"}
+I (181824) GW_MSG_HANDLER: non known json data rxed.
+W (181834) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 33,  remain = 0
+W (181844) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer =  
+I (181844) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (186704) GW_TCP_SERVER: tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack30"}
+
+I (186704) GW_TCP_SERVER: tcp-00-01-process stream json from sock:: 37, role = 1, len = 33  rx_len(before)= 0
+I (186704) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack30"}
+
+I (186714) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack30"}
+
+I (186734) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack30"}
+ , 
+W (186734) GW_TCP_SERVER: tcp-01-01-Parse loop: start offset = 0,  remain = 33
+W (186744) GW_TCP_SERVER: tcp-01-02-No newline found, waiting for more data, current buffer = {"msg_type": "keep_alive_ack30"}
+ 
+I (186754) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack30"}
+I (186764) GW_TCP_SERVER: tcp-02-02-[OTA] Rx msg_type = keep_alive_ack30 from sock37 
+I (186774) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack30"}
+I (186784) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack30"}

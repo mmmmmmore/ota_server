@@ -5,6 +5,7 @@ class GatewayClient:
         self.ip = ip
         self.port = port
         self.queue = queue
+        self.ackseq = 0
 
     async def run(self):
         while True:
@@ -39,7 +40,8 @@ class GatewayClient:
                         try:
                             obj = json.loads(msg)
                             if obj.get("msg_type") == "keep_alive":
-                                ack = {"msg_type": "keep_alive_ack"}
+                                ack = {"msg_type": f"keep_alive_ack{str(self.ackseq)}"}
+                                self.ackseq += 1
                                 if "seq" in obj: 
                                     ack["seq"] = obj["seq"]
                                 writer.write((json.dumps(ack) + "\n").encode())
