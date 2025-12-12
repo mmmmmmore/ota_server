@@ -1,0 +1,984 @@
+I (551684) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack12"}
+ , 
+I (551694) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 33
+I (551704) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 32
+I (551704) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack12"} 
+I (551714) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack12"}
+I (551724) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack12"}
+I (551734) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack12"}
+I (551744) GW_MSG_HANDLER: non known json data rxed.
+I (551754) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack12
+I (551754) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+I (551764) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 33,  rx_len = 33
+I (551774) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (551774) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (556574) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack13"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 31 33 22 7D 0A 
+I (556584) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack13"}
+
+I (556594) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack13"}
+
+I (556604) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 37 ::{"msg_type": "keep_alive_ack13"}
+ , 
+I (556614) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 33
+I (556614) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 32
+I (556624) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack13"} 
+I (556634) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type": "keep_alive_ack13"}
+I (556644) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack13"}
+I (556654) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack13"}
+I (556664) GW_MSG_HANDLER: non known json data rxed.
+I (556664) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack13
+I (556674) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+I (556684) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 33,  rx_len = 33
+I (556684) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (556694) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+
+maochun@MMMBP ota_gw % idf.py -p /dev/tty.usbmodem5B3E0345201 monitor
+Executing action: monitor
+Running idf_monitor in directory /Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw
+Executing "/Users/maochun/.espressif/python_env/idf6.0_py3.13_env/bin/python /Users/maochun/esp32prj/esp-idf/tools/idf_monitor.py -p /dev/tty.usbmodem5B3E0345201 -b 115200 --toolchain-prefix xtensa-esp32s3-elf- --target esp32s3 --revision 0 /Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/build/ota_gw.elf /Users/maochun/esp32prj/Project_CAM/branch/ota_GW/ota_gw/build/bootloader/bootloader.elf -m '/Users/maochun/.espressif/python_env/idf6.0_py3.13_env/bin/python' '/Users/maochun/esp32prj/esp-idf/tools/idf.py' '-p' '/dev/tty.usbmodem5B3E0345201'"...
+--- Warning: Serial ports accessed as /dev/tty.* will hang gdb if launched.
+--- Using /dev/cu.usbmodem5B3E0345201 instead...
+--- esp-idf-monitor 1.7.0 on /dev/cu.usbmodem5B3E0345201 115200
+--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x16fc
+load:0x403c8700,len:0xf14
+--- 0x403c8700: _stext at ??:?
+load:0x403cb700,len:0x3214
+entry 0x403c8930
+--- 0x403c8930: call_start_cpu0 at /Users/maochun/esp32prj/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+I (25) boot: ESP-IDF v6.0-dev-2039-g2044fba6e7 2nd stage bootloader
+I (25) boot: compile time Dec  5 2025 11:19:21
+I (25) boot: Multicore bootloader
+I (27) boot: chip revision: v0.2
+I (30) boot: efuse block revision: v1.3
+I (33) qio_mode: Enabling default flash chip QIO
+I (38) boot.esp32s3: Boot SPI Speed : 80MHz
+I (41) boot.esp32s3: SPI Mode       : QIO
+I (45) boot.esp32s3: SPI Flash Size : 16MB
+I (49) boot: Enabling RNG early entropy source...
+I (54) boot: Partition Table:
+I (56) boot: ## Label            Usage          Type ST Offset   Length
+I (62) boot:  0 nvs              WiFi data        01 02 00009000 00005000
+I (69) boot:  1 otadata          OTA data         01 00 0000e000 00002000
+I (75) boot:  2 app0             OTA app          00 10 00010000 00400000
+I (82) boot:  3 app1             OTA app          00 11 00410000 00400000
+I (88) boot:  4 spiffs           Unknown data     01 82 00810000 00770000
+I (95) boot: End of partition table
+I (98) esp_image: segment 0: paddr=00010020 vaddr=3c0a0020 size=1f250h (127568) map
+I (125) esp_image: segment 1: paddr=0002f278 vaddr=3fc99800 size=00da0h (  3488) load
+I (126) esp_image: segment 2: paddr=00030020 vaddr=42000020 size=9e2d8h (647896) map
+I (227) esp_image: segment 3: paddr=000ce300 vaddr=3fc9a5a0 size=04398h ( 17304) load
+I (230) esp_image: segment 4: paddr=000d26a0 vaddr=40374000 size=15708h ( 87816) load
+I (248) esp_image: segment 5: paddr=000e7db0 vaddr=50000000 size=00020h (    32) load
+I (257) boot: Loaded app from partition at offset 0x10000
+I (257) boot: Disabling RNG early entropy source...
+I (268) octal_psram: vendor id    : 0x0d (AP)
+I (268) octal_psram: dev id       : 0x02 (generation 3)
+I (268) octal_psram: density      : 0x03 (64 Mbit)
+I (270) octal_psram: good-die     : 0x01 (Pass)
+I (274) octal_psram: Latency      : 0x01 (Fixed)
+I (278) octal_psram: VCC          : 0x01 (3V)
+I (283) octal_psram: SRF          : 0x01 (Fast Refresh)
+I (288) octal_psram: BurstType    : 0x01 (Hybrid Wrap)
+I (292) octal_psram: BurstLen     : 0x01 (32 Byte)
+I (297) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)
+I (302) octal_psram: DriveStrength: 0x00 (1/1)
+I (307) MSPI Timing: PSRAM timing tuning index: 5
+I (311) esp_psram: Found 8MB PSRAM device
+I (314) esp_psram: Speed: 80MHz
+I (317) cpu_start: Multicore app
+I (753) esp_psram: SPI SRAM memory test OK
+I (761) cpu_start: GPIO 44 and 43 are used as console UART I/O pins
+I (762) cpu_start: Pro cpu start user code
+I (762) cpu_start: cpu freq: 160000000 Hz
+I (763) app_init: Application information:
+I (767) app_init: Project name:     ota_gw
+I (771) app_init: App version:      2.1.1
+I (775) app_init: Compile time:     Dec  5 2025 12:48:53
+I (780) app_init: ELF file SHA256:  c29463d1b...
+I (784) app_init: ESP-IDF:          v6.0-dev-2039-g2044fba6e7
+I (790) efuse_init: Min chip rev:     v0.0
+I (793) efuse_init: Max chip rev:     v0.99 
+I (797) efuse_init: Chip rev:         v0.2
+I (801) heap_init: Initializing. RAM available for dynamic allocation:
+I (808) heap_init: At 3FCA6418 len 000432F8 (268 KiB): RAM
+I (813) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+I (818) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+I (823) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM
+I (829) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator
+I (836) spi_flash: detected chip: boya
+I (838) spi_flash: flash io: qio
+W (842) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`
+I (851) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (857) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (864) main_task: Started on CPU0
+I (884) main_task: Calling app_main()
+ESP32S3 Boot Success...
+I (904) pp: pp rom version: e7ae62f
+I (904) net80211: net80211 rom version: e7ae62f
+I (914) wifi:wifi driver task: 3fcabaa0, prio:23, stack:6656, core=0
+I (914) wifi:wifi firmware version: df85326
+I (914) wifi:wifi certification version: v7.0
+I (914) wifi:config NVS flash: enabled
+I (914) wifi:config nano formatting: disabled
+I (924) wifi:Init data frame dynamic rx buffer num: 64
+I (924) wifi:Init static rx mgmt buffer num: 5
+I (934) wifi:Init management short buffer num: 32
+I (934) wifi:Init static tx buffer num: 32
+I (944) wifi:Init tx cache buffer num: 32
+I (944) wifi:Init static tx FG buffer num: 2
+I (944) wifi:Init static rx buffer size: 1600
+I (954) wifi:Init static rx buffer num: 16
+I (954) wifi:Init dynamic rx buffer num: 64
+I (964) wifi_init: rx ba win: 6
+I (964) wifi_init: accept mbox: 6
+I (964) wifi_init: tcpip mbox: 32
+I (964) wifi_init: udp mbox: 6
+I (974) wifi_init: tcp mbox: 6
+I (974) wifi_init: tcp tx win: 5760
+I (974) wifi_init: tcp rx win: 5760
+I (984) wifi_init: tcp mss: 1440
+I (984) wifi_init: WiFi/LWIP prefer SPIRAM
+I (984) wifi_init: WiFi IRAM OP enabled
+I (994) wifi_init: WiFi RX IRAM OP enabled
+I (994) phy_init: phy_version 701,f4f1da3a,Mar  3 2025,15:50:10
+I (1044) wifi:mode : softAP (dc:b4:d9:10:4d:b1)
+I (1044) wifi:Total power save buffer number: 16
+I (1044) wifi:Init max length of beacon: 752/752
+I (1044) wifi:Init max length of beacon: 752/752
+I (1044) esp_netif_lwip: DHCP server started on interface WIFI_AP_DEF with IP: 192.168.4.1
+I (1054) wifi_ap: SoftAP started: SSID=OTA-GW, gateway=192.168.4.1, netmask=255.255.255.0, protocol=b/g/n, PMF=capable/not-required
+I (1064) PSRAM: PSRAM size: 8388608 bytes
+I (1074) PSRAM: Free heap: 8524644 bytes
+I (1074) PSRAM: PSRAM is initialized and ready.
+I (1074) PSRAM: Successfully allocated 1KB from PSRAM.
+I (1524) SPIFFS: SPIFFS mounted successfully
+I (1524) SPIFFS: Partition size: total=7161281, used=2939461
+I (1524) common_gpio: Starting GPIO initialization...
+I (1524) common_gpio: STBY GPIO 17 set to HIGH
+I (1524) common_gpio: Motor GPIOs initialized
+I (1534) common_gpio: All GPIOs initialized
+I (1534) common_gpio: LEDC channels initialized
+I (1544) GW_TCP_SERVER: tcp_server_task started on port 9001
+I (1544) GW_TCP_SERVER: TCP Server listening on port 9001
+I (1554) GW_TCP_SERVER: tcp_server_task started on port 9002
+I (1554) GW_TCP_SERVER: TCP Server listening on port 9002
+I (1564) WEB_OTAGW: OTA Gateway Webserver started
+系统初始化完成，等待客户端连接...
+I (1574) main_task: Returned from app_main()
+I (2374) wifi:new:<1,1>, old:<1,1>, ap:<1,1>, sta:<255,255>, prof:1, snd_ch_cfg:0x0
+I (2374) wifi:station: 5c:5f:67:ed:16:1a join, AID=1, bgn, 40U
+I (2434) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.2
+I (2644) wifi:new:<1,1>, old:<1,1>, ap:<1,1>, sta:<255,255>, prof:1, snd_ch_cfg:0x0
+I (2644) wifi:station: dc:b4:d9:10:5f:a8 join, AID=2, bgn, 40U
+I (2694) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.3
+I (3734) wifi:<ba-add>idx:2 (ifx:1, dc:b4:d9:10:5f:a8), tid:0, ssn:0, winSize:64
+I (3764) GW_TCP_SERVER: Client connected, sock=37, ip=192.168.4.3, port=56314
+I (3764) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 131,  raw = {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 72 65 67 69 73 74 65 72 22 2C 22 64 65 76 69 63 65 5F 6E 61 6D 65 22 3A 22 56 65 68 31 5F 53 43 4D 31 22 2C 22 63 6C 69 65 6E 74 5F 69 64 22 3A 22 37 35 38 22 2C 22 6D 61 63 22 3A 22 44 43 3A 42 34 3A 44 39 3A 31 30 3A 35 46 3A 41 38 22 2C 22 76 65 72 73 69 6F 6E 22 3A 22 31 2E 31 2E 30 22 2C 22 69 70 22 3A 22 31 39 32 2E 31 36 38 2E 34 2E 33 22 7D 0A 
+I (3804) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"}
+
+I (3824) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 131 , buffers = {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"}
+
+I (3844) GW_TCP_SERVER: tcp-00-04-Rx 131 bytes from client 37 ::{"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"}
+ , 
+I (3864) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 131
+I (3874) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 130
+I (3874) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 130, json = {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"} 
+I (3894) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"}
+I (3914) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 2,  json= {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"}
+I (3934) GW_MSG_HANDLER: Processing message from sock 37 (role=2): {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"}
+I (3944) CLIENT_REGISTER: Saving client register: name=Veh1_SCM1, id=758, mac=DC:B4:D9:10:5F:A8, ip=192.168.4.3, ver=1.1.0, sock=37
+I (3964) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = register
+I (3964) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+I (3974) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 131,  rx_len = 131
+I (3984) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (3984) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (3994) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 56,  raw = {"msg_type":"ota_result","task_id":"Null","state":"NA"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6F 74 61 5F 72 65 73 75 6C 74 22 2C 22 74 61 73 6B 5F 69 64 22 3A 22 4E 75 6C 6C 22 2C 22 73 74 61 74 65 22 3A 22 4E 41 22 7D 0A 
+I (4014) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"ota_result","task_id":"Null","state":"NA"}
+_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"}
+
+I (4034) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 56 , buffers = {"msg_type":"ota_result","task_id":"Null","state":"NA"}
+
+I (4044) GW_TCP_SERVER: tcp-00-04-Rx 56 bytes from client 37 ::{"msg_type":"ota_result","task_id":"Null","state":"NA"}
+ , 
+I (4064) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 56
+I (4064) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 55
+I (4074) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 55, json = {"msg_type":"ota_result","task_id":"Null","state":"NA"} 
+I (4084) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"ota_result","task_id":"Null","state":"NA"}
+I (4094) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 2,  json= {"msg_type":"ota_result","task_id":"Null","state":"NA"}
+I (4104) GW_MSG_HANDLER: Processing message from sock 37 (role=2): {"msg_type":"ota_result","task_id":"Null","state":"NA"}
+I (4114) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = ota_result
+I (4124) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+I (4134) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 56,  rx_len = 56
+I (4134) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (4144) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (6564) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 30,  raw = {"msg_type":"keep_alive_ack"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 22 7D 0A 
+I (6574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"keep_alive_ack"}
+_id":"Null","state":"NA"}
+
+I (6584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 30 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (6594) GW_TCP_SERVER: tcp-00-04-Rx 30 bytes from client 37 ::{"msg_type":"keep_alive_ack"}
+ , 
+I (6604) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 30
+I (6614) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 29
+I (6614) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 29, json = {"msg_type":"keep_alive_ack"} 
+I (6624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"keep_alive_ack"}
+I (6634) GW_TCP_SERVER: tcp-02-01-[CLIENT] Rx keep_alive_ack from sock: 37
+I (6644) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 30,  rx_len = 30
+I (6644) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (6654) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (11564) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 30,  raw = {"msg_type":"keep_alive_ack"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 22 7D 0A 
+I (11574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (11584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 30 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (11594) GW_TCP_SERVER: tcp-00-04-Rx 30 bytes from client 37 ::{"msg_type":"keep_alive_ack"}
+ , 
+I (11604) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 30
+I (11614) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 29
+I (11614) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 29, json = {"msg_type":"keep_alive_ack"} 
+I (11624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"keep_alive_ack"}
+I (11634) GW_TCP_SERVER: tcp-02-01-[CLIENT] Rx keep_alive_ack from sock: 37
+I (11644) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 30,  rx_len = 30
+I (11644) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (11654) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (16564) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 30,  raw = {"msg_type":"keep_alive_ack"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 22 7D 0A 
+I (16574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (16584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 30 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (16594) GW_TCP_SERVER: tcp-00-04-Rx 30 bytes from client 37 ::{"msg_type":"keep_alive_ack"}
+ , 
+I (16604) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 30
+I (16614) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 29
+I (16614) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 29, json = {"msg_type":"keep_alive_ack"} 
+I (16624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"keep_alive_ack"}
+I (16634) GW_TCP_SERVER: tcp-02-01-[CLIENT] Rx keep_alive_ack from sock: 37
+I (16644) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 30,  rx_len = 30
+I (16644) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (16654) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (21564) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 30,  raw = {"msg_type":"keep_alive_ack"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 22 7D 0A 
+I (21574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (21584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 30 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (21594) GW_TCP_SERVER: tcp-00-04-Rx 30 bytes from client 37 ::{"msg_type":"keep_alive_ack"}
+ , 
+I (21604) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 30
+I (21614) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 29
+I (21614) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 29, json = {"msg_type":"keep_alive_ack"} 
+I (21624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"keep_alive_ack"}
+I (21634) GW_TCP_SERVER: tcp-02-01-[CLIENT] Rx keep_alive_ack from sock: 37
+I (21644) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 30,  rx_len = 30
+I (21644) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (21654) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (26564) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 30,  raw = {"msg_type":"keep_alive_ack"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 22 7D 0A 
+I (26574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (26584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 30 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (26594) GW_TCP_SERVER: tcp-00-04-Rx 30 bytes from client 37 ::{"msg_type":"keep_alive_ack"}
+ , 
+I (26604) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 30
+I (26614) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 29
+I (26614) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 29, json = {"msg_type":"keep_alive_ack"} 
+I (26624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"keep_alive_ack"}
+I (26634) GW_TCP_SERVER: tcp-02-01-[CLIENT] Rx keep_alive_ack from sock: 37
+I (26644) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 30,  rx_len = 30
+I (26644) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (26654) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (31564) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 30,  raw = {"msg_type":"keep_alive_ack"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 22 7D 0A 
+I (31574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (31584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 30 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (31594) GW_TCP_SERVER: tcp-00-04-Rx 30 bytes from client 37 ::{"msg_type":"keep_alive_ack"}
+ , 
+I (31604) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 30
+I (31614) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 29
+I (31614) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 29, json = {"msg_type":"keep_alive_ack"} 
+I (31624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"keep_alive_ack"}
+I (31634) GW_TCP_SERVER: tcp-02-01-[CLIENT] Rx keep_alive_ack from sock: 37
+I (31644) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 30,  rx_len = 30
+I (31644) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (31654) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (36564) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 30,  raw = {"msg_type":"keep_alive_ack"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 22 7D 0A 
+I (36574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (36584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 30 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (36594) GW_TCP_SERVER: tcp-00-04-Rx 30 bytes from client 37 ::{"msg_type":"keep_alive_ack"}
+ , 
+I (36604) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 30
+I (36614) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 29
+I (36614) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 29, json = {"msg_type":"keep_alive_ack"} 
+I (36624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"keep_alive_ack"}
+I (36634) GW_TCP_SERVER: tcp-02-01-[CLIENT] Rx keep_alive_ack from sock: 37
+I (36644) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 30,  rx_len = 30
+I (36644) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (36654) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (38564) GW_TCP_SERVER: Client connected, sock=39, ip=192.168.4.2, port=51940
+I (38564) GW_TCP_SERVER: OTA Server socket set: 39
+I (41564) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 30,  raw = {"msg_type":"keep_alive_ack"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 22 7D 0A 
+I (41574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (41584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 30 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (41594) GW_TCP_SERVER: tcp-00-04-Rx 30 bytes from client 37 ::{"msg_type":"keep_alive_ack"}
+ , 
+I (41604) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 30
+I (41614) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 29
+I (41614) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 29, json = {"msg_type":"keep_alive_ack"} 
+I (41624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"keep_alive_ack"}
+I (41634) GW_TCP_SERVER: tcp-02-01-[CLIENT] Rx keep_alive_ack from sock: 37
+I (41644) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 30,  rx_len = 30
+I (41644) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (41654) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (41644) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack51"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 35 31 22 7D 0A 
+I (41674) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack51"}
+
+I (41684) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack51"}
+
+I (41694) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 39 ::{"msg_type": "keep_alive_ack51"}
+ , 
+I (41704) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 0,  rx_len = 33
+I (41714) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 32
+I (41724) GW_TCP_SERVER: tcp-01-03json: sock =39 , msg_len = 32, json = {"msg_type": "keep_alive_ack51"} 
+I (41724) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 39 :: {"msg_type": "keep_alive_ack51"}
+I (41734) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 39.  role = 1,  json= {"msg_type": "keep_alive_ack51"}
+I (41744) GW_MSG_HANDLER: Processing message from sock 39 (role=1): {"msg_type": "keep_alive_ack51"}
+I (41754) GW_MSG_HANDLER: non known json data rxed.
+I (41764) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack51
+I (41764) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+I (41774) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 33,  rx_len = 33
+I (41784) GW_TCP_SERVER: tcp-01-no new line in sock : 39, remain = 0
+I (41784) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (46564) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack52"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 35 32 22 7D 0A 
+I (46574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack52"}
+
+I (46584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 33 , buffers = {"msg_type": "keep_alive_ack52"}
+
+I (46594) GW_TCP_SERVER: tcp-00-04-Rx 33 bytes from client 39 ::{"msg_type": "keep_alive_ack52"}
+ , 
+I (46604) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 0,  rx_len = 33
+I (46614) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 32
+I (46614) GW_TCP_SERVER: tcp-01-03json: sock =39 , msg_len = 32, json = {"msg_type": "keep_alive_ack52"} 
+I (46624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 39 :: {"msg_type": "keep_alive_ack52"}
+I (46634) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 39.  role = 1,  json= {"msg_type": "keep_alive_ack52"}
+I (46644) GW_MSG_HANDLER: Processing message from sock 39 (role=1): {"msg_type": "keep_alive_ack52"}
+I (46654) GW_MSG_HANDLER: non known json data rxed.
+I (46654) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack52
+I (46664) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+I (46674) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 33,  rx_len = 33
+I (46674) GW_TCP_SERVER: tcp-01-no new line in sock : 39, remain = 0
+I (46684) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (46594) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 30,  raw = {"msg_type":"keep_alive_ack"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 22 7D 0A 
+I (46704) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (46714) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 30 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (46724) GW_TCP_SERVER: tcp-00-04-Rx 30 bytes from client 37 ::{"msg_type":"keep_alive_ack"}
+ , 
+I (46734) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 30
+I (46744) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 29
+I (46744) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 29, json = {"msg_type":"keep_alive_ack"} 
+I (46754) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"keep_alive_ack"}
+I (46764) GW_TCP_SERVER: tcp-02-01-[CLIENT] Rx keep_alive_ack from sock: 37
+I (46774) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 30,  rx_len = 30
+I (46784) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (46784) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+E (48484) GW_TCP_SERVER: recv failed: errno 104
+I (48484) GW_TCP_SERVER: Closing client socket 39
+W (48484) GW_TCP_SERVER: OTA Server disconnected
+I (49214) GW_TCP_SERVER: Client connected, sock=39, ip=192.168.4.2, port=51943
+I (49214) GW_TCP_SERVER: OTA Server socket set: 39
+I (49214) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 44,  raw = {"msg_type": "hello", "role": "ota_server"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 68 65 6C 6C 6F 22 2C 20 22 72 6F 6C 65 22 3A 20 22 6F 74 61 5F 73 65 72 76 65 72 22 7D 0A 
+I (49234) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "hello", "role": "ota_server"}
+
+I (49244) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 44 , buffers = {"msg_type": "hello", "role": "ota_server"}
+
+I (49264) GW_TCP_SERVER: tcp-00-04-Rx 44 bytes from client 39 ::{"msg_type": "hello", "role": "ota_server"}
+ , 
+I (49274) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 0,  rx_len = 44
+I (49274) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 43
+I (49284) GW_TCP_SERVER: tcp-01-03json: sock =39 , msg_len = 43, json = {"msg_type": "hello", "role": "ota_server"} 
+I (49294) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 39 :: {"msg_type": "hello", "role": "ota_server"}
+I (49304) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 39.  role = 1,  json= {"msg_type": "hello", "role": "ota_server"}
+I (49314) GW_MSG_HANDLER: Processing message from sock 39 (role=1): {"msg_type": "hello", "role": "ota_server"}
+I (49324) GW_MSG_HANDLER: OTA server hello received on sock 39
+I (49324) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = hello
+I (49334) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+I (49344) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 44,  rx_len = 44
+I (49344) GW_TCP_SERVER: tcp-01-no new line in sock : 39, remain = 0
+I (49354) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (51564) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 30,  raw = {"msg_type":"keep_alive_ack"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 22 7D 0A 
+I (51574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (51584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 30 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (51594) GW_TCP_SERVER: tcp-00-04-Rx 30 bytes from client 37 ::{"msg_type":"keep_alive_ack"}
+ , 
+I (51604) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 30
+I (51614) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 29
+I (51614) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 29, json = {"msg_type":"keep_alive_ack"} 
+I (51624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"keep_alive_ack"}
+I (51634) GW_TCP_SERVER: tcp-02-01-[CLIENT] Rx keep_alive_ack from sock: 37
+I (51644) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 30,  rx_len = 30
+I (51644) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (51654) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (51654) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 32,  raw = {"msg_type": "keep_alive_ack0"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 30 22 7D 0A 
+I (51674) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack0"}
+ta_server"}
+
+I (51684) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 32 , buffers = {"msg_type": "keep_alive_ack0"}
+
+I (51694) GW_TCP_SERVER: tcp-00-04-Rx 32 bytes from client 39 ::{"msg_type": "keep_alive_ack0"}
+ , 
+I (51704) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 0,  rx_len = 32
+I (51714) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 31
+I (51724) GW_TCP_SERVER: tcp-01-03json: sock =39 , msg_len = 31, json = {"msg_type": "keep_alive_ack0"} 
+I (51734) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 39 :: {"msg_type": "keep_alive_ack0"}
+I (51734) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 39.  role = 1,  json= {"msg_type": "keep_alive_ack0"}
+I (51744) GW_MSG_HANDLER: Processing message from sock 39 (role=1): {"msg_type": "keep_alive_ack0"}
+I (51754) GW_MSG_HANDLER: non known json data rxed.
+I (51764) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack0
+I (51774) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+I (51774) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 32,  rx_len = 32
+I (51784) GW_TCP_SERVER: tcp-01-no new line in sock : 39, remain = 0
+I (51784) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+E (55984) GW_TCP_SERVER: recv failed: errno 104
+I (55984) GW_TCP_SERVER: Closing client socket 39
+W (55984) GW_TCP_SERVER: OTA Server disconnected
+I (56564) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 30,  raw = {"msg_type":"keep_alive_ack"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 22 7D 0A 
+I (56574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (56584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 30 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (56594) GW_TCP_SERVER: tcp-00-04-Rx 30 bytes from client 37 ::{"msg_type":"keep_alive_ack"}
+ , 
+I (56604) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 30
+I (56614) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 29
+I (56614) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 29, json = {"msg_type":"keep_alive_ack"} 
+I (56624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"keep_alive_ack"}
+I (56634) GW_TCP_SERVER: tcp-02-01-[CLIENT] Rx keep_alive_ack from sock: 37
+I (56644) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 30,  rx_len = 30
+I (56644) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (56654) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (56714) GW_TCP_SERVER: Client connected, sock=39, ip=192.168.4.2, port=51946
+I (56714) GW_TCP_SERVER: OTA Server socket set: 39
+I (61564) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 30,  raw = {"msg_type":"keep_alive_ack"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 22 7D 0A 
+I (61574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (61584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 30 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (61594) GW_TCP_SERVER: tcp-00-04-Rx 30 bytes from client 37 ::{"msg_type":"keep_alive_ack"}
+ , 
+I (61604) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 30
+I (61614) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 29
+I (61614) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 29, json = {"msg_type":"keep_alive_ack"} 
+I (61624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"keep_alive_ack"}
+I (61634) GW_TCP_SERVER: tcp-02-01-[CLIENT] Rx keep_alive_ack from sock: 37
+I (61644) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 30,  rx_len = 30
+I (61644) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (61654) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (61584) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 32,  raw = {"msg_type": "keep_alive_ack0"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 30 22 7D 0A 
+I (61674) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack0"}
+
+I (61684) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 32 , buffers = {"msg_type": "keep_alive_ack0"}
+
+I (61694) GW_TCP_SERVER: tcp-00-04-Rx 32 bytes from client 39 ::{"msg_type": "keep_alive_ack0"}
+ , 
+I (61704) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 0,  rx_len = 32
+I (61714) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 31
+I (61724) GW_TCP_SERVER: tcp-01-03json: sock =39 , msg_len = 31, json = {"msg_type": "keep_alive_ack0"} 
+I (61734) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 39 :: {"msg_type": "keep_alive_ack0"}
+I (61734) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 39.  role = 1,  json= {"msg_type": "keep_alive_ack0"}
+I (61744) GW_MSG_HANDLER: Processing message from sock 39 (role=1): {"msg_type": "keep_alive_ack0"}
+I (61754) GW_MSG_HANDLER: non known json data rxed.
+I (61764) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack0
+I (61774) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+I (61774) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 32,  rx_len = 32
+I (61784) GW_TCP_SERVER: tcp-01-no new line in sock : 39, remain = 0
+I (61784) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (65314) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 256,  raw = {"msg_type": "ota_task", "task_id": "20251212_101847_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251212_101847", "status": "pending"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6F 74 61 5F 74 61 73 6B 22 2C 20 22 74 61 73 6B 5F 69 64 22 3A 20 22 32 30 32 35 31 32 31 32 5F 31 30 31 38 34 37 5F 37 35 38 22 2C 20 22 64 65 76 69 63 65 5F 6E 61 6D 65 22 3A 20 22 56 65 68 31 5F 53 43 4D 31 22 2C 20 22 63 6C 69 65 6E 74 5F 69 64 22 3A 20 22 37 35 38 22 2C 20 22 76 65 72 73 69 6F 6E 22 3A 20 22 76 32 2E 32 2E 30 22 2C 20 22 66 69 72 6D 77 61 72 65 5F 75 72 6C 22 3A 20 22 68 74 74 70 73 3A 2F 2F 31 39 32 2E 31 36 38 2E 34 2E 32 3A 38 30 38 30 2F 66 69 72 6D 77 61 72 65 2F 6F 74 61 5F 63 6C 69 65 6E 74 5F 76 32 2E 32 2E 30 2E 62 69 6E 22 2C 20 22 74 69 6D 65 73 74 61 6D 70 22 3A 20 22 32 30 32 35 31 32 31 32 5F 31 30 31 38 34 37 22 2C 20 22 73 74 61 74 75 73 22 3A 20 22 70 65 6E 64 69 6E 67 22 7D 0A 
+I (65404) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "ota_task", "task_id": "20251212_101847_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251212_101847", "status": "pending"}
+
+I (65434) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 256 , buffers = {"msg_type": "ota_task", "task_id": "20251212_101847_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251212_101847", "status": "pending"}
+
+I (65464) GW_TCP_SERVER: tcp-00-04-Rx 256 bytes from client 39 ::{"msg_type": "ota_task", "task_id": "20251212_101847_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251212_101847", "status": "pending"}
+ , 
+I (65494) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 0,  rx_len = 256
+I (65504) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 255
+I (65504) GW_TCP_SERVER: tcp-01-03json: sock =39 , msg_len = 255, json = {"msg_type": "ota_task", "task_id": "20251212_101847_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251212_101847", "status": "pending"} 
+I (65534) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 39 :: {"msg_type": "ota_task", "task_id": "20251212_101847_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251212_101847", "status": "pending"}
+I (65564) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 39.  role = 1,  json= {"msg_type": "ota_task", "task_id": "20251212_101847_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251212_101847", "status": "pending"}
+I (65594) GW_MSG_HANDLER: Processing message from sock 39 (role=1): {"msg_type": "ota_task", "task_id": "20251212_101847_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251212_101847", "status": "pending"}
+I (65624) GW_MSG_HANDLER: GW Rx ota task, schedule delay dispatch to otaapp 
+I (65624) OTA_APP_MGMT: New Task [20251212_101847_758] created in Queue, wait for User response 
+I (65634) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = ota_task
+I (65644) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+I (65644) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 256,  rx_len = 256
+I (65654) GW_TCP_SERVER: tcp-01-no new line in sock : 39, remain = 0
+I (65664) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (66564) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 30,  raw = {"msg_type":"keep_alive_ack"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 22 7D 0A 
+I (66574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (66584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 30 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (66594) GW_TCP_SERVER: tcp-00-04-Rx 30 bytes from client 37 ::{"msg_type":"keep_alive_ack"}
+ , 
+I (66604) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 30
+I (66614) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 29
+I (66614) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 29, json = {"msg_type":"keep_alive_ack"} 
+I (66624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"keep_alive_ack"}
+I (66634) GW_TCP_SERVER: tcp-02-01-[CLIENT] Rx keep_alive_ack from sock: 37
+I (66644) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 30,  rx_len = 30
+I (66644) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (66654) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (66614) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 32,  raw = {"msg_type": "keep_alive_ack1"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 31 22 7D 0A 
+I (66674) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack1"}
+d": "20251212_101847_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251212_101847", "status": "pending"}
+
+I (66704) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 32 , buffers = {"msg_type": "keep_alive_ack1"}
+
+I (66714) GW_TCP_SERVER: tcp-00-04-Rx 32 bytes from client 39 ::{"msg_type": "keep_alive_ack1"}
+ , 
+I (66724) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 0,  rx_len = 32
+I (66734) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 31
+I (66734) GW_TCP_SERVER: tcp-01-03json: sock =39 , msg_len = 31, json = {"msg_type": "keep_alive_ack1"} 
+I (66744) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 39 :: {"msg_type": "keep_alive_ack1"}
+I (66754) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 39.  role = 1,  json= {"msg_type": "keep_alive_ack1"}
+I (66764) GW_MSG_HANDLER: Processing message from sock 39 (role=1): {"msg_type": "keep_alive_ack1"}
+I (66774) GW_MSG_HANDLER: non known json data rxed.
+I (66784) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack1
+I (66784) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+I (66794) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 32,  rx_len = 32
+I (66804) GW_TCP_SERVER: tcp-01-no new line in sock : 39, remain = 0
+I (66804) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (71564) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 30,  raw = {"msg_type":"keep_alive_ack"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 22 7D 0A 
+I (71574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (71584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 30 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (71594) GW_TCP_SERVER: tcp-00-04-Rx 30 bytes from client 37 ::{"msg_type":"keep_alive_ack"}
+ , 
+I (71604) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 30
+I (71614) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 29
+I (71614) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 29, json = {"msg_type":"keep_alive_ack"} 
+I (71624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"keep_alive_ack"}
+I (71634) GW_TCP_SERVER: tcp-02-01-[CLIENT] Rx keep_alive_ack from sock: 37
+I (71644) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 30,  rx_len = 30
+I (71644) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (71654) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (71634) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 32,  raw = {"msg_type": "keep_alive_ack2"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 32 22 7D 0A 
+I (71674) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack2"}
+
+I (71684) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 32 , buffers = {"msg_type": "keep_alive_ack2"}
+
+I (71694) GW_TCP_SERVER: tcp-00-04-Rx 32 bytes from client 39 ::{"msg_type": "keep_alive_ack2"}
+ , 
+I (71704) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 0,  rx_len = 32
+I (71714) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 31
+I (71724) GW_TCP_SERVER: tcp-01-03json: sock =39 , msg_len = 31, json = {"msg_type": "keep_alive_ack2"} 
+I (71734) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 39 :: {"msg_type": "keep_alive_ack2"}
+I (71734) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 39.  role = 1,  json= {"msg_type": "keep_alive_ack2"}
+I (71744) GW_MSG_HANDLER: Processing message from sock 39 (role=1): {"msg_type": "keep_alive_ack2"}
+I (71754) GW_MSG_HANDLER: non known json data rxed.
+I (71764) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack2
+I (71774) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+I (71774) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 32,  rx_len = 32
+I (71784) GW_TCP_SERVER: tcp-01-no new line in sock : 39, remain = 0
+I (71784) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (73254) OTA_APP_MGMT: Sending OTA task to client 758 (IP=192.168.4.3): {"msg_type":"ota_task","task_id":"20251212_101847_758","device_name":"Veh1_SCM1","client_id":"758","version":"v2.2.0","firmware_url":"https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin","features":"","user_response":"User_Accept"},  UI response: User_Accept
+I (73274) OTA_APP_MGMT: Client 758 state updated to UPDATING
+I (73274) OTA_APP_MGMT:  [20251212_101847_758] init OTA progress for client = 
+I (73284) WEB_OTAGW: User have response to task: 20251212_101847_758
+I (73324) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 80,  raw = {"msg_type":"ota_progress","task_id":"20251212_101847_758","state":"DWLD_DONE"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6F 74 61 5F 70 72 6F 67 72 65 73 73 22 2C 22 74 61 73 6B 5F 69 64 22 3A 22 32 30 32 35 31 32 31 32 5F 31 30 31 38 34 37 5F 37 35 38 22 2C 22 73 74 61 74 65 22 3A 22 44 57 4C 44 5F 44 4F 4E 45 22 7D 0A 
+I (73344) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"ota_progress","task_id":"20251212_101847_758","state":"DWLD_DONE"}
+D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"}
+
+I (73364) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 80 , buffers = {"msg_type":"ota_progress","task_id":"20251212_101847_758","state":"DWLD_DONE"}
+
+I (73374) GW_TCP_SERVER: tcp-00-04-Rx 80 bytes from client 37 ::{"msg_type":"ota_progress","task_id":"20251212_101847_758","state":"DWLD_DONE"}
+ , 
+I (73394) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 80
+I (73394) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 79
+I (73404) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 79, json = {"msg_type":"ota_progress","task_id":"20251212_101847_758","state":"DWLD_DONE"} 
+I (73414) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"ota_progress","task_id":"20251212_101847_758","state":"DWLD_DONE"}
+I (73434) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 37.  role = 2,  json= {"msg_type":"ota_progress","task_id":"20251212_101847_758","state":"DWLD_DONE"}
+I (73444) GW_MSG_HANDLER: Processing message from sock 37 (role=2): {"msg_type":"ota_progress","task_id":"20251212_101847_758","state":"DWLD_DONE"}
+I (73454) OTA_APP_MGMT: OTA module Rx Client send download finish signal
+I (73464) OTA_APP_MGMT: OTA progress update to 15 percentage 
+I (73474) OTA_APP_MGMT: OTA under progress, update the percentage
+I (73474) GW_MSG_HANDLER: msg_handler tx the ota_progress to otaapp finished
+I (73484) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = ota_progress
+I (73494) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+I (73494) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 80,  rx_len = 80
+I (73504) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (73504) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (74474) OTA_APP_MGMT:  progress upgrading ::: 20% 
+I (75474) OTA_APP_MGMT:  progress upgrading ::: 25% 
+I (76474) OTA_APP_MGMT:  progress upgrading ::: 30% 
+I (76564) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 32,  raw = {"msg_type": "keep_alive_ack3"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 33 22 7D 0A 
+I (76574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack3"}
+
+I (76584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 32 , buffers = {"msg_type": "keep_alive_ack3"}
+
+I (76594) GW_TCP_SERVER: tcp-00-04-Rx 32 bytes from client 39 ::{"msg_type": "keep_alive_ack3"}
+ , 
+I (76604) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 0,  rx_len = 32
+I (76604) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 31
+I (76614) GW_TCP_SERVER: tcp-01-03json: sock =39 , msg_len = 31, json = {"msg_type": "keep_alive_ack3"} 
+I (76624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 39 :: {"msg_type": "keep_alive_ack3"}
+I (76634) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 39.  role = 1,  json= {"msg_type": "keep_alive_ack3"}
+I (76644) GW_MSG_HANDLER: Processing message from sock 39 (role=1): {"msg_type": "keep_alive_ack3"}
+I (76654) GW_MSG_HANDLER: non known json data rxed.
+I (76654) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack3
+I (76664) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+I (76664) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 32,  rx_len = 32
+I (76674) GW_TCP_SERVER: tcp-01-no new line in sock : 39, remain = 0
+I (76684) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (76594) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 30,  raw = {"msg_type":"keep_alive_ack"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 22 7D 0A 
+I (76704) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"keep_alive_ack"}
+sk_id":"20251212_101847_758","state":"DWLD_DONE"}
+
+I (76724) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 30 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (76734) GW_TCP_SERVER: tcp-00-04-Rx 30 bytes from client 37 ::{"msg_type":"keep_alive_ack"}
+ , 
+I (76734) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 30
+I (76744) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 29
+I (76754) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 29, json = {"msg_type":"keep_alive_ack"} 
+I (76764) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"keep_alive_ack"}
+I (76764) GW_TCP_SERVER: tcp-02-01-[CLIENT] Rx keep_alive_ack from sock: 37
+I (76774) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 30,  rx_len = 30
+I (76784) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (76784) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (77474) OTA_APP_MGMT:  progress upgrading ::: 35% 
+I (78474) OTA_APP_MGMT:  progress upgrading ::: 40% 
+I (78984) wifi:<ba-add>idx:3 (ifx:1, 5c:5f:67:ed:16:1a), tid:0, ssn:230, winSize:64
+I (79474) OTA_APP_MGMT:  progress upgrading ::: 45% 
+I (80474) OTA_APP_MGMT:  progress upgrading ::: 50% 
+I (81474) OTA_APP_MGMT:  progress upgrading ::: 55% 
+I (81564) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 32,  raw = {"msg_type": "keep_alive_ack4"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 34 22 7D 0A 
+I (81574) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type": "keep_alive_ack4"}
+
+I (81584) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 32 , buffers = {"msg_type": "keep_alive_ack4"}
+
+I (81594) GW_TCP_SERVER: tcp-00-04-Rx 32 bytes from client 39 ::{"msg_type": "keep_alive_ack4"}
+ , 
+I (81604) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 0,  rx_len = 32
+I (81604) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 31
+I (81614) GW_TCP_SERVER: tcp-01-03json: sock =39 , msg_len = 31, json = {"msg_type": "keep_alive_ack4"} 
+I (81624) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 39 :: {"msg_type": "keep_alive_ack4"}
+I (81634) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 39.  role = 1,  json= {"msg_type": "keep_alive_ack4"}
+I (81644) GW_MSG_HANDLER: Processing message from sock 39 (role=1): {"msg_type": "keep_alive_ack4"}
+I (81654) GW_MSG_HANDLER: non known json data rxed.
+I (81654) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack4
+I (81664) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+I (81674) GW_TCP_DEBUG::: tcp-loop start: sock: 39,  start_idx = 32,  rx_len = 32
+I (81674) GW_TCP_SERVER: tcp-01-no new line in sock : 39, remain = 0
+I (81684) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (81594) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 30,  raw = {"msg_type":"keep_alive_ack"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 22 7D 0A 
+I (81704) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (81714) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 30 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (81724) GW_TCP_SERVER: tcp-00-04-Rx 30 bytes from client 37 ::{"msg_type":"keep_alive_ack"}
+ , 
+I (81734) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 0,  rx_len = 30
+I (81744) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 29
+I (81744) GW_TCP_SERVER: tcp-01-03json: sock =37 , msg_len = 29, json = {"msg_type":"keep_alive_ack"} 
+I (81754) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 37 :: {"msg_type":"keep_alive_ack"}
+I (81764) GW_TCP_SERVER: tcp-02-01-[CLIENT] Rx keep_alive_ack from sock: 37
+I (81774) GW_TCP_DEBUG::: tcp-loop start: sock: 37,  start_idx = 30,  rx_len = 30
+I (81774) GW_TCP_SERVER: tcp-01-no new line in sock : 37, remain = 0
+I (81784) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (82474) OTA_APP_MGMT:  progress upgrading ::: 60% 
+
+***ERROR*** A stack overflow in task Tmr Svc has been detected.
+
+
+Backtrace: 0x4037d0a5:0x3fcaaec0 0x4037d06d:0x3fcaaee0 0x4209ad0e:0x3fcaaf00 0x4037e357:0x3fcaaf80 0x4037d920:0x3fcaafa0 0x4037d916:0x00000000 |<-CORRUPTED
+--- 0x4037d0a5: panic_abort at /Users/maochun/esp32prj/esp-idf/components/esp_system/panic.c:480
+--- 0x4037d06d: esp_system_abort at /Users/maochun/esp32prj/esp-idf/components/esp_system/port/esp_system_chip.c:87
+--- 0x4209ad0e: vApplicationStackOverflowHook at /Users/maochun/esp32prj/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:563
+--- 0x4037e357: vTaskSwitchContext at /Users/maochun/esp32prj/esp-idf/components/freertos/FreeRTOS-Kernel/tasks.c:3698
+--- 0x4037d920: _frxt_dispatch at /Users/maochun/esp32prj/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:451
+--- 0x4037d916: _frxt_int_exit at /Users/maochun/esp32prj/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/portasm.S:246
+
+
+
+
+ELF file SHA256: c29463d1b
+
+Rebooting...
+���ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4037d245
+--- 0x4037d245: esp_restart_noos at /Users/maochun/esp32prj/esp-idf/components/esp_system/port/soc/esp32s3/system_internal.c:164
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x16fc
+load:0x403c8700,len:0xf14
+--- 0x403c8700: _stext at ??:?
+load:0x403cb700,len:0x3214
+entry 0x403c8930
+--- 0x403c8930: call_start_cpu0 at /Users/maochun/esp32prj/esp-idf/components/bootloader/subproject/main/bootloader_start.c:25
+I (29) boot: ESP-IDF v6.0-dev-2039-g2044fba6e7 2nd stage bootloader
+I (29) boot: compile time Dec  5 2025 11:19:21
+I (29) boot: Multicore bootloader
+I (31) boot: chip revision: v0.2
+I (34) boot: efuse block revision: v1.3
+I (37) qio_mode: Enabling default flash chip QIO
+I (42) boot.esp32s3: Boot SPI Speed : 80MHz
+I (46) boot.esp32s3: SPI Mode       : QIO
+I (49) boot.esp32s3: SPI Flash Size : 16MB
+I (53) boot: Enabling RNG early entropy source...
+I (58) boot: Partition Table:
+I (60) boot: ## Label            Usage          Type ST Offset   Length
+I (67) boot:  0 nvs              WiFi data        01 02 00009000 00005000
+I (73) boot:  1 otadata          OTA data         01 00 0000e000 00002000
+I (80) boot:  2 app0             OTA app          00 10 00010000 00400000
+I (86) boot:  3 app1             OTA app          00 11 00410000 00400000
+I (93) boot:  4 spiffs           Unknown data     01 82 00810000 00770000
+I (99) boot: End of partition table
+I (103) esp_image: segment 0: paddr=00010020 vaddr=3c0a0020 size=1f250h (127568) map
+I (129) esp_image: segment 1: paddr=0002f278 vaddr=3fc99800 size=00da0h (  3488) load
+I (130) esp_image: segment 2: paddr=00030020 vaddr=42000020 size=9e2d8h (647896) map
+I (231) esp_image: segment 3: paddr=000ce300 vaddr=3fc9a5a0 size=04398h ( 17304) load
+I (235) esp_image: segment 4: paddr=000d26a0 vaddr=40374000 size=15708h ( 87816) load
+I (252) esp_image: segment 5: paddr=000e7db0 vaddr=50000000 size=00020h (    32) load
+I (261) boot: Loaded app from partition at offset 0x10000
+I (262) boot: Disabling RNG early entropy source...
+I (272) octal_psram: vendor id    : 0x0d (AP)
+I (272) octal_psram: dev id       : 0x02 (generation 3)
+I (272) octal_psram: density      : 0x03 (64 Mbit)
+I (274) octal_psram: good-die     : 0x01 (Pass)
+I (278) octal_psram: Latency      : 0x01 (Fixed)
+I (283) octal_psram: VCC          : 0x01 (3V)
+I (287) octal_psram: SRF          : 0x01 (Fast Refresh)
+I (292) octal_psram: BurstType    : 0x01 (Hybrid Wrap)
+I (297) octal_psram: BurstLen     : 0x01 (32 Byte)
+I (301) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)
+I (306) octal_psram: DriveStrength: 0x00 (1/1)
+I (311) MSPI Timing: PSRAM timing tuning index: 5
+I (315) esp_psram: Found 8MB PSRAM device
+I (319) esp_psram: Speed: 80MHz
+I (322) cpu_start: Multicore app
+I (757) esp_psram: SPI SRAM memory test OK
+I (765) cpu_start: GPIO 44 and 43 are used as console UART I/O pins
+I (766) cpu_start: Pro cpu start user code
+I (766) cpu_start: cpu freq: 160000000 Hz
+I (768) app_init: Application information:
+I (771) app_init: Project name:     ota_gw
+I (775) app_init: App version:      2.1.1
+I (779) app_init: Compile time:     Dec  5 2025 12:48:53
+I (784) app_init: ELF file SHA256:  c29463d1b...
+I (788) app_init: ESP-IDF:          v6.0-dev-2039-g2044fba6e7
+I (794) efuse_init: Min chip rev:     v0.0
+I (798) efuse_init: Max chip rev:     v0.99 
+I (802) efuse_init: Chip rev:         v0.2
+I (805) heap_init: Initializing. RAM available for dynamic allocation:
+I (812) heap_init: At 3FCA6418 len 000432F8 (268 KiB): RAM
+I (817) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+I (822) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+I (827) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM
+I (833) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator
+I (840) spi_flash: detected chip: boya
+I (842) spi_flash: flash io: qio
+W (846) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`
+I (855) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (862) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (869) main_task: Started on CPU0
+I (889) main_task: Calling app_main()
+ESP32S3 Boot Success...
+I (909) pp: pp rom version: e7ae62f
+I (909) net80211: net80211 rom version: e7ae62f
+I (919) wifi:wifi driver task: 3fcabaa0, prio:23, stack:6656, core=0
+I (919) wifi:wifi firmware version: df85326
+I (919) wifi:wifi certification version: v7.0
+I (919) wifi:config NVS flash: enabled
+I (919) wifi:config nano formatting: disabled
+I (929) wifi:Init data frame dynamic rx buffer num: 64
+I (929) wifi:Init static rx mgmt buffer num: 5
+I (939) wifi:Init management short buffer num: 32
+I (939) wifi:Init static tx buffer num: 32
+I (949) wifi:Init tx cache buffer num: 32
+I (949) wifi:Init static tx FG buffer num: 2
+I (949) wifi:Init static rx buffer size: 1600
+I (959) wifi:Init static rx buffer num: 16
+I (959) wifi:Init dynamic rx buffer num: 64
+I (969) wifi_init: rx ba win: 6
+I (969) wifi_init: accept mbox: 6
+I (969) wifi_init: tcpip mbox: 32
+I (969) wifi_init: udp mbox: 6
+I (979) wifi_init: tcp mbox: 6
+I (979) wifi_init: tcp tx win: 5760
+I (979) wifi_init: tcp rx win: 5760
+I (989) wifi_init: tcp mss: 1440
+I (989) wifi_init: WiFi/LWIP prefer SPIRAM
+I (989) wifi_init: WiFi IRAM OP enabled
+I (999) wifi_init: WiFi RX IRAM OP enabled
+I (999) phy_init: phy_version 701,f4f1da3a,Mar  3 2025,15:50:10
+I (1039) wifi:mode : softAP (dc:b4:d9:10:4d:b1)
+I (1039) wifi:Total power save buffer number: 16
+I (1039) wifi:Init max length of beacon: 752/752
+I (1049) wifi:Init max length of beacon: 752/752
+I (1049) esp_netif_lwip: DHCP server started on interface WIFI_AP_DEF with IP: 192.168.4.1
+I (1059) wifi_ap: SoftAP started: SSID=OTA-GW, gateway=192.168.4.1, netmask=255.255.255.0, protocol=b/g/n, PMF=capable/not-required
+I (1069) PSRAM: PSRAM size: 8388608 bytes
+I (1069) PSRAM: Free heap: 8524644 bytes
+I (1069) PSRAM: PSRAM is initialized and ready.
+I (1079) PSRAM: Successfully allocated 1KB from PSRAM.
+I (1519) SPIFFS: SPIFFS mounted successfully
+I (1519) SPIFFS: Partition size: total=7161281, used=2939461
+I (1519) common_gpio: Starting GPIO initialization...
+I (1519) common_gpio: STBY GPIO 17 set to HIGH
+I (1519) common_gpio: Motor GPIOs initialized
+I (1529) common_gpio: All GPIOs initialized
+I (1529) common_gpio: LEDC channels initialized
+I (1539) GW_TCP_SERVER: tcp_server_task started on port 9001
+I (1539) GW_TCP_SERVER: TCP Server listening on port 9001
+I (1549) GW_TCP_SERVER: tcp_server_task started on port 9002
+I (1549) GW_TCP_SERVER: TCP Server listening on port 9002
+I (1559) WEB_OTAGW: OTA Gateway Webserver started
+系统初始化完成，等待客户端连接...
+I (1569) main_task: Returned from app_main()
+I (1929) wifi:new:<1,1>, old:<1,1>, ap:<1,1>, sta:<255,255>, prof:1, snd_ch_cfg:0x0
+I (1929) wifi:station: 5c:5f:67:ed:16:1a join, AID=1, bgn, 40U
+I (1959) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.2
+I (2049) wifi:new:<1,1>, old:<1,1>, ap:<1,1>, sta:<255,255>, prof:1, snd_ch_cfg:0x0
+I (2049) wifi:station: dc:b4:d9:10:5f:a8 join, AID=2, bgn, 40U
+I (2129) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.3
+I (3159) wifi:<ba-add>idx:2 (ifx:1, dc:b4:d9:10:5f:a8), tid:0, ssn:0, winSize:64
+I (3169) GW_TCP_SERVER: Client connected, sock=38, ip=192.168.4.3, port=56316
+I (3189) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 131,  raw = {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 72 65 67 69 73 74 65 72 22 2C 22 64 65 76 69 63 65 5F 6E 61 6D 65 22 3A 22 56 65 68 31 5F 53 43 4D 31 22 2C 22 63 6C 69 65 6E 74 5F 69 64 22 3A 22 37 35 38 22 2C 22 6D 61 63 22 3A 22 44 43 3A 42 34 3A 44 39 3A 31 30 3A 35 46 3A 41 38 22 2C 22 76 65 72 73 69 6F 6E 22 3A 22 31 2E 31 2E 30 22 2C 22 69 70 22 3A 22 31 39 32 2E 31 36 38 2E 34 2E 33 22 7D 0A 
+I (3239) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"}
+
+I (3259) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 131 , buffers = {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"}
+
+I (3269) GW_TCP_SERVER: tcp-00-04-Rx 131 bytes from client 38 ::{"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"}
+ , 
+I (3289) GW_TCP_DEBUG::: tcp-loop start: sock: 38,  start_idx = 0,  rx_len = 131
+I (3299) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 130
+I (3299) GW_TCP_SERVER: tcp-01-03json: sock =38 , msg_len = 130, json = {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"} 
+I (3319) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 38 :: {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"}
+I (3339) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 38.  role = 2,  json= {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"}
+I (3359) GW_MSG_HANDLER: Processing message from sock 38 (role=2): {"msg_type":"register","device_name":"Veh1_SCM1","client_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"}
+I (3379) CLIENT_REGISTER: Saving client register: name=Veh1_SCM1, id=758, mac=DC:B4:D9:10:5F:A8, ip=192.168.4.3, ver=1.1.0, sock=38
+I (3389) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = register
+I (3389) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+I (3399) GW_TCP_DEBUG::: tcp-loop start: sock: 38,  start_idx = 131,  rx_len = 131
+I (3409) GW_TCP_SERVER: tcp-01-no new line in sock : 38, remain = 0
+I (3409) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (3419) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 56,  raw = {"msg_type":"ota_result","task_id":"Null","state":"NA"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6F 74 61 5F 72 65 73 75 6C 74 22 2C 22 74 61 73 6B 5F 69 64 22 3A 22 4E 75 6C 6C 22 2C 22 73 74 61 74 65 22 3A 22 4E 41 22 7D 0A 
+I (3439) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"ota_result","task_id":"Null","state":"NA"}
+_id":"758","mac":"DC:B4:D9:10:5F:A8","version":"1.1.0","ip":"192.168.4.3"}
+
+I (3459) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 56 , buffers = {"msg_type":"ota_result","task_id":"Null","state":"NA"}
+
+I (3479) GW_TCP_SERVER: tcp-00-04-Rx 56 bytes from client 38 ::{"msg_type":"ota_result","task_id":"Null","state":"NA"}
+ , 
+I (3489) GW_TCP_DEBUG::: tcp-loop start: sock: 38,  start_idx = 0,  rx_len = 56
+I (3489) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 55
+I (3499) GW_TCP_SERVER: tcp-01-03json: sock =38 , msg_len = 55, json = {"msg_type":"ota_result","task_id":"Null","state":"NA"} 
+I (3509) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 38 :: {"msg_type":"ota_result","task_id":"Null","state":"NA"}
+I (3519) GW_TCP_SERVER: tcp-02-03-dispatching to msg_handler : sock = 38.  role = 2,  json= {"msg_type":"ota_result","task_id":"Null","state":"NA"}
+I (3529) GW_MSG_HANDLER: Processing message from sock 38 (role=2): {"msg_type":"ota_result","task_id":"Null","state":"NA"}
+I (3549) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = ota_result
+I (3549) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+I (3559) GW_TCP_DEBUG::: tcp-loop start: sock: 38,  start_idx = 56,  rx_len = 56
+I (3569) GW_TCP_SERVER: tcp-01-no new line in sock : 38, remain = 0
+I (3569) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+I (6559) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 30,  raw = {"msg_type":"keep_alive_ack"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 22 7D 0A 
+I (6569) GW_TCP_SERVER: tcp-00-02-after memcopy buffer appended, new rx_len = 0 , buffers = {"msg_type":"keep_alive_ack"}
+_id":"Null","state":"NA"}
+
+I (6579) GW_TCP_SERVER: tcp-00-03-before unlocked, new rx_len = 30 , buffers = {"msg_type":"keep_alive_ack"}
+
+I (6589) GW_TCP_SERVER: tcp-00-04-Rx 30 bytes from client 38 ::{"msg_type":"keep_alive_ack"}
+ , 
+I (6599) GW_TCP_DEBUG::: tcp-loop start: sock: 38,  start_idx = 0,  rx_len = 30
+I (6609) GW_TCP_DEBUG::: tco-loop-new-line-found: line_end_idx= 29
+I (6609) GW_TCP_SERVER: tcp-01-03json: sock =38 , msg_len = 29, json = {"msg_type":"keep_alive_ack"} 
+I (6619) GW_TCP_SERVER: tcp-01-04-Rx JSON from sock 38 :: {"msg_type":"keep_alive_ack"}
+I (6629) GW_TCP_SERVER: tcp-02-01-[CLIENT] Rx keep_alive_ack from sock: 38
+I (6639) GW_TCP_DEBUG::: tcp-loop start: sock: 38,  start_idx = 30,  rx_len = 30
+I (6639) GW_TCP_SERVER: tcp-01-no new line in sock : 38, remain = 0
+I (6649) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+
+maochun@MMMBP ota_gw % 
