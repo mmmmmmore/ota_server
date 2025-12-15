@@ -1,0 +1,671 @@
+
+
+
+I (1545) GW_TCP_SERVER: TCP Server listening on port 9002
+I (1555) WEB_OTAGW: OTA Gateway Webserver started
+系统初始化完成，等待客户端连接...
+I (1565) main_task: Returned from app_main()
+I (4405) wifi:new:<1,1>, old:<1,1>, ap:<1,1>, sta:<255,255>, prof:1, snd_ch_cfg:0x0
+I (4415) wifi:station: 5c:5f:67:ed:16:1a join, AID=1, bgn, 40U
+I (5455) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.2
+I (9205) GW_TCP_SERVER: Client connected, sock=37, ip=192.168.4.2, port=65474
+I (9205) GW_TCP_SERVER: OTA Server socket set: 37
+W (9205) GW_TCP_Sock: Big while loop seq is [1]
+I (11555) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack16"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 31 36 22 7D 0A W (11555) GW_TCP_Sock: recv Rx seq is [1]
+
+I (11565) GW_TCP_DEBUG::: While loop Seq___: 1
+I (11565) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (11575) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack16"} 
+W (11585) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (11595) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack16"}
+I (11605) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack16"}
+I (11615) GW_MSG_HANDLER: non known json data rxed.
+I (11615) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack16
+I (11625) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (11635) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (11635) GW_TCP_DEBUG::: tcp-35-01-time is 11635..
+W (11645) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (11645) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (11655) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (11665) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (11675) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (11675) GW_TCP_DEBUG::: While loop Seq___: 2
+I (11675) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (11685) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (11695) GW_TCP_Sock: recv function exec data to process stream function seq [1]
+I (16555) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack17"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 31 37 22 7D 0A W (16555) GW_TCP_Sock: recv Rx seq is [2]
+
+I (16565) GW_TCP_DEBUG::: While loop Seq___: 1
+I (16575) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (16575) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack17"} 
+W (16585) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (16595) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack17"}
+I (16605) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack17"}
+I (16615) GW_MSG_HANDLER: non known json data rxed.
+I (16615) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack17
+I (16625) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (16635) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (16635) GW_TCP_DEBUG::: tcp-35-01-time is 16635..
+W (16645) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (16645) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (16655) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (16665) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (16675) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (16675) GW_TCP_DEBUG::: While loop Seq___: 2
+I (16685) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (16685) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (16695) GW_TCP_Sock: recv function exec data to process stream function seq [2]
+I (21635) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack18"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 31 38 22 7D 0A W (21635) GW_TCP_Sock: recv Rx seq is [3]
+
+I (21645) GW_TCP_DEBUG::: While loop Seq___: 1
+I (21655) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (21655) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack18"} 
+W (21665) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (21675) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack18"}
+I (21685) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack18"}
+I (21695) GW_MSG_HANDLER: non known json data rxed.
+I (21695) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack18
+I (21705) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (21715) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (21715) GW_TCP_DEBUG::: tcp-35-01-time is 21715..
+W (21725) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (21725) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (21735) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (21745) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (21755) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (21755) GW_TCP_DEBUG::: While loop Seq___: 2
+I (21765) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (21765) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (21775) GW_TCP_Sock: recv function exec data to process stream function seq [3]
+I (26655) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack19"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 31 39 22 7D 0A W (26655) GW_TCP_Sock: recv Rx seq is [4]
+
+I (26665) GW_TCP_DEBUG::: While loop Seq___: 1
+I (26665) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (26675) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack19"} 
+W (26685) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (26695) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack19"}
+I (26705) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack19"}
+I (26715) GW_MSG_HANDLER: non known json data rxed.
+I (26715) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack19
+I (26725) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (26735) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (26735) GW_TCP_DEBUG::: tcp-35-01-time is 26735..
+W (26745) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (26745) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (26755) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (26765) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (26775) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (26775) GW_TCP_DEBUG::: While loop Seq___: 2
+I (26775) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (26785) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (26795) GW_TCP_Sock: recv function exec data to process stream function seq [4]
+I (29785) wifi:<ba-add>idx:2 (ifx:1, 5c:5f:67:ed:16:1a), tid:0, ssn:222, winSize:64
+I (31555) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack20"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 32 30 22 7D 0A W (31565) GW_TCP_Sock: recv Rx seq is [5]
+
+I (31565) GW_TCP_DEBUG::: While loop Seq___: 1
+I (31575) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (31585) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack20"} 
+W (31595) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (31595) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack20"}
+I (31605) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack20"}
+I (31615) GW_MSG_HANDLER: non known json data rxed.
+I (31625) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack20
+I (31625) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (31635) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (31645) GW_TCP_DEBUG::: tcp-35-01-time is 31645..
+W (31645) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (31655) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (31665) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (31665) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (31675) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (31675) GW_TCP_DEBUG::: While loop Seq___: 2
+I (31685) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (31695) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (31695) GW_TCP_Sock: recv function exec data to process stream function seq [5]
+I (36555) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack21"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 32 31 22 7D 0A W (36555) GW_TCP_Sock: recv Rx seq is [6]
+
+I (36565) GW_TCP_DEBUG::: While loop Seq___: 1
+I (36565) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (36575) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack21"} 
+W (36585) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (36595) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack21"}
+I (36605) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack21"}
+I (36615) GW_MSG_HANDLER: non known json data rxed.
+I (36615) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack21
+I (36625) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (36635) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (36635) GW_TCP_DEBUG::: tcp-35-01-time is 36635..
+W (36645) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (36645) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (36655) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (36665) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (36665) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (36675) GW_TCP_DEBUG::: While loop Seq___: 2
+I (36675) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (36685) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (36695) GW_TCP_Sock: recv function exec data to process stream function seq [6]
+I (41605) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack22"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 32 32 22 7D 0A W (41605) GW_TCP_Sock: recv Rx seq is [7]
+
+I (41615) GW_TCP_DEBUG::: While loop Seq___: 1
+I (41625) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (41625) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack22"} 
+W (41635) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (41645) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack22"}
+I (41655) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack22"}
+I (41665) GW_MSG_HANDLER: non known json data rxed.
+I (41665) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack22
+I (41675) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (41685) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (41685) GW_TCP_DEBUG::: tcp-35-01-time is 41685..
+W (41695) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (41695) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (41705) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (41715) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (41725) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (41725) GW_TCP_DEBUG::: While loop Seq___: 2
+I (41735) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (41735) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (41745) GW_TCP_Sock: recv function exec data to process stream function seq [7]
+I (46615) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack23"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 32 33 22 7D 0A W (46625) GW_TCP_Sock: recv Rx seq is [8]
+
+I (46635) GW_TCP_DEBUG::: While loop Seq___: 1
+I (46635) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (46645) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack23"} 
+W (46655) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (46655) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack23"}
+I (46665) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack23"}
+I (46675) GW_MSG_HANDLER: non known json data rxed.
+I (46685) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack23
+I (46695) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (46695) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (46705) GW_TCP_DEBUG::: tcp-35-01-time is 46705..
+W (46705) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (46715) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (46725) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (46735) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (46735) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (46745) GW_TCP_DEBUG::: While loop Seq___: 2
+I (46745) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (46755) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (46755) GW_TCP_Sock: recv function exec data to process stream function seq [8]
+I (51595) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack24"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 32 34 22 7D 0A W (51605) GW_TCP_Sock: recv Rx seq is [9]
+
+I (51615) GW_TCP_DEBUG::: While loop Seq___: 1
+I (51615) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (51625) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack24"} 
+W (51635) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (51635) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack24"}
+I (51645) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack24"}
+I (51655) GW_MSG_HANDLER: non known json data rxed.
+I (51665) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack24
+I (51675) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (51675) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (51685) GW_TCP_DEBUG::: tcp-35-01-time is 51685..
+W (51685) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (51695) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (51705) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (51715) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (51715) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (51725) GW_TCP_DEBUG::: While loop Seq___: 2
+I (51725) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (51735) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (51735) GW_TCP_Sock: recv function exec data to process stream function seq [9]
+I (56655) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack25"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 32 35 22 7D 0A W (56655) GW_TCP_Sock: recv Rx seq is [10]
+
+I (56665) GW_TCP_DEBUG::: While loop Seq___: 1
+I (56675) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (56675) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack25"} 
+W (56685) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (56695) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack25"}
+I (56705) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack25"}
+I (56715) GW_MSG_HANDLER: non known json data rxed.
+I (56725) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack25
+I (56725) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (56735) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (56745) GW_TCP_DEBUG::: tcp-35-01-time is 56745..
+W (56745) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (56755) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (56765) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (56765) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (56775) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (56775) GW_TCP_DEBUG::: While loop Seq___: 2
+I (56785) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (56785) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (56795) GW_TCP_Sock: recv function exec data to process stream function seq [10]
+I (61565) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack26"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 32 36 22 7D 0A W (61575) GW_TCP_Sock: recv Rx seq is [11]
+
+I (61585) GW_TCP_DEBUG::: While loop Seq___: 1
+I (61585) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (61595) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack26"} 
+W (61605) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (61605) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack26"}
+I (61615) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack26"}
+I (61625) GW_MSG_HANDLER: non known json data rxed.
+I (61635) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack26
+I (61645) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (61645) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (61655) GW_TCP_DEBUG::: tcp-35-01-time is 61655..
+W (61655) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (61665) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (61675) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (61685) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (61685) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (61695) GW_TCP_DEBUG::: While loop Seq___: 2
+I (61695) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (61705) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (61705) GW_TCP_Sock: recv function exec data to process stream function seq [11]
+I (66555) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack27"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 32 37 22 7D 0A W (66555) GW_TCP_Sock: recv Rx seq is [12]
+
+I (66565) GW_TCP_DEBUG::: While loop Seq___: 1
+I (66565) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (66575) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack27"} 
+W (66585) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (66595) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack27"}
+I (66605) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack27"}
+I (66615) GW_MSG_HANDLER: non known json data rxed.
+I (66615) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack27
+I (66625) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (66635) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (66635) GW_TCP_DEBUG::: tcp-35-01-time is 66635..
+W (66645) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (66645) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (66655) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (66665) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (66665) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (66675) GW_TCP_DEBUG::: While loop Seq___: 2
+I (66675) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (66685) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (66695) GW_TCP_Sock: recv function exec data to process stream function seq [12]
+I (71605) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack28"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 32 38 22 7D 0A W (71605) GW_TCP_Sock: recv Rx seq is [13]
+
+I (71615) GW_TCP_DEBUG::: While loop Seq___: 1
+I (71625) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (71625) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack28"} 
+W (71635) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (71645) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack28"}
+I (71655) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack28"}
+I (71665) GW_MSG_HANDLER: non known json data rxed.
+I (71665) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack28
+I (71675) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (71685) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (71685) GW_TCP_DEBUG::: tcp-35-01-time is 71685..
+W (71695) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (71705) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (71715) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (71715) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (71725) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (71725) GW_TCP_DEBUG::: While loop Seq___: 2
+I (71735) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (71735) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (71745) GW_TCP_Sock: recv function exec data to process stream function seq [13]
+I (76625) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack29"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 32 39 22 7D 0A W (76625) GW_TCP_Sock: recv Rx seq is [14]
+
+I (76635) GW_TCP_DEBUG::: While loop Seq___: 1
+I (76645) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (76645) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack29"} 
+W (76655) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (76665) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack29"}
+I (76675) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack29"}
+I (76685) GW_MSG_HANDLER: non known json data rxed.
+I (76685) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack29
+I (76695) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (76705) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (76705) GW_TCP_DEBUG::: tcp-35-01-time is 76705..
+W (76715) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (76725) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (76735) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (76735) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (76745) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (76745) GW_TCP_DEBUG::: While loop Seq___: 2
+I (76755) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (76755) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (76765) GW_TCP_Sock: recv function exec data to process stream function seq [14]
+I (81645) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack30"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 33 30 22 7D 0A W (81645) GW_TCP_Sock: recv Rx seq is [15]
+
+I (81655) GW_TCP_DEBUG::: While loop Seq___: 1
+I (81665) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (81675) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack30"} 
+W (81685) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (81685) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack30"}
+I (81695) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack30"}
+I (81705) GW_MSG_HANDLER: non known json data rxed.
+I (81715) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack30
+I (81725) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (81725) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (81735) GW_TCP_DEBUG::: tcp-35-01-time is 81735..
+W (81735) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (81745) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (81755) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (81765) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (81765) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (81765) GW_TCP_DEBUG::: While loop Seq___: 2
+I (81775) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (81785) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (81785) GW_TCP_Sock: recv function exec data to process stream function seq [15]
+I (86655) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack31"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 33 31 22 7D 0A W (86655) GW_TCP_Sock: recv Rx seq is [16]
+
+I (86665) GW_TCP_DEBUG::: While loop Seq___: 1
+I (86675) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (86685) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack31"} 
+W (86695) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (86695) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack31"}
+I (86705) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack31"}
+I (86715) GW_MSG_HANDLER: non known json data rxed.
+I (86725) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack31
+I (86735) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (86735) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (86745) GW_TCP_DEBUG::: tcp-35-01-time is 86745..
+W (86745) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (86755) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (86765) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (86775) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (86775) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (86775) GW_TCP_DEBUG::: While loop Seq___: 2
+I (86785) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (86795) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (86795) GW_TCP_Sock: recv function exec data to process stream function seq [16]
+I (91575) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack32"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 33 32 22 7D 0A W (91575) GW_TCP_Sock: recv Rx seq is [17]
+
+I (91585) GW_TCP_DEBUG::: While loop Seq___: 1
+I (91585) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (91595) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack32"} 
+W (91605) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (91615) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack32"}
+I (91625) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack32"}
+I (91635) GW_MSG_HANDLER: non known json data rxed.
+I (91635) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack32
+I (91645) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (91655) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (91655) GW_TCP_DEBUG::: tcp-35-01-time is 91655..
+W (91665) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (91665) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (91675) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (91685) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (91695) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (91695) GW_TCP_DEBUG::: While loop Seq___: 2
+I (91695) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (91705) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (91715) GW_TCP_Sock: recv function exec data to process stream function seq [17]
+I (96595) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack33"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 33 33 22 7D 0A W (96595) GW_TCP_Sock: recv Rx seq is [18]
+
+I (96605) GW_TCP_DEBUG::: While loop Seq___: 1
+I (96605) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (96615) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack33"} 
+W (96625) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (96635) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack33"}
+I (96645) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack33"}
+I (96655) GW_MSG_HANDLER: non known json data rxed.
+I (96655) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack33
+I (96665) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (96665) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (96675) GW_TCP_DEBUG::: tcp-35-01-time is 96675..
+W (96685) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (96685) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (96695) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (96705) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (96705) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (96715) GW_TCP_DEBUG::: While loop Seq___: 2
+I (96715) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (96725) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (96725) GW_TCP_Sock: recv function exec data to process stream function seq [18]
+I (101615) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack34"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 33 34 22 7D 0A W (101615) GW_TCP_Sock: recv Rx seq is [19]
+
+I (101625) GW_TCP_DEBUG::: While loop Seq___: 1
+I (101625) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (101635) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack34"} 
+W (101645) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (101645) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack34"}
+I (101665) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack34"}
+I (101675) GW_MSG_HANDLER: non known json data rxed.
+I (101675) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack34
+I (101685) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (101685) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (101695) GW_TCP_DEBUG::: tcp-35-01-time is 101695..
+W (101705) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (101705) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (101715) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (101725) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (101725) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (101735) GW_TCP_DEBUG::: While loop Seq___: 2
+I (101735) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (101745) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (101745) GW_TCP_Sock: recv function exec data to process stream function seq [19]
+I (106625) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack35"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 33 35 22 7D 0A W (106625) GW_TCP_Sock: recv Rx seq is [20]
+
+I (106635) GW_TCP_DEBUG::: While loop Seq___: 1
+I (106645) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (106655) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack35"} 
+W (106665) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (106665) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack35"}
+I (106675) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack35"}
+I (106685) GW_MSG_HANDLER: non known json data rxed.
+I (106695) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack35
+I (106695) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (106705) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (106715) GW_TCP_DEBUG::: tcp-35-01-time is 106715..
+W (106715) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (106725) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (106735) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (106745) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (106745) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (106755) GW_TCP_DEBUG::: While loop Seq___: 2
+I (106755) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (106765) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (106765) GW_TCP_Sock: recv function exec data to process stream function seq [20]
+I (111645) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack36"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 33 36 22 7D 0A W (111645) GW_TCP_Sock: recv Rx seq is [21]
+
+I (111655) GW_TCP_DEBUG::: While loop Seq___: 1
+I (111665) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (111665) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack36"} 
+W (111685) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (111685) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack36"}
+I (111695) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack36"}
+I (111705) GW_MSG_HANDLER: non known json data rxed.
+I (111715) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack36
+I (111715) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (111725) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (111735) GW_TCP_DEBUG::: tcp-35-01-time is 111735..
+W (111735) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (111745) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (111755) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (111765) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (111765) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (111765) GW_TCP_DEBUG::: While loop Seq___: 2
+I (111775) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (111785) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (111785) GW_TCP_Sock: recv function exec data to process stream function seq [21]
+I (116675) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 33,  raw = {"msg_type": "keep_alive_ack37"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6B 65 65 70 5F 61 6C 69 76 65 5F 61 63 6B 33 37 22 7D 0A W (116675) GW_TCP_Sock: recv Rx seq is [22]
+
+I (116685) GW_TCP_DEBUG::: While loop Seq___: 1
+I (116685) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 32
+I (116695) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 32, json = {"msg_type": "keep_alive_ack37"} 
+W (116705) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (116715) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "keep_alive_ack37"}
+I (116725) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack37"}
+I (116735) GW_MSG_HANDLER: non known json data rxed.
+I (116735) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack37
+I (116745) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (116745) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (116755) GW_TCP_DEBUG::: tcp-35-01-time is 116755..
+W (116765) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (116765) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (116775) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (116785) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (116785) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (116795) GW_TCP_DEBUG::: While loop Seq___: 2
+I (116795) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (116805) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (116815) GW_TCP_Sock: recv function exec data to process stream function seq [22]
+I (120505) wifi:station: 5c:5f:67:ed:16:1a leave, AID = 1, reason = 1, bss_flags is 756835, bss:0x3c0d0da8
+I (120505) wifi:new:<1,0>, old:<1,1>, ap:<1,1>, sta:<255,255>, prof:1, snd_ch_cfg:0x0
+I (120505) wifi:<ba-del>idx:2, tid:0
+I (120515) wifi:new:<1,1>, old:<1,0>, ap:<1,1>, sta:<255,255>, prof:1, snd_ch_cfg:0x0
+W (131815) GW_TCP_Sock: smaller 0 len seq is [0]
+W (131815) GW_TCP_Sock: smaller than 0 socket data received! 
+W (141965) GW_TCP_Sock: smaller 0 len seq is [0]
+E (141965) GW_TCP_SERVER: recv failed: errno 113
+I (141965) GW_TCP_SERVER: Closing client socket 37
+W (141965) GW_TCP_SERVER: OTA Server disconnected
+E (141965) GW_TCP_SERVER: Unable to accept connection: errno 128
+I (141975) GW_TCP_SERVER: Client connected, sock=37, ip=192.168.4.2, port=64191
+I (141985) GW_TCP_SERVER: OTA Server socket set: 37
+W (141985) GW_TCP_Sock: Big while loop seq is [3]
+I (141985) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 512,  raw = {"msg_type": "ota_task", "task_id": "20251215_181444_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181444", "status": "pending"}
+{"msg_type": "ota_task", "task_id": "20251215_181447_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181447", "status": "pending"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6F 74 61 5F 74 61 73 6B 22 2C 20 22 74 61 73 6B 5F 69 64 22 3A 20 22 32 30 32 35 31 32 31 35 5F 31 38 31 34 34 34 5F 37 35 38 22 2C 20 22 64 65 76 69 63 65 5F 6E 61 6D 65 22 3A 20 22 56 65 68 31 5F 53 43 4D 31 22 2C 20 22 63 6C 69 65 6E 74 5F 69 64 22 3A 20 22 37 35 38 22 2C 20 22 76 65 72 73 69 6F 6E 22 3A 20 22 76 32 2E 32 2E 30 22 2C 20 22 66 69 72 6D 77 61 72 65 5F 75 72 6C 22 3A 20 22 68 74 74 70 73 3A 2F 2F 31 39 32 2E 31 36 38 2E 34 2E 32 3A 38 30 38 30 2F 66 69 72 6D 77 61 72 65 2F 6F 74 61 5F 63 6C 69 65 6E 74 5F 76 32 2E 32 2E 30 2E 62 69 6E 22 2C 20 22 74 69 6D 65 73 74 61 6D 70 22 3A 20 22 32 30 32 35 31 32 31 35 5F 31 38 31 34 34 34 22 2C 20 22 73 74 61 74 75 73 22 3A 20 22 70 65 6E 64 69 6E 67 22 7D 0A 7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6F 74 61 5F 74 61 73 6B 22 2C 20 22 74 61 73 6B 5F 69 64 22 3A 20 22 32 30 32 35 31 32 31 35 5F 31 38 31 34 34 37 5F 37 35 38 22 2C 20 22 64 65 76 69 63 65 5F 6E 61 6D 65 22 3A 20 22 56 65 68 31 5F 53 43 4D 31 22 2C 20 22 63 6C 69 65 6E 74 5F 69 64 22 3A 20 22 37 35 38 22 2C 20 22 76 65 72 73 69 6F 6E 22 3A 20 22 76 32 2E 32 2E 30 22 2C 20 22 66 69 72 6D 77 61 72 65 5F 75 72 6C 22 3A 20 22 68 74 74 70 73 3A 2F 2F 31 39 32 2E 31 36 38 2E 34 2E 32 3A 38 30 38 30 2F 66 69 72 6D 77 61 72 65 2F 6F 74 61 5F 63 6C 69 65 6E 74 5F 76 32 2E 32 2E 30 2E 62 69 6E 22 2C 20 22 74 69 6D 65 73 74 61 6D 70 22 3A 20 22 32 30 32 35 31 32 31 35 5F 31 38 31 34 34 37 22 2C 20 22 73 74 61 74 75 73 22 3A 20 22 70 65 6E 64 69 6E 67 22 7D 0A W (142165) GW_TCP_Sock: recv Rx seq is [23]
+
+I (142175) GW_TCP_DEBUG::: While loop Seq___: 1
+I (142185) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 255
+I (142185) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 255, json = {"msg_type": "ota_task", "task_id": "20251215_181444_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181444", "status": "pending"} 
+W (142225) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (142225) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "ota_task", "task_id": "20251215_181444_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181444", "status": "pending"}
+I (142255) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "ota_task", "task_id": "20251215_181444_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181444", "status": "pending"}
+I (142285) GW_MSG_HANDLER: GW Rx ota task, schedule delay dispatch to otaapp 
+I (142295) OTA_APP_MGMT: New Task [20251215_181444_758] created in Queue, wait for User response 
+I (142305) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = ota_task
+I (142305) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (142315) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (142315) GW_TCP_DEBUG::: tcp-35-01-time is 142315..
+W (142325) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (142335) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (142345) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (142345) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (142355) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (142355) GW_TCP_DEBUG::: While loop Seq___: 2
+I (142365) GW_TCP_DEBUG::: Seq___:2:tcp-loop-new-line-found: line_end_idx= 511
+I (142365) GW_TCP_SERVER: if < 512 loop Seq :2: tcp-01-03json: sock =37 , msg_len = 255, json = {"msg_type": "ota_task", "task_id": "20251215_181447_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181447", "status": "pending"} 
+W (142395) GW_TCP_DEBUG::: while loop: [2], if 512 loop [2]
+I (142405) GW_TCP_SERVER: if4_s512_root_seq [2]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "ota_task", "task_id": "20251215_181447_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181447", "status": "pending"}
+I (142435) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "ota_task", "task_id": "20251215_181447_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181447", "status": "pending"}
+I (142465) GW_MSG_HANDLER: GW Rx ota task, schedule delay dispatch to otaapp 
+I (142475) OTA_APP_MGMT: New Task [20251215_181447_758] created in Queue, wait for User response 
+I (142485) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = ota_task
+I (142485) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (142495) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (142495) GW_TCP_DEBUG::: tcp-35-01-time is 142495..
+W (142505) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (142515) GW_TCP_DEBUG::: msg_handler__while loop [2], if4_512_loop[2], if512_root_loop{2}, if512rootmsg_loop[2]
+W (142525) GW_TCP_DEBUG::: keepalive__while loop [2], if4_512_loop[2], if512_root_loop{2}
+I (142525) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (142535) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (142535) GW_TCP_DEBUG::: While loop Seq___: 3
+I (142545) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (142545) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (142555) GW_TCP_Sock: recv function exec data to process stream function seq [23]
+I (142565) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 512,  raw = {"msg_type": "ota_task", "task_id": "20251215_181449_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181449", "status": "pending"}
+{"msg_type": "ota_task", "task_id": "20251215_181452_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181452", "status": "pending"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6F 74 61 5F 74 61 73 6B 22 2C 20 22 74 61 73 6B 5F 69 64 22 3A 20 22 32 30 32 35 31 32 31 35 5F 31 38 31 34 34 39 5F 37 35 38 22 2C 20 22 64 65 76 69 63 65 5F 6E 61 6D 65 22 3A 20 22 56 65 68 31 5F 53 43 4D 31 22 2C 20 22 63 6C 69 65 6E 74 5F 69 64 22 3A 20 22 37 35 38 22 2C 20 22 76 65 72 73 69 6F 6E 22 3A 20 22 76 32 2E 32 2E 30 22 2C 20 22 66 69 72 6D 77 61 72 65 5F 75 72 6C 22 3A 20 22 68 74 74 70 73 3A 2F 2F 31 39 32 2E 31 36 38 2E 34 2E 32 3A 38 30 38 30 2F 66 69 72 6D 77 61 72 65 2F 6F 74 61 5F 63 6C 69 65 6E 74 5F 76 32 2E 32 2E 30 2E 62 69 6E 22 2C 20 22 74 69 6D 65 73 74 61 6D 70 22 3A 20 22 32 30 32 35 31 32 31 35 5F 31 38 31 34 34 39 22 2C 20 22 73 74 61 74 75 73 22 3A 20 22 70 65 6E 64 69 6E 67 22 7D 0A 7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6F 74 61 5F 74 61 73 6B 22 2C 20 22 74 61 73 6B 5F 69 64 22 3A 20 22 32 30 32 35 31 32 31 35 5F 31 38 31 34 35 32 5F 37 35 38 22 2C 20 22 64 65 76 69 63 65 5F 6E 61 6D 65 22 3A 20 22 56 65 68 31 5F 53 43 4D 31 22 2C 20 22 63 6C 69 65 6E 74 5F 69 64 22 3A 20 22 37 35 38 22 2C 20 22 76 65 72 73 69 6F 6E 22 3A 20 22 76 32 2E 32 2E 30 22 2C 20 22 66 69 72 6D 77 61 72 65 5F 75 72 6C 22 3A 20 22 68 74 74 70 73 3A 2F 2F 31 39 32 2E 31 36 38 2E 34 2E 32 3A 38 30 38 30 2F 66 69 72 6D 77 61 72 65 2F 6F 74 61 5F 63 6C 69 65 6E 74 5F 76 32 2E 32 2E 30 2E 62 69 6E 22 2C 20 22 74 69 6D 65 73 74 61 6D 70 22 3A 20 22 32 30 32 35 31 32 31 35 5F 31 38 31 34 35 32 22 2C 20 22 73 74 61 74 75 73 22 3A 20 22 70 65 6E 64 69 6E 67 22 7D 0A W (142735) GW_TCP_Sock: recv Rx seq is [24]
+
+I (142755) GW_TCP_DEBUG::: While loop Seq___: 1
+I (142755) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 255
+I (142765) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 255, json = {"msg_type": "ota_task", "task_id": "20251215_181449_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181449", "status": "pending"} 
+W (142795) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (142795) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "ota_task", "task_id": "20251215_181449_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181449", "status": "pending"}
+I (142825) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "ota_task", "task_id": "20251215_181449_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181449", "status": "pending"}
+I (142855) GW_MSG_HANDLER: GW Rx ota task, schedule delay dispatch to otaapp 
+I (142865) OTA_APP_MGMT: New Task [20251215_181449_758] created in Queue, wait for User response 
+I (142875) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = ota_task
+I (142875) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (142885) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (142895) GW_TCP_DEBUG::: tcp-35-01-time is 142895..
+W (142895) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (142905) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (142915) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (142925) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (142925) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (142935) GW_TCP_DEBUG::: While loop Seq___: 2
+I (142935) GW_TCP_DEBUG::: Seq___:2:tcp-loop-new-line-found: line_end_idx= 511
+I (142945) GW_TCP_SERVER: if < 512 loop Seq :2: tcp-01-03json: sock =37 , msg_len = 255, json = {"msg_type": "ota_task", "task_id": "20251215_181452_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181452", "status": "pending"} 
+W (142975) GW_TCP_DEBUG::: while loop: [2], if 512 loop [2]
+I (142975) GW_TCP_SERVER: if4_s512_root_seq [2]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "ota_task", "task_id": "20251215_181452_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181452", "status": "pending"}
+I (143005) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "ota_task", "task_id": "20251215_181452_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181452", "status": "pending"}
+I (143035) GW_MSG_HANDLER: GW Rx ota task, schedule delay dispatch to otaapp 
+I (143045) OTA_APP_MGMT: New Task [20251215_181452_758] created in Queue, wait for User response 
+I (143055) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = ota_task
+I (143055) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (143065) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (143075) GW_TCP_DEBUG::: tcp-35-01-time is 143075..
+W (143075) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (143085) GW_TCP_DEBUG::: msg_handler__while loop [2], if4_512_loop[2], if512_root_loop{2}, if512rootmsg_loop[2]
+W (143095) GW_TCP_DEBUG::: keepalive__while loop [2], if4_512_loop[2], if512_root_loop{2}
+I (143105) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (143105) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (143115) GW_TCP_DEBUG::: While loop Seq___: 3
+I (143115) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (143125) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (143125) GW_TCP_Sock: recv function exec data to process stream function seq [24]
+I (143135) GW_TCP_SERVER: TCP__10__tcp rx all raw data:  :: len = 256,  raw = {"msg_type": "ota_task", "task_id": "20251215_181454_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181454", "status": "pending"}
+
+7B 22 6D 73 67 5F 74 79 70 65 22 3A 20 22 6F 74 61 5F 74 61 73 6B 22 2C 20 22 74 61 73 6B 5F 69 64 22 3A 20 22 32 30 32 35 31 32 31 35 5F 31 38 31 34 35 34 5F 37 35 38 22 2C 20 22 64 65 76 69 63 65 5F 6E 61 6D 65 22 3A 20 22 56 65 68 31 5F 53 43 4D 31 22 2C 20 22 63 6C 69 65 6E 74 5F 69 64 22 3A 20 22 37 35 38 22 2C 20 22 76 65 72 73 69 6F 6E 22 3A 20 22 76 32 2E 32 2E 30 22 2C 20 22 66 69 72 6D 77 61 72 65 5F 75 72 6C 22 3A 20 22 68 74 74 70 73 3A 2F 2F 31 39 32 2E 31 36 38 2E 34 2E 32 3A 38 30 38 30 2F 66 69 72 6D 77 61 72 65 2F 6F 74 61 5F 63 6C 69 65 6E 74 5F 76 32 2E 32 2E 30 2E 62 69 6E 22 2C 20 22 74 69 6D 65 73 74 61 6D 70 22 3A 20 22 32 30 32 35 31 32 31 35 5F 31 38 31 34 35 34 22 2C 20 22 73 74 61 74 75 73 22 3A 20 22 70 65 6E 64 69 6E 67 22 7D 0A W (143215) GW_TCP_Sock: recv Rx seq is [25]
+
+I (143235) GW_TCP_DEBUG::: While loop Seq___: 1
+I (143235) GW_TCP_DEBUG::: Seq___:1:tcp-loop-new-line-found: line_end_idx= 255
+I (143245) GW_TCP_SERVER: if < 512 loop Seq :1: tcp-01-03json: sock =37 , msg_len = 255, json = {"msg_type": "ota_task", "task_id": "20251215_181454_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181454", "status": "pending"} 
+W (143275) GW_TCP_DEBUG::: while loop: [1], if 512 loop [1]
+I (143285) GW_TCP_SERVER: if4_s512_root_seq [1]-dispatching to msg_handler : sock = 37.  role = 1,  json= {"msg_type": "ota_task", "task_id": "20251215_181454_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181454", "status": "pending"}
+I (143315) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "ota_task", "task_id": "20251215_181454_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.2.0.bin", "timestamp": "20251215_181454", "status": "pending"}
+I (143345) GW_MSG_HANDLER: GW Rx ota task, schedule delay dispatch to otaapp 
+I (143345) OTA_APP_MGMT: New Task [20251215_181454_758] created in Queue, wait for User response 
+I (143355) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = ota_task
+I (143365) GW_TCP_SERVER: tcp-02-04-msg dispatched continuing parse loop
+W (143365) GW_TCP_DEBUG::: tcp-15-01-update last seen finish and lock
+W (143375) GW_TCP_DEBUG::: tcp-35-01-time is 143375..
+W (143385) GW_TCP_DEBUG::: tcp-15-02-update last seen finish and unlock
+W (143385) GW_TCP_DEBUG::: msg_handler__while loop [1], if4_512_loop[1], if512_root_loop{1}, if512rootmsg_loop[1]
+W (143395) GW_TCP_DEBUG::: keepalive__while loop [1], if4_512_loop[1], if512_root_loop{1}
+I (143405) GW_TCP_DEBUG::: tcp-before-lock sock =37
+I (143405) GW_TCP_DEBUG::: tcp-after-lock sock =37
+I (143415) GW_TCP_DEBUG::: While loop Seq___: 2
+I (143415) GW_TCP_SERVER: if1 loop new line in sock : 37, remain = 0, Seq___: 1
+I (143425) GW_TCP_SERVER: tcp-03-01-compacting buffer : 0
+W (143435) GW_TCP_Sock: recv function exec data to process stream function seq [25]
+W (143435) GW_TCP_Sock: smaller 0 len seq is [0]
+E (143445) GW_TCP_SERVER: recv failed: errno 113
+I (143445) GW_TCP_SERVER: Closing client socket 37
+W (143455) GW_TCP_SERVER: OTA Server disconnected
