@@ -1,4 +1,5 @@
 import asyncio, json, time
+import socket
 
 class GatewayClient:
     def __init__(self, ip, port, queue):
@@ -14,10 +15,13 @@ class GatewayClient:
                 hellp_msg ={"msg_type":"hello", "role":"ota_server"}
                 reader, writer = await asyncio.open_connection(self.ip, self.port)
                 print("[TCP] Connected to GW")
-                #hello_payload = json.dumps(hellp_msg) +'\n'
+                sock = writer.get_extra_info('socket')
+                if sock is not None:
+                    sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+                hello_payload = json.dumps(hellp_msg) +'\n'
                 writer.write((json.dumps(hellp_msg)+'\n').encode())
                 await writer.drain()
-                print("[TCP] Tx hello to OTA GW finished")
+                #print("[TCP] Tx hello to OTA GW finished")
 
                 async def sender():
                     while True:
@@ -25,7 +29,7 @@ class GatewayClient:
                         payload = json.dumps(task) + "\n"
                         writer.write(payload.encode())
                         await writer.drain()
-                        print(f"[TCP] Sent task: {payload.strip()}")
+                        print(f"[TCP] Sent task: {repr(payload)}")
                         task["status"] = "success"
                         with open(filepath, "w") as f:
                             json.dump(task, f, indent=2)

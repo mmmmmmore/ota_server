@@ -67,7 +67,7 @@ def create_task_file(device_name, client_id, version):
         "device_name": device_name,
         "client_id": client_id,
         "version": version,
-        "firmware_url": f"https://{current_ip}:8080/firmware/ota_client_{version}.bin",
+        "firmware_url": f"https://{current_ip}:8080/firmware/ota_client_{client_id}_{version}.bin",
         "timestamp": timestamp,
         "status": "pending"
     }
