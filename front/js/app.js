@@ -7,6 +7,24 @@
 
 let statsChart = null; // 在全局定义一个变量保存图表实例
 const stats = {};
+const socket = io.connect("http://localhost:8080");
+
+socket.on("ota_task_update", (rawData) =>{
+  try {
+    const data = JSON.parse(rawData);
+    console.log("Rx info update from GW");
+
+    fetch("https://localhost:8080/api/devices")
+      .then(res => res.json())
+      .then(devices => {
+        // reserve for flash function.
+        // TBD realize the info update function
+      })
+  } catch (err){
+    console.log("Invalid data from GW ", rawData);
+  }
+})
+
 
 const partition ={};
 // 分区状态：true=A运行；false=B运行
@@ -61,11 +79,6 @@ function uploadFirmware() {
 }
 
 
-//function renderPartition(deviceName) {
-//  const html = partitionHTML(partitions[deviceName]);
-//  const cells = document.querySelectorAll(`#partition-${deviceName}`);
-//  cells.forEach(cell => { cell.innerHTML = html; });
-//}
 
 function setStatus(deviceName, text, color) {
   const cell = document.getElementById(`status-${deviceName}`);
@@ -127,8 +140,6 @@ function queryDevices() {
     })
     .catch(error => console.error("查询设备失败:", error));
 }
-
-
 //update device info
 function editDevice(mac) {
   const newName = prompt("请输入新的设备名称:");
@@ -169,40 +180,33 @@ function deleteDevice(mac) {
   .catch(err => console.error("删除失败:", err));
 }
 
-
-
 function renderPartition(partition) {
-  if (!partition) {
-    // 默认情况：A、B 都灰色
-    return `
-      <div class="partition">
-        <div class="box inactive">A</div>
-        <div class="box inactive">B</div>
-      </div>
-    `;
+  if (partition == "A"){
+    return `<div class="parition"><div class="box active">A</div><div class="box inactive">B</div></div>`;
+  } else if(partition =="B") {
+    return `<div class="partition"><div class="box inactive">A</div><div class="box active">B</div></div>`;
+  } else{
+    return `<div class="partition"><div class="box inactive">A</div><div class="box active">B</div></div>`; 
   }
+}
 
-  if (partition === "A") {
-    return `
-      <div class="partition">
-        <div class="box active">A</div>
-        <div class="box inactive">B</div>
-      </div>
-    `;
-  }
-
-  if (partition === "B") {
-    return `
-      <div class="partition">
-        <div class="box inactive">A</div>
-        <div class="box active">B</div>
-      </div>
-    `;
+function renderDevice(dev){
+  const row = document.getElementById(`task-row-${dev.client_id}`);
+  if (row){
+    row.innerHTML = renderDeviceRow(dev); 
   }
 }
 
 
-
+function renderDeviceRow(dev){
+  return `
+    <tr id="task-row-${dev.client_id}">
+      <td>${dev.device_name}</td>
+      <td>${dev.client_id}</td>
+      <td>${dev.mac_address}</td>
+      <td>${dev.ip}
+  `;
+}
 
 //add create new device function
 function newDevices() {
@@ -332,7 +336,7 @@ function refreshTask() {
             ${versionOptions}
           </select>
         </td>
-        <td>${renderPartition(dev.partition || "")}</td>
+        <td>${renderPartition(dev.partition || "A")}</td>
         <td><button onclick="pushOTA('${dev.client_id}', '${dev.device_name}')">OTA推送</button></td>
         <td id="status-${dev.client_id}">待执行</td>
       `;
@@ -525,7 +529,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+// --------------- update task hsitory list ------------//
 
+function showTaskHistory(clientId){
+  // request interface
+  fetch(`api/tasks?client_id=${clientId}`)
+  .then(res => res.json())
+  .then(tasks => {
+    const listContainer = document.getElementById("taskHistoryList");
+    listContainer.innerHTML = ""; 
+
+    //
+    tasks.forEach(task =>{
+      const item = document.createElement("div");
+      item.className = "task-item";
+      item.innerHTML =`
+        <span><strong>Task ID:</strong> ${task.task_id}</span>
+        <span><strong>Task ID:</strong> ${task.result}</span>
+      `;
+      listContainer.appendChild(item);
+    });
+
+    //display the window
+    document.getElementById("taskHistoryModal").classList.remove("hidden");
+  })
+  .catch(err =>{
+    console.log("Query Task List fail", err);
+    alert("Cannot Acquire Task List");
+  });
+}
+
+
+
+function closeTaskHistory(){
+  document.getElementById("taskHistoryModal").classList.add("hidden");
+}
 
 
 

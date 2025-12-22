@@ -1,5 +1,9 @@
 import asyncio, json, time
 import socket
+import re
+from routes.devices import update_device_partition
+from routes.websock import push_msg_2_front
+from routes.devices import update_device_connection
 
 class GatewayClient:
     def __init__(self, ip, port, queue):
@@ -51,6 +55,18 @@ class GatewayClient:
                                 writer.write((json.dumps(ack) + "\n").encode())
                                 await writer.drain()
                                 print("[TCP] Sent keep_alive_ack")
+                            elif obj.get("msg_type") == "ota_task_ack":
+                                ota_task_id = obj.get("task_id")
+                                ota_task_client_id = re.split("_",ota_task_id)[-1]  ## split the client id
+                                ota_task_status = obj.get("status")  ## parse the result
+                                update_device_partition(ota_task_client_id,ota_task_status)  # update the partition after ack
+                                
+                                push_msg_2_front(obj)  # push ota task json to front
+                            elif obj.get("msg_type") == "register":
+                                ota_client_id = obj.get("client_id")
+                                ota_client_connect_state = obj.get("connect_state")
+                                update_device_connection(ota_client_id,ota_client_connect_state)
+                                push_msg_2_front(obj)
                             else:
                                 print("[TCP] GW message:", obj)
                         except Exception as e:

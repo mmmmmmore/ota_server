@@ -29,6 +29,24 @@ def save_devices(devices):
 
 
 
+def update_device_partition(client_id, ota_result):
+    device_info = load_devices
+    for d in device_info:
+        if d["client_id"] == client_id:
+            if ota_result == "success":
+                d["partition"] = "B" if d["partition"] =="A" else "A"
+            break
+
+                
+
+def update_device_connection(client_id, connect_state):
+    device_info = load_devices
+    for d in device_info:
+        if d["client_id"] == client_id:
+            d["status"] = connect_state       ## need html update online/offline.
+            break
+
+
 # 模拟设备存储（后续可以替换成数据库或文件）
 #devices = [
 #    {"name": "Vehicle_1", "ip": "192.168.4.2", "version": "v1.0.0", "partition": "A", "status": "online"},

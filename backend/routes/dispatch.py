@@ -69,7 +69,7 @@ def create_task_file(device_name, client_id, version):
         "version": version,
         "firmware_url": f"https://{current_ip}:8080/firmware/ota_client_{client_id}_{version}.bin",
         "timestamp": timestamp,
-        "status": "pending"
+        "status": "initiated"
     }
     with open(filepath, "w") as f:
         json.dump(task, f, indent=2)

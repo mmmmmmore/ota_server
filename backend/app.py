@@ -10,7 +10,7 @@ from routes.software import software_bp
 from routes.upload import upload_bp
 from routes.dispatch import dispatch_bp, tcpthread
 from routes.download import download_bp
-
+from routes.websock import socketio
 
 
 app = Flask(__name__)
@@ -32,5 +32,6 @@ app.register_blueprint(download_bp)
 if __name__ == "__main__":
     tcpthread.start()
     context = ("server.crt","server.key")
-    app.run(host="0.0.0.0", port=8080, debug=True,  ssl_context = context)
+    socketio.init_app(app, cors_allowed_origins= "*")
+    socketio.run(app,host="0.0.0.0", port=8080, debug=True,  ssl_context = context)
 
