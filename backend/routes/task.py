@@ -110,8 +110,6 @@ class Task():
         self.tasklist=[]
         for filename in os.listdir(TASK_DIR):
             task_remark = re.search(pattern_task_id,filename)
-            print(filename)
-            print(task_remark)
             if task_remark:
                 file_path = os.path.join(TASK_DIR, filename)
                 try:

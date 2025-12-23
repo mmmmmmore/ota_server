@@ -1,0 +1,26 @@
+maochun@MMMBP backend % python3 app.py 
+from task::/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/backend/db/tasks
+/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/backend/db/tasks not exist, please check path
+[TCP] Connected to GW
+ * Restarting with stat
+from task::/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/backend/db/tasks
+/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/backend/db/tasks not exist, please check path
+[TCP] Connected to GW
+[TCP] GW disconnected
+ * Debugger is active!
+ * Debugger PIN: 132-824-052
+Exception in thread Thread-2 (run_server):
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/threading.py", line 1043, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/threading.py", line 994, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/flask_socketio/__init__.py", line 688, in run_server
+    eventlet.wsgi.server(eventlet_socket, app,
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+                         log_output=log_output, **kwargs)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: server() got an unexpected keyword argument 'ssl_context'
+[TCP] Connection error: [Errno 54] Connection reset by peer
