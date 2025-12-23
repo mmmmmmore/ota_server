@@ -1,0 +1,97 @@
+method 1 error
+
+from task::/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/backend/db/tasks
+/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/./backend/app.py:7: DeprecationWarning: 
+Eventlet is deprecated. It is currently being maintained in bugfix mode, and
+we strongly recommend against using it for new projects.
+
+If you are already using Eventlet, we recommend migrating to a different
+framework.  For more detail see
+https://eventlet.readthedocs.io/en/latest/asyncio/migration.html
+
+  import eventlet
+/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/backend/db/tasks not exist, please check path
+[TCP] Connected to GW
+ * Serving Flask app 'app'
+ * Debug mode: off
+[TCP] GW disconnected
+Traceback (most recent call last):
+  File "/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/./backend/app.py", line 47, in <module>
+    socketio.run(app,
+    ~~~~~~~~~~~~^^^^^
+                 host="0.0.0.0",
+                 ^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                 allow_unsafe_werkzeug=True
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 )
+                 ^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/flask_socketio/__init__.py", line 660, in run
+    app.run(host=host, port=port, threaded=True,
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            use_reloader=use_reloader, **reloader_options, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/flask/app.py", line 662, in run
+    run_simple(t.cast(str, host), port, self, **options)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/werkzeug/serving.py", line 1093, in run_simple
+    srv = make_server(
+        hostname,
+    ...<7 lines>...
+        fd=fd,
+    )
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/werkzeug/serving.py", line 930, in make_server
+    return ThreadedWSGIServer(
+        host, port, app, request_handler, passthrough_errors, ssl_context, fd=fd
+    )
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/werkzeug/serving.py", line 801, in __init__
+    ssl_context = load_ssl_context(*ssl_context)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/werkzeug/serving.py", line 644, in load_ssl_context
+    ctx.load_cert_chain(cert_file, pkey_file)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory
+maochun@MMMBP ota_server % 
+
+
+
+method 3 error
+
+maochun@MMMBP ota_server % python3 ./backend/app.py
+from task::/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/backend/db/tasks
+/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/./backend/app.py:7: DeprecationWarning: 
+Eventlet is deprecated. It is currently being maintained in bugfix mode, and
+we strongly recommend against using it for new projects.
+
+If you are already using Eventlet, we recommend migrating to a different
+framework.  For more detail see
+https://eventlet.readthedocs.io/en/latest/asyncio/migration.html
+
+  import eventlet
+/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/backend/db/tasks not exist, please check path
+[TCP] Connected to GW
+Traceback (most recent call last):
+  File "/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/./backend/app.py", line 47, in <module>
+    socketio.run(app,
+    ~~~~~~~~~~~~^^^^^
+                 host="0.0.0.0",
+                 ^^^^^^^^^^^^^^^
+    ...<4 lines>...
+            #     allow_unsafe_werkzeug=True
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 )
+                 ^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/flask_socketio/__init__.py", line 708, in run
+    self.wsgi_server = pywsgi.WSGIServer(
+                       ~~~~~~~~~~~~~~~~~^
+        (host, port), app, handler_class=WebSocketHandler,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        log=log, **kwargs)
+        ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/gevent/pywsgi.py", line 1626, in __init__
+    StreamServer.__init__(self, listener, backlog=backlog, spawn=spawn, **ssl_args)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/gevent/server.py", line 118, in __init__
+    self.wrap_socket = ssl_context.wrap_socket
+                       ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'tuple' object has no attribute 'wrap_socket'
+maochun@MMMBP ota_server % 

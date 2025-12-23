@@ -3,6 +3,9 @@ from flask_cors import CORS
 import asyncio, threading
 from fastapi.staticfiles import StaticFiles
 from routes.task import STATIC_DIR
+import ssl
+import eventlet
+
 
 # 导入蓝图
 from routes.devices import devices_bp
@@ -30,7 +33,22 @@ app.register_blueprint(download_bp)
 
 if __name__ == "__main__":
     tcpthread.start()
-    context = ("server.crt","server.key")
+    #context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+    #context.load_cert_chain("server.crt","server.key")
+    context = ("server.crt", "server.key")
     socketio.init_app(app, cors_allowed_origins= "*")
-    socketio.run(app,host="0.0.0.0", port=8080, debug=True,  ssl_context = context)
-
+    #eventlet.wsgi.server(
+    #    eventlet.listen(("0.0.0.0", 8080)),
+    #    app,
+    #    ssl_args={"certfile":"server.crt", "keyfile":"server.key"}
+    #)
+    #socketio.run(app,host="0.0.0.0", port=8080, debug=True,  ssl_context = ("server.crt", "server.key"))
+    
+    socketio.run(app,
+                 host="0.0.0.0", 
+                 port=8080, 
+            #     debug=False,
+            #     use_reloader=False,
+                 ssl_context = ("server.crt","server.key"),
+            #     allow_unsafe_werkzeug=True
+                 )

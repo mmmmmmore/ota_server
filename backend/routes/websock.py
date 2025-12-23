@@ -2,7 +2,7 @@ from flask_socketio import SocketIO, emit
 import json
 
 # init obj
-socketio = SocketIO(cors_allowed_origins= "*")
+socketio = SocketIO(cors_allowed_origins= "*",async_mode="gevent")
 
 
 # define the event
