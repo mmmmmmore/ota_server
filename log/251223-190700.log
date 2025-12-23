@@ -1,0 +1,71 @@
+
+server gevent issue
+
+
+maochun@MMMBP ota_server % python3 ./backend/app.py
+from task::/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/backend/db/tasks
+/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/./backend/app.py:7: DeprecationWarning: 
+Eventlet is deprecated. It is currently being maintained in bugfix mode, and
+we strongly recommend against using it for new projects.
+
+If you are already using Eventlet, we recommend migrating to a different
+framework.  For more detail see
+https://eventlet.readthedocs.io/en/latest/asyncio/migration.html
+
+  import eventlet
+/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/backend/db/tasks not exist, please check path
+[TCP] Connected to GW
+[TCP] GW disconnected
+Websocket connected with client
+Websocket disconnect with client
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 900, in gevent._gevent_cgreenlet.Greenlet.run
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/gevent/baseserver.py", line 34, in _handle_and_close_when_done
+    return handle(*args_tuple)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/gevent/server.py", line 209, in wrap_socket_and_handle
+    with _closing_socket(self.wrap_socket(client_socket, **self.ssl_args)) as ssl_socket:
+                         ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sock=sock,
+        ^^^^^^^^^^
+    ...<5 lines>...
+        session=session
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/ssl.py", line 1027, in _create
+    self.getpeername()
+    ~~~~~~~~~~~~~~~~^^
+OSError: [Errno 22] Invalid argument
+2025-12-23T11:07:59Z <Greenlet at 0x111d36b60: _handle_and_close_when_done(<bound method StreamServer.wrap_socket_and_handle , <bound method StreamServer.do_close of <WSGIServer, (<gevent._socket3.socket [closed] at 0x111c3fe70 o)> failed with OSError
+
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 900, in gevent._gevent_cgreenlet.Greenlet.run
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/gevent/baseserver.py", line 34, in _handle_and_close_when_done
+    return handle(*args_tuple)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/gevent/server.py", line 209, in wrap_socket_and_handle
+    with _closing_socket(self.wrap_socket(client_socket, **self.ssl_args)) as ssl_socket:
+                         ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sock=sock,
+        ^^^^^^^^^^
+    ...<5 lines>...
+        session=session
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/ssl.py", line 1027, in _create
+    self.getpeername()
+    ~~~~~~~~~~~~~~~~^^
+OSError: [Errno 22] Invalid argument
+2025-12-23T11:07:59Z <Greenlet at 0x111d377e0: _handle_and_close_when_done(<bound method StreamServer.wrap_socket_and_handle , <bound method StreamServer.do_close of <WSGIServer, (<gevent._socket3.socket [closed] at 0x111c3fee0 o)> failed with OSError
+
+[TCP] Connection error: Connection lost
+[TCP] Connected to GW
+[TCP] Sent task: '{"msg_type": "ota_task", "task_id": "20251223_190858_758", "device_name": "Veh1_SCM1", "client_id": "758", "version": "v2.2.0", "firmware_url": "https://192.168.100.200:8080/firmware/ota_client_758_v2.2.0.bin", "timestamp": "20251223_190858", "result": "0x 1 0x 0", "feature": "support_ota_feedback"}\n'
+[TCP] Connection error: [Errno 54] Connection reset by peer
+[TCP] Connected to GW
