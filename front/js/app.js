@@ -7,6 +7,14 @@
 
 let statsChart = null; // 在全局定义一个变量保存图表实例
 const stats = {};
+const socket=io("http://localhost:8080");
+socket.on("connect",()=>{
+  console.log("Websocket connected");
+});
+
+socket.on("disconnect", ()=>{
+  console.log("Websocket disconnected");
+});
 
 
 socket.on("ota_task_update", (rawData) =>{
