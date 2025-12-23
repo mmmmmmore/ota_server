@@ -20,7 +20,7 @@ print("from task"+"::"+TASK_DIR)
 # define task class
 
 def read_version_note(version):
-    swfile = SW_LIST_DIR+"\\software_list.json"
+    swfile = os.path.join(SW_LIST_DIR, "software_list.json")
     with open(swfile, "r", encoding="utf-8") as f:
         data = json.load(f)
     changenotes = next((item["changes"] for item in data if item["version"] == version),None)

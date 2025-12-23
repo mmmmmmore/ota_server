@@ -21,3 +21,6 @@ STATIC_DIR = os.path.join(BASE_DIR, "..","db","static")
 os.makedirs(FIRMWARE_DIR, exist_ok=True)
 GW_IP = "192.168.4.1"
 GW_TCP_PORT = 9001
+
+SERVERCRT = os.path.join(BASE_DIR, "..", "server.crt")
+SERVERKEY = os.path.join(BASE_DIR,"..","server.key")

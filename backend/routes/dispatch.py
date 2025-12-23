@@ -39,26 +39,6 @@ task_mgmt.__load_tasklist__()
 
 
 
-#def create_task_file(device_name, client_id, version):
-#    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-#    task_id = f"{timestamp}_{client_id}"
-#    filename = f"{task_id}.json"
-#    filepath = os.path.join(TASK_DIR, filename)
-#    current_ip = get_local_ip()
-#    task = {
-#        "msg_type": "ota_task",
-#        "task_id": task_id,
-#        "device_name": device_name,
-#        "client_id": client_id,
-#        "version": version,
-#        "firmware_url": f"https://{current_ip}:8080/firmware/ota_client_{client_id}_{version}.bin",
-#        "timestamp": timestamp,
-#        "status": "initiated"
-#    }
-#   with open(filepath, "w") as f:
-#        json.dump(task, f, indent=2)
-#   return filepath, task
-
 def update_task_status(filepath, task, status, error=None):
     task["status"] = status
     if error:

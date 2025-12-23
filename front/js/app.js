@@ -7,7 +7,7 @@
 
 let statsChart = null; // 在全局定义一个变量保存图表实例
 const stats = {};
-const socket = io.connect("http://localhost:8080");
+
 
 socket.on("ota_task_update", (rawData) =>{
   try {
@@ -365,14 +365,10 @@ function pushOTA(clientId, deviceName) {
     return res.json();
   })
   .then(data => {
-    const statusCell = document.getElementById(`status-${clientId}`);
-    statusCell.innerText = "成功: " + data.message;
-    alert("任务推送成功！");
+    alert("Task_Triggered_Success: "+data.message)
   })
   .catch(err => {
-    const statusCell = document.getElementById(`status-${clientId}`);
-    statusCell.innerText = "失败: " + err.message;
-    alert("推送失败: " + err.message);
+    alert("Task_Triggered_Failed: " + err.message);
   });
 }
 

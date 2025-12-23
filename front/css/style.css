@@ -159,3 +159,7 @@ button {
 .history-table th {
   background-color: #32f5f2;
 }
+
+.hidden{
+  display: none;
+}
