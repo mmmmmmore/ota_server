@@ -5,11 +5,7 @@ import json
 
 upload_bp = Blueprint("upload", __name__)
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_DIR = os.path.join(BASE_DIR, "..", "db")
-SOFTWARE_FILE = os.path.join(DB_DIR, "software_list.json")
-FIRMWARE_DIR = os.path.join(BASE_DIR, "firmware")
-os.makedirs(FIRMWARE_DIR, exist_ok=True)
+from routes.base_value import SOFTWARE_FILE, FIRMWARE_DIR
 
 software_versions = []  # 引用或共享版本列表
 

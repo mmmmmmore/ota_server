@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
 import asyncio, threading
-
-
+from fastapi.staticfiles import StaticFiles
+from routes.task import STATIC_DIR
 
 # 导入蓝图
 from routes.devices import devices_bp
@@ -13,9 +13,8 @@ from routes.download import download_bp
 from routes.websock import socketio
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=STATIC_DIR, static_url_path="/static")
 CORS(app, resources={r"/*":{"origins":"*"}},supports_credentials=True)  # 解决跨域问题，前端不同源也能访问 # config the cert
-
 
 
 # 注册蓝图

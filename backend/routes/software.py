@@ -5,10 +5,8 @@ from datetime import datetime
 
 software_bp = Blueprint("software", __name__)
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_DIR = os.path.join(BASE_DIR, "..", "db")
-SOFTWARE_FILE = os.path.join(DB_DIR, "software_list.json")
-FIRMWARE_DIR = os.path.join(BASE_DIR, '..', "firmware")
+from routes.base_value import FIRMWARE_DIR, SOFTWARE_FILE
+
 
 # 确保目录存在
 os.makedirs(FIRMWARE_DIR, exist_ok=True)
@@ -25,6 +23,8 @@ def load_software():
 def save_software(data):
     with open(SOFTWARE_FILE, "w") as f:
         json.dump(data, f, indent=2)
+
+
 
 # 查询所有软件版本
 @software_bp.route("/api/software", methods=["GET"])

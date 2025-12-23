@@ -5,6 +5,8 @@ from routes.devices import update_device_partition
 from routes.websock import push_msg_2_front
 from routes.devices import update_device_connection
 
+
+
 class GatewayClient:
     def __init__(self, ip, port, queue):
         self.ip = ip

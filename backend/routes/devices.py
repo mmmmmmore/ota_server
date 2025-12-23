@@ -1,14 +1,12 @@
 import json
 import os
 from flask import Blueprint, jsonify, request
-
+from routes.base_value import DEVICES_FILE
 
 devices_bp = Blueprint("devices", __name__)
 
 ## JSON save path
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_DIR = os.path.join(BASE_DIR,'..','db')
-DEVICES_FILE = os.path.join(DB_DIR, "devices.json")
+
 
 
 ## initiate check

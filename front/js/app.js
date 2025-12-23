@@ -336,9 +336,10 @@ function refreshTask() {
             ${versionOptions}
           </select>
         </td>
-        <td>${renderPartition(dev.partition || "A")}</td>
         <td><button onclick="pushOTA('${dev.client_id}', '${dev.device_name}')">OTA推送</button></td>
-        <td id="status-${dev.client_id}">待执行</td>
+        <td>
+          <a href="#" onclick="showTaskHistory('${dev.client_id}')">OTA_Record</a>
+        </td>
       `;
 
       tbody.appendChild(row);
@@ -346,7 +347,6 @@ function refreshTask() {
   })
   .catch(err => console.error("刷新任务列表失败:", err));
 }
-
 
 
 function pushOTA(clientId, deviceName) {
@@ -461,42 +461,24 @@ function pollTaskStatus(taskId, deviceName) {
 
 
 function showStats() {
-  fetch("https://localhost:8080/api/dispatch/stats")
-    .then(res => res.json())
-    .then(stats => {
-      
-      const labels = Object.keys(stats);
-      const totalData = labels.map(cid => stats[cid].total);
-      const successData = labels.map(cid => stats[cid].success);
-      const percentData = labels.map(cid => stats[cid].percent);
+  // get target client id
+  const clientId = document.getElementById("clientSelect").value;
 
-      // create blank chart
-      if(!statsChart){
-        const ctx = document.getElementById("updateChart").getContext("2d");
-        statsChart = new Chart(ctx, {
-          type: "bar",
-          date: {
-            labels:labels ,
-            datasets:[
-              { label: "Total",       data : totalData,   backgroundColor : "lightblue"},
-              { label: "Success",     data : successData, backgroundColor : "green"},
-              { label: "SuccessRate", data : percentData, backgroundColor : "black"}
-            ]
-          },
-          options:{
-            responsive : true,
-            scales: {y: {beginAtZero: true} }
-          }
-        });
-      } else {
-        statsChart.data.labels  = labels ;
-        statsChart.data.datasets[0].data = totalData;
-        statsChart.data.datasets[1].data = successData;
-        statsChart.data.datasets[2].data = percentData;
-        statsChart.update();
+  fetch("https://localhost:8080/api/dispatch/state_summary")
+    .then(res => res.json())
+    .then(data => {
+      if (data.summary_exeuction == "OK"){
+        let imgPath;
+        if (clientId === 'ALL'){
+          imgPath = "https://localhost:8080/static/summary_all.png";
+        } else {
+          imgPath = `https://localhost:8080/static/summary_${clientId}.png`
+        }
+        const imgElement = document.getElementById("stateImage");
+        imgElement.src = imgPath;
+        imgElement.style.display = "block";
       }
-    })
-    .catch(err => console.error("统计失败:", err));
+    });
 }
 
 
@@ -533,23 +515,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function showTaskHistory(clientId){
   // request interface
-  fetch(`api/tasks?client_id=${clientId}`)
+  fetch(`https://localhost:8080/api/dispatch/history/?client_id=${clientId}`)
   .then(res => res.json())
   .then(tasks => {
     const listContainer = document.getElementById("taskHistoryList");
-    listContainer.innerHTML = ""; 
+    listContainer.innerHTML = "";  //clear all info before update
 
-    //
-    tasks.forEach(task =>{
-      const item = document.createElement("div");
-      item.className = "task-item";
-      item.innerHTML =`
-        <span><strong>Task ID:</strong> ${task.task_id}</span>
-        <span><strong>Task ID:</strong> ${task.result}</span>
-      `;
-      listContainer.appendChild(item);
+    //create table
+    const table = document.createElement("table");
+    table.classList.add("history-table");
+
+    const thead = document.createElement("thead");
+    thead.innerHTML =`
+      <tr>
+        <th>TaskID</th>
+        <th>Phase</th>
+        <th>Result</th>
+      </tr>
+    `;
+    table.appendChild(thead);
+
+    //update table content
+    const tbody = document.createElement("tbody");
+    data.forEach(task =>{
+      const row = document.createElement("tr");
+      row.innerHTML=`<td>${task.task_id}</td><td>${task.phase}</td><td>${task.result}</td>`;
+      tbody.appendChild(row);
     });
 
+
+    table.appendChild(tbody);
+    listContainer.appendChild(table);
     //display the window
     document.getElementById("taskHistoryModal").classList.remove("hidden");
   })

@@ -2,9 +2,8 @@ from flask import Blueprint, send_from_directory
 import os
 download_bp = Blueprint("download", __name__)
 
+from routes.base_value import FIRMWARE
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-FIRMWARE = os.path.join(BASE_DIR, "..", "firmware")
 
 
 @download_bp.route("/firmware/<filename>", methods=["GET"])
