@@ -38,9 +38,6 @@ tcpthread = threading.Thread(target= start_asyncio, daemon=True )
 
 
 
-
-
-
 def get_local_ip():
     # try netifaces preferred interface en0 (mac), fallback to UDP trick
     try:
@@ -81,6 +78,8 @@ def update_task_status(filepath, task, status, error=None):
         task["error"] = error
     with open(filepath, "w") as f:
         json.dump(task, f, indent=2)
+
+
 
 @dispatch_bp.route("/api/dispatch/push", methods=["POST"])
 def push_task():
@@ -125,4 +124,5 @@ def get_stats():
         success = data["success"]
         data["percent"] = round(success / total * 100, 2) if total > 0 else 0
     return jsonify(stats)
+
 

@@ -28,7 +28,6 @@ def save_devices(devices):
 
 
 
-
 def update_device_partition(client_id, ota_result):
     device_info = load_devices
     for d in device_info:
