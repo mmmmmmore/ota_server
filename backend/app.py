@@ -51,8 +51,10 @@ if __name__ == "__main__":
     
     socketio.run(app, host="0.0.0.0", 
                  port=8080, 
-                 debug=False,
-                 use_reloader=False,
-                 ssl_context = context
+                 certfile = SERVERCRT,
+                 keyfile = SERVERKEY
+    #             debug=False,
+    #             use_reloader=False,
+    #             ssl_context = context
     #             allow_unsafe_werkzeug=True
                 )

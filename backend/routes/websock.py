@@ -1,8 +1,12 @@
 from flask_socketio import SocketIO, emit
 import json
+import eventlet
+eventlet.monkey_patch()
+from routes.dispatch import websock_handle_summary
+from routes.dispatch import websocket_handle_task_history
 
 # init obj
-socketio = SocketIO(cors_allowed_origins= "*",async_mode="gevent")
+socketio = SocketIO(cors_allowed_origins= "*",async_mode="eventlet")
 
 
 # define the event
@@ -14,9 +18,33 @@ def handle_connect():
 @socketio.on("disconnect")
 def handle_disconnect():
     print("Websocket disconnect with client")
+
+
+@socketio.on("query")
+def handle_query(payload):
+    ##payload sample:
+    """_summary_
+
+    {
+        "action": "query_task_history",
+        "client_id":"758"
+    }
+    """
+    action = payload.get("action")
+    client_id = payload.get("client_id")
     
+    if action == "query_task_history":
+        res=websocket_handle_task_history(client_id)
+        emit(res)
+    elif action == "query_state_summary":
+        res=websock_handle_summary(client_id)
+        emit(res)
+    else :
+        emit("query err",{
+            "error": "unknown action",
+            "action": action
+        })
     
-def push_msg_2_front(payload):  ## json format
-    message = json.dumps(payload)
-    socketio.emit("ota_task_update",message)
+def push_msg_2_front(payload: dict):  ## json format
+    socketio.emit("ota_task_update",payload)
     print(f"[WebSocket] pushed ota task update info to front")

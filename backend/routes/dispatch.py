@@ -79,3 +79,10 @@ def get_stats(client_id):
 def get_client_history(client_id):
     return task_mgmt.task_history(client_id)
 
+
+def websock_handle_summary(client_id):
+    png = task_mgmt.plot_summary(client_id)
+    return {"summary_execution":"OK"}
+
+def websocket_handle_task_history(client_id):
+    return task_mgmt.task_history(client_id)

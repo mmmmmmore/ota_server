@@ -1,13 +1,12 @@
-// 统计数据
-//const stats = {
-//  "Vehicle_1": { success: 0, total: 0 },
-//  "Vehicle_2": { success: 0, total: 0 },
-//  "Vehicle_3": { success: 0, total: 0 }
-//};
 
-let statsChart = null; // 在全局定义一个变量保存图表实例
-const stats = {};
-const socket=io("http://localhost:8080");
+
+
+const socket=io("https://localhost:8080",{
+  transports: ["websocket"],
+  secure:true,
+  reconnection:true
+});
+
 socket.on("connect",()=>{
   console.log("Websocket connected");
 });
@@ -19,7 +18,6 @@ socket.on("disconnect", ()=>{
 
 socket.on("ota_task_update", (rawData) =>{
   try {
-    const data = JSON.parse(rawData);
     console.log("Rx info update from GW");
 
     fetch("https://localhost:8080/api/devices")
@@ -34,13 +32,6 @@ socket.on("ota_task_update", (rawData) =>{
 })
 
 
-const partition ={};
-// 分区状态：true=A运行；false=B运行
-//const partitions = {
-//  "Vehicle_1": true,
-//  "Vehicle_2": true,
-//  "Vehicle_3": true
-//};
 
 // 菜单切换
 function showSection(sectionId) {
@@ -95,27 +86,6 @@ function setStatus(deviceName, text, color) {
   cell.style.color = color;
 }
 
-// 图表对象
-//let updateChart = null;
-
-// 更新统计并刷新图表
-//function updateStats(deviceName, success) {
-//  stats[deviceName].total++;
-//  if (success) stats[deviceName].success++;
-//
-//  if (!updateChart) return;
-//
-//  const successData = Object.values(stats).map(s => s.success);
-//  const failData = Object.values(stats).map(s => s.total - s.success);
-//  const ratioData = Object.values(stats).map(s =>
-//    s.total > 0 ? Math.round((s.success / s.total) * 100) : 0
-//  );
-//
-//  updateChart.data.datasets[0].data = successData;
-//  updateChart.data.datasets[1].data = failData;
-//  updateChart.data.datasets[2].data = ratioData;
-//  updateChart.update();
-//}
 
 // ---------------- API 对接 ---------------- //
 
@@ -468,50 +438,13 @@ function showStats() {
   // get target client id
   const clientId = document.getElementById("clientSelect").value;
 
-  fetch("https://localhost:8080/api/dispatch/state_summary")
-    .then(res => res.json())
-    .then(data => {
-      if (data.summary_exeuction == "OK"){
-        let imgPath;
-        if (clientId === 'ALL'){
-          imgPath = "https://localhost:8080/static/summary_all.png";
-        } else {
-          imgPath = `https://localhost:8080/static/summary_${clientId}.png`
-        }
-        const imgElement = document.getElementById("stateImage");
-        imgElement.src = imgPath;
-        imgElement.style.display = "block";
-      }
-    });
+  socket.emit("query",{
+    action: "query_state_summary",
+    client_id: clientId
+  });
 }
 
 
-
-
-
-// ---------------- 初始化 ---------------- //
-document.addEventListener("DOMContentLoaded", () => {
-  ["Vehicle_1", "Vehicle_2", "Vehicle_3"].forEach(renderPartition);
-
-  const ctx = document.getElementById('updateChart').getContext('2d');
-  statsChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: [],
-      datasets: [
-        { label: "总的推送次数", data: [0, 0, 0], backgroundColor: 'lightblue' },
-        { label: "成功次数", data: [0, 0, 0], backgroundColor: 'green' },
-        { label: "成功比例 (%)", data: [0, 0, 0], backgroundColor: 'orange' }
-      ]
-    },
-    options: {
-      responsive: false,
-      scales: {
-        y: { beginAtZero: true }
-      }
-    }
-  });
-});
 
 
 
