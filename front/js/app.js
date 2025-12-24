@@ -434,14 +434,22 @@ function pollTaskStatus(taskId, deviceName) {
 //---------------ota result summary ------------------//
 
 
-function showStats() {
+async function showStats() {
   // get target client id
   const clientId = document.getElementById("clientSelect").value;
 
-  socket.emit("query",{
-    action: "query_state_summary",
-    client_id: clientId
-  });
+  const requestId= genRequestId(); //need refer to requestBus
+  const payload = {
+    msg_type  : "task_summary",
+    client_id : clientId,
+    request_id : requestId
+  };
+  try {
+    await ReqeusBus.send("task_summary", payload, {requestId});
+    console.log("[APP] Request task summary", payload);
+  } catch (err) {
+    console.log("[APP] request task summary failed", err);
+  }
 }
 
 
@@ -450,46 +458,23 @@ function showStats() {
 
 // --------------- update task hsitory list ------------//
 
-function showTaskHistory(clientId){
+async function showTaskHistory(clientId){
   // request interface
-  fetch(`https://localhost:8080/api/dispatch/history/?client_id=${clientId}`)
-  .then(res => res.json())
-  .then(tasks => {
-    const listContainer = document.getElementById("taskHistoryList");
-    listContainer.innerHTML = "";  //clear all info before update
 
-    //create table
-    const table = document.createElement("table");
-    table.classList.add("history-table");
+  const request_id = genRequestId();
+  const payload = {
+    msg_type: "task_history",
+    client_id: clientId,
+    request_id:requestId
+  };
 
-    const thead = document.createElement("thead");
-    thead.innerHTML =`
-      <tr>
-        <th>TaskID</th>
-        <th>Phase</th>
-        <th>Result</th>
-      </tr>
-    `;
-    table.appendChild(thead);
+  try {
+    await requestBus.send("task_history", payload, {requestId});
+    console.log("[APP] request update task history list");
+  } catch (err) {
+    console.log("[APP] request update task history failed", err);
+  }
 
-    //update table content
-    const tbody = document.createElement("tbody");
-    data.forEach(task =>{
-      const row = document.createElement("tr");
-      row.innerHTML=`<td>${task.task_id}</td><td>${task.phase}</td><td>${task.result}</td>`;
-      tbody.appendChild(row);
-    });
-
-
-    table.appendChild(tbody);
-    listContainer.appendChild(table);
-    //display the window
-    document.getElementById("taskHistoryModal").classList.remove("hidden");
-  })
-  .catch(err =>{
-    console.log("Query Task List fail", err);
-    alert("Cannot Acquire Task List");
-  });
 }
 
 
@@ -500,9 +485,60 @@ function closeTaskHistory(){
 
 
 
+function onTaskSummary(png, request_id){
+  const imgEl = document.getElementById("stateImage")
+  if (imgEl){
+    imgEl.src = png;
+  }
+}
+
+
+function onTaskHistory(client_id, json, request_id){
+  //update the table list
+  const listContainer = document.getElementById("taskHistoryList");
+  listContainer.innerHTML = "";  //clear all info before update
+
+    //create table
+  const table = document.createElement("table");
+  table.classList.add("history-table");
+
+  const thead = document.createElement("thead");
+  thead.innerHTML =`
+    <tr>
+      <th>TaskID</th>
+      <th>Phase</th>
+      <th>Result</th>
+    </tr>
+  `;
+  table.appendChild(thead);
+
+  //update table content
+  const tbody = document.createElement("tbody");
+  data.forEach(task =>{
+    const row = document.createElement("tr");
+    row.innerHTML=`<td>${task.task_id}</td><td>${task.phase}</td><td>${task.result}</td>`;
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+  listContainer.appendChild(table);
+  //display the window
+  document.getElementById("taskHistoryModal").classList.remove("hidden");
+}
+
+
+function onDeviceUpdate(device_name, request_id){
+  updateDevice(device_name);
+}
 
 
 
-
+window.App = {
+  showStats,
+  showTaskHistory,
+  onTaskSummary,
+  onTaskHistory,
+  onDeviceUpdate
+};
 
 
