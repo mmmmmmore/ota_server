@@ -2,9 +2,8 @@ import asyncio, json, time
 import socket
 import re
 from routes.devices import update_device_partition
-from routes.websock import push_msg_2_front
 from routes.devices import update_device_connection
-
+from routes.websock import socketio
 
 
 class GatewayClient:
@@ -79,3 +78,6 @@ class GatewayClient:
                 print("[TCP] Connection error:", e)
                 await asyncio.sleep(5)
 
+    async def push_msg_2_front(payload: dict):  ## json format
+        socketio.emit("ota_task_update",payload)
+        print(f"[WebSocket] pushed ota task update info to front")

@@ -9,6 +9,7 @@ from routes.dispatch import websocket_handle_task_history
 socketio = SocketIO(cors_allowed_origins= "*",async_mode="eventlet")
 
 
+
 # define the event
 @socketio.on("connect")
 def handle_connect():
@@ -26,7 +27,7 @@ def handle_query(payload):
     """_summary_
 
     {
-        "action": "query_task_history",
+        "action": "task_summary",
         "client_id":"758"
     }
     """
@@ -36,7 +37,7 @@ def handle_query(payload):
     if action == "query_task_history":
         res=websocket_handle_task_history(client_id)
         emit(res)
-    elif action == "query_state_summary":
+    elif action == "task_summary":
         res=websock_handle_summary(client_id)
         emit(res)
     else :
@@ -45,6 +46,3 @@ def handle_query(payload):
             "action": action
         })
     
-def push_msg_2_front(payload: dict):  ## json format
-    socketio.emit("ota_task_update",payload)
-    print(f"[WebSocket] pushed ota task update info to front")
