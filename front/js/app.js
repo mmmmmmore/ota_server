@@ -1,544 +1,156 @@
-
-
-
-const socket=io("https://localhost:8080",{
-  transports: ["websocket"],
-  secure:true,
-  reconnection:true
-});
-
-socket.on("connect",()=>{
-  console.log("Websocket connected");
-});
-
-socket.on("disconnect", ()=>{
-  console.log("Websocket disconnected");
-});
-
-
-socket.on("ota_task_update", (rawData) =>{
-  try {
-    console.log("Rx info update from GW");
-
-    fetch("https://localhost:8080/api/devices")
-      .then(res => res.json())
-      .then(devices => {
-        // reserve for flash function.
-        // TBD realize the info update function
-      })
-  } catch (err){
-    console.log("Invalid data from GW ", rawData);
-  }
-})
-
-
-
-// 菜单切换
-function showSection(sectionId) {
-  document.querySelectorAll('.section').forEach(sec => sec.classList.add('hidden'));
-  document.getElementById(sectionId).classList.remove('hidden');
-}
-
-// 分区显示
-function partitionHTML(isAActive) {
-  return isAActive
-    ? '<div class="partition-box active">A</div><div class="partition-box inactive">B</div>'
-    : '<div class="partition-box inactive">A</div><div class="partition-box active">B</div>';
-}
-
-function uploadFirmware() {
-  const fileInput = document.getElementById("firmwareFile");
-  const versionInput = document.getElementById("firmwareVersion");
-  const md5Input = document.getElementById("firmwareMD5");
-  const changeInput = document.getElementById("changenote");
-
-  if (!fileInput.files.length) {
-    alert("请先选择固件文件");
-    return;
-  }
-  const file = fileInput.files[0];
-  const version = versionInput.value || "unknown";
-  const md5 = md5Input.value || "";
-  const changes =changeInput.value || "";
-
-  const formData = new FormData();
-  formData.append("file", file);
-  formData.append("version", version);
-  formData.append("md5",md5);
-  formData.append("changes",changes)
-
-    fetch("https://localhost:8080/api/software/upload", { method: "POST", body: formData })
-    .then(res =>res.json() )  
-    .then(data => {
-      alert("Upload Success: "+JSON.stringify(data));
-      querySoftware();  //fresh the sw list
-      })
-    .catch(err => console.error("请求失败:", err));
-  
-}
-
-
-
-function setStatus(deviceName, text, color) {
-  const cell = document.getElementById(`status-${deviceName}`);
-  if (!cell) return;
-  cell.textContent = text;
-  cell.style.color = color;
-}
-
-
-// ---------------- API 对接 ---------------- //
-
-// 查询设备信息
-function queryDevices() {
-  fetch("https://localhost:8080/api/devices")
-    .then(response => response.json())
-    .then(devices => {
-      const tbody = document.getElementById("devices-tbody");
-      tbody.innerHTML = ""; // 清空旧内容
-
-      devices.forEach(dev => {
-        const row = document.createElement("tr");
-
-        row.innerHTML = `
-          <td>${dev.device_name || ""}</td>
-          <td>${dev.client_id || ""}</td>
-          <td>${dev.mac_address || ""}</td>
-          <td>${dev.ip || ""}</td>
-          <td>${dev.firmware_version || ""}</td>
-          <td>${renderPartition(dev.partition)}</td>
-          <td>${dev.status || ""}</td>
-          <td>
-            <button onclick="editDevice('${dev.mac_address}')">Edit</button>
-            <button onclick="deleteDevice('${dev.mac_address}')">Delete</button>
-        `;
-
-        tbody.appendChild(row);
-      });
-    })
-    .catch(error => console.error("查询设备失败:", error));
-}
-//update device info
-function editDevice(mac) {
-  const newName = prompt("请输入新的设备名称:");
-  const clientId = prompt("请输入设备Client ID (可选):");
-  const newPartition = prompt("Please input Partition A/B ");
-
-  const payload = {
-    device_name: newName,
-    client_id: clientId,
-    partition: newPartition
-  };
-
-  fetch(`https://localhost:8080/api/devices/${mac}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  })
-  .then(res => res.json())
-  .then(data => {
-    alert("设备修改成功: " + JSON.stringify(data));
-    queryDevices();
-  })
-  .catch(err => console.error("修改失败:", err));
-}
-
-//delete device function
-function deleteDevice(mac) {
-  if (!confirm(`确定要删除设备 ${mac} 吗？`)) return;
-
-  fetch(`https://localhost:8080/api/devices/${mac}`, {
-    method: "DELETE"
-  })
-  .then(res => res.json())
-  .then(data => {
-    alert("设备删除成功: " + JSON.stringify(data));
-    queryDevices();
-  })
-  .catch(err => console.error("删除失败:", err));
-}
-
-function renderPartition(partition) {
-  if (partition == "A"){
-    return `<div class="parition"><div class="box active">A</div><div class="box inactive">B</div></div>`;
-  } else if(partition =="B") {
-    return `<div class="partition"><div class="box inactive">A</div><div class="box active">B</div></div>`;
-  } else{
-    return `<div class="partition"><div class="box inactive">A</div><div class="box active">B</div></div>`; 
-  }
-}
-
-function renderDevice(dev){
-  const row = document.getElementById(`task-row-${dev.client_id}`);
-  if (row){
-    row.innerHTML = renderDeviceRow(dev); 
-  }
-}
-
-
-function renderDeviceRow(dev){
-  return `
-    <tr id="task-row-${dev.client_id}">
-      <td>${dev.device_name}</td>
-      <td>${dev.client_id}</td>
-      <td>${dev.mac_address}</td>
-      <td>${dev.ip}
-  `;
-}
-
-//add create new device function
-function newDevices() {
-  // 简单示例：弹出输入框收集信息
-  const deviceName = prompt("请输入设备名称:");
-  const macAddress = prompt("请输入设备MAC地址:");
-  const clientId = prompt("请输入设备Client ID (可选):");
-  const firmwareVersion = prompt("请输入初始固件版本 (可选):");
-
-  if (!deviceName || !macAddress) {
-    alert("设备名称和MAC地址是必填项！");
-    return;
+// app.js
+// update new structure code for app.js , only interface with Html 
+(() => {
+  // 菜单切换：显示对应的 section
+  function showSection(sectionId) {
+    document.querySelectorAll(".section").forEach(sec => sec.classList.add("hidden"));
+    const el = document.getElementById(sectionId);
+    if (el) el.classList.remove("hidden");
   }
 
-  // 构造请求体
-  const newDevice = {
-    device_name: deviceName,
-    mac_address: macAddress,
-    client_id: clientId,
-    firmware_version: firmwareVersion,
-  };
+  // ---------------- OTA设备接口 ----------------
+  function queryDevices() {
+    if (window.DeviceManager && typeof DeviceManager.queryDevices === "function") {
+      DeviceManager.queryDevices();
+    }
+  }
 
-  // 调用后端接口
-  fetch('https://localhost:8080/api/devices/register', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(newDevice)
-  })
-  .then(response => response.json())
-  .then(data => {
-    alert("设备创建成功: " + JSON.stringify(data));
-    // TODO: 刷新设备列表
-    queryDevices();
-  })
-  .catch(error => {
-    console.error("创建设备失败:", error);
-    alert("创建设备失败，请检查日志");
-  });
-}
+  function newDevices() {
+    if (window.DeviceManager && typeof DeviceManager.newDevice === "function") {
+      DeviceManager.newDevice();
+    }
+  }
 
+  function editDevice(mac) {
+    if (window.DeviceManager && typeof DeviceManager.editDevice === "function") {
+      DeviceManager.editDevice(mac);
+    }
+  }
 
-// 查询软件版本
-function querySoftware() {
-  fetch("https://localhost:8080/api/software")
-    .then(res => res.json())
-    .then(list => {
-      const tbody = document.getElementById("software-tbody");
-      tbody.innerHTML = "";
+  function deleteDevice(mac) {
+    if (window.DeviceManager && typeof DeviceManager.deleteDevice === "function") {
+      DeviceManager.deleteDevice(mac);
+    }
+  }
 
-      list.forEach(s => {
-        const row = document.createElement("tr");
-        tbody.innerHTML += `<tr>
-          <td>${s.version}</td>
-          <td>${s.date}</td>
-          <td>${s.changes}</td>
-          <td>${s.md5}</td>
-          <td>
-            <button onclick="editSoftware('${s.version}')">Edit</button>
-            <button onclick="deleteSoftware('${s.version}')">Delete</button>
-          <td>
-        </tr>
-        `;
-        tbody.appendChild(row);
-      });
-    })
-    .catch(err => alert("软件查询失败: " + err));
-}
+  // ---------------- OTA软件接口 ----------------
+  function querySoftware() {
+    if (window.SoftwareManager && typeof SoftwareManager.querySoftware === "function") {
+      SoftwareManager.querySoftware();
+    }
+  }
 
+  function uploadFirmware() {
+    if (window.SoftwareManager && typeof SoftwareManager.uploadFirmware === "function") {
+      SoftwareManager.uploadFirmware();
+    }
+  }
 
-function editSoftware(version) {
-  const newChanges = prompt("请输入新的变化点说明:");
-  const newMd5 = prompt("请输入新的MD5值:");
+  function editSoftware(version) {
+    if (window.SoftwareManager && typeof SoftwareManager.editSoftware === "function") {
+      SoftwareManager.editSoftware(version);
+    }
+  }
 
-  fetch(`https://localhost:8080/api/software/${version}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ changes: newChanges, md5: newMd5 })
-  })
-  .then(res => res.json())
-  .then(data => {
-    alert("修改成功: " + JSON.stringify(data));
-    querySoftware();
-  });
-}
+  function deleteSoftware(version) {
+    if (window.SoftwareManager && typeof SoftwareManager.deleteSoftware === "function") {
+      SoftwareManager.deleteSoftware(version);
+    }
+  }
 
+  // ---------------- OTA任务接口 ----------------
+  function refreshTask() {
+    if (window.OTAManager && typeof OTAManager.refreshTask === "function") {
+      OTAManager.refreshTask();
+    }
+  }
 
+  function pushOTA(clientId, deviceName) {
+    if (window.OTAManager && typeof OTAManager.pushOTA === "function") {
+      OTAManager.pushOTA(clientId, deviceName);
+    }
+  }
 
-function deleteSoftware(version) {
-  if (!confirm(`确定要删除版本 ${version} 吗？`)) return;
+  function showStats() {
+    if (window.OTAManager && typeof OTAManager.showTaskStats === "function") {
+      OTAManager.showTaskStats();
+    }
+  }
 
-  fetch(`https://localhost:8080/api/software/${version}`, { method: "DELETE" })
-    .then(res => res.json())
-    .then(data => {
-      alert("删除成功: " + JSON.stringify(data));
-      querySoftware();
-    });
-}
+  function showTaskHistory(clientId) {
+    if (window.OTAManager && typeof OTAManager.showTaskHistory === "function") {
+      OTAManager.showTaskHistory(clientId);
+    }
+  }
 
+  function closeTaskHistory() {
+    const modal = document.getElementById("taskHistoryModal");
+    if (modal) modal.classList.add("hidden");
+  }
 
-//=======================below for OTA task =================
+  // ---------------- Handler回调接口 ----------------
+  function onTaskSummary(png, request_id) {
+    const imgEl = document.getElementById("stateImage");
+    if (imgEl) {
+      imgEl.src = "data:image/png;base64," + png;
+      imgEl.style.display = "block";
+    }
+  }
 
-function refreshTask() {
-  Promise.all([
-    fetch("https://localhost:8080/api/devices").then(res => res.json()),
-    fetch("https://localhost:8080/api/software").then(res => res.json())
-  ])
-  .then(([devices, software]) => {
-    const tbody = document.getElementById("tasks-tbody");
-    tbody.innerHTML = "";
+  function onTaskHistory(client_id, json, request_id) {
+    const listContainer = document.getElementById("taskHistoryList");
+    listContainer.innerHTML = "";
 
-    devices.forEach(dev => {
+    const table = document.createElement("table");
+    table.classList.add("history-table");
+
+    const thead = document.createElement("thead");
+    thead.innerHTML = `
+      <tr>
+        <th>TaskID</th>
+        <th>Phase</th>
+        <th>Result</th>
+      </tr>
+    `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement("tbody");
+    json.forEach(task => {
       const row = document.createElement("tr");
-
-      // 构建软件版本下拉菜单
-      let versionOptions = "";
-      software.forEach(s => {
-        versionOptions += `<option value="${s.version}">${s.version}</option>`;
-      });
-
-      row.innerHTML = `
-        <td>${dev.device_name}</td>
-        <td>${dev.client_id}</td>
-        <td>
-          <select id="ver-${dev.client_id}">
-            ${versionOptions}
-          </select>
-        </td>
-        <td><button onclick="pushOTA('${dev.client_id}', '${dev.device_name}')">OTA推送</button></td>
-        <td>
-          <a href="#" onclick="showTaskHistory('${dev.client_id}')">OTA_Record</a>
-        </td>
-      `;
-
+      row.innerHTML = `<td>${task.task_id}</td><td>${task.phase}</td><td>${task.result}</td>`;
       tbody.appendChild(row);
     });
-  })
-  .catch(err => console.error("刷新任务列表失败:", err));
-}
 
+    table.appendChild(tbody);
+    listContainer.appendChild(table);
 
-function pushOTA(clientId, deviceName) {
-  const version = document.getElementById(`ver-${clientId}`).value;
+    document.getElementById("taskHistoryModal").classList.remove("hidden");
+  }
 
-  fetch("https://localhost:8080/api/dispatch/push", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ client_id: clientId, device_name: deviceName, version: version })
-  })
-  .then(res => {
-    if (!res.ok) {
-      // 如果返回非200状态码，直接抛出错误
-      return res.json().then(err => { throw new Error(err.error || "请求失败"); });
+  function onDeviceUpdate(device_name, request_id) {
+    if (window.DeviceManager && typeof DeviceManager.updateDeviceStatus === "function") {
+      DeviceManager.updateDeviceStatus(device_name, request_id);
     }
-    return res.json();
-  })
-  .then(data => {
-    alert("Task_Triggered_Success: "+data.message)
-  })
-  .catch(err => {
-    alert("Task_Triggered_Failed: " + err.message);
-  });
-}
+  }
 
-
-
-
-// 单设备更新
-function updateDevice(deviceName) {
-  const version = document.getElementById(`ver-${deviceName}`).value;
-  setStatus(deviceName, "更新中...", "black");
-
-  fetch("https://localhost:8080/api/dispatch", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      target: [deviceName],
-      version: version,
-      url: "/firmware/firmware.bin"
-    })
-  })
-    .then(res => res.json())
-    .then(resp => {
-      setStatus(deviceName, "任务已下发", "blue");
-      // 查询任务结果
-      pollTaskStatus(resp.task_id, deviceName);
-    })
-    .catch(err => setStatus(deviceName, "下发失败", "red"));
-}
-
-// 更新全部设备
-function updateAll() {
-  const version = document.getElementById("ver-All").value;
-  const statusAll = document.getElementById("status-All");
-  statusAll.textContent = "更新中...";
-  statusAll.style.color = "black";
-
-  fetch("https://localhost:8080/api/dispatch", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      target: ["Vehicle_1", "Vehicle_2", "Vehicle_3"],
-      version: version,
-      url: "/firmware/firmware.bin"
-    })
-  })
-    .then(res => res.json())
-    .then(resp => {
-      statusAll.textContent = "任务已下发";
-      statusAll.style.color = "blue";
-      pollTaskStatus(resp.task_id, "All");
-    })
-    .catch(err => {
-      statusAll.textContent = "下发失败";
-      statusAll.style.color = "red";
-    });
-}
-
-// 轮询任务状态
-function pollTaskStatus(taskId, deviceName) {
-  setTimeout(() => {
-    fetch(`https://localhost:8080/api/status?task_id=${taskId}`)
-      .then(res => res.json())
-      .then(results => {
-        results.forEach(r => {
-          const success = r.result === "success";
-          setStatus(r.name, success ? "成功" : "失败", success ? "green" : "red");
-          partitions[r.name] = success ? !partitions[r.name] : partitions[r.name];
-          renderPartition(r.name);
-          updateStats(r.name, success);
-        });
-
-        if (deviceName === "All") {
-          const allSuccess = results.every(r => r.result === "success");
-          const statusAll = document.getElementById("status-All");
-          statusAll.textContent = allSuccess ? "全部成功" : "部分失败";
-          statusAll.style.color = allSuccess ? "green" : "orange";
-        }
-      })
-      .catch(err => console.error("状态查询失败:", err));
-  }, 2000);
-}
-
-
-
-//---------------ota result summary ------------------//
-
-
-async function showStats() {
-  // get target client id
-  const clientId = document.getElementById("clientSelect").value;
-
-  const requestId= genRequestId(); //need refer to requestBus
-  const payload = {
-    msg_type  : "task_summary",
-    client_id : clientId,
-    request_id : requestId
+  // ---------------- 全局暴露 ----------------
+  window.App = {
+    showSection,
+    queryDevices,
+    newDevices,
+    editDevice,
+    deleteDevice,
+    querySoftware,
+    uploadFirmware,
+    editSoftware,
+    deleteSoftware,
+    refreshTask,
+    pushOTA,
+    showStats,
+    showTaskHistory,
+    closeTaskHistory,
+    onTaskSummary,
+    onTaskHistory,
+    onDeviceUpdate
   };
-  try {
-    await ReqeusBus.send("task_summary", payload, {requestId});
-    console.log("[APP] Request task summary", payload);
-  } catch (err) {
-    console.log("[APP] request task summary failed", err);
-  }
-}
-
-
-
-
-
-// --------------- update task hsitory list ------------//
-
-async function showTaskHistory(clientId){
-  // request interface
-
-  const request_id = genRequestId();
-  const payload = {
-    msg_type: "task_history",
-    client_id: clientId,
-    request_id:requestId
-  };
-
-  try {
-    await requestBus.send("task_history", payload, {requestId});
-    console.log("[APP] request update task history list");
-  } catch (err) {
-    console.log("[APP] request update task history failed", err);
-  }
-
-}
-
-
-
-function closeTaskHistory(){
-  document.getElementById("taskHistoryModal").classList.add("hidden");
-}
-
-
-
-function onTaskSummary(png, request_id){
-  const imgEl = document.getElementById("stateImage")
-  if (imgEl){
-    imgEl.src = png;
-  }
-}
-
-
-function onTaskHistory(client_id, json, request_id){
-  //update the table list
-  const listContainer = document.getElementById("taskHistoryList");
-  listContainer.innerHTML = "";  //clear all info before update
-
-    //create table
-  const table = document.createElement("table");
-  table.classList.add("history-table");
-
-  const thead = document.createElement("thead");
-  thead.innerHTML =`
-    <tr>
-      <th>TaskID</th>
-      <th>Phase</th>
-      <th>Result</th>
-    </tr>
-  `;
-  table.appendChild(thead);
-
-  //update table content
-  const tbody = document.createElement("tbody");
-  data.forEach(task =>{
-    const row = document.createElement("tr");
-    row.innerHTML=`<td>${task.task_id}</td><td>${task.phase}</td><td>${task.result}</td>`;
-    tbody.appendChild(row);
-  });
-
-  table.appendChild(tbody);
-  listContainer.appendChild(table);
-  //display the window
-  document.getElementById("taskHistoryModal").classList.remove("hidden");
-}
-
-
-function onDeviceUpdate(device_name, request_id){
-  updateDevice(device_name);
-}
-
-
-
-window.App = {
-  showStats,
-  showTaskHistory,
-  onTaskSummary,
-  onTaskHistory,
-  onDeviceUpdate
-};
-
-
+})();
