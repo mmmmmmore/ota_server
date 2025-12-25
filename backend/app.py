@@ -1,23 +1,28 @@
 from flask import Flask
 from flask_cors import CORS
-import asyncio, threading
-from fastapi.staticfiles import StaticFiles
-from routes.task import STATIC_DIR
+from flask_socketio import SocketIO
+
+
 import ssl
 import eventlet
-from routes.base_value import SERVERCRT
-from routes.base_value import SERVERKEY
+from routes.base_value import SERVERCRT, SERVERKEY, GW_IP, GW_TCP_PORT
 
 # 导入蓝图
 from routes.devices import devices_bp
 from routes.software import software_bp
 from routes.upload import upload_bp
-from routes.dispatch import dispatch_bp, tcpthread
+from routes.dispatch import dispatch_bp
 from routes.download import download_bp
 from routes.websock import socketio
+from routes.tcp_async import start_gateway_tcp
+
+from routes.devices import init_device_subscription
+from routes.software import init_software_subscription
+from routes.dispatch import init_dispatch_subscription
+from routes.websock import init_websock_subscription
 
 
-app = Flask(__name__, static_folder=STATIC_DIR, static_url_path="/static")
+app = Flask(__name__)
 CORS(app, resources={r"/*":{"origins":"*"}},supports_credentials=True)  # 解决跨域问题，前端不同源也能访问 # config the cert
 
 
@@ -28,9 +33,12 @@ app.register_blueprint(upload_bp)
 app.register_blueprint(dispatch_bp)
 app.register_blueprint(download_bp)
 
+start_gateway_tcp(GW_IP, GW_TCP_PORT)
 
-
-
+init_websock_subscription()
+init_device_subscription()
+init_dispatch_subscription()
+init_software_subscription()
 
 if __name__ == "__main__":
     tcpthread.start()

@@ -2,9 +2,10 @@
 import threading
 import time
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
 
 class MessageBus:
-    def __init__(self, default_ttl=10):
+    def __init__(self, default_ttl=10, max_workers = 10):
         """
         default_ttl: 消息的默认生命周期（秒）
         """
@@ -12,6 +13,7 @@ class MessageBus:
         self.messages = defaultdict(list)      # event_type -> [(payload, expire_time)]
         self.lock = threading.Lock()
         self.default_ttl = default_ttl
+        self.executor = ThreadPoolExecutor(max_workers=max_workers)
 
     def subscribe(self, event_type, handler, consume_old=True):
         """
@@ -47,18 +49,21 @@ class MessageBus:
         with self.lock:
             handlers = self.subscribers.get(event_type, [])
             if handlers:
-                # 有订阅者 → 立即分发
+                #  create payload to async thread pool
                 for handler in handlers:
-                    try:
-                        handler(payload)
-                    except Exception as e:
-                        print(f"[Bus] handler error: {e}")
+                    self.executor.submit(self._safe_invoke, handler, payload)
             else:
                 # 没有订阅者 → 缓存消息
-                self.messages[event_type].append((payload, expire_time))
+                self.messages.setdefault(event_type, []).append((payload, expire_time))
 
         # 启动定时器清理过期消息
         threading.Timer(ttl or self.default_ttl, self._cleanup, args=[event_type]).start()
+
+    def _safe_invoke(self, handler, payload):
+        try:
+            handler(payload)
+        except Exception as e:
+            print(f"[MsgBus] handler error: {e}")
 
     def _cleanup(self, event_type):
         """清理过期消息"""

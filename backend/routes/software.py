@@ -2,6 +2,7 @@ import os
 import json
 from flask import Blueprint, request, jsonify
 from datetime import datetime
+from routes.messagebus import bus
 
 software_bp = Blueprint("software", __name__)
 
@@ -104,3 +105,88 @@ def delete_software(version):
 
     save_software(new_list)
     return jsonify({"message": f"版本 {version} 已删除"}), 200
+
+
+
+def handle_software_create(payload):
+    file = payload.get("file")
+    version = payload.get("version")
+    md5 = payload.get("md5")
+    changes = payload.get("changes")
+    
+    
+    if not file or not version:
+        return jsonify({"error": "缺少必要字段"}), 400
+
+    # 保存固件文件，以版本号命名
+    save_path = os.path.join(FIRMWARE_DIR, f"{file.filename}")
+    file.save(save_path)
+
+    # 更新 JSON 列表
+    software_list = load_software()
+    # 检查是否已存在版本
+    for s in software_list:
+        if s["version"] == version:
+            return jsonify({"error": "版本已存在"}), 409
+
+    new_entry = {
+        "version": version,
+        "release_date": datetime.now().strftime("%Y-%m-%d"),
+        "changes": changes or "",
+        "md5": md5 or "",
+        "filename": f"{file.filename}"  # 记录固件文件名
+    }
+    software_list.append(new_entry)
+    save_software(software_list)
+
+    bus.publish("software.update", {"msg_type": "software_update", "content":"software_created"})
+
+
+def handle_software_delete(payload):
+    software_list = load_software()
+    new_list = []
+    deleted_entry = None
+
+    for s in software_list:
+        if s["version"] == payload.get("version"):
+            deleted_entry = s
+        else:
+            new_list.append(s)
+
+    if not deleted_entry:
+        print(f"[Software] version not found: {payload.get("version")} ")
+
+    # 删除对应固件文件
+    firmware_path = os.path.join(FIRMWARE_DIR, deleted_entry.get("filename", ""))
+    if os.path.exists(firmware_path):
+        os.remove(firmware_path)
+
+    save_software(new_list)
+    bus.publish("software.update", {"msg_type": "software_update", "content":"software_deleted"})
+
+
+def handle_software_edit(payload):
+    software_list = load_software()
+    version = payload.get("version")
+
+    for s in software_list:
+        if s["version"] == version:
+            s["release_date"] = payload.get("release_date", s["release_date"])
+            s["changes"] = payload.get("changes", s["changes"])
+            s["md5"] = payload.get("md5", s["md5"])
+            save_software(software_list)
+            bus.publish("software.update", {"msg_type": "software_update", "content":"software_deleted"})
+            break
+        
+def handle_software_query(payload):
+    software_json = load_software()
+    bus.publish("software.update", {"msg_type":"software_udpate", "content": software_json})
+
+
+
+#need use by app.py for initialization
+def init_software_subscription():
+    bus.subscribe("websock.software_create", handle_software_create)
+    bus.subscribe("websock.software_delte", handle_software_delete)
+    bus.subscribe("websock.software_edit", handle_software_edit)
+    bus.subscribe("websock.software_query", handle_software_query)    

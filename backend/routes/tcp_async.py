@@ -1,9 +1,11 @@
 import asyncio, json, time
 import socket
 import re
-from routes.devices import update_device_partition
-from routes.devices import update_device_connection
-from routes.websock import socketio
+import threading
+from messagebus import bus
+from routes.base_value import GW_IP, GW_TCP_PORT
+
+
 
 
 class GatewayClient:
@@ -16,15 +18,13 @@ class GatewayClient:
     async def run(self):
         while True:
             try:
-                
-                hellp_msg ={"msg_type":"hello", "role":"ota_server"}
+                hello_msg ={"msg_type":"hello", "role":"ota_server"}
                 reader, writer = await asyncio.open_connection(self.ip, self.port)
                 print("[TCP] Connected to GW")
                 sock = writer.get_extra_info('socket')
                 if sock is not None:
                     sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
-                hello_payload = json.dumps(hellp_msg) +'\n'
-                writer.write((json.dumps(hellp_msg)+'\n').encode())
+                writer.write((json.dumps(hello_msg)+'\n').encode())
                 await writer.drain()
                 #print("[TCP] Tx hello to OTA GW finished")
 
@@ -35,9 +35,10 @@ class GatewayClient:
                         writer.write(payload.encode())
                         await writer.drain()
                         print(f"[TCP] Sent task: {repr(payload)}")
-                        task["status"] = "success"
+                        task["status"] = "success"    ## need change the phase and result 
                         with open(filepath, "w") as f:
                             json.dump(task, f, indent=2)
+                        bus.publish("task.sent", {"filepath":filepath, "task":task})
 
                 async def receiver():
                     while True:
@@ -57,27 +58,39 @@ class GatewayClient:
                                 await writer.drain()
                                 print("[TCP] Sent keep_alive_ack")
                             elif obj.get("msg_type") == "ota_task_ack":
-                                ota_task_id = obj.get("task_id")
-                                ota_task_client_id = re.split("_",ota_task_id)[-1]  ## split the client id
-                                ota_task_status = obj.get("status")  ## parse the result
-                                update_device_partition(ota_task_client_id,ota_task_status)  # update the partition after ack
-                                
-                                push_msg_2_front(obj)  # push ota task json to front
+                                bus.publish("tcp.update_task", obj)
                             elif obj.get("msg_type") == "register":
-                                ota_client_id = obj.get("client_id")
-                                ota_client_connect_state = obj.get("connect_state")
-                                update_device_connection(ota_client_id,ota_client_connect_state)
-                                push_msg_2_front(obj)
+                                bus.publish("tc[].device_update", obj)
                             else:
                                 print("[TCP] GW message:", obj)
                         except Exception as e:
                             print("[TCP] Parse error:", e, msg)
-
                 await asyncio.gather(sender(), receiver())
             except Exception as e:
                 print("[TCP] Connection error:", e)
                 await asyncio.sleep(5)
 
-    async def push_msg_2_front(payload: dict):  ## json format
-        socketio.emit("ota_task_update",payload)
-        print(f"[WebSocket] pushed ota task update info to front")
+
+def start_gateway_tcp(ip, port):
+    ota_gw = GatewayClient(ip, port)
+    
+    def run_loop():
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        loop.run_until_complete(ota_gw.run())
+    
+    tcp_thread = threading.Thread(target= run_loop, daemon= True)
+    tcp_thread.start()
+    
+    ## subscribe the bus
+    def handle_tcp_send(payload):
+        filepath = payload.get("filepath")
+        task = payload.get("task")
+        asyncio.run_coroutine_threadsafe(ota_gw.queue.put((filepath, task)), asyncio.get_event_loop())
+    
+    bus.subscribe("dispatch.task_send", handle_tcp_send)
+    
+    print("[TCP] Gateway client started")
+    
+    
+    

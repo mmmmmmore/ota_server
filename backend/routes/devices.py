@@ -2,6 +2,8 @@ import json
 import os
 from flask import Blueprint, jsonify, request
 from routes.base_value import DEVICES_FILE
+from routes.messagebus import bus
+
 
 devices_bp = Blueprint("devices", __name__)
 
@@ -119,3 +121,86 @@ def delete_device(mac_address):
     return jsonify({"message": f"设备 {mac_address} 已删除"}), 200
 
 
+
+
+def handle_device_create(payload):
+    # payload will include device name, mac and client id...
+    devices = load_devices()
+    mac = payload.get("mac_address")
+    
+    if not mac or any(d["mac_address"] == mac for d in devices):
+        print(f"[Device] create new device fail, device exist{mac}")
+        return
+    
+    new_devices = {
+        "device_name": payload.get("device_name", "Unnamed"),
+        "mac_address": mac,
+        "client_id": payload.get("client_id"),
+        "ip": None,
+        "version": payload.get("version", "unknown"),
+        "partition": "A",
+        "status": None
+    }
+    
+    devices.append(new_devices)
+    save_devices(devices)
+    print("[Device] New Device created in db")
+    
+    
+def handle_device_delete(payload):
+    mac = payload.get("mac_address")
+    if not mac:
+        print("[Device] device not found by input, please check")
+        return
+
+    devices = load_devices()
+    new_devices = [d for d in devices if d["mac_address"] != mac]
+    save_devices(new_devices)
+    print(f" [Device] device of {mac} deleted from db")
+    
+
+def handle_device_edit(payload):
+    mac = payload.get("mac_address")
+    if not mac:
+        print("[Device] device not found in db")
+        return
+    
+    devices = load_devices()
+    for d in devices:
+        if d["mac_address"] == mac:
+            d['device_name'] = payload.get("device_name", d["device_name"])
+            d['client_id'] = payload.get("client_id", d["client_id"])
+            d['partition'] = payload.get("partition", d["partition"])
+            save_devices(devices)
+            print(f"[Device] device of {mac} updated ")
+            break
+
+
+def handle_device_query(payload):
+    devices = load_devices()
+    bus.publish("device.update", {"type": "device", "devices": "updated"})
+    print("please update info in front")
+    
+
+def handle_device_update(payload):
+    # change online offline 
+    connection = payload.get("online")
+    client_id = payload.get("client_id")
+    devices = load_devices()
+    for d in devices:
+        if d["client_id"] = client_id:
+            d["status"] = connection
+            save_devices(devices)
+            print(f"[Device] device {client_id} connection udpated")
+            bus.publish("device.update", {"msg_type":"device_update", "content":"connection_changed"})
+            break
+
+
+# need use in app for initialization
+def init_device_subscription():
+    bus.subscribe("websock.device_create", handle_device_create)
+    bus.subscribe("websock.device_delete", handle_device_delete)
+    bus.subscribe("websock.device_edit", handle_device_edit)
+    bus.subscribe("websock.device_query", handle_device_query)
+    bus.subscribe("tcp.device_update", handle_device_update)
+        
