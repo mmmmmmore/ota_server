@@ -41,7 +41,9 @@ init_device_subscription()
 init_dispatch_subscription()
 init_software_subscription()
 
-
+@app.route("/")
+def index():
+    return "Hello from Flask_SocketIO"
 
 @app.route("/index.html")
 def index_html():
@@ -53,7 +55,7 @@ def serv_front(filename):
     return send_from_directory(FRONT_PATH, filename)
 
 
-
+socketio.init_app(app, cors_allowed_origins="*")
 
 if __name__ == "__main__":
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
@@ -63,13 +65,15 @@ if __name__ == "__main__":
     context.set_ciphers("ECDHE+AESGCM:ECDHE+CHACHA20:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384")
 
     
-    listener = eventlet.listen(('0.0.0.0', 8080))
-    ssl_listener = eventlet.wrap_ssl(
-        listener,
-        ssl_context= context,
-        server_side = True
-    )
-    eventlet.wsgi.server(ssl_listener, app)
+    socketio.run(app, host="127.0.0.1", port=8000)
+    
+    #listener = eventlet.listen(('127.0.0.1', 8080))
+    #ssl_listener = eventlet.wrap_ssl(
+    #    listener,
+    #    ssl_context= context,
+    #    server_side = True
+    #)
+    #eventlet.wsgi.server(ssl_listener, app)
    # socketio.init_app(app, cors_allowed_origins= "*")
    # socketio.run(app, host="0.0.0.0", 
    #              port=8080, 

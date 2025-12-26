@@ -42,26 +42,32 @@
   }
 
   // 推送 OTA 任务
-  function pushOTA(clientId, deviceName) {
+  async function pushOTA(clientId, deviceName) {
     const version = document.getElementById(`ver-${clientId}`).value;
 
-    fetch("https://localhost:8080/api/dispatch/push", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ client_id: clientId, device_name: deviceName, version: version })
-    })
-      .then(res => {
-        if (!res.ok) {
-          return res.json().then(err => { throw new Error(err.error || "请求失败"); });
-        }
-        return res.json();
-      })
-      .then(data => {
-        alert("任务下发成功: " + data.message);
-      })
-      .catch(err => {
-        alert("任务下发失败: " + err.message);
-      });
+    const payload = {
+      msg_type:"ota_task",
+      action:"ota_push",
+      client_id:clientId,
+      device_name:deviceName,
+      version:version
+    };
+
+    try {
+    const resp = await RequestBus.send(
+      "ota_task",
+      payload,
+      { timeoutMs: 20000 }
+    );
+
+    alert("OTA任务下发成功");
+    console.log("[OTA] push success:", resp);
+
+  } catch (err) {
+    alert("OTA任务下发失败: " + err.message);
+    console.error("[OTA] push failed:", err);
+  }
+  
   }
 
   // 查询任务统计结果 (summary)

@@ -5,7 +5,7 @@ eventlet.monkey_patch()
 from routes.messagebus import bus
 
 # init obj
-socketio = SocketIO(cors_allowed_origins= "*",async_mode="eventlet")
+socketio = SocketIO(cors_allowed_origins= "*", async_mode="eventlet")
 
 
 
@@ -32,7 +32,9 @@ def handle_query(payload):
     """
     action = payload.get("action")
     client_id = payload.get("client_id")
-    
+
+
+
 
 @socketio.on("task_update")
 def handle_task_push(data):
@@ -45,6 +47,11 @@ def handle_websocket_message(payload):
         action = payload["action"]
         if action == "ota_push":
             bus.publish("websock.task_push", payload)
+            
+            emit("server.response", {
+                "request_id": payload.get("request_id"),
+                "status": "ok"
+            })
         elif action ==  "task_summary":
             bus.publish("websock.task_summary", payload)
         elif action == "tack_history":
@@ -78,7 +85,23 @@ def handle_websocket_message(payload):
     else:
         print("No valid data rx from front side, please check the js setup")
         
+
         
+        
+@socketio.on("client.request")
+def handle_client_request(payload):
+    print("[WS] rx client.request:", payload)
+
+    try:
+        handle_websocket_message(payload)
+    except Exception as e:
+        emit("server.response", {
+            "request_id": payload.get("request_id"),
+            "status": "error",
+            "error": str(e)
+        })
+
+     
         
 def notify_refresh(payload):
     socketio.emit("page_refresh", {"type": payload.get("type", "generic")})

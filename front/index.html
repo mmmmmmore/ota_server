@@ -20,9 +20,9 @@
   <!-- 左侧菜单栏 -->
   <div class="sidebar">
     <h2>OTA_Management</h2>
-    <div class="menu-item" onclick="showSection('devices')">OTA设备</div>
-    <div class="menu-item" onclick="showSection('software')">OTA软件</div>
-    <div class="menu-item" onclick="showSection('tasks')">OTA任务</div>
+    <div class="menu-item" onclick="App.showSection('devices')">OTA设备</div>
+    <div class="menu-item" onclick="App.showSection('software')">OTA软件</div>
+    <div class="menu-item" onclick="App.showSection('tasks')">OTA任务</div>
   </div>
 
   <!-- 主内容区 -->
@@ -47,8 +47,8 @@
           <!-- Dynamic Fulfill by Devices JSON-->
         </tbody>
       </table>
-      <button onclick="queryDevices()">查询设备信息</button>
-      <button onclick="newDevices()">创建新设备</button>
+      <button onclick="DeviceManager.queryDevices()">查询设备信息</button>
+      <button onclick="DeviceManager.newDevices()">创建新设备</button>
     </div>
 
     <!-- OTA软件 -->
@@ -68,7 +68,7 @@
           <!-- 动态填充 -->
         </tbody>
       </table>
-      <button onclick="querySoftware()">查询软件版本</button>
+      <button onclick="SoftwareManager.querySoftware()">查询软件版本</button>
 
       <!-- 新增：固件上传入口 -->
       <h4>上传新固件</h4>
@@ -76,7 +76,7 @@
       <input type="text" id="firmwareVersion" placeholder="版本号 (如 v1.3.0)" />
       <input type="text" id="firmwareMD5" placeholder="md5" />
       <input type="text" id="changenote" placeholder="SW Change Note " />
-      <button onclick="uploadFirmware()">上传固件</button>
+      <button onclick="SoftwareManager.uploadFirmware()">上传固件</button>
     </div>
 
     <!-- OTA任务 -->
@@ -103,9 +103,9 @@
         <option value="759">759</option>
         <option value="760">760</option>
       </select>
-      <button onclick="refreshTask()">Task_Fresh</button>
+      <button onclick="OTAManager.refreshTask()">Task_Fresh</button>
       <!-- add chart-->
-      <button onclick="showStats()">统计结果</button>
+      <button onclick="OTAManager.showStats()">统计结果</button>
       <img id="stateImage" src="" alt="Summary_Chart" style="display: none; max-width:800px;" />
     </div>
   </div>
@@ -116,7 +116,7 @@
       <div id="taskHistoryList" class="scrollable">
         <!-- Dynamic query task list and update-->
       </div>
-      <button onclick="closeTaskHistory()">Close</button>
+      <button onclick="OTAManager.closeTaskHistory()">Close</button>
     </div>
   </div>
     
