@@ -24,3 +24,8 @@ GW_TCP_PORT = 9001
 
 SERVERCRT = os.path.join(BASE_DIR, "..", "server.crt")
 SERVERKEY = os.path.join(BASE_DIR,"..","server.key")
+SERVERPEM = os.path.join(BASE_DIR, "..","server_cert.pem")
+SERVERFULCHAIN = os.path.join(BASE_DIR, "..", "fullchain.pem")
+
+
+FRONT_PATH= os.path.join(BASE_DIR, "..","..","front")

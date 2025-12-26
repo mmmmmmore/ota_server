@@ -1,11 +1,12 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_cors import CORS
 from flask_socketio import SocketIO
 
 
 import ssl
 import eventlet
-from routes.base_value import SERVERCRT, SERVERKEY, GW_IP, GW_TCP_PORT
+import eventlet.wsgi
+from routes.base_value import SERVERCRT, SERVERKEY, GW_IP, GW_TCP_PORT, FRONT_PATH, SERVERPEM, SERVERFULCHAIN
 
 # 导入蓝图
 from routes.devices import devices_bp
@@ -40,29 +41,40 @@ init_device_subscription()
 init_dispatch_subscription()
 init_software_subscription()
 
-if __name__ == "__main__":
-    tcpthread.start()
 
-    #context = ("server.crt", "server.key")
-    #app.run(host="0.0.0.0", port=8080, debug=True,  ssl_context = context)
-    
+
+@app.route("/index.html")
+def index_html():
+    return send_from_directory(FRONT_PATH, 'index.html')
+
+
+@app.route("/front/<path:filename>")
+def serv_front(filename):
+    return send_from_directory(FRONT_PATH, filename)
+
+
+
+
+if __name__ == "__main__":
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-    context.load_cert_chain(certfile=SERVERCRT,keyfile=SERVERKEY)
+    context.minimum_version = ssl.TLSVersion.TLSv1_2
+    context.maximum_version = ssl.TLSVersion.TLSv1_3
+    context.load_cert_chain(certfile=SERVERFULCHAIN,keyfile=SERVERKEY)
+#    context.set_ciphers("ECDHE+AESGCM:ECDHE20")
     
-    socketio.init_app(app, cors_allowed_origins= "*")
-    #eventlet.wsgi.server(
-    #    eventlet.listen(("0.0.0.0", 8080)),
-    #    app,
-    #    ssl_args={"certfile":SERVERCRT, "keyfile":SERVERKEY}
-    #)
-    #socketio.run(app,host="0.0.0.0", port=8080, debug=True,  ssl_context = ("server.crt", "server.key"))
     
-    socketio.run(app, host="0.0.0.0", 
-                 port=8080, 
-                 certfile = SERVERCRT,
-                 keyfile = SERVERKEY
-    #             debug=False,
-    #             use_reloader=False,
-    #             ssl_context = context
-    #             allow_unsafe_werkzeug=True
-                )
+    
+    
+    
+    listener = eventlet.listen(('0.0.0.0', 8080))
+    ssl_listener = eventlet.wrap_ssl(
+        listener,
+        ssl_context= context,
+        server_side = True
+    )
+    eventlet.wsgi.server(ssl_listener, app)
+   # socketio.init_app(app, cors_allowed_origins= "*")
+   # socketio.run(app, host="0.0.0.0", 
+   #              port=8080, 
+   #              ssl_context = context
+   #             )

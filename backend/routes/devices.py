@@ -188,7 +188,7 @@ def handle_device_update(payload):
     client_id = payload.get("client_id")
     devices = load_devices()
     for d in devices:
-        if d["client_id"] = client_id:
+        if d["client_id"] == client_id:
             d["status"] = connection
             save_devices(devices)
             print(f"[Device] device {client_id} connection udpated")

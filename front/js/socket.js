@@ -3,12 +3,13 @@
   const ENDPOINT = "https://localhost:8080"; // 开发阶段可改为 http://localhost:8080
 
   const socket = io(ENDPOINT, {
-    transports: ["websocket", "polling"], // 建议允许回退
+    transports: ["websocket"], // 建议允许回退
     reconnection: true,
     reconnectionAttempts: 10,
     reconnectionDelay: 1000,
     timeout: 20000,
-    secure: true
+    secure: true,
+    rejectUnauthorized: false
   });
 
   socket.on("connect", () => {

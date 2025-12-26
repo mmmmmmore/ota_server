@@ -2,9 +2,8 @@ import asyncio, json, time
 import socket
 import re
 import threading
-from messagebus import bus
 from routes.base_value import GW_IP, GW_TCP_PORT
-
+from routes.messagebus import bus
 
 
 
@@ -71,8 +70,9 @@ class GatewayClient:
                 await asyncio.sleep(5)
 
 
-def start_gateway_tcp(ip, port):
-    ota_gw = GatewayClient(ip, port)
+def start_gateway_tcp(ip, port, queue_size=200):
+    queue = asyncio.Queue(maxsize=queue_size)
+    ota_gw = GatewayClient(ip, port, queue)
     
     def run_loop():
         loop = asyncio.new_event_loop()
