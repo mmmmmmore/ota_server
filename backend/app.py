@@ -60,11 +60,8 @@ if __name__ == "__main__":
     context.minimum_version = ssl.TLSVersion.TLSv1_2
     context.maximum_version = ssl.TLSVersion.TLSv1_3
     context.load_cert_chain(certfile=SERVERFULCHAIN,keyfile=SERVERKEY)
-#    context.set_ciphers("ECDHE+AESGCM:ECDHE20")
-    
-    
-    
-    
+    context.set_ciphers("ECDHE+AESGCM:ECDHE+CHACHA20:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384")
+
     
     listener = eventlet.listen(('0.0.0.0', 8080))
     ssl_listener = eventlet.wrap_ssl(
@@ -78,3 +75,4 @@ if __name__ == "__main__":
    #              port=8080, 
    #              ssl_context = context
    #             )
+
