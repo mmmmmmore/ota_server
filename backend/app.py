@@ -4,8 +4,6 @@ from flask_socketio import SocketIO
 
 
 import ssl
-import eventlet
-import eventlet.wsgi
 from routes.base_value import SERVERCRT, SERVERKEY, GW_IP, GW_TCP_PORT, FRONT_PATH, SERVERPEM, SERVERFULCHAIN
 
 # 导入蓝图
@@ -23,7 +21,7 @@ from routes.dispatch import init_dispatch_subscription
 from routes.websock import init_websock_subscription
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="front", static_url_path="")
 CORS(app, resources={r"/*":{"origins":"*"}},supports_credentials=True)  # 解决跨域问题，前端不同源也能访问 # config the cert
 
 
@@ -55,7 +53,7 @@ def serv_front(filename):
     return send_from_directory(FRONT_PATH, filename)
 
 
-socketio.init_app(app, cors_allowed_origins="*")
+socketio.init_app(app, async_mode="threading",cors_allowed_origins="*")
 
 if __name__ == "__main__":
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
@@ -65,7 +63,7 @@ if __name__ == "__main__":
     context.set_ciphers("ECDHE+AESGCM:ECDHE+CHACHA20:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384")
 
     
-    socketio.run(app, host="127.0.0.1", port=8000)
+    socketio.run(app, host="127.0.0.1", port=8000, debug=True)
     
     #listener = eventlet.listen(('127.0.0.1', 8080))
     #ssl_listener = eventlet.wrap_ssl(
