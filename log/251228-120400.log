@@ -1,0 +1,19 @@
+Websocket connected with client
+[WS] rx client.request: {'msg_type': 'task_info', 'request_id': 'req_nh7yfok2u51766894649695', 'action': 'pushtask', 'client_id': '758', 'device_name': 'Veh1_SCM1', 'version': 'v2.2.0'}
+task_info
+exe the task handle
+exe the task publish
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/eventlet/hubs/hub.py", line 471, in fire_timers
+    timer()
+    ~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/eventlet/hubs/timer.py", line 59, in __call__
+    cb(*args, **kw)
+    ~~^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/eventlet/semaphore.py", line 147, in _do_acquire
+    waiter.switch()
+    ~~~~~~~~~~~~~^^
+greenlet.error: Cannot switch to a different thread
+        Current:  <greenlet.greenlet object at 0x11028c2c0 (otid=0x111138e40) suspended active started main>
+        Expected: <greenlet.greenlet object at 0x115f21240 (otid=0x115d58c60) suspended active started main>
+ HB from kkMUyVvKxDcWXVMdAAAB at 1766894662102
