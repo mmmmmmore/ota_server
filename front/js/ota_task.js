@@ -46,8 +46,8 @@
     const version = document.getElementById(`ver-${clientId}`).value;
 
     const payload = {
-      msg_type:"ota_task",
-      action:"ota_push",
+      msg_type:"task_info",
+      action:"pushtask",
       client_id:clientId,
       device_name:deviceName,
       version:version
@@ -55,7 +55,7 @@
 
     try {
     const resp = await RequestBus.send(
-      "ota_task",
+      "task_info",
       payload,
       { timeoutMs: 20000 }
     );
@@ -76,7 +76,8 @@
     const requestId = RequestBus.genRequestId();
 
     const payload = {
-      msg_type: "task_summary",
+      msg_type: "task_info",
+      action:"queryTaskSummary",
       client_id: clientId,
       request_id: requestId
     };
@@ -94,7 +95,8 @@
     const requestId = RequestBus.genRequestId();
 
     const payload = {
-      msg_type: "task_history",
+      msg_type: "task_info",
+      action: "queryTasklist",
       client_id: clientId,
       request_id: requestId
     };

@@ -1,4 +1,5 @@
 from flask_socketio import SocketIO, emit
+from flask import request
 import json
 import eventlet
 eventlet.monkey_patch()
@@ -41,49 +42,85 @@ def handle_task_push(data):
     bus.publish("task.create", data)
     
 
+@socketio.on("heartbeat")
+def handle_heartbeat(data):
+    print(f" HB from {request.sid} at {data['ts']}")
+    emit("heartbeat_ack", {"status":"OK", "ts":data["ts"]}, to=request.sid)
+
+
+
+def handle_server_response(payload):
+    payload_ack = {
+        "msg_type":payload.get("msg_type"),
+        "request_id":payload.get("request_id"),
+        "status": "ok"
+    }
+    emit("server.response", payload_ack)
+    print(payload_ack)
+
+def handle_ota_task_message(payload):
+    action = payload["action"]
+    if action == "pushtask":
+        bus.publish("websock.task_push", payload)    
+        handle_server_response(payload)
+    elif action ==  "queryTaskSummary":
+        bus.publish("websock.task_summary", payload)
+        handle_server_response(payload)
+    elif action == "taskTasklist":
+        bus.publish("websock.task_history", payload)
+        handle_server_response(payload)
+    else:
+        print("Unknow action from front, please check the js setup")
+    
+
+def handle_device_message(payload):
+    action = payload["action"]
+    if action == "device_create":
+        bus.publish("websock.device_create", payload)
+        handle_server_response(payload)
+    elif action =="device_delete":
+        bus.publish("websock.device_delete", payload)
+        handle_server_response(payload)
+    elif action =="device_query":
+        bus.publish("websock.device_query", payload)
+        handle_server_response(payload)
+    elif action == "device_edit":
+        bus.publish("websock.device_edit", payload)
+        handle_server_response(payload)
+    else:
+        print("unknown action from device info, please chekc JS setup")    
+
+
+
+def handle_software_message(payload):
+    action = payload["action"]
+    if action == "software_create":
+        bus.publish("websock.software_create", payload)
+        handle_server_response(payload)
+    elif action =="software_delete":
+        bus.publish("websock.software_delete", payload)
+        handle_server_response(payload)
+    elif action =="software_query":
+        bus.publish("websock.software_query", payload)
+        handle_server_response(payload)
+    elif action == "software_edit":
+        bus.publish("websock.software_edit", payload)
+        handle_server_response(payload)
+    else:
+        print("unknown action from software info, please chekc JS setup")       
+
+
 
 def handle_websocket_message(payload):
-    if payload["msg_type"] == "ota_task":
-        action = payload["action"]
-        if action == "ota_push":
-            bus.publish("websock.task_push", payload)
-            
-            emit("server.response", {
-                "request_id": payload.get("request_id"),
-                "status": "ok"
-            })
-        elif action ==  "task_summary":
-            bus.publish("websock.task_summary", payload)
-        elif action == "tack_history":
-            bus.publish("websock.task_history", payload)
-        else:
-            print("Unknow action from front, please check the js setup")
+    print(payload["msg_type"])
+    if payload["msg_type"] == "task_info":
+        handle_ota_task_message(payload)
     elif payload["msg_type"] == "device_info":
-        action = payload["action"]
-        if action == "create":
-            bus.publish("websock.device_create", payload)
-        elif action =="delete":
-            bus.publish("websock.device_delete", payload)
-        elif action =="query":
-            bus.publish("websock.device_query", payload)
-        elif action == "edit":
-            bus.publish("websock.device_edit", payload)
-        else:
-            print("unknown action from device info, please chekc JS setup")    
+        handle_device_message(payload)
     elif payload["msg_type"] == "software_info":
-        action = payload["action"]
-        if action == "create":
-            bus.publish("websock.software_create", payload)
-        elif action =="delete":
-            bus.publish("websock.software_delete", payload)
-        elif action =="query":
-            bus.publish("websock.software_query", payload)
-        elif action == "edit":
-            bus.publish("websock.software_edit", payload)
-        else:
-            print("unknown action from software info, please chekc JS setup")              
+        handle_software_message(payload)
     else:
-        print("No valid data rx from front side, please check the js setup")
+        print("[HANDLE_WEB]::No valid data rx from front side, please check the js setup")
         
 
         
@@ -128,3 +165,6 @@ def init_websock_subscription():
     ## split
     bus.subscribe("dispatch.task_history", push_task_history)
     bus.subscribe("dispatch.task_summary", push_task_summary)    
+
+
+

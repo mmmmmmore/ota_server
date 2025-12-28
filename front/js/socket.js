@@ -14,6 +14,11 @@
 
   socket.on("connect", () => {
     console.log("[WS] connected:", socket.id);
+    setInterval(() =>{
+      if (socket.connected) {
+        socket.emit("heartbeat", { ts: Date.now() });
+      }
+    }, 30000);
   });
 
   socket.on("disconnect", (reason) => {
@@ -23,6 +28,13 @@
   socket.on("connect_error", (err) => {
     console.warn("[WS] connect_error:", err.message);
   });
+
+  socket.on("heartbeat_ack", (data) => {
+    console.log("[WS] Rx HB ack from Server success", data);
+  })
+  
+
+
 
   // 暴露全局接口
   window.SocketChannel = {
