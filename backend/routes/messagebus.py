@@ -48,10 +48,13 @@ class MessageBus:
         expire_time = time.time() + (ttl or self.default_ttl)
         with self.lock:
             handlers = self.subscribers.get(event_type, [])
+            
             if handlers:
                 #  create payload to async thread pool
                 for handler in handlers:
+                    print("[Msg_BUS]", handler)
                     self.executor.submit(self._safe_invoke, handler, payload)
+                    print(self.messages)
             else:
                 # 没有订阅者 → 缓存消息
                 self.messages.setdefault(event_type, []).append((payload, expire_time))

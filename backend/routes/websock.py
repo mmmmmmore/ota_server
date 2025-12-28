@@ -10,42 +10,6 @@ socketio = SocketIO(cors_allowed_origins= "*", async_mode="eventlet")
 
 
 
-# define the event
-@socketio.on("connect")
-def handle_connect():
-    print("Websocket connected with client")
-    
-    
-@socketio.on("disconnect")
-def handle_disconnect():
-    print("Websocket disconnect with client")
-
-
-@socketio.on("query")
-def handle_query(payload):
-    ##payload sample:
-    """_summary_
-
-    {
-        "action": "task_summary",
-        "client_id":"758"
-    }
-    """
-    action = payload.get("action")
-    client_id = payload.get("client_id")
-
-
-
-
-@socketio.on("task_update")
-def handle_task_push(data):
-    bus.publish("task.create", data)
-    
-
-@socketio.on("heartbeat")
-def handle_heartbeat(data):
-    print(f" HB from {request.sid} at {data['ts']}")
-    emit("heartbeat_ack", {"status":"OK", "ts":data["ts"]}, to=request.sid)
 
 
 
@@ -61,6 +25,7 @@ def handle_server_response(payload):
 def handle_ota_task_message(payload):
     action = payload["action"]
     if action == "pushtask":
+        print("exe the task publish")
         bus.publish("websock.task_push", payload)    
         handle_server_response(payload)
     elif action ==  "queryTaskSummary":
@@ -95,6 +60,7 @@ def handle_device_message(payload):
 def handle_software_message(payload):
     action = payload["action"]
     if action == "software_create":
+        
         bus.publish("websock.software_create", payload)
         handle_server_response(payload)
     elif action =="software_delete":
@@ -114,6 +80,7 @@ def handle_software_message(payload):
 def handle_websocket_message(payload):
     print(payload["msg_type"])
     if payload["msg_type"] == "task_info":
+        print("exe the task handle")
         handle_ota_task_message(payload)
     elif payload["msg_type"] == "device_info":
         handle_device_message(payload)
@@ -123,7 +90,27 @@ def handle_websocket_message(payload):
         print("[HANDLE_WEB]::No valid data rx from front side, please check the js setup")
         
 
-        
+
+
+
+## front and backend routes definition.
+# define the event
+@socketio.on("connect")
+def handle_connect():
+    print("Websocket connected with client")
+    
+    
+@socketio.on("disconnect")
+def handle_disconnect():
+    print("Websocket disconnect with client")
+
+    
+
+@socketio.on("heartbeat")
+def handle_heartbeat(data):
+    print(f" HB from {request.sid} at {data['ts']}")
+    emit("heartbeat_ack", {"status":"OK", "ts":data["ts"]}, to=request.sid)
+
         
 @socketio.on("client.request")
 def handle_client_request(payload):
