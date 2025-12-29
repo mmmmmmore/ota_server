@@ -88,3 +88,41 @@ I (43004) GW_TCP_Sock: Client connected, sock = 37, ip = 192.168.4.2, port = 607
 I (43004) GW_TCP_Sock: tcp_client_task started for sock = 37
 W (43004) GW_TCP_SERVER: OTA server already connected on sock=38, closing old one
 E (43014) GW_TCP_Sock: recv failed : errno: 128 
+
+
+
+
+I (2662988) msg_handler: Received OTA task
+I (2662988) OTA_HANDLER_Client: Starting OTA from URL: https://localhost:8080/firmware/ota_client_758_v2.3.0.bin
+I (2663008) OTA_HANDLER_Client: Saved ota_flag =1, and task_id = 20251229_143215_758
+I (2663008) OTA_HANDLER_Client: Sending progress info to GW: {"msg_type":"ota_progress","task_id":"20251229_143215_758","state":"DWLD_DONE"}
+I (2663018) tcp_client: Message sent: {"msg_type":"ota_progress","task_id":"20251229_143215_758","state":"DWLD_DONE"}
+
+E (2668028) esp-tls: [sock=55] delayed connect error: Connection reset by peer
+E (2668028) esp-tls: Failed to open new connection
+E (2668028) transport_base: Failed to open a new connection
+E (2668038) HTTP_CLIENT: Connection failed, sock < 0
+E (2668038) esp_https_ota: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT
+E (2668048) esp_https_ota: Failed to establish HTTP connection
+E (2668048) OTA_HANDLER_Client: OTA Failed
+I (2668068) OTA_HANDLER_Client: Saved ota_flag =1, and task_id = 20251229_143215_758
+I (2668068) tcp_client: Received 26 bytes: {"msg_type":"keep_alive"}
+
+
+
+I (3016938) msg_handler: Received OTA task
+I (3016948) OTA_HANDLER_Client: Starting OTA from URL: https://192.168.4.2:8080/firmware/ota_client_758_v2.3.0.bin
+I (3016968) OTA_HANDLER_Client: Saved ota_flag =1, and task_id = 20251229_151853_758
+I (3016968) OTA_HANDLER_Client: Sending progress info to GW: {"msg_type":"ota_progress","task_id":"20251229_151853_758","state":"DWLD_DONE"}
+I (3016978) tcp_client: Message sent: {"msg_type":"ota_progress","task_id":"20251229_151853_758","state":"DWLD_DONE"}
+
+E (3026998) esp-tls: [sock=55] select() timeout
+E (3026998) esp-tls: Failed to open new connection
+E (3026998) transport_base: Failed to open a new connection
+E (3026998) HTTP_CLIENT: Connection failed, sock < 0
+E (3026998) esp_https_ota: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT
+E (3027008) esp_https_ota: Failed to establish HTTP connection
+E (3027018) OTA_HANDLER_Client: OTA Failed
+I (3027028) OTA_HANDLER_Client: Saved ota_flag =1, and task_id = 20251229_151853_758
+I (3027028) tcp_client: Received 52 bytes: {"msg_type":"keep_alive"}
+{"msg_type":"keep_alive"}

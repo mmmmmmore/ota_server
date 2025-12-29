@@ -137,7 +137,7 @@ class Task():
             "device_name": device_name,
             "client_id": client_id,
             "version": version,
-            "firmware_url": f"https://localhost:8080/firmware/ota_client_{client_id}_{version}.bin",
+            "firmware_url": f"https://192.168.4.2:8080/firmware/ota_client_{client_id}_{version}.bin",
             "timestamp": timestamp,
             "result": encode_result(TaskPhase.INITIATED, TaskResult.UNKNOWN),
             "feature": sw_note
