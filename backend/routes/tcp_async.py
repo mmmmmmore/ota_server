@@ -8,11 +8,12 @@ from routes.messagebus import bus
 
 
 class GatewayClient:
-    def __init__(self, ip, port, queue):
+    def __init__(self, ip, port):
         self.ip = ip
         self.port = port
-        self.queue = queue
         self.ackseq = 0
+        self.loop = None
+        self.writer = None
 
     async def run(self):
         while True:
@@ -27,11 +28,12 @@ class GatewayClient:
                 await writer.drain()
                 #print("[TCP] Tx hello to OTA GW finished")
 
-                async def sender():
-                    while True:
-                        filepath, task = await self.queue.get()
-                        payload = json.dumps(task) + "\n"
-                        writer.write(payload.encode())
+                async def sender(filepath, task):
+                    if not self.writer:
+                        print("[TCP] writer not ready, GW not connected")
+                        return
+                    payload = json.dumps(task) + "\n"
+                    self.writer.write(payload.encode())
                         await writer.drain()
                         print(f"[TCP] Sent task: {repr(payload)}")
                         task["status"] = "success"    ## need change the phase and result 
@@ -76,6 +78,7 @@ def start_gateway_tcp(ip, port, queue_size=200):
     
     def run_loop():
         loop = asyncio.new_event_loop()
+        ota_gw.loop = loop
         asyncio.set_event_loop(loop)
         loop.run_until_complete(ota_gw.run())
     
@@ -86,7 +89,10 @@ def start_gateway_tcp(ip, port, queue_size=200):
     def handle_tcp_send(payload):
         filepath = payload.get("filepath")
         task = payload.get("task")
-        asyncio.run_coroutine_threadsafe(ota_gw.queue.put((filepath, task)), asyncio.get_event_loop())
+        
+        fut = asyncio.run_coroutine_threadsafe(ota_gw.queue.put((filepath, task)), ota_gw.loop)
+        fut.result()
+        
     
     bus.subscribe("dispatch.task_send", handle_tcp_send)
     

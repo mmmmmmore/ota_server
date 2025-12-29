@@ -1,0 +1,19 @@
+need check after tcp_subscribe how to handle
+
+
+127.0.0.1 - - [29/Dec/2025 08:52:40] "GET /api/software HTTP/1.1" 200 -
+127.0.0.1 - - [29/Dec/2025 08:52:40] "GET /api/devices HTTP/1.1" 200 -
+ HB from RsPaAXG1fU31gc8QAAAB at 1766969570415
+[WS] rx client.request: {'msg_type': 'task_info', 'request_id': 'req_rh7cy7b811i1766969582896', 'action': 'pushtask', 'client_id': '758', 'device_name': 'Veh1_SCM1', 'version': 'v2.2.0'}
+task_info
+exe the task handle
+exe the task publish
+[Msg_BUS] <function handle_push_task at 0x105c82a20>
+defaultdict(<class 'list'>, {})
+{'msg_type': 'task_info', 'request_id': 'req_rh7cy7b811i1766969582896', 'status': 'ok'}
+[Msg_BUS] <function start_gateway_tcp.<locals>.handle_tcp_send at 0x10db02b60>
+defaultdict(<class 'list'>, {})
+/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/backend/routes/tcp_async.py:89: RuntimeWarning: coroutine 'Queue.put' was never awaited
+  asyncio.run_coroutine_threadsafe(ota_gw.queue.put((filepath, task)), asyncio.get_event_loop())
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+[MsgBus] handler error: There is no current event loop in thread 'ThreadPoolExecutor-0_1'.

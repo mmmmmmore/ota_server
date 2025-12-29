@@ -2,8 +2,8 @@
   {
     "version": "v2.2.0",
     "release_date": "2025-12-10",
-    "changes": null,
-    "md5": null,
+    "changes": "initial_LED_Flash",
+    "md5": "md5_of_22",
     "filename": "ota_client_v2.2.0.bin"
   },
   {

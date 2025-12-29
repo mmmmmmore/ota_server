@@ -1,8 +1,8 @@
 from flask_socketio import SocketIO, emit
 from flask import request
 import json
-import eventlet
-eventlet.monkey_patch()
+#import eventlet
+#eventlet.monkey_patch()
 from routes.messagebus import bus
 
 # init obj
@@ -20,12 +20,12 @@ def handle_server_response(payload):
         "status": "ok"
     }
     emit("server.response", payload_ack)
-    print(payload_ack)
+    #print(payload_ack)
 
 def handle_ota_task_message(payload):
     action = payload["action"]
     if action == "pushtask":
-        print("exe the task publish")
+        #print("exe the task publish")
         bus.publish("websock.task_push", payload)    
         handle_server_response(payload)
     elif action ==  "queryTaskSummary":
@@ -80,7 +80,7 @@ def handle_software_message(payload):
 def handle_websocket_message(payload):
     print(payload["msg_type"])
     if payload["msg_type"] == "task_info":
-        print("exe the task handle")
+        #print("exe the task handle")
         handle_ota_task_message(payload)
     elif payload["msg_type"] == "device_info":
         handle_device_message(payload)

@@ -24,7 +24,7 @@ def handle_push_task(payload):
     # simply enqueue task to tcp_client send queue
     try:
         bus.publish("dispatch.task_send", task)
-        
+        print(task)
     except Exception as e:
         bus.publish("task.failed", {"task":task, "error":str(e)})  ## reverse 
 
