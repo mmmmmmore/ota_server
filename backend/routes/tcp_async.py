@@ -23,16 +23,21 @@ class GatewayClient:
         self.loop: Optional[asyncio.AbstractEventLoop] = None
         self.writer: Optional[asyncio.StreamWriter] = None
         self.ackseq: int = 0
-
         # Optional buffering: tasks queued when GW not connected
         self.pending_tasks: List[Dict[str, Any]] = []
+        self.connected: bool = False  # OTA server connection with GW 
+        
 
     async def run(self):
         """Main connection loop with auto-reconnect and TCP_NODELAY."""
         while True:
             try:
+                if self.writer is not None and not self.writer.is_closing():
+                    await asyncio.sleep(5)
+                    continue
                 reader, writer = await asyncio.open_connection(self.ip, self.port)
                 self.writer = writer
+                self.connected = True
                 print("[TCP] Connected to GW")
 
                 # Set TCP_NODELAY
@@ -94,13 +99,13 @@ class GatewayClient:
                 bus.publish("tcp.device_update", obj)
             else:
                 print("[TCP] GW message:", obj)
+            
+        # after all connection finished
+        self.connected = False
 
     async def _send_keepalive_ack(self, writer: asyncio.StreamWriter, obj: Dict[str, Any]):
         """Reply to keep_alive with ack."""
-        ack = {"msg_type": f"keep_alive_ack{str(self.ackseq)}"}
-        self.ackseq += 1
-        if "seq" in obj:
-            ack["seq"] = obj["seq"]
+        ack = {"msg_type": f"keep_alive_ack"}
         writer.write((json.dumps(ack) + "\n").encode())
         await writer.drain()
         print("[TCP] Sent keep_alive_ack")

@@ -36,3 +36,59 @@ I (1393792) msg_handler: Sent keep_alive_ack to GW
 I (1398792) tcp_client: Received 26 bytes: {"msg_type":"keep_alive"}
 
 I (1398792) msg_handler: Sent keep_alive_ack to GW
+
+
+
+client Cert update:
+
+maochun@MMMBP ota_handler % curl -v https://localhost:8080/firmware/ota_client_758_v2.3.0.bin --cacert rootCA.pem
+*   Trying [::1]:8080...
+* connect to ::1 port 8080 failed: Connection refused
+*   Trying 127.0.0.1:8080...
+* Connected to localhost (127.0.0.1) port 8080
+* ALPN: curl offers h2,http/1.1
+* (304) (OUT), TLS handshake, Client hello (1):
+*  CAfile: rootCA.pem
+*  CApath: none
+* (304) (IN), TLS handshake, Server hello (2):
+* (304) (IN), TLS handshake, Unknown (8):
+* (304) (IN), TLS handshake, Certificate (11):
+* (304) (IN), TLS handshake, CERT verify (15):
+* (304) (IN), TLS handshake, Finished (20):
+* (304) (OUT), TLS handshake, Finished (20):
+* SSL connection using TLSv1.3 / AEAD-AES256-GCM-SHA384
+* ALPN: server accepted http/1.1
+* Server certificate:
+*  subject: CN=ota.test.local
+*  start date: Dec  3 01:07:09 2025 GMT
+*  expire date: Dec  3 01:07:09 2026 GMT
+*  subjectAltName: host "localhost" matched cert's "localhost"
+*  issuer: CN=MyTestCA
+*  SSL certificate verify ok.
+* using HTTP/1.1
+> GET /firmware/ota_client_758_v2.3.0.bin HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/8.4.0
+> Accept: */*
+> 
+< HTTP/1.1 200 OK
+< Server: nginx/1.29.4
+< Date: Mon, 29 Dec 2025 06:54:33 GMT
+< Content-Type: application/octet-stream
+< Content-Length: 977600
+< Connection: keep-alive
+< Content-Disposition: inline; filename=ota_client_758_v2.3.0.bin
+< Last-Modified: Tue, 16 Dec 2025 11:41:32 GMT
+< Cache-Control: no-cache
+< ETag: "1765885292.0-977600-4176292457"
+< 
+Warning: Binary output can mess up your terminal. Use "--output -" to tell 
+Warning: curl to output it to your terminal anyway, or consider "--output 
+Warning: <FILE>" to save to a file.
+* Failure writing output to destination
+* Closing connection
+maochun@MMMBP ota_handler % 
+
+
+
+127.0.0.1 - - [29/Dec/2025:14:54:33 +0800] "GET /firmware/ota_client_758_v2.3.0.bin HTTP/1.1" 200 147114 "-" "curl/8.4.0"
