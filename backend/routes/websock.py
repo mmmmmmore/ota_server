@@ -31,7 +31,7 @@ def handle_ota_task_message(payload):
     elif action ==  "queryTaskSummary":
         bus.publish("websock.task_summary", payload)
         handle_server_response(payload)
-    elif action == "taskTasklist":
+    elif action == "queryTasklist":
         bus.publish("websock.task_history", payload)
         handle_server_response(payload)
     else:
@@ -128,20 +128,33 @@ def handle_client_request(payload):
      
         
 def notify_refresh(payload):
-    socketio.emit("page_refresh", {"type": payload.get("type", "generic")})
+    socketio.emit("server_parsed", {
+        "msg_type":"ota_server_notify",
+        "action":"fresh",
+        "subarea":payload.get("subarea")
+    })
     #
     # payload example
     print(f"[Web] notify front refresh page: {payload}")
     #
     
 def push_task_history(payload):
-    socketio.emit("task_history", {"tasks": payload})
+    socketio.emit("server_parsed", {
+        "msg_type":"ota_history_list",
+        "action":"response_history_list",
+        "subarea":"task_history",
+        "payload":payload
+    })
     #this transfer the payload as json format to front
     print("[Web] update task history to front finished")
 
 
 def push_task_summary(payload):
-    socketio.emit("task_summary", {"summary_url": payload.get("summary_url")})
+    socketio.emit("server_parsed", {
+        "msg_type":"ota_task_summary",
+        "action":"response_url",
+        "url":payload   # url of png 
+    })
     print("[Web] update summary figure path to front, need front udpate the display")
     
 

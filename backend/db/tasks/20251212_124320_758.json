@@ -6,5 +6,5 @@
   "version": "v2.1.4",
   "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_v2.1.4.bin",
   "timestamp": "20251212_124320",
-  "status": "0x01 0x01"
+  "result": "0x01 0x01"
 }

@@ -58,8 +58,8 @@ def decode_result(result_str: str) -> tuple[TaskPhase, TaskResult]:
     parts = result_str.strip().split()
     if len(parts) !=2 :
         return TaskPhase.UNKNOW, TaskResult.UNKNOWN
-    phase_val = parts (parts[0])
-    result_val = parts(parts[1])
+    phase_val =  parts[0]
+    result_val = parts[1]
     phase_enum = TaskPhase(phase_val) if phase_val in TaskPhase._value2member_map_ else TaskPhase.UNKNOW
     result_enum = TaskResult(result_val) if result_val in TaskResult._value2member_map_ else TaskResult.UNKNOWN
     return phase_enum, result_enum    
@@ -93,6 +93,7 @@ class Task():
         self.taskfilelist = []
         self.tasklist = []
         self.devicelist =[]
+        self.save_dir = STATIC_DIR
         
         
         
@@ -137,7 +138,7 @@ class Task():
             "device_name": device_name,
             "client_id": client_id,
             "version": version,
-            "firmware_url": f"https://192.168.4.2:8080/firmware/ota_client_{client_id}_{version}.bin",
+            "firmware_url": f"https://localhost:8443/firmware/ota_client_{client_id}_{version}.bin",
             "timestamp": timestamp,
             "result": encode_result(TaskPhase.INITIATED, TaskResult.UNKNOWN),
             "feature": sw_note
@@ -224,7 +225,8 @@ class Task():
             return result_summary, phse_summary
 
         
-    def plot_summary(self, client_id: str, save_dir: str = STATIC_DIR):
+    def plot_summary(self, client_id: str):
+        
         result_summary, phase_summary = self.__task_summary_by_client(client_id)
         
         #plt figure
@@ -247,9 +249,9 @@ class Task():
         
         plt.tight_layout()
         if client_id == "all":        
-            save_path = os.path.join(save_dir, f"summary_all.png")
+            save_path = os.path.join(self.save_dir, f"summary_all.png")
         else:
-            save_path = os.path.join(save_dir, f"summary_{client_id}.png")
+            save_path = os.path.join(self.save_dir, f"summary_{client_id}.png")
         plt.savefig(save_path)
         plt.close(fig)
         
@@ -267,4 +269,4 @@ class Task():
                         "result":str(result_enum)
                     }
                 )
-        return jsonify(history_tasks)
+        return json.dumps(history_tasks)

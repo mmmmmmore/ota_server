@@ -43,14 +43,16 @@ def get_client_history(client_id):
 
 
 
-def handle_task_history(client_id):
+def handle_task_history(payload):
+    client_id = payload.get("client_id")
     history_json = task_mgmt.task_history(client_id)
     bus.publish("dispatch.task_history", history_json)
     print(f"[Dispatch] hisotry json returned")
 
 
 def handle_task_summary(data):
-    png = task_mgmt.plot_summary(data)
+    client_id = data.get("client_id")
+    png = task_mgmt.plot_summary(client_id)
     bus.publish("dispatch.task_summary", png)
     print(f"[Dispatch] return png path to front: {png}")
     
