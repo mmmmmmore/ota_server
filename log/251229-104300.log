@@ -1,0 +1,90 @@
+
+
+GW NG log of tcp_server about socket monitor
+
+
+系统初始化完成，等待客户端连接...
+I (1574) main_task: Returned from app_main()
+I (8164) wifi:new:<1,0>, old:<1,1>, ap:<1,0>, sta:<255,255>, prof:1, snd_ch_cfg:0x0
+I (8164) wifi:station: a4:5e:60:c5:69:75 join, AID=1, bgn, 20
+I (8194) wifi:<ba-add>idx:2 (ifx:1, a4:5e:60:c5:69:75), tid:6, ssn:2, winSize:64
+I (9374) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.2
+I (13484) wifi:<ba-add>idx:3 (ifx:1, a4:5e:60:c5:69:75), tid:0, ssn:0, winSize:64
+I (15614) GW_TCP_Sock: Client connected, sock = 37, ip = 192.168.4.2, port = 60692
+I (15614) GW_TCP_Sock: tcp_client_task started for sock = 37
+I (15614) GW_TCP_SERVER: OTA Server socket set: 37
+I (15624) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "hello", "role": "ota_server"}
+I (15624) GW_MSG_HANDLER: OTA server hello received on sock 37
+I (15634) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = hello
+I (16574) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack0"}
+I (16574) GW_MSG_HANDLER: non known json data rxed.
+I (16574) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack0
+I (17614) GW_TCP_Sock: Client connected, sock = 38, ip = 192.168.4.2, port = 60693
+I (17614) GW_TCP_Sock: tcp_client_task started for sock = 38
+W (17614) GW_TCP_SERVER: OTA server already connected on sock=37, closing old one
+E (17614) GW_TCP_Sock: recv failed : errno: 128 
+I (17624) GW_TCP_SERVER: OTA Server socket set: 38
+I (17624) GW_TCP_Sock: Closing client socket : 37
+I (17624) GW_MSG_HANDLER: Processing message from sock 38 (role=1): {"msg_type": "hello", "role": "ota_server"}
+W (17634) CLIENT_REGISTER: Client , not found by socket: 37
+I (17644) GW_MSG_HANDLER: OTA server hello received on sock 38
+I (17654) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = hello
+I (21634) GW_MSG_HANDLER: Processing message from sock 38 (role=1): {"msg_type": "keep_alive_ack0"}
+I (21634) GW_MSG_HANDLER: non known json data rxed.
+I (21634) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack0
+I (22624) GW_TCP_Sock: Client connected, sock = 37, ip = 192.168.4.2, port = 60695
+I (22624) GW_TCP_Sock: tcp_client_task started for sock = 37
+W (22624) GW_TCP_SERVER: OTA server already connected on sock=38, closing old one
+E (22634) GW_TCP_Sock: recv failed : errno: 128 
+I (22634) GW_TCP_SERVER: OTA Server socket set: 37
+I (22644) GW_TCP_Sock: Closing client socket : 38
+I (22644) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "hello", "role": "ota_server"}
+W (22644) CLIENT_REGISTER: Client , not found by socket: 38
+I (22654) GW_MSG_HANDLER: OTA server hello received on sock 37
+I (22674) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = hello
+I (26554) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack1"}
+I (26554) GW_MSG_HANDLER: non known json data rxed.
+I (26554) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack1
+I (27714) GW_TCP_Sock: Client connected, sock = 38, ip = 192.168.4.2, port = 60704
+I (27714) GW_TCP_Sock: tcp_client_task started for sock = 38
+W (27714) GW_TCP_SERVER: OTA server already connected on sock=37, closing old one
+E (27724) GW_TCP_Sock: recv failed : errno: 128 
+I (27724) GW_TCP_SERVER: OTA Server socket set: 38
+I (27724) GW_TCP_Sock: Closing client socket : 37
+I (27734) GW_MSG_HANDLER: Processing message from sock 38 (role=1): {"msg_type": "hello", "role": "ota_server"}
+W (27734) CLIENT_REGISTER: Client , not found by socket: 37
+I (27744) GW_MSG_HANDLER: OTA server hello received on sock 38
+I (27754) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = hello
+I (31574) GW_MSG_HANDLER: Processing message from sock 38 (role=1): {"msg_type": "keep_alive_ack1"}
+I (31574) GW_MSG_HANDLER: non known json data rxed.
+I (31574) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack1
+I (32854) GW_TCP_Sock: Client connected, sock = 37, ip = 192.168.4.2, port = 60716
+I (32854) GW_TCP_Sock: tcp_client_task started for sock = 37
+W (32854) GW_TCP_SERVER: OTA server already connected on sock=38, closing old one
+E (32864) GW_TCP_Sock: recv failed : errno: 128 
+I (32864) GW_TCP_SERVER: OTA Server socket set: 37
+I (32864) GW_TCP_Sock: Closing client socket : 38
+I (32874) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "hello", "role": "ota_server"}
+W (32874) CLIENT_REGISTER: Client , not found by socket: 38
+I (32884) GW_MSG_HANDLER: OTA server hello received on sock 37
+I (32894) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = hello
+I (36694) GW_MSG_HANDLER: Processing message from sock 37 (role=1): {"msg_type": "keep_alive_ack2"}
+I (36704) GW_MSG_HANDLER: non known json data rxed.
+I (36704) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack2
+I (37984) GW_TCP_Sock: Client connected, sock = 38, ip = 192.168.4.2, port = 60732
+I (37994) GW_TCP_Sock: tcp_client_task started for sock = 38
+W (37994) GW_TCP_SERVER: OTA server already connected on sock=37, closing old one
+E (37994) GW_TCP_Sock: recv failed : errno: 128 
+I (38004) GW_TCP_SERVER: OTA Server socket set: 38
+I (38004) GW_TCP_Sock: Closing client socket : 37
+I (38004) GW_MSG_HANDLER: Processing message from sock 38 (role=1): {"msg_type": "hello", "role": "ota_server"}
+W (38014) CLIENT_REGISTER: Client , not found by socket: 37
+I (38024) GW_MSG_HANDLER: OTA server hello received on sock 38
+I (38034) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = hello
+I (41554) GW_MSG_HANDLER: Processing message from sock 38 (role=1): {"msg_type": "keep_alive_ack2"}
+I (41554) GW_MSG_HANDLER: non known json data rxed.
+I (41554) GW_MSG_HANDLER: Msg_handler Finish parse for msg_type = keep_alive_ack2
+I (43004) GW_TCP_Sock: Client connected, sock = 37, ip = 192.168.4.2, port = 60753
+I (43004) GW_TCP_Sock: tcp_client_task started for sock = 37
+W (43004) GW_TCP_SERVER: OTA server already connected on sock=38, closing old one
+E (43014) GW_TCP_Sock: recv failed : errno: 128 

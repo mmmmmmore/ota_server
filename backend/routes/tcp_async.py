@@ -174,9 +174,9 @@ def start_gateway_tcp(ip: str = GW_IP, port: int = GW_TCP_PORT):
     threading.Thread(target=run_loop, daemon=True).start()
 
     # Subscribe to dispatch → trigger send_task
-    def handle_tcp_send(payload: Dict[str, Any]):
+    def handle_tcp_send(payload):
         filepath = payload.get("filepath")
-        task = payload.get("task")
+        task = payload.get("task_json")
         if filepath is None or task is None:
             print("[TCP] invalid payload for send:", payload)
             return

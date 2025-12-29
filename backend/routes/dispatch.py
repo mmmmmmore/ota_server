@@ -23,7 +23,7 @@ def handle_push_task(payload):
     filepath, task = task_mgmt.task_create(device_name, client_id, version)
     # simply enqueue task to tcp_client send queue
     try:
-        bus.publish("dispatch.task_send", task)
+        bus.publish("dispatch.task_send", {'filepath':filepath,'task_json':task})
         print(task)
     except Exception as e:
         bus.publish("task.failed", {"task":task, "error":str(e)})  ## reverse 
