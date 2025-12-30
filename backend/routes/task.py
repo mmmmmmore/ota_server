@@ -1,4 +1,7 @@
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
 from enum import IntEnum
 import re, os, time
 import json
@@ -138,7 +141,7 @@ class Task():
             "device_name": device_name,
             "client_id": client_id,
             "version": version,
-            "firmware_url": f"https://localhost:8443/firmware/ota_client_{client_id}_{version}.bin",
+            "firmware_url": f"https://192.168.4.2:8443/firmware/ota_client_{client_id}_{version}.bin",
             "timestamp": timestamp,
             "result": encode_result(TaskPhase.INITIATED, TaskResult.UNKNOWN),
             "feature": sw_note
@@ -230,7 +233,7 @@ class Task():
         result_summary, phase_summary = self.__task_summary_by_client(client_id)
         
         #plt figure
-        fig, axes = plt.subplot(1,2, figsize=(10,4))
+        fig, axes = plt.subplots(1,2, figsize=(10,4))
         phases = list(phase_summary.keys())
         phase_value = list(phase_summary.values())
         axes[0].bar(phases, phase_value, color="skyblue")

@@ -128,10 +128,10 @@ def handle_client_request(payload):
      
         
 def notify_refresh(payload):
-    socketio.emit("server_parsed", {
+    socketio.emit("server.parsed", {
         "msg_type":"ota_server_notify",
         "action":"fresh",
-        "subarea":payload.get("subarea")
+        "payload":payload
     })
     #
     # payload example
@@ -139,18 +139,19 @@ def notify_refresh(payload):
     #
     
 def push_task_history(payload):
-    socketio.emit("server_parsed", {
+    socketio.emit("server.parsed", {
         "msg_type":"ota_history_list",
         "action":"response_history_list",
         "subarea":"task_history",
         "payload":payload
     })
+    #print("[Backend-WEB]:", payload)
     #this transfer the payload as json format to front
     print("[Web] update task history to front finished")
 
 
 def push_task_summary(payload):
-    socketio.emit("server_parsed", {
+    socketio.emit("server.parsed", {
         "msg_type":"ota_task_summary",
         "action":"response_url",
         "url":payload   # url of png 

@@ -175,7 +175,7 @@ def handle_software_edit(payload):
             s["changes"] = payload.get("changes", s["changes"])
             s["md5"] = payload.get("md5", s["md5"])
             save_software(software_list)
-            bus.publish("software.update", {"msg_type": "software_update", "content":"software_deleted"})
+            bus.publish("software.update", {"page_area": "software_update", "content":"software_deleted"})
             break
         
 def handle_software_query(payload):

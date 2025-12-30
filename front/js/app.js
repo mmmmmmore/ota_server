@@ -89,7 +89,7 @@
   }
 
   // ---------------- Handler回调接口 ----------------
-  function onTaskSummary(png, request_id) {
+  function onTaskSummary(png) {
     const imgEl = document.getElementById("stateImage");
     if (imgEl) {
       imgEl.src = "data:image/png;base64," + png;
@@ -97,9 +97,11 @@
     }
   }
 
-  function onTaskHistory(client_id, json, request_id) {
+  function onTaskHistory(payload) {
     const listContainer = document.getElementById("taskHistoryList");
     listContainer.innerHTML = "";
+
+    const tasks = JSON.parse(payload)
 
     const table = document.createElement("table");
     table.classList.add("history-table");
@@ -115,7 +117,7 @@
     table.appendChild(thead);
 
     const tbody = document.createElement("tbody");
-    json.forEach(task => {
+    tasks.forEach(task => {
       const row = document.createElement("tr");
       row.innerHTML = `<td>${task.task_id}</td><td>${task.phase}</td><td>${task.result}</td>`;
       tbody.appendChild(row);
@@ -127,10 +129,17 @@
     document.getElementById("taskHistoryModal").classList.remove("hidden");
   }
 
-  function onDeviceUpdate(device_name, request_id) {
-    if (window.DeviceManager && typeof DeviceManager.updateDeviceStatus === "function") {
-      DeviceManager.updateDeviceStatus(device_name, request_id);
+  function onDeviceUpdate() {
+    if (window.DeviceManager && typeof DeviceManager.queryDevices === "function") {
+      DeviceManager.queryDevices();
     }
+  }
+
+  function onSoftwareUpdate(){
+    if (window.SoftwareManager && typeof SoftwareManager.queryDevices === "function"){
+      SoftwareManager.queryDevices();
+    }
+
   }
 
   // ---------------- 全局暴露 ----------------

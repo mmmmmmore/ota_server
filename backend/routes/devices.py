@@ -192,7 +192,7 @@ def handle_device_update(payload):
             d["status"] = connection
             save_devices(devices)
             print(f"[Device] device {client_id} connection udpated")
-            bus.publish("device.update", {"msg_type":"device_update", "content":"connection_changed"})
+            bus.publish("device.update", {"page_area":"device_update", "content":"connection_changed"})
             break
 
 

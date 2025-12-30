@@ -45,5 +45,46 @@
     }
   });
 
+  SocketChannel.on("server.parsed", (resp) =>{
+    const {msg_type, action, payload, subarea, url} = resp || {};
+    //console.log("Front_BUS", payload);
+    switch(msg_type){
+      case "ota_server_notify":
+        const {page_area, content} = payload;
+        switch (page_area){
+          case "device_update":
+            if(window.App.onDeviceUpdate()){
+              window.App.onDeviceUpdate();
+            }
+            break;
+          case "software_update":
+            if(window.App.onSoftwareUpdate){
+              window.App.onSoftwareUpdate();
+            }
+            break;
+        }
+
+      case "ota_history_list":
+        if (action === "response_history_list" && subarea === "task_history") {
+          // transfer json data to ota_task.js
+          if(window.App){
+            window.App.onTaskHistory(payload);
+          }
+        }
+        break;
+
+      case "ota_task_summary":
+        if(action === "response_url"){
+          //console.log(url)
+          //transfer the url to front page, fresh the page
+          if(window.App){
+            window.App.onTaskSummary(url);
+          }
+        }
+    }
+  });
+
+
+
   window.RequestBus = { send, genRequestId };
 })();
