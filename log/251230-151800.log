@@ -1,0 +1,40 @@
+ranch/ota_Server/ota_server/backend/routes/tcp_async.py', reloading
+ * Restarting with stat
+from task::/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/backend/db/tasks
+/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/backend/db/tasks not exist, please check path
+[TCP] Gateway client started
+[TCP] Connected to GW
+[TCP] Connection error: [Errno 54] Connection reset by peer
+ * Debugger is active!
+ * Debugger PIN: 296-762-680
+Websocket connected with client
+[TCP] Sent keep_alive_ack
+ HB from yUHn2A3FjTI_2phlAAAB at 1767079028182
+[TCP] Connected to GW
+[TCP] Connection error: [Errno 54] Connection reset by peer
+[TCP] Sent keep_alive_ack
+ HB from yUHn2A3FjTI_2phlAAAB at 1767079033058
+[TCP] Connected to GW
+[TCP] Connection error: [Errno 54] Connection reset by peer
+[TCP] Sent keep_alive_ack
+[TCP] Connected to GW
+[TCP] Connection error: [Errno 54] Connection reset by peer
+[TCP] Sent keep_alive_ack
+ HB from yUHn2A3FjTI_2phlAAAB at 1767079042776
+[TCP] Connected to GW
+[TCP] Connection error: [Errno 54] Connection reset by peer
+[TCP] Sent keep_alive_ack
+ HB from yUHn2A3FjTI_2phlAAAB at 1767079045959
+[TCP] Connected to GW
+[TCP] Connection error: [Errno 54] Connection reset by peer
+[TCP] Sent keep_alive_ack
+ HB from yUHn2A3FjTI_2phlAAAB at 1767079049412
+ HB from yUHn2A3FjTI_2phlAAAB at 1767079050420
+ HB from yUHn2A3FjTI_2phlAAAB at 1767079053257
+[TCP] Connected to GW
+ HB from yUHn2A3FjTI_2phlAAAB at 1767079054249
+ HB from yUHn2A3FjTI_2phlAAAB at 1767079058187
+[TCP] GW disconnected
+ HB from yUHn2A3FjTI_2phlAAAB at 1767079063063
+[TCP] Connected to GW
+[TCP] GW disconnected

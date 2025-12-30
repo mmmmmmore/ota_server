@@ -26,35 +26,42 @@ class GatewayClient:
         # Optional buffering: tasks queued when GW not connected
         self.pending_tasks: List[Dict[str, Any]] = []
         self.connected: bool = False  # OTA server connection with GW 
+        self.lask_ack =0
+        self.conn_lock = asyncio.Lock()
         
 
     async def run(self):
         """Main connection loop with auto-reconnect and TCP_NODELAY."""
         while True:
             try:
-                if self.writer is not None and not self.writer.is_closing():
-                    await asyncio.sleep(5)
-                    continue
-                reader, writer = await asyncio.open_connection(self.ip, self.port)
-                self.writer = writer
-                self.connected = True
-                print("[TCP] Connected to GW")
+                async with self.conn_lock:
+                    
+                    if self.writer :
+                        print("..............write alive")
+                        if time.time() - self.lask_ack < 30:
+                            print(f"[Backend-TCP]{time.time()-self.lask_ack}")
+                            await asyncio.sleep(5)
+                            continue
+                    reader, writer = await asyncio.open_connection(self.ip, self.port)
+                    self.writer = writer
+                    self.connected = True
+                    print("[TCP] Connected to GW")
 
                 # Set TCP_NODELAY
-                sock = writer.get_extra_info('socket')
-                if sock is not None:
-                    sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+                    sock = writer.get_extra_info('socket')
+                    if sock is not None:
+                        sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
 
                 # Hello handshake
-                hello_msg = {"msg_type": "hello", "role": "ota_server"}
-                writer.write((json.dumps(hello_msg) + "\n").encode())
-                await writer.drain()
+                    hello_msg = {"msg_type": "hello", "role": "ota_server"}
+                    writer.write((json.dumps(hello_msg) + "\n").encode())
+                    await writer.drain()
 
                 # Flush any pending tasks (if any)
-                await self._flush_pending()
+                    await self._flush_pending()
 
                 # Start receiver loop (blocking until disconnect)
-                await self.receiver(reader, writer)
+                    await self.receiver(reader, writer)
 
             except Exception as e:
                 print("[TCP] Connection error:", e)
@@ -93,6 +100,8 @@ class GatewayClient:
             mt = obj.get("msg_type")
             if mt == "keep_alive":
                 await self._send_keepalive_ack(writer, obj)
+                self.lask_ack = time.time()
+                self.connected = True
             elif mt == "ota_task_ack":
                 bus.publish("tcp.update_task", obj)
             elif mt == "register":
