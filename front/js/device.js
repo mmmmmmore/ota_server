@@ -1,13 +1,29 @@
 // device.js
 (() => {
-  // 查询设备信息
+  // Helper function to render status indicator
+  function renderStatus(status) {
+    const statusLower = (status || 'unknown').toLowerCase();
+    let statusClass = 'status-unknown';
+    let title = 'Unknown';
+  
+    if (statusLower === 'online') {
+      statusClass = 'status-online';
+      title = 'Online';
+    } else if (statusLower === 'offline') {
+      statusClass = 'status-offline';
+      title = 'Offline';
+    }
+  
+    return `<span class="status-indicator ${statusClass}" title="${title}"></span>`;
+  }
+
+  // Update your queryDevices function
   function queryDevices() {
     fetch("https://localhost:8080/api/devices")
       .then(response => response.json())
       .then(devices => {
         const tbody = document.getElementById("devices-tbody");
         tbody.innerHTML = ""; // 清空旧内容
-
         devices.forEach(dev => {
           const row = document.createElement("tr");
           row.innerHTML = `
@@ -17,7 +33,7 @@
             <td>${dev.ip || ""}</td>
             <td>${dev.firmware_version || ""}</td>
             <td>${renderPartition(dev.partition)}</td>
-            <td>${dev.status || ""}</td>
+            <td>${renderStatus(dev.status)}</td>
             <td>
               <button onclick="App.editDevice('${dev.mac_address}')">Edit</button>
               <button onclick="App.deleteDevice('${dev.mac_address}')">Delete</button>
@@ -27,7 +43,7 @@
         });
       })
       .catch(error => console.error("查询设备失败:", error));
-  }
+  }   
 
   // 新建设备
   function newDevice() {

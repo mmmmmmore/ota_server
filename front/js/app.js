@@ -89,13 +89,31 @@
   }
 
   // ---------------- Handler回调接口 ----------------
-  function onTaskSummary(png) {
+function onTaskSummary(png) {
+    console.log('[Front-APP]', png);
+    
+    // Convert ArrayBuffer to string (the ArrayBuffer contains base64 text, not binary image data)
+    const uint8Array = new Uint8Array(png);
+    const base64String = new TextDecoder('utf-8').decode(uint8Array);
+    
+    console.log('[Front-APP] base64String:', base64String.substring(0, 100)); // Log first 100 chars
+    
     const imgEl = document.getElementById("stateImage");
     if (imgEl) {
-      imgEl.src = "data:image/png;base64," + png;
-      imgEl.style.display = "block";
+        imgEl.src = "data:image/png;base64," + base64String;
+        imgEl.style.display = "block";
+        
+        // Add error handler to debug
+        imgEl.onerror = function() {
+            console.error('Image failed to load');
+        };
+        imgEl.onload = function() {
+            console.log('Image loaded successfully');
+        };
+    } else {
+        console.error('Image element not found');
     }
-  }
+}
 
   function onTaskHistory(payload) {
     const listContainer = document.getElementById("taskHistoryList");

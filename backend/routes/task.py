@@ -1,7 +1,7 @@
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-
+import base64
 from enum import IntEnum
 import re, os, time
 import json
@@ -258,7 +258,10 @@ class Task():
         plt.savefig(save_path)
         plt.close(fig)
         
-        return save_path
+        with open(save_path, 'rb') as f:
+            img_base64 = base64.b64encode(f.read())
+            b64_str = img_base64.decode("ascii")
+        return img_base64
         
     def task_history(self, client_id):
         history_tasks=[]

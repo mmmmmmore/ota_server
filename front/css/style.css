@@ -169,3 +169,43 @@ button {
 .hidden{
   display: none;
 }
+
+
+/* Status indicator dots */
+.status-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.status-online {
+  background-color: #4caf50; /* Green */
+  box-shadow: 0 0 4px rgba(76, 175, 80, 0.6);
+}
+
+.status-offline {
+  background-color: #f44336; /* Red */
+  box-shadow: 0 0 4px rgba(244, 67, 54, 0.6);
+}
+
+.status-unknown {
+  background-color: #9e9e9e; /* Grey */
+  box-shadow: 0 0 4px rgba(158, 158, 158, 0.6);
+}
+
+/* Optional: Add animation for online status */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.status-online {
+  animation: pulse 2s infinite;
+}
