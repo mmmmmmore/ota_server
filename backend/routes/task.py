@@ -32,7 +32,7 @@ def read_version_note(version):
 
 
 class TaskPhase(IntEnum):
-    UNKNOW      = 0x00
+    UNKNOWN     = 0x00
     INITIATED   = 0x01
     PENDING     = 0x02
     REJECTED    = 0x03
@@ -44,10 +44,11 @@ class TaskResult(IntEnum):
     FAILED      = 0x02
     
 def to_hex_byte(value: int) -> str :
-    return f"0x{value: 02X}"
+    return f"0x{value:02X}"
 
 def parse_hex_byte(hex_str: str) -> int:
-    hex_str = hex_str.lower().strip()
+    hex_str = hex_str.strip().lower()
+    #support "0x01", "01", "1"
     if hex_str.startswith('0x'):
         return int(hex_str, 16)
     return int(hex_str, 16)
@@ -60,11 +61,15 @@ def encode_result(phase: TaskPhase, result: TaskResult) -> str:
 def decode_result(result_str: str) -> tuple[TaskPhase, TaskResult]:
     parts = result_str.strip().split()
     if len(parts) !=2 :
-        return TaskPhase.UNKNOW, TaskResult.UNKNOWN
-    phase_val =  parts[0]
-    result_val = parts[1]
-    phase_enum = TaskPhase(phase_val) if phase_val in TaskPhase._value2member_map_ else TaskPhase.UNKNOW
-    result_enum = TaskResult(result_val) if result_val in TaskResult._value2member_map_ else TaskResult.UNKNOWN
+        return TaskPhase.UNKNOWN, TaskResult.UNKNOWN
+    
+    try:
+        phase_int = parse_hex_byte(parts[0])
+        result_int = parse_hex_byte(parts[1])
+    except ValueError:
+        return TaskPhase.UNKNOWN, TaskResult.UNKNOWN
+    phase_enum = TaskPhase(phase_int) if phase_int in TaskPhase._value2member_map_ else TaskPhase.UNKNOWN
+    result_enum = TaskResult(result_int) if result_int in TaskResult._value2member_map_ else TaskResult.UNKNOWN
     return phase_enum, result_enum    
 
 
@@ -177,6 +182,8 @@ class Task():
                 
     
     def __task_summary_by_client(self, client_id):
+        ## below add for debug log
+        seq=0
         result_summary = {
             "total": 0,
             "success":0,
@@ -189,9 +196,10 @@ class Task():
             "reject":0,
             "finish":0
         }
-        if client_id == "all":
+        if client_id == "ALL":
             for task in self.tasklist:
                 result_summary["total"]+=1
+                phse_summary["total"]+=1
                 phase_enum, result_enum = decode_result(task.get("result", "0x00 0x00"))
                 if result_enum == TaskResult.SUCCESS:
                     result_summary["success"]+=1
@@ -206,34 +214,34 @@ class Task():
                     phse_summary["reject"]+=1
                 elif phase_enum == TaskPhase.FINISHED:
                     phse_summary["finish"]+=1
+            print(f"Total of summary is {phse_summary['total']}")
         else:
             for task in self.tasklist:
                 if task["client_id"] == client_id:
-                    continue
-                result_summary["total"]+=1
-                phase_enum, result_enum = decode_result(task.get("result", "0x00 0x00"))
-                if result_enum == TaskResult.SUCCESS:
-                    result_summary["success"]+=1
-                elif result_enum == TaskResult.FAILED:
-                    result_summary["failed"]+=1
-                ## after result summary the phase summary
-                if phase_enum == TaskPhase.INITIATED:
-                    phse_summary["initiate"]+=1
-                elif phase_enum == TaskPhase.PENDING:
-                    phse_summary["pending"]+=1
-                elif phase_enum == TaskPhase.REJECTED:
-                    phse_summary["reject"]+=1
-                elif phase_enum == TaskPhase.FINISHED:
-                    phse_summary["finish"]+=1
-            return result_summary, phse_summary
+                    result_summary["total"]+=1
+                    phse_summary["total"]+=1
+                    phase_enum, result_enum = decode_result(task.get("result", "0x00 0x00"))
+                    if result_enum == TaskResult.SUCCESS:
+                        result_summary["success"]+=1
+                    elif result_enum == TaskResult.FAILED:
+                        result_summary["failed"]+=1
+                    ## after result summary the phase summary
+                    if phase_enum == TaskPhase.INITIATED:
+                        phse_summary["initiate"]+=1
+                    elif phase_enum == TaskPhase.PENDING:
+                        phse_summary["pending"]+=1
+                    elif phase_enum == TaskPhase.REJECTED:
+                        phse_summary["reject"]+=1
+                    elif phase_enum == TaskPhase.FINISHED:
+                        phse_summary["finish"]+=1
+        return result_summary, phse_summary
 
         
     def plot_summary(self, client_id: str):
         
         result_summary, phase_summary = self.__task_summary_by_client(client_id)
-        
         #plt figure
-        fig, axes = plt.subplots(1,2, figsize=(10,4))
+        fig, axes = plt.subplots(1,2, figsize=(12,3))
         phases = list(phase_summary.keys())
         phase_value = list(phase_summary.values())
         axes[0].bar(phases, phase_value, color="skyblue")

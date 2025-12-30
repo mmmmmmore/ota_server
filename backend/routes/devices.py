@@ -184,7 +184,7 @@ def handle_device_query(payload):
 
 def handle_device_update(payload):
     # change online offline 
-    connection = payload.get("online")
+    connection = payload.get("connect_state")
     client_id = payload.get("client_id")
     devices = load_devices()
     for d in devices:

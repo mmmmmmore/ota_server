@@ -155,3 +155,4 @@ Server_Backend：
       基于这个特点，其SSL/HTTPS的通讯需要必须要通过代理服务器来实现。 这里处理原本的认证证书连，还需要将生成一个fullchain.pem 用于代理服务器校验使用。 
 
       
+Below Feature3, for detail bug fix and data format stream optimization

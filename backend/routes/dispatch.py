@@ -52,6 +52,7 @@ def handle_task_history(payload):
 
 def handle_task_summary(data):
     client_id = data.get("client_id")
+    print(f"[Backend-Dispatch]{client_id} will check the summary")
     png = task_mgmt.plot_summary(client_id)
     bus.publish("dispatch.task_summary", png)
     #print(f"[Dispatch] return png path to front: {png}")

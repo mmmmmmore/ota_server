@@ -6,7 +6,7 @@
   "version": "v2.3.0",
   "firmware_url": "https://localhost:8080/firmware/ota_client_758_v2.3.0.bin",
   "timestamp": "20251229_141849",
-  "result": "0x 1 0x 0",
+  "result": "0x04 0x01",
   "feature": "smooth_change",
   "status": "success"
 }

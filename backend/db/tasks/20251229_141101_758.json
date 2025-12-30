@@ -6,7 +6,7 @@
   "version": "v2.2.0",
   "firmware_url": "https://192.168.4.2:8080/firmware/ota_client_758_v2.2.0.bin",
   "timestamp": "20251229_141101",
-  "result": "0x 1 0x 0",
+  "result": "0x04 0x01",
   "feature": "initial_LED_Flash",
   "status": "success"
 }

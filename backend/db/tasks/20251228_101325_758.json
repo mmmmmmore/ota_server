@@ -6,6 +6,6 @@
   "version": "v2.2.0",
   "firmware_url": "https://198.18.0.1:8080/firmware/ota_client_758_v2.2.0.bin",
   "timestamp": "20251228_101325",
-  "result": "0x 1 0x 0",
+  "result": "0x01 0x00",
   "feature": "support_ota_feedback"
 }

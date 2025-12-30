@@ -6,7 +6,7 @@
     "ip": null,
     "version": "unknown",
     "partition": "B",
-    "status": "online"
+    "status": "Online"
   },
   {
     "device_name": "Veh1_SCM2",
@@ -15,7 +15,7 @@
     "ip": null,
     "version": "unknown",
     "partition": null,
-    "status": null
+    "status": "Online"
   },
   {
     "device_name": "Veh2_SCM3",
@@ -24,6 +24,6 @@
     "ip": null,
     "version": "unknown",
     "partition": null,
-    "status": "offline"
+    "status": "Online"
   }
 ]
