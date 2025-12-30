@@ -47,21 +47,21 @@ def handle_task_history(payload):
     client_id = payload.get("client_id")
     history_json = task_mgmt.task_history(client_id)
     bus.publish("dispatch.task_history", history_json)
-    print(f"[Dispatch] hisotry json returned")
+    #print(f"[Dispatch] hisotry json returned")
 
 
 def handle_task_summary(data):
     client_id = data.get("client_id")
     png = task_mgmt.plot_summary(client_id)
     bus.publish("dispatch.task_summary", png)
-    print(f"[Dispatch] return png path to front: {png}")
+    #print(f"[Dispatch] return png path to front: {png}")
     
 
 def handle_tcp_task_update(payload):
     phase_str , result_str = payload.get("result")
     Task.task_update_phase(phase_str)
     Task.task_update_result(result_str)
-    print("[Dispatch] update the task result, front can check by click the result check :: ")
+    #print("[Dispatch] update the task result, front can check by click the result check :: ")
 
 # this init function use be import to app.py for initialization
 def init_dispatch_subscription():

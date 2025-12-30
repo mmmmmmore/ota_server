@@ -96,7 +96,7 @@ function onTaskSummary(png) {
     const uint8Array = new Uint8Array(png);
     const base64String = new TextDecoder('utf-8').decode(uint8Array);
     
-    console.log('[Front-APP] base64String:', base64String.substring(0, 100)); // Log first 100 chars
+    //console.log('[Front-APP] base64String:', base64String.substring(0, 100)); // Log first 100 chars
     
     const imgEl = document.getElementById("stateImage");
     if (imgEl) {

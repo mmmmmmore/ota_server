@@ -120,3 +120,38 @@ Client 通过 URL 下载固件。
   openssl genrsa -out server.key 2048    
   openssl req -new -key server.key -out server.csr -subj "/CN=ota.test.local"      
   openssl x509 -req -in server.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial  -out server.crt -days 365 -sha256 -extfile san.cnf -extensions v3_req
+
+
+
+针对已经完成的后端服务器做一次功能开发的梳理和总结
+
+从架构实现上，通过多轮的尝试，有如下的服务器模块运行特征需要了解：
+Server_Backend： 
+      用于实现后端的设备、软件和任务的维护管理
+      用于实现后端和用户侧的GW的TCP通讯
+      用于实现后端和用户侧的Client端的SSL/HTTPS 通讯
+      用于实现和前端的页面信息交互
+
+      使用的框架： Python-Flask
+                  Pythhon_async 异步TCP通讯模块
+                  Python_socketIO 
+      
+      需要关注的要点：
+            Python FLask本身对于HTTP的支持比较友好，如果整个服务框架等模型只在HTTP的模式上搭建，那么相对而言比较简单；
+            但是ESP32 需要使用HTTPS，且强制要求配置HTTPS，即使在config_t中配置skip verification也绕不过去。
+            同时，在webscoket的通讯中，也对SSL的配置安全校验有较高的要求，因此，backend必须要实现强的SSL的通讯安全
+            基于此，我们在上述的Flask基础上引入了Nginx 代理服务器来实现。
+
+      因此，后端服务器除功能实现外，具体的业务模型如下：
+
+      Backend           <====>  Nginx Proxy Server 
+            port:8000            |_____
+                                    |_____: port 8080, proxy with Front page        <====> https:localhost:8080/  
+                                    |_____: port 8443, proxy with ESP/Client HTTPS connection.   <====> https:IP:8443/
+      
+      在这里 需要说明，PythonFlask模块本身支持的SSL，但是需要使用eventlet模式，但是这个模式下对于 tcp_async的线程处理非常不利，会造成TCP通讯无法维护线程池。 
+      因此最终的模型是，在flask中采用async_mode= “threading” 模式，这样确保backend所有的线程池管理能满足业务需要。
+
+      基于这个特点，其SSL/HTTPS的通讯需要必须要通过代理服务器来实现。 这里处理原本的认证证书连，还需要将生成一个fullchain.pem 用于代理服务器校验使用。 
+
+      
