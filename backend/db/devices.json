@@ -14,8 +14,8 @@
     "client_id": "759",
     "ip": null,
     "version": "unknown",
-    "partition": null,
-    "status": "Offline"
+    "partition": "B",
+    "status": "Online"
   },
   {
     "device_name": "Veh2_SCM3",
@@ -23,7 +23,7 @@
     "client_id": "760",
     "ip": null,
     "version": "unknown",
-    "partition": null,
+    "partition": "A",
     "status": "Online"
   }
 ]

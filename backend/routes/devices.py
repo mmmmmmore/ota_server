@@ -1,5 +1,5 @@
 import json
-import os
+import os,re
 from flask import Blueprint, jsonify, request
 from routes.base_value import DEVICES_FILE
 from routes.messagebus import bus
@@ -28,15 +28,26 @@ def save_devices(devices):
 
 
 
-def update_device_partition(client_id, ota_result):
-    device_info = load_devices
+
+
+def handle_tcp_task_update_partition(payload):
+    task_id = payload.get("task_id")
+    client_id = re.split("_", task_id)[-1] 
+    result = payload.get("status")
+    #print(f"{client_id} update partition with result {result}")
+    device_info = load_devices()
     for d in device_info:
         if d["client_id"] == client_id:
-            if ota_result == "success":
+            if result == "success":
+                #print(f"condition ready to change ")
                 d["partition"] = "B" if d["partition"] =="A" else "A"
+                #print(f"{d} partition changed")
+                save_devices(device_info)
+                bus.publish("device.update", {"type": "device", "devices": "updated"})
             break
+    #print("-=====info front update====----")
 
-                
+
 
 def update_device_connection(client_id, connect_state):
     device_info = load_devices
@@ -196,6 +207,9 @@ def handle_device_update(payload):
             break
 
 
+
+    
+
 # need use in app for initialization
 def init_device_subscription():
     bus.subscribe("websock.device_create", handle_device_create)
@@ -203,4 +217,5 @@ def init_device_subscription():
     bus.subscribe("websock.device_edit", handle_device_edit)
     bus.subscribe("websock.device_query", handle_device_query)
     bus.subscribe("tcp.device_update", handle_device_update)
+    bus.subscribe("tcp.update_task", handle_tcp_task_update_partition)
         

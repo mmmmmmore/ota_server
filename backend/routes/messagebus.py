@@ -52,7 +52,7 @@ class MessageBus:
             if handlers:
                 #  create payload to async thread pool
                 for handler in handlers:
-                    print("[Msg_BUS]", handler)
+                    #print("[Msg_BUS]", handler)
                     self.executor.submit(self._safe_invoke, handler, payload)
                     #print(self.messages)
             else:
@@ -64,8 +64,8 @@ class MessageBus:
 
     def _safe_invoke(self, handler, payload):
         try:
-            print("[Msg_BUS]",handler)
-            print("[Msg_BUS]",payload)
+            #print("[Msg_BUS]",handler)
+            #print("[Msg_BUS]",payload)
             handler(payload)
         except Exception as e:
             print(f"[MsgBus] handler error: {e}")

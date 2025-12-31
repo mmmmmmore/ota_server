@@ -2,7 +2,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import base64
-
+from threading import Lock, RLock
 import re, os, time
 import json
 from datetime import datetime
@@ -92,8 +92,13 @@ class Task():
         self.tasklist = []
         self.devicelist =[]
         self.save_dir = STATIC_DIR
+        self._locks ={}
         
-        
+    
+    def _get_task_lock(self, task_id: str) -> RLock:
+        if task_id not in self._locks:
+            self._locks[task_id] = RLock()
+        return self._locks[task_id]
         
     def __load_device__(self):
         try:
@@ -148,27 +153,34 @@ class Task():
         return filepath, task
     
     def task_update_phase(self, task_id, new_tashphase: TaskPhase):
-        for task in self.tasklist:
-            if task["task_id"] == task_id:
-                _, current_result = decode_result(task["result"])
-                task['result'] = encode_result(new_tashphase, current_result)
-                taskfile = os.path.join(TASK_DIR, f"{task_id}.json")
-                with open(taskfile, "w") as f:
-                    json.dump(task, taskfile, indent=2)
-                    print("[Dispatch] task phase updated")
-                break
+        lock = self._get_task_lock(task_id)
+        with lock:
+            for task in self.tasklist:
+                if task["task_id"] == task_id:
+                    _, current_result = decode_result(task["result"])
+                    task['result'] = encode_result(new_tashphase, current_result)
+                    taskfile = os.path.join(TASK_DIR, f"{task_id}.json")
+                    print(f'[TASK] update task file {taskfile}')
+                    with open(taskfile, "w") as f:
+                        json.dump(task, f, indent=2)
+                        print("[Dispatch] task phase updated")
+                    break
         return None
     
     def task_update_result(self, task_id, new_result: TaskResult):
-        for task in self.tasklist:
-            if task["task_id"] == task_id:
-                current_phase, _ = decode_result(task["result"])
-                task["result"] = encode_result(current_phase.FINISHED, new_result)
-                taskfile = os.path.join(TASK_DIR, f"{task_id}.json")
-                with open(taskfile, "w") as f:
-                    json.dump(task, taskfile, indent=2)
-                    print("[Dispatch] task result updated")
-                break
+        lock = self._get_task_lock(task_id)
+        with lock:
+            for task in self.tasklist:
+                if task["task_id"] == task_id:
+                    current_phase, _ = decode_result(task["result"])
+                    task["result"] = encode_result(current_phase.FINISHED, new_result)
+                    taskfile = os.path.join(TASK_DIR, f"{task_id}.json")
+                    print(f'[TASK] update task file {taskfile}')
+
+                    with open(taskfile, "w") as f:
+                        json.dump(task, f, indent=2)
+                        print("[Dispatch] task result updated")
+                    break
         return None
                 
                 
@@ -271,8 +283,8 @@ class Task():
                 history_tasks.append(
                     {
                         "task_id":task["task_id"],
-                        "phase":str(phase_enum),
-                        "result":str(result_enum)
+                        "phase":phase_enum.name,
+                        "result":result_enum.name
                     }
                 )
         return json.dumps(history_tasks)
