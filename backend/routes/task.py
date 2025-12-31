@@ -2,7 +2,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import base64
-from enum import IntEnum
+
 import re, os, time
 import json
 from datetime import datetime
@@ -12,7 +12,7 @@ from routes.devices import load_devices
 from routes.software import load_software
 from routes.base_value import TASK_DIR, STATIC_DIR, SW_LIST_DIR
 # setup the target path
-
+from routes.base_value import TaskPhase, TaskResult
 
 
 
@@ -31,17 +31,7 @@ def read_version_note(version):
 
 
 
-class TaskPhase(IntEnum):
-    UNKNOWN     = 0x00
-    INITIATED   = 0x01
-    PENDING     = 0x02
-    REJECTED    = 0x03
-    FINISHED    = 0x04
-    
-class TaskResult(IntEnum):
-    UNKNOWN     = 0x00
-    SUCCESS     = 0x01
-    FAILED      = 0x02
+
     
 def to_hex_byte(value: int) -> str :
     return f"0x{value:02X}"
@@ -165,6 +155,7 @@ class Task():
                 taskfile = os.path.join(TASK_DIR, f"{task_id}.json")
                 with open(taskfile, "w") as f:
                     json.dump(task, taskfile, indent=2)
+                    print("[Dispatch] task phase updated")
                 break
         return None
     
@@ -176,6 +167,7 @@ class Task():
                 taskfile = os.path.join(TASK_DIR, f"{task_id}.json")
                 with open(taskfile, "w") as f:
                     json.dump(task, taskfile, indent=2)
+                    print("[Dispatch] task result updated")
                 break
         return None
                 

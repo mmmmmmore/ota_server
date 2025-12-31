@@ -1,4 +1,6 @@
 import os
+from enum import IntEnum
+
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TASK_DIR = os.path.normpath(os.path.join(BASE_DIR, "..", "db", "tasks"))
@@ -29,3 +31,15 @@ SERVERFULCHAIN = os.path.join(BASE_DIR, "..", "fullchain.pem")
 
 
 FRONT_PATH= os.path.join(BASE_DIR, "..","..","front")
+
+class TaskPhase(IntEnum):
+    UNKNOWN     = 0x00
+    INITIATED   = 0x01
+    PENDING     = 0x02
+    REJECTED    = 0x03
+    FINISHED    = 0x04
+    
+class TaskResult(IntEnum):
+    UNKNOWN     = 0x00
+    SUCCESS     = 0x01
+    FAILED      = 0x02

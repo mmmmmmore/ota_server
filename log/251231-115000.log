@@ -1,0 +1,27 @@
+
+[Msg_BUS] <function notify_refresh at 0x118b8c7c0>
+[Msg_BUS] <function notify_refresh at 0x118b8c7c0>
+[Msg_BUS] {'page_area': 'device_update', 'content': 'connection_changed'}
+[Web] notify front refresh page: {'page_area': 'device_update', 'content': 'connection_changed'}
+127.0.0.1 - - [31/Dec/2025 11:49:26] "GET /api/devices HTTP/1.1" 200 -
+[Msg_BUS] <function handle_device_update at 0x10eadd580>
+[Msg_BUS] <function handle_device_update at 0x10eadd580>
+[Backend-TCP] device new register online, need update the result
+[Msg_BUS] {'msg_type': 'register', 'device_name': 'Veh2_SCM3', 'client_id': '760', 'mac': '1C:DB:D4:AF:1F:60', 'ip': '192.168.4.3', 'connect_state': 'Online'}
+[Device] device 760 connection udpated
+[Msg_BUS] <function notify_refresh at 0x118b8c7c0>
+[Msg_BUS] <function notify_refresh at 0x118b8c7c0>
+[Msg_BUS] {'page_area': 'device_update', 'content': 'connection_changed'}
+[Web] notify front refresh page: {'page_area': 'device_update', 'content': 'connection_changed'}
+127.0.0.1 - - [31/Dec/2025 11:49:26] "GET /api/devices HTTP/1.1" 200 -
+[Msg_BUS] <function handle_tcp_task_update at 0x118b5fce0>
+[Msg_BUS] <function handle_task_ack_update at 0x118b5fd80>
+[Msg_BUS] <function handle_tcp_task_update at 0x118b5fce0>
+[Msg_BUS] {'msg_type': 'ota_task_ack', 'task_id': '20251231_114900_760', 'status': 'success', 'version': 'v2.2.0'}
+[MsgBus] handler error: cannot unpack non-iterable NoneType object
+[Msg_BUS] <function handle_task_ack_update at 0x118b5fd80>
+[Msg_BUS] {'msg_type': 'ota_task_ack', 'task_id': '20251231_114900_760', 'status': 'success', 'version': 'v2.2.0'}
+[MsgBus] handler error: 'str' object has no attribute 'write'
+[TCP_Async] Rx task_ack from GW {'msg_type': 'ota_task_ack', 'task_id': '20251231_114900_760', 'status': 'success', 'version': 'v2.2.0'}
+[TCP_Async] Tx keepalive_ack 
+[TCP_Async] Tx keepalive_ack 

@@ -28,96 +28,121 @@ class GatewayClient:
         self.connected: bool = False  # OTA server connection with GW 
         self.lask_ack =0
         self.conn_lock = asyncio.Lock()
+        self.last_keepalive_ack =0
+        self.keepalive_ack_interval=5  # seconds
         
 
     async def run(self):
         """Main connection loop with auto-reconnect and TCP_NODELAY."""
         while True:
             try:
+                
+                reader, writer = await asyncio.open_connection(self.ip, self.port)
+                
+                sock = writer.get_extra_info("socket")
+                if sock :
+                    sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+                
+                
+                # Check if we already have a healthy connection
                 async with self.conn_lock:
-                    
-                    if self.writer :
-                        print("..............write alive")
-                        if time.time() - self.lask_ack < 30:
-                            print(f"[Backend-TCP]{time.time()-self.lask_ack}")
-                            await asyncio.sleep(5)
-                            continue
-                    reader, writer = await asyncio.open_connection(self.ip, self.port)
                     self.writer = writer
                     self.connected = True
-                    print("[TCP] Connected to GW")
-
-                # Set TCP_NODELAY
-                    sock = writer.get_extra_info('socket')
-                    if sock is not None:
-                        sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
-
-                # Hello handshake
+                    self.lask_ack = time.time()
+                    print("[TCP_Async] Connected with GW")
+                    
+                    # Hello handshake
                     hello_msg = {"msg_type": "hello", "role": "ota_server"}
                     writer.write((json.dumps(hello_msg) + "\n").encode())
                     await writer.drain()
-
-                # Flush any pending tasks (if any)
+                    
                     await self._flush_pending()
-
-                # Start receiver loop (blocking until disconnect)
+                    
                     await self.receiver(reader, writer)
-
+                    
             except Exception as e:
-                print("[TCP] Connection error:", e)
+                print(f"[TCP_Async] Connection error: {e}")
+            
             finally:
-                # Cleanup on disconnect
-                try:
+                
+                async with self.conn_lock:
+                    self.connected= False
                     if self.writer:
-                        self.writer.close()
-                        # In asyncio 3.11+, can await writer.wait_closed()
-                except Exception:
-                    pass
-                self.writer = None
+                        try:
+                            self.writer.close()
+                            await self.writer.wait_closed()
+                        except Exception:
+                            pass
+                        self.writer =None
+                print("[TCP_Async] Disconnected with GW, retry in 10s")
+                await asyncio.sleep(10)
+                    
 
-            # Backoff before reconnect
-            await asyncio.sleep(5)
-
+    
     async def receiver(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
         """Receive messages from GW and publish to MessageBus."""
-        while True:
-            data = await reader.readline()
-            if not data:
-                print("[TCP] GW disconnected")
-                break
+        try:
+            while True:
+                data = await reader.readline()
+                if not data:
+                    print("[TCP] GW disconnected")
+                    break
 
-            msg = data.decode(errors="replace").strip()
-            if not msg:
-                continue
+                msg = data.decode(errors="replace").strip()
+                if not msg:
+                    continue
 
-            try:
-                obj = json.loads(msg)
-            except Exception as e:
-                print("[TCP] Parse error:", e, msg)
-                continue
+                try:
+                    obj = json.loads(msg)
+                except Exception as e:
+                    print("[TCP] Parse error:", e, msg)
+                    continue
 
-            # Dispatch by msg_type
-            mt = obj.get("msg_type")
-            if mt == "keep_alive":
-                await self._send_keepalive_ack(writer, obj)
-                self.lask_ack = time.time()
-                self.connected = True
-            elif mt == "ota_task_ack":
-                bus.publish("tcp.update_task", obj)
-            elif mt == "register":
-                bus.publish("tcp.device_update", obj)
-            else:
-                print("[TCP] GW message:", obj)
+                # Dispatch by msg_type
+                mt = obj.get("msg_type")
+                if mt == "keep_alive":
+                    await self._send_keepalive_ack(writer, obj)
+                    self.lask_ack = time.time()
+                    
+                    self.connected = True
+                elif mt == "ota_task_ack":
+                    bus.publish("tcp.update_task", obj)
+                    print("[TCP_Async] Rx task_ack from GW", obj)
+                elif mt == "register":
+                    bus.publish("tcp.device_update", obj)
+                    print(f"[Backend-TCP] device new register online, need update the result")
+                else:
+                    print("[TCP] GW message:", obj)
+        except asyncio.CancelledError:
+            print("[TCP_Async] Receiver canncelled")
+        
+        except Exception as e:
+            print("[TCP_Async] Received error: ", e)
+        
+        finally:
+            print("[TCP_Async] Receiver exiting")
             
-        # after all connection finished
-        self.connected = False
 
     async def _send_keepalive_ack(self, writer: asyncio.StreamWriter, obj: Dict[str, Any]):
+        if not self.writer:
+            return
+        
+        now = time.time()
+        if now- self.last_keepalive_ack < self.keepalive_ack_interval:
+            return
+        
+        
         """Reply to keep_alive with ack."""
         ack = {"msg_type": f"keep_alive_ack"}
-        writer.write((json.dumps(ack) + "\n").encode())
-        await writer.drain()
-        print("[TCP] Sent keep_alive_ack")
+        try:
+            self.writer.write((json.dumps(ack)+'\n').encode())
+            await self.writer.drain()
+            self.last_keepalive_ack =now
+            print("[TCP_Async] Tx keepalive_ack ")
+        except Exception as e:
+            print("[TCP_Async] keepalive sent failed: ",e)
+            
+            
 
     async def send_task(self, filepath: str, task: Dict[str, Any]):
         """
