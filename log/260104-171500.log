@@ -1,0 +1,265 @@
+
+[TCP_Async] Connected with GW
+[Backend-TCP] after connected run -04 True
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:8000
+Press CTRL+C to quit
+ * Restarting with stat
+from task::/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/backend/db/tasks
+/Users/maochun/esp32prj/Project_CAM/branch/ota_Server/ota_server/backend/db/tasks not exist, please check path
+File 20251231_121437_760.json cannot be decoded by JSON
+[TCP] Gateway client started
+[Backend-TCP] step run-01 try logFalse
+[Backend-TCP] THis is try run-02 setup tcp protocol 
+[Backend-TCP] THis is try run -03 tcp False 
+[TCP_Async] Connected with GW
+[Backend-TCP] after connected run -04 True
+[TCP_Async] Received error:  [Errno 54] Connection reset by peer
+[TCP_Async] Receiver exiting
+[Backend-TCP] run 06 finally True
+before finally: run-07 True
+after finally  setup : run -08 False
+after finally setup, check writer :run-09 <StreamWriter transport=<_SelectorSocketTransport closed fd=6> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=6>>>
+before writer close :run-11<StreamWriter transport=<_SelectorSocketTransport closed fd=6> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=6>>>
+after writer close setup, rum-12None
+[TCP_Async] Disconnected with GW, retry in 10s
+ * Debugger is active!
+ * Debugger PIN: 296-762-680
+[TCP_Async] Tx keepalive_ack :1767518029.118142 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518034.1397362 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[Backend-TCP] step run-01 try logFalse
+[Backend-TCP] THis is try run-02 setup tcp protocol 
+[Backend-TCP] THis is try run -03 tcp False 
+[TCP_Async] Connected with GW
+[Backend-TCP] after connected run -04 True
+[TCP_Async] Received error:  [Errno 54] Connection reset by peer
+[TCP_Async] Receiver exiting
+[Backend-TCP] run 06 finally True
+before finally: run-07 True
+after finally  setup : run -08 False
+after finally setup, check writer :run-09 <StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+before writer close :run-11<StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+after writer close setup, rum-12None
+[TCP_Async] Disconnected with GW, retry in 10s
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518044.064429 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[Backend-TCP] step run-01 try logFalse
+[Backend-TCP] THis is try run-02 setup tcp protocol 
+[Backend-TCP] THis is try run -03 tcp False 
+[TCP_Async] Connected with GW
+[Backend-TCP] after connected run -04 True
+[TCP_Async] Received error:  [Errno 54] Connection reset by peer
+[TCP_Async] Receiver exiting
+[Backend-TCP] run 06 finally True
+before finally: run-07 True
+after finally  setup : run -08 False
+after finally setup, check writer :run-09 <StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+before writer close :run-11<StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+after writer close setup, rum-12None
+[TCP_Async] Disconnected with GW, retry in 10s
+[TCP_Async] Tx keepalive_ack :1767518049.0817978 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[Backend-TCP] device new register online, need update the result
+[Device] device 759 connection udpated
+[Web] notify front refresh page: {'page_area': 'device_update', 'content': 'connection_changed'}
+[Backend-TCP] device new register online, need update the result
+[Device] device 758 connection udpated
+[Web] notify front refresh page: {'page_area': 'device_update', 'content': 'connection_changed'}
+[Backend-TCP] step run-01 try logFalse
+[Backend-TCP] THis is try run-02 setup tcp protocol 
+[Backend-TCP] THis is try run -03 tcp False 
+[TCP_Async] Connected with GW
+[Backend-TCP] after connected run -04 True
+[TCP_Async] Received error:  [Errno 54] Connection reset by peer
+[TCP_Async] Receiver exiting
+[Backend-TCP] run 06 finally True
+before finally: run-07 True
+after finally  setup : run -08 False
+after finally setup, check writer :run-09 <StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+before writer close :run-11<StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+after writer close setup, rum-12None
+[TCP_Async] Disconnected with GW, retry in 10s
+[TCP_Async] Tx keepalive_ack :1767518059.1178172 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518064.1342232 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[Backend-TCP] step run-01 try logFalse
+[Backend-TCP] THis is try run-02 setup tcp protocol 
+[Backend-TCP] THis is try run -03 tcp False 
+[TCP_Async] Connected with GW
+[Backend-TCP] after connected run -04 True
+[TCP_Async] Received error:  [Errno 54] Connection reset by peer
+[TCP_Async] Receiver exiting
+[Backend-TCP] run 06 finally True
+before finally: run-07 True
+after finally  setup : run -08 False
+after finally setup, check writer :run-09 <StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+before writer close :run-11<StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+after writer close setup, rum-12None
+[TCP_Async] Disconnected with GW, retry in 10s
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518074.070122 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[Backend-TCP] step run-01 try logFalse
+[Backend-TCP] THis is try run-02 setup tcp protocol 
+[Backend-TCP] THis is try run -03 tcp False 
+[TCP_Async] Connected with GW
+[Backend-TCP] after connected run -04 True
+[TCP_Async] Received error:  [Errno 54] Connection reset by peer
+[TCP_Async] Receiver exiting
+[Backend-TCP] run 06 finally True
+before finally: run-07 True
+after finally  setup : run -08 False
+after finally setup, check writer :run-09 <StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+before writer close :run-11<StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+after writer close setup, rum-12None
+[TCP_Async] Disconnected with GW, retry in 10s
+[TCP_Async] Tx keepalive_ack :1767518079.089259 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[Backend-TCP] step run-01 try logFalse
+[Backend-TCP] THis is try run-02 setup tcp protocol 
+[Backend-TCP] THis is try run -03 tcp False 
+[TCP_Async] Connected with GW
+[Backend-TCP] after connected run -04 True
+[TCP_Async] Received error:  [Errno 54] Connection reset by peer
+[TCP_Async] Receiver exiting
+[Backend-TCP] run 06 finally True
+before finally: run-07 True
+after finally  setup : run -08 False
+after finally setup, check writer :run-09 <StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+before writer close :run-11<StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+after writer close setup, rum-12None
+[TCP_Async] Disconnected with GW, retry in 10s
+[TCP_Async] Tx keepalive_ack :1767518089.032053 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518094.13511 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[Backend-TCP] step run-01 try logFalse
+[Backend-TCP] THis is try run-02 setup tcp protocol 
+[Backend-TCP] THis is try run -03 tcp False 
+[TCP_Async] Connected with GW
+[Backend-TCP] after connected run -04 True
+[TCP_Async] Received error:  [Errno 54] Connection reset by peer
+[TCP_Async] Receiver exiting
+[Backend-TCP] run 06 finally True
+before finally: run-07 True
+after finally  setup : run -08 False
+after finally setup, check writer :run-09 <StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+before writer close :run-11<StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+after writer close setup, rum-12None
+[TCP_Async] Disconnected with GW, retry in 10s
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518104.0705512 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[Backend-TCP] step run-01 try logFalse
+[Backend-TCP] THis is try run-02 setup tcp protocol 
+[Backend-TCP] THis is try run -03 tcp False 
+[TCP_Async] Connected with GW
+[Backend-TCP] after connected run -04 True
+[TCP_Async] Received error:  [Errno 54] Connection reset by peer
+[TCP_Async] Receiver exiting
+[Backend-TCP] run 06 finally True
+before finally: run-07 True
+after finally  setup : run -08 False
+after finally setup, check writer :run-09 <StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+before writer close :run-11<StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+after writer close setup, rum-12None
+[TCP_Async] Disconnected with GW, retry in 10s
+[TCP_Async] Tx keepalive_ack :1767518109.084094 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518114.1033118 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[Backend-TCP] step run-01 try logFalse
+[Backend-TCP] THis is try run-02 setup tcp protocol 
+[Backend-TCP] THis is try run -03 tcp False 
+[TCP_Async] Connected with GW
+[Backend-TCP] after connected run -04 True
+[TCP_Async] Received error:  [Errno 54] Connection reset by peer
+[TCP_Async] Receiver exiting
+[Backend-TCP] run 06 finally True
+before finally: run-07 True
+after finally  setup : run -08 False
+after finally setup, check writer :run-09 <StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+before writer close :run-11<StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader exception=ConnectionResetError(54, 'Connection reset by peer') transport=<_SelectorSocketTransport closed fd=13>>>
+after writer close setup, rum-12None
+[TCP_Async] Disconnected with GW, retry in 10s
+[TCP_Async] Tx keepalive_ack :1767518119.118784 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518124.136518 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[Backend-TCP] step run-01 try logFalse
+[Backend-TCP] THis is try run-02 setup tcp protocol 
+[Backend-TCP] THis is try run -03 tcp False 
+[TCP_Async] Connected with GW
+[Backend-TCP] after connected run -04 True
+[TCP] GW disconnected
+[TCP_Async] Receiver exiting
+[Backend-TCP] run 06 finally True
+before finally: run-07 True
+after finally  setup : run -08 False
+after finally setup, check writer :run-09 <StreamWriter transport=<_SelectorSocketTransport fd=13 read=idle write=<idle, bufsize=0>> reader=<StreamReader eof transport=<_SelectorSocketTransport fd=13 read=idle write=<idle, bufsize=0>>>>
+after check writer, setup close: run-10 <StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader eof transport=<_SelectorSocketTransport closed fd=13>>>
+before writer close :run-11<StreamWriter transport=<_SelectorSocketTransport closed fd=13> reader=<StreamReader eof transport=<_SelectorSocketTransport closed fd=13>>>
+after writer close setup, rum-12None
+[TCP_Async] Disconnected with GW, retry in 10s
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518134.070218 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[Backend-TCP] step run-01 try logFalse
+[TCP_Async] Connection error: [Errno 60] Connect call failed ('192.168.4.1', 9001)
+[Backend-TCP] run 05- False
+[Backend-TCP] run 06 finally False
+before finally: run-07 False
+after finally  setup : run -08 False
+[TCP_Async] Disconnected with GW, retry in 10s
+
+
+
+
+[Backend-TCP] step run-01 try logFalse
+[Backend-TCP] THis is try run-02 setup tcp protocol 
+[Backend-TCP] THis is try run -03 tcp False 
+[TCP_Async] Connected with GW
+[Backend-TCP] after connected run -04 True
+[TCP_Async] Tx keepalive_ack :1767518224.0699258 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518234.186812 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518244.036576 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518254.073492 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518259.0873852 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518269.122998 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518279.0550232 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518284.071886 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518289.0892348 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518294.106633 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518304.0471108 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518309.055197 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518314.07331 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+[TCP_Async] Tx keepalive_ack :1767518319.090137 
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
+Receiver -01 the keepalive parsed with : keep_alive, with connection status: True
