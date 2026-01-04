@@ -144,7 +144,7 @@ class Task():
             "firmware_url": f"https://192.168.4.2:8443/firmware/ota_client_{client_id}_{version}.bin",
             "timestamp": timestamp,
             "result": encode_result(TaskPhase.INITIATED, TaskResult.UNKNOWN),
-            "feature": sw_note
+            "features": sw_note
         }
         with open(filepath, "w") as f:
             json.dump(task, f, indent=2)
