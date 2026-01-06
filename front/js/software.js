@@ -12,7 +12,7 @@
           const row = document.createElement("tr");
           row.innerHTML = `
             <td>${s.version}</td>
-            <td>${s.date}</td>
+            <td>${s.release_date || s.date || ""}</td>
             <td>${s.changes}</td>
             <td>${s.md5}</td>
             <td>

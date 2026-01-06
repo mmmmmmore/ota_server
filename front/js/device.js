@@ -31,7 +31,7 @@
             <td>${dev.client_id || ""}</td>
             <td>${dev.mac_address || ""}</td>
             <td>${dev.ip || ""}</td>
-            <td>${dev.firmware_version || ""}</td>
+            <td>${dev.version || dev.firmware_version || ""}</td>
             <td>${renderPartition(dev.partition)}</td>
             <td>${renderStatus(dev.status)}</td>
             <td>
@@ -57,11 +57,12 @@
       return;
     }
 
+    // Backend expects `version` field; include fallback for `firmware_version` compatibility
     const newDevice = {
       device_name: deviceName,
       mac_address: macAddress,
       client_id: clientId,
-      firmware_version: firmwareVersion,
+      version: firmwareVersion || null,
     };
 
     fetch("https://localhost:8080/api/devices/register", {

@@ -194,15 +194,25 @@ def handle_device_query(payload):
     
 
 def handle_device_update(payload):
-    # change online offline 
+    print(payload)
+    # change online/offline; update version only when coming Online
     connection = payload.get("connect_state")
     client_id = payload.get("client_id")
+    version = payload.get("version")
+    ip = payload.get("ip")
     devices = load_devices()
     for d in devices:
         if d["client_id"] == client_id:
             d["status"] = connection
+            # update version only when device connects (going online)
+            if connection and version:
+                ver = re.split('_',version)[0]
+                print(f"========={ver}")
+                d["version"] = ver
+                d["ip"] = ip
+                print(f"[Device] device {client_id} version updated to {version}")
             save_devices(devices)
-            print(f"[Device] device {client_id} connection udpated")
+            print(f"[Device] device {client_id} connection updated")
             bus.publish("device.update", {"page_area":"device_update", "content":"connection_changed"})
             break
 
