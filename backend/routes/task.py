@@ -242,37 +242,109 @@ class Task():
 
         
     def plot_summary(self, client_id: str):
-        
+        # Preserve data logic, enhance only visuals
         result_summary, phase_summary = self.__task_summary_by_client(client_id)
-        #plt figure
-        fig, axes = plt.subplots(1,2, figsize=(12,3))
-        phases = list(phase_summary.keys())
-        phase_value = list(phase_summary.values())
-        axes[0].bar(phases, phase_value, color="skyblue")
+
+        # Friendly display labels keeping original keys
+        phase_labels_map = {
+            "total": "Total",
+            "initiate": "Initiated",
+            "pending": "Pending",
+            "reject": "Rejected",
+            "finish": "Finished",
+        }
+        result_labels_map = {
+            "total": "Total",
+            "success": "Success",
+            "failed": "Failed",
+        }
+
+        # Modern color palette aligned with front theme
+        phase_colors_map = {
+            "total": "#CBD5E0",     # gray 300
+            "initiate": "#667eea",  # indigo
+            "pending": "#4299e1",   # blue
+            "reject": "#f56565",    # red
+            "finish": "#48bb78",    # green
+        }
+        result_colors_map = {
+            "total": "#CBD5E0",
+            "success": "#48bb78",
+            "failed": "#f56565",
+        }
+
+        # Figure setup with a clean, modern style (cross‑platform fonts)
+        plt.rcParams.update({
+            "font.family": "sans-serif",
+            # Use matplotlib-bundled DejaVu Sans first, then common system fonts
+            "font.sans-serif": ["DejaVu Sans", "Helvetica", "Arial"],
+            "font.size": 11,
+            "axes.titleweight": "bold",
+            "axes.labelweight": "bold",
+        })
+
+        fig, axes = plt.subplots(1, 2, figsize=(14, 4.5))
+
+        # Phases subplot
+        phases_keys = list(phase_summary.keys())
+        phases_vals = [phase_summary[k] for k in phases_keys]
+        phases_labels = [phase_labels_map.get(k, k.title()) for k in phases_keys]
+        phases_colors = [phase_colors_map.get(k, "#667eea") for k in phases_keys]
+
+        bars0 = axes[0].bar(phases_labels, phases_vals, color=phases_colors, edgecolor="#e2e8f0", linewidth=1.2)
         axes[0].set_title("Task Phase Summary")
         axes[0].set_ylabel("Count")
-        for i, v in enumerate(phase_value):
-            axes[0].text(i, v+0.1, str(v), ha="center")
-        
-        results = list(result_summary.keys())
-        result_value = list(result_summary.values())
-        axes[1].bar(results, result_value, color= "lightgreen")
+        axes[0].grid(axis="y", linestyle="--", alpha=0.35)
+        axes[0].spines["top"].set_visible(False)
+        axes[0].spines["right"].set_visible(False)
+
+        for rect, v in zip(bars0, phases_vals):
+            axes[0].text(
+                rect.get_x() + rect.get_width() / 2,
+                rect.get_height() + 0.1,
+                str(v),
+                ha="center",
+                va="bottom",
+                fontsize=10,
+                color="#2d3748",
+            )
+
+        # Results subplot
+        results_keys = list(result_summary.keys())
+        results_vals = [result_summary[k] for k in results_keys]
+        results_labels = [result_labels_map.get(k, k.title()) for k in results_keys]
+        results_colors = [result_colors_map.get(k, "#667eea") for k in results_keys]
+
+        bars1 = axes[1].bar(results_labels, results_vals, color=results_colors, edgecolor="#e2e8f0", linewidth=1.2)
         axes[1].set_title("Task Result Summary")
         axes[1].set_ylabel("Count")
-        for i, v in enumerate(result_value):
-            axes[1].text(i, v+0.1, str(v), ha="center")
-        
+        axes[1].grid(axis="y", linestyle="--", alpha=0.35)
+        axes[1].spines["top"].set_visible(False)
+        axes[1].spines["right"].set_visible(False)
+
+        for rect, v in zip(bars1, results_vals):
+            axes[1].text(
+                rect.get_x() + rect.get_width() / 2,
+                rect.get_height() + 0.1,
+                str(v),
+                ha="center",
+                va="bottom",
+                fontsize=10,
+                color="#2d3748",
+            )
+
+        # Layout & save
         plt.tight_layout()
-        if client_id == "all":        
+        if client_id == "all":
             save_path = os.path.join(self.save_dir, f"summary_all.png")
         else:
             save_path = os.path.join(self.save_dir, f"summary_{client_id}.png")
-        plt.savefig(save_path)
+        plt.savefig(save_path, dpi=160, bbox_inches="tight")
         plt.close(fig)
-        
+
         with open(save_path, 'rb') as f:
             img_base64 = base64.b64encode(f.read())
-            b64_str = img_base64.decode("ascii")
+            _ = img_base64.decode("ascii")
         return img_base64
         
     def task_history(self, client_id):
