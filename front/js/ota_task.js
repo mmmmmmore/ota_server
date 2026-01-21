@@ -2,9 +2,11 @@
 (() => {
   // 刷新任务列表：生成每个设备一行，右侧包含软件版本选择和操作按钮
   function refreshTask() {
+    const devicesUrl = window.AppConfig.getAPIEndpoint('/api/devices');
+    const softwareUrl = window.AppConfig.getAPIEndpoint('/api/software');
     Promise.all([
-      fetch("https://localhost:8080/api/devices").then(res => res.json()),
-      fetch("https://localhost:8080/api/software").then(res => res.json())
+      fetch(devicesUrl).then(res => res.json()),
+      fetch(softwareUrl).then(res => res.json())
     ])
       .then(([devices, software]) => {
         const tbody = document.getElementById("tasks-tbody");

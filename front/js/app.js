@@ -180,4 +180,34 @@ function onTaskSummary(png) {
     onTaskHistory,
     onDeviceUpdate
   };
+
+  // ---------------- 初始化应用 ----------------
+  async function initApp() {
+    try {
+      // Initialize configuration
+      await window.AppConfig.init();
+      
+      // Log environment info
+      if (window.electronAPI) {
+        console.log('[App] Running in Electron');
+        console.log('[App] Platform:', window.electronAPI.platform);
+        console.log('[App] Versions:', window.electronAPI.versions);
+      } else {
+        console.log('[App] Running in browser');
+      }
+      
+      console.log('[App] Backend URL:', window.AppConfig.backendURL);
+      console.log('[App] Application initialized successfully');
+      
+    } catch (error) {
+      console.error('[App] Initialization error:', error);
+    }
+  }
+
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+  } else {
+    initApp();
+  }
 })();

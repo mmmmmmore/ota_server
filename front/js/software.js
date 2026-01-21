@@ -2,7 +2,8 @@
 (() => {
   // 查询软件版本
   function querySoftware() {
-    fetch("https://localhost:8080/api/software")
+    const url = window.AppConfig.getAPIEndpoint('/api/software');
+    fetch(url)
       .then(res => res.json())
       .then(list => {
         const tbody = document.getElementById("software-tbody");
@@ -49,7 +50,8 @@
     formData.append("md5", md5);
     formData.append("changes", changes);
 
-    fetch("https://localhost:8080/api/software/upload", {
+    const url = window.AppConfig.getAPIEndpoint('/api/software/upload');
+    fetch(url, {
       method: "POST",
       body: formData
     })
@@ -68,7 +70,8 @@
 
     const payload = { changes: newChanges, md5: newMd5 };
 
-    fetch(`https://localhost:8080/api/software/${version}`, {
+    const url = window.AppConfig.getAPIEndpoint(`/api/software/${version}`);
+    fetch(url, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -85,7 +88,8 @@
   function deleteSoftware(version) {
     if (!confirm(`确定要删除版本 ${version} 吗？`)) return;
 
-    fetch(`https://localhost:8080/api/software/${version}`, {
+    const url = window.AppConfig.getAPIEndpoint(`/api/software/${version}`);
+    fetch(url, {
       method: "DELETE"
     })
       .then(res => res.json())

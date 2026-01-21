@@ -19,7 +19,8 @@
 
   // Update your queryDevices function
   function queryDevices() {
-    fetch("https://localhost:8080/api/devices")
+    const url = window.AppConfig.getAPIEndpoint('/api/devices');
+    fetch(url)
       .then(response => response.json())
       .then(devices => {
         const tbody = document.getElementById("devices-tbody");
@@ -65,7 +66,8 @@
       version: firmwareVersion || null,
     };
 
-    fetch("https://localhost:8080/api/devices/register", {
+    const url = window.AppConfig.getAPIEndpoint('/api/devices/register');
+    fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newDevice)
@@ -93,7 +95,8 @@
       partition: newPartition
     };
 
-    fetch(`https://localhost:8080/api/devices/${mac}`, {
+    const url = window.AppConfig.getAPIEndpoint(`/api/devices/${mac}`);
+    fetch(url, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -110,7 +113,8 @@
   function deleteDevice(mac) {
     if (!confirm(`确定要删除设备 ${mac} 吗？`)) return;
 
-    fetch(`https://localhost:8080/api/devices/${mac}`, {
+    const url = window.AppConfig.getAPIEndpoint(`/api/devices/${mac}`);
+    fetch(url, {
       method: "DELETE"
     })
       .then(res => res.json())

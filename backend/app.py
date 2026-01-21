@@ -63,7 +63,8 @@ if __name__ == "__main__":
     context.set_ciphers("ECDHE+AESGCM:ECDHE+CHACHA20:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384")
 
     
-    socketio.run(app, host="127.0.0.1", port=8000, debug=True)
+    # Werkzeug now enforces production safety; allow for local dev
+    socketio.run(app, host="127.0.0.1", port=8000, debug=True, allow_unsafe_werkzeug=True)
     
     #listener = eventlet.listen(('127.0.0.1', 8080))
     #ssl_listener = eventlet.wrap_ssl(
