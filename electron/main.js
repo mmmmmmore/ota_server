@@ -1,14 +1,30 @@
 const { app, BrowserWindow, ipcMain, dialog, Menu } = require('electron');
 const path = require('path');
 const { spawn } = require('child_process');
+const fs = require('fs');
 
-// Work around noisy EGL driver warnings by disabling GPU acceleration on Electron
-app.disableHardwareAcceleration();
+// Get user data directory (editable by users)
+const userDataPath = app.getPath('userData');
+const dbDir = path.join(userDataPath, 'data');
+const logsDir = path.join(userDataPath, 'logs');
+
+// Ensure directories exist
+[dbDir, logsDir].forEach(dir => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+});
+
+console.log(`[Electron] User Data Path: ${userDataPath}`);
+console.log(`[Electron] Database Path: ${dbDir}`);
 
 let mainWindow;
 let pythonProcess;
 const BACKEND_PORT = 8000;
 const BACKEND_HOST = '127.0.0.1';
+
+// Work around noisy EGL driver warnings by disabling GPU acceleration on Electron
+app.disableHardwareAcceleration();
 
 // Check if backend is already running
 function checkBackendRunning() {
@@ -24,7 +40,7 @@ function checkBackendRunning() {
   });
 }
 
-// Start Python backend
+// Start Node.js backend
 async function startBackend() {
   const isRunning = await checkBackendRunning();
   
@@ -33,30 +49,41 @@ async function startBackend() {
     return;
   }
 
-  console.log('Starting Python backend...');
+  console.log('Starting Node.js backend...');
   
-  const backendPath = path.join(__dirname, '..', 'backend', 'app.py');
+  const backendPath = path.join(__dirname, '..', 'backend_nodejs', 'server.js');
   
-  // Start Python process
-  pythonProcess = spawn('python3', [backendPath], {
+  // Pass database path to backend via environment
+  const env = {
+    ...process.env,
+    DB_PATH: path.join(dbDir, 'backend', 'db'),
+    FIRMWARE_PATH: path.join(dbDir, '..', 'firmware'),
+    NODE_ENV: 'production',
+    PORT: BACKEND_PORT.toString(),
+    HOST: BACKEND_HOST
+  };
+
+  // Start Node.js process
+  pythonProcess = spawn('node', [backendPath], {
     cwd: path.join(__dirname, '..'),
-    stdio: 'pipe'
+    stdio: 'pipe',
+    env: env
   });
 
   pythonProcess.stdout.on('data', (data) => {
-    console.log(`[Python Backend]: ${data.toString()}`);
+    console.log(`[Node.js Backend]: ${data.toString()}`);
   });
 
   pythonProcess.stderr.on('data', (data) => {
-    console.error(`[Python Backend Error]: ${data.toString()}`);
+    console.error(`[Node.js Backend Error]: ${data.toString()}`);
   });
 
   pythonProcess.on('close', (code) => {
-    console.log(`Python backend process exited with code ${code}`);
+    console.log(`Node.js backend process exited with code ${code}`);
   });
 
   // Wait for backend to start
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  await new Promise(resolve => setTimeout(resolve, 2000));
 }
 
 // Create main application window
@@ -83,6 +110,15 @@ function createWindow() {
     {
       label: 'File',
       submenu: [
+        {
+          label: 'Open Data Folder',
+          accelerator: 'CmdOrCtrl+Shift+D',
+          click: () => {
+            const { shell } = require('electron');
+            shell.openPath(dbDir);
+          }
+        },
+        { type: 'separator' },
         {
           label: 'Refresh',
           accelerator: 'CmdOrCtrl+R',
@@ -120,7 +156,7 @@ function createWindow() {
               type: 'info',
               title: 'About OTA Management',
               message: 'OTA Management Desktop Application',
-              detail: 'Version 1.0.0\nFirmware update management for ESP32 devices'
+              detail: `Version 1.0.0\nFirmware update management for ESP32 devices\n\nData Folder: ${dbDir}`
             });
           }
         }

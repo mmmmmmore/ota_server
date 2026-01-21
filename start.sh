@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # OTA Management Desktop App - Startup Script
-# This script starts the Python backend and then launches the Electron app
+# This script starts the Node.js backend and then launches the Electron app
 
 echo "======================================"
 echo "OTA Management Desktop Application"
@@ -15,35 +15,40 @@ if ! command -v node &> /dev/null; then
     exit 1
 fi
 
-# Check if Python3 is installed
-if ! command -v python3 &> /dev/null; then
-    echo "Error: Python3 is not installed."
-    echo "Please install Python3 from https://www.python.org/"
+# Check if npm is installed
+if ! command -v npm &> /dev/null; then
+    echo "Error: npm is not installed."
+    echo "Please install Node.js from https://nodejs.org/"
     exit 1
 fi
 
-# Check if node_modules exists
+# Check if root node_modules exists
 if [ ! -d "node_modules" ]; then
-    echo "Installing Node.js dependencies..."
+    echo "Installing root Node.js dependencies..."
     npm install
     if [ $? -ne 0 ]; then
-        echo "Error: Failed to install dependencies"
+        echo "Error: Failed to install root dependencies"
         exit 1
     fi
     echo ""
 fi
 
-# Check Python dependencies
-echo "Checking Python dependencies..."
-python3 -c "import flask, flask_cors, flask_socketio" 2>/dev/null
-if [ $? -ne 0 ]; then
-    echo "Installing Python dependencies..."
-    pip3 install flask flask-cors flask-socketio python-socketio
+# Check if backend_nodejs dependencies are installed
+if [ ! -d "backend_nodejs/node_modules" ]; then
+    echo "Installing backend Node.js dependencies..."
+    cd backend_nodejs
+    npm install
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to install backend dependencies"
+        exit 1
+    fi
+    cd ..
+    echo ""
 fi
 
 echo ""
 echo "Starting application..."
-echo "- Python Backend: Starting on port 8000"
+echo "- Node.js Backend: Starting on port 8000"
 echo "- Electron Frontend: Starting desktop window"
 echo ""
 
