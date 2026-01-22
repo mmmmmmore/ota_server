@@ -1,0 +1,12 @@
+{
+  "msg_type": "ota_task",
+  "task_id": "20260104_172816_760",
+  "device_name": "Veh2_SCM3",
+  "client_id": "760",
+  "version": "v2.4.0",
+  "firmware_url": "https://192.168.4.2:8443/firmware/ota_client_760_v2.4.0.bin",
+  "timestamp": "20260104_172816",
+  "result": "0x01 0x00",
+  "feature": "quick_blink",
+  "status": "success"
+}

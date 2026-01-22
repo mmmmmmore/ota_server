@@ -1,0 +1,10 @@
+{
+  "msg_type": "ota_task",
+  "task_id": "20251215_182930_758",
+  "device_name": "Veh1_SCM1",
+  "client_id": "758",
+  "version": "v2.2.0",
+  "firmware_url": "https://192.168.4.3:8080/firmware/ota_client_v2.2.0.bin",
+  "timestamp": "20251215_182930",
+  "result": "0x03 0x02"
+}

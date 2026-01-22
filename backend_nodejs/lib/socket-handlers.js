@@ -5,6 +5,21 @@
 const { v4: uuidv4 } = require('uuid');
 
 function setupSocketHandlers(io, db, bus) {
+  // Lazy-load task manager to avoid startup issues
+  let taskManager = null;
+  function getTaskManager() {
+    if (!taskManager) {
+      try {
+        const TaskManager = require('./task-manager');
+        taskManager = new TaskManager(db);
+      } catch (err) {
+        console.error('[Socket.IO] Failed to load TaskManager:', err.message);
+        throw err;
+      }
+    }
+    return taskManager;
+  }
+  
   // Store active client connections
   const clients = new Map();
 
@@ -81,17 +96,125 @@ function setupSocketHandlers(io, db, bus) {
     });
 
     // ============ GENERIC REQUEST/RESPONSE ============
-    socket.on('client.request', (msg) => {
-      console.log(`[Socket.IO] client.request from ${socket.id}:`, msg.msg_type);
+    socket.on('client.request', async (msg) => {
+      console.log(`[Socket.IO] client.request from ${socket.id}:`, msg.msg_type, msg.action);
       
-      // Echo the request back as response
-      const response = {
-        ...msg,
-        status: 'ok',
-        server_time: new Date().toISOString()
-      };
+      try {
+        // Handle task_info messages
+        if (msg.msg_type === 'task_info') {
+          if (msg.action === 'queryTaskSummary') {
+            try {
+              // Generate task summary chart
+              const clientId = msg.client_id || 'ALL';
+              console.log(`[Socket.IO] Generating task summary for client: ${clientId}`);
+              
+              const tm = getTaskManager();
+              console.log('[Socket.IO] TaskManager loaded, generating chart...');
+              
+              const base64Image = await tm.generateSummaryChart(clientId);
+              console.log(`[Socket.IO] Chart generated, size: ${base64Image.length} chars`);
+              
+              // Send response
+              socket.emit('server.response', {
+                msg_type: msg.msg_type,
+                request_id: msg.request_id,
+                status: 'ok'
+              });
+              
+              // Send the chart image via server.parsed
+              socket.emit('server.parsed', {
+                msg_type: 'ota_task_summary',
+                action: 'response_url',
+                url: base64Image
+              });
+              
+              console.log('[Socket.IO] Task summary chart sent to client');
+              return;
+            } catch (error) {
+              console.error('[Socket.IO] Error generating task summary:', error);
+              socket.emit('server.response', {
+                msg_type: msg.msg_type,
+                request_id: msg.request_id,
+                status: 'error',
+                error: error.message
+              });
+              return;
+            }
+          }
+          
+          if (msg.action === 'queryTasklist') {
+            // Get task history
+            const clientId = msg.client_id;
+            console.log(`[Socket.IO] Getting task history for client: ${clientId}`);
+            
+            const tm = getTaskManager();
+            const history = tm.getTaskHistory(clientId);
+            
+            // Send response
+            socket.emit('server.response', {
+              msg_type: msg.msg_type,
+              request_id: msg.request_id,
+              status: 'ok'
+            });
+            
+            // Send the task history
+            socket.emit('server.parsed', {
+              msg_type: 'ota_history_list',
+              action: 'response_history_list',
+              subarea: 'task_history',
+              payload: JSON.stringify(history)
+            });
+            
+            console.log('[Socket.IO] Task history sent to client');
+            return;
+          }
 
-      socket.emit('server.response', response);
+          if (msg.action === 'pushtask') {
+            // Handle OTA task push
+            const { client_id, device_name, version } = msg;
+            console.log(`[Socket.IO] Pushing OTA task for ${client_id}:${version}`);
+
+            const taskId = `${new Date().toISOString().replace(/[:-]/g, '').split('.')[0]}_${client_id}`;
+            const task = {
+              msg_type: 'ota_task',
+              task_id: taskId,
+              client_id,
+              device_name,
+              version,
+              firmware_url: `https://192.168.4.2:8443/firmware/ota_client_${client_id}_${version}.bin`,
+              timestamp: new Date().toISOString(),
+              result: '0x01 0x00', // INITIATED, UNKNOWN
+              features: ''
+            };
+
+            db.saveTask(taskId, task);
+            bus.publish('task.created', task);
+
+            socket.emit('server.response', {
+              msg_type: msg.msg_type,
+              request_id: msg.request_id,
+              status: 'ok'
+            });
+            
+            return;
+          }
+        }
+        
+        // Default response for other messages
+        socket.emit('server.response', {
+          ...msg,
+          status: 'ok',
+          server_time: new Date().toISOString()
+        });
+      } catch (error) {
+        console.error('[Socket.IO] Error handling client.request:', error);
+        socket.emit('server.response', {
+          msg_type: msg.msg_type,
+          request_id: msg.request_id,
+          status: 'error',
+          error: error.message
+        });
+      }
     });
 
     // ============ CLEANUP ============

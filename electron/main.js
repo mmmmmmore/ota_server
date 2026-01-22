@@ -54,11 +54,13 @@ async function startBackend() {
   const backendPath = path.join(__dirname, '..', 'backend_nodejs', 'server.js');
   
   // Pass database path to backend via environment
+  // Use local backend_nodejs/db for development, Electron user data for production
+  const isPackaged = app.isPackaged;
   const env = {
     ...process.env,
-    DB_PATH: path.join(dbDir, 'backend', 'db'),
-    FIRMWARE_PATH: path.join(dbDir, '..', 'firmware'),
-    NODE_ENV: 'production',
+    DB_PATH: isPackaged ? path.join(dbDir, 'backend', 'db') : path.join(__dirname, '..', 'backend_nodejs', 'db'),
+    FIRMWARE_PATH: isPackaged ? path.join(dbDir, '..', 'firmware') : path.join(__dirname, '..', 'firmware'),
+    NODE_ENV: isPackaged ? 'production' : 'development',
     PORT: BACKEND_PORT.toString(),
     HOST: BACKEND_HOST
   };

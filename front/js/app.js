@@ -89,29 +89,37 @@
   }
 
   // ---------------- Handler回调接口 ----------------
-function onTaskSummary(png) {
-    console.log('[Front-APP]', png);
+function onTaskSummary(base64Data) {
+    console.log('[Front-APP] Received task summary image');
     
-    // Convert ArrayBuffer to string (the ArrayBuffer contains base64 text, not binary image data)
-    const uint8Array = new Uint8Array(png);
-    const base64String = new TextDecoder('utf-8').decode(uint8Array);
-    
-    //console.log('[Front-APP] base64String:', base64String.substring(0, 100)); // Log first 100 chars
+    if (!base64Data) {
+        console.error('[Front-APP] No image data received');
+        return;
+    }
     
     const imgEl = document.getElementById("stateImage");
     if (imgEl) {
-        imgEl.src = "data:image/png;base64," + base64String;
+        // If the data is already a string, use it directly
+        if (typeof base64Data === 'string') {
+            imgEl.src = "data:image/png;base64," + base64Data;
+        } else {
+            // If it's an ArrayBuffer (old format), decode it
+            const uint8Array = new Uint8Array(base64Data);
+            const base64String = new TextDecoder('utf-8').decode(uint8Array);
+            imgEl.src = "data:image/png;base64," + base64String;
+        }
+        
         imgEl.style.display = "block";
         
         // Add error handler to debug
         imgEl.onerror = function() {
-            console.error('Image failed to load');
+            console.error('[Front-APP] Image failed to load');
         };
         imgEl.onload = function() {
-            console.log('Image loaded successfully');
+            console.log('[Front-APP] Image loaded successfully');
         };
     } else {
-        console.error('Image element not found');
+        console.error('[Front-APP] Image element not found');
     }
 }
 

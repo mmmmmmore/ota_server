@@ -30,10 +30,10 @@ let dbDir = process.env.DB_PATH;
 let firmwareDir = process.env.FIRMWARE_PATH;
 
 if (!dbDir || !firmwareDir) {
-  // Default development paths
+  // Default development paths - use backend_nodejs for Node.js implementation
   const baseDir = path.join(__dirname, '..');
-  dbDir = dbDir || path.join(baseDir, 'backend', 'db');
-  firmwareDir = firmwareDir || path.join(baseDir, 'backend', 'firmware');
+  dbDir = dbDir || path.join(__dirname, 'db');
+  firmwareDir = firmwareDir || path.join(baseDir, 'firmware');
 }
 
 const frontDir = path.join(__dirname, '..', 'front');

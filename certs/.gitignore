@@ -1,0 +1,14 @@
+# Ignore private keys - NEVER commit these!
+*.key
+rootCA.key
+server.key
+server_key.pem
+
+# Ignore certificate signing requests
+*.csr
+
+# Ignore serial files
+*.srl
+
+# Keep directory structure
+!.gitignore

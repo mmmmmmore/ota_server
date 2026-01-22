@@ -1,0 +1,12 @@
+{
+  "msg_type": "ota_task",
+  "task_id": "20251231_111949_759",
+  "device_name": "Veh1_SCM2",
+  "client_id": "759",
+  "version": "v2.3.0",
+  "firmware_url": "https://192.168.4.2:8443/firmware/ota_client_759_v2.3.0.bin",
+  "timestamp": "20251231_111949",
+  "result": "0x01 0x00",
+  "feature": "smooth_change",
+  "status": "success"
+}
