@@ -8,9 +8,15 @@
     "start-backend": "node backend_nodejs/server.js",
     "dev": "concurrently \"npm run start-backend\" \"wait-on http://localhost:8000 && electron .\"",
     "build": "electron-builder",
-    "build-mac": "electron-builder --mac",
-    "build-win": "electron-builder --win",
-    "build-linux": "electron-builder --linux"
+    "build-mac": "electron-builder --mac dmg zip",
+    "build-mac-dmg": "electron-builder --mac dmg",
+    "build-mac-zip": "electron-builder --mac zip",
+    "build-win": "electron-builder --win nsis portable",
+    "build-win-exe": "electron-builder --win nsis",
+    "build-win-portable": "electron-builder --win portable",
+    "build-linux": "electron-builder --linux AppImage deb",
+    "build-all": "electron-builder -mwl",
+    "build-publish": "electron-builder --publish always"
   },
   "keywords": [
     "OTA",
@@ -40,39 +46,52 @@
       "front/**/*",
       "backend_nodejs/**/*",
       "node_modules/**/*",
-      "package.json"
+      "package.json",
+      "certs/**/*"
     ],
-    "extraResources": [
-      {
-        "from": "backend_nodejs",
-        "to": "backend_nodejs"
-      }
-    ],
+    "extraMetadata": {
+      "main": "electron/main.js"
+    },
     "mac": {
       "category": "public.app-category.developer-tools",
       "target": ["dmg", "zip"],
       "icon": "assets/icon.icns",
-      "artifactName": "${productName}-${version}-${arch}.${ext}"
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false
     },
     "dmg": {
       "icon": "assets/icon.icns",
       "iconSize": 100,
+      "window": {
+        "width": 540,
+        "height": 380
+      },
       "contents": [
         {
-          "x": 110,
-          "y": 150,
+          "x": 130,
+          "y": 170,
           "type": "file"
         },
         {
-          "x": 240,
-          "y": 150,
+          "x": 410,
+          "y": 170,
           "type": "link",
           "path": "/Applications"
         }
       ]
     },
     "win": {
-      "target": ["nsis", "portable"],
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ],
       "icon": "assets/icon.ico"
     },
     "nsis": {
@@ -80,7 +99,13 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "OTA Management"
+      "shortcutName": "OTA Management",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "installerHeaderIcon": "assets/icon.ico"
+    },
+    "portable": {
+      "artifactName": "${productName}-${version}-portable.${ext}"
     },
     "linux": {
       "target": ["AppImage", "deb"],
